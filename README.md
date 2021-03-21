@@ -2,8 +2,8 @@
 <hr>
 
 [Quizzical]() was created for educators, learners and quiz enthusiasts to find and share topical mini-quizzes. 
-The main goal of the site is to support and enhance the work of teachers and the learning of students whilst encouraging fun and friendly competition.
-Quizzical was developed by Tom Haysom [thaysom22]() for the data-centric project of the [Code Institute Full Stack Diploma]().
+The main goal of the site is to support and enhance the work of teachers and the learning of students whilst facilitating fun and friendly competition.
+Quizzical was developed by Tom Haysom [thaysom22]() for data-centric project of the [Code Institute Full Stack Diploma]().
 
 ## Table of Contents
 1. [UX](#ux)
@@ -70,6 +70,7 @@ Site owner's goals:
 * To collate searchable quiz content from users that I can use in my own teaching practice and design of resources
 * To provide a virtual community where ideas can be shared and collaboration in teaching and learning is fostered
 * To provide an educational means of fun!
+* To create a scalable platform tha can be expanded in scope to include many more categories of topic and features such as ability to play quizzes interactively.
 
 ### User Stories
 
@@ -97,11 +98,19 @@ As a regular user of the site:
 
 ### Design Choices
 
+#### Overview
+
 The overall tone of the site is a balance of fun and friendly with educational depth and credibility. The design aims to appeal to both school age students using the site content directly, as well to other adult users accessing and sharing content.
-Inspiration for design and layout was taken from a number of (much more sophisticated) online quiz sites such as 'Quizziz' and 'Kahoot' (see [credits](#credits)). 
 The colors, styling, and icons were chosen to present a familiar and intuitive user interface whilst maintaining sufficient contrast between elements and areas of the page.
 A consistent overall layout and feel across the site was a priority when designing the layout of pages and choice of icons and components.
 A mobile first design approach was used to optimize the user experience for small devices first before adjusting layout and size of elements for larger screen sizes.
+
+Inspiration for design and layout was taken from some existing (much more sophisticated) online quiz sites:
+* [Quizziz]()
+* [Kahoot]()
+
+This project aims to create a basic implementation of quiz sharing functionality which is scalable into an application with it's own unique features and content in future versions.
+Quizziz and Kahoot both include functionality for users to login and play head to head on a quiz interactively in real time: this functionality is beyond the scope of this project and the developer's current skill level and time available therefore the scope is limited to sharing static quiz content. 
 
 #### Fonts 
 
@@ -115,18 +124,28 @@ A mobile first design approach was used to optimize the user experience for smal
 - Icons are used to help orientate the user and communicate the purpose of a particular feature or page on the site. 
 - Icons are also used as links (or in combination with a textual link) to help all users understand the site and particularly non-English speaking users. 
 
-#### Styling
+#### Styling 
 
-- Horizontal rules
-- Buttons 
+- Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
+- Buttons of various sizes and styles are used from [MaterializeCSS](https://materializecss.com/) to distinguish priority calls to action from secondary interactions. Icons are used with buttons to convey clear meaning to all users. Buttons have inbuilt interaction effects to provide reliable, useful and expected feedback to users.
 - Carousels with images
-- 
+- Cards to display groups of information (discrete quiz / question)
+- Collapsible footer
+- Navbar
+- Progression indicators
+
+#### Images
+
+- Main landing page image
+- Images for main features carousel
+- Smaller secondary images for help section 
+- Images for each quiz category to be displayed in discover carousels, search results and view quiz pages
 
 #### Wireframes
 
 Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/):
 
-- [See all wireframes]()
+- [View all wireframes]()
 
 ## 2. Features
 <hr>
@@ -162,6 +181,8 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 - Search results page
 
 - View quiz page
+    - Admin users can edit and delete all quizzes on database when logged in
+    - If a user is the creator of a quiz they can edit and delete that quiz when logged in 
 
 - Edit quiz page
 
@@ -173,8 +194,45 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 
 - Login page
 
+### Features left to implement
+
 ## 3. Information Architecture
 <hr>
+
+### Database choice
+
+### Database collections structure
+
+#### Users collection
+
+- User_id (ObjectId)
+- Username (String)
+- Main_category (ObjectId)
+- Main_age_range (ObjectId)
+- Password (String)
+
+#### Quizzes collection
+
+- Quiz_id (ObjectId)
+- Owner_id (ObjectId)
+- Category_id (ObjectId)
+- AgeRange_id (ObjectId)
+- Quiz_title (String)
+- Questions (Array)
+    - Question_text (String)
+    - Answers (Array)
+        - Answer_text (String)
+        - Correct (Boolean)
+ 
+#### Categories collection
+
+- Category_id (ObjectId)
+- Category_name (String)
+
+#### Age ranges collection
+
+- Age_range_id (ObjectId)
+- Age_range (String)
 
 ## 4. Testing
 <hr>

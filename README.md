@@ -51,9 +51,8 @@ Target audiences and possible user goals:
     * To have fun competing against my peers
 * Anyone who uses quiz content for personal use or for organizing an event:
     * To share my own quiz content with others for the benefit of many
-    * To find general knoweledge quiz content
-    * To search by topic/subject for specific quiz content for my own interest
-    * To search by topic/subject for specific quiz content for a quiz event
+    * To find general knoweledge quiz content for my own interest or for an event
+    * To search by topic/subject for specific quiz content for my own interest or for an event
     
 Quizzical is a great way to meet these user needs because:
 
@@ -98,21 +97,81 @@ As a regular user of the site:
 
 ### Design Choices
 
-The overall tone of the site is a balance of fun and friendly with educational credibility. The design aims to appeal to both school age students using the site content directly, as well to other adult users accessing and sharing content.
-Inspiration for design and layout was taken from a number of (much more sophisticated) online quiz sites (see [credits](#credits)). 
-The colors, styling, and icons were chosen to present a familiar and intuitive user interface whilst maintaining sufficient contrast between elements and areas of the page, as well as a consistent overall layout and feel across the site.
+The overall tone of the site is a balance of fun and friendly with educational depth and credibility. The design aims to appeal to both school age students using the site content directly, as well to other adult users accessing and sharing content.
+Inspiration for design and layout was taken from a number of (much more sophisticated) online quiz sites such as 'Quizziz' and 'Kahoot' (see [credits](#credits)). 
+The colors, styling, and icons were chosen to present a familiar and intuitive user interface whilst maintaining sufficient contrast between elements and areas of the page.
+A consistent overall layout and feel across the site was a priority when designing the layout of pages and choice of icons and components.
+A mobile first design approach was used to optimize the user experience for small devices first before adjusting layout and size of elements for larger screen sizes.
 
-* Fonts 
+#### Fonts 
 
-* Colors
+#### Colors
 
-* Icons
+#### Icons
 
-* Styling
+- Icons are used across the site to help users navigate the site more easily to find and interact with the data they need. 
+- Icons help to provide a familiar user experience so new users and younger users can understand how to use and navigate the site more easily. 
+- Icons reduce the need for textual information and labels and facilitate a cleaner and less cluttered user interface - particularly on smaller devices.
+- Icons are used to help orientate the user and communicate the purpose of a particular feature or page on the site. 
+- Icons are also used as links (or in combination with a textual link) to help all users understand the site and particularly non-English speaking users. 
 
+#### Styling
+
+- Horizontal rules
+- Buttons 
+- Carousels with images
+- 
+
+#### Wireframes
+
+Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/):
+
+- [See all wireframes]()
 
 ## 2. Features
 <hr>
+
+- Note that the features included in this project for submission to Code Institute represent a 'Minimum Viable Project' (MVP) version. It was important not to allow the scope to become too large given the time constraints and the requirements and criteria of the course assessment. There are a large umber of features - big and small - that were left out in the scope phase of the project but which may well be added at a later date.
+
+### Existing features
+
+- Navbar
+    - Logged out links: Sign Up, Login and How To
+    - Logged in links: Discover, Create, Profile, Help and Logout
+    - Quizzical icon at left
+    - Links are collapsable on small screens into burger icon
+    - Fixed position so always visible
+- Footer
+    - Single column layout on small screen
+    - Link to top of page
+    - Copyright information
+    - About button: hides/unhides content below
+    - About section (visible by default on landing page hidden by default on all other pages). Includes brief info about the project and the site owner/developer. Includes links to developer portfolio, LinkedIn and GitHub.
+    - Inverse color contrast with background of elements above.
+
+- Landing page
+    - Main title, tagline and Sign Up/ Log In links. Sign Up button is call to action for new users and is larger and more prominent.
+    - Photo of engaged learners
+    - List of benefits of using site
+    - Carousel of 3 images related to main features of site each with explanatory caption text. Users can click arrow icons to scroll manually through images in carousel. Ellipsis icon shows current image displayed in list of images.
+    - 'Easy to get started' (help) section. 3 numbered steps, each has concise textual instruction and small associated image to inform user of most basic process to follow to start using the application.
+    - Final call to action section: 'Ready to get Quizzical' prompt and large, prominent button to sign up page.
+
+- Discover page
+
+- Search results page
+
+- View quiz page
+
+- Edit quiz page
+
+- Create quiz page
+
+- Profile page
+
+- Register account/edit profile page
+
+- Login page
 
 ## 3. Information Architecture
 <hr>
@@ -123,11 +182,18 @@ The colors, styling, and icons were chosen to present a familiar and intuitive u
 ## 5. Technologies Used
 <hr>
 
+* Balsamiq for wireframing
+* Gitpod as IDE
+* Git and GitHub for version control
+
 ## 6. Deployment
 <hr>
 
 ## 7. Credits
 <hr>
+
+* Code institute 'gitpod-full-template' repository
+
 ### Content
 
 ### Code

@@ -127,7 +127,7 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 #### Styling 
 
 - Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
-- Buttons of various sizes and styles are used from [MaterializeCSS](https://materializecss.com/) to distinguish priority calls to action from secondary interactions. Icons are used with buttons to convey clear meaning to all users. Buttons have inbuilt interaction effects to provide reliable, useful and expected feedback to users.
+- Buttons of various sizes and styles are used from [MaterializeCSS](https://materializecss.com/) to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. Icons are used with buttons to convey clear meaning to all users. Buttons have inbuilt interaction effects to provide reliable, useful and expected feedback to users.
 - Carousels with images
 - Cards to display groups of information (discrete quiz / question)
 - Collapsible footer
@@ -160,6 +160,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Quizzical icon at left
     - Links are collapsable on small screens into burger icon
     - Fixed position so always visible
+
 - Footer
     - Single column layout on small screen
     - Link to top of page
@@ -173,18 +174,30 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Photo of engaged learners
     - List of benefits of using site
     - Carousel of 3 images related to main features of site each with explanatory caption text. Users can click arrow icons to scroll manually through images in carousel. Ellipsis icon shows current image displayed in list of images.
-    - 'Easy to get started' (help) section. 3 numbered steps, each has concise textual instruction and small associated image to inform user of most basic process to follow to start using the application.
+    - 'Easy to get started' section. 3 numbered steps, each has concise textual instruction and small associated image to inform user of most basic process to follow to start using the application.
     - Final call to action section: 'Ready to get Quizzical' prompt and large, prominent button to sign up page.
 
 - Discover page
+    - Main title with compass icon helps orientate user and provide context for page
+    - Primary search bar CTA with text input and placeholder text 'find a quiz' on intial page load. Magnify icon acts as submit button for search input
+    - Recommended section. Includes quizzes belonging to main category of interest and age range specified in current user settings. Arrow icon links to view search results page with all recommended quizzes. Carousel of three quizzes from recommended list is displayed on a card element. Each item in carousel shows quiz image and caption with title of quiz. Carousel cycles through each quiz automatically and arrows left and right allow user to cycle manually. Ellipsis icon is shown to specifiy position of currently viewed quiz.
+    - Category sections have similar layout and functionality to recommended section. A carousel is shown for main categories and age ranges.
+    - Secondary search bar CTA at end of main page content. Subtitle - "Can't find what you're looking for?". Another search bar, same as above so user can serach without scrolling up to top of page again. Create button linking to create quiz page and smaller link to 'see all quizzes' which links to view search results page. 
 
 - Search results page
+    - Search bar input and magnify icon submit (as as element on discover page).
+    - Number of results displayed just above quiz results in small, subtle font (as it is secondary information)
+    - Each quiz found in database that matches search criteria (from search box or via selecting from discover page) is displayed inside discrete card elementseparated by margin in a list. Each card displays the quiz title, quiz image, number of questions, category and age range information relating to that quiz.  Each card has a 'view' CTA button with an icon and text which links to a page displaying the specific quiz.
+    - At bottom of main page content there is a section with subtitle: "Can't find what you're looking for?" and a CTA 'Create' button with icon which links to the create quiz page. There is a smller link 'see all quizzes' which links to view search results page. 
 
 - View quiz page
-    - Admin users can edit and delete all quizzes on database when logged in
-    - If a user is the creator of a quiz they can edit and delete that quiz when logged in 
+    - Card element displays main, summary information about the selected quiz: quiz title, image, category, age range and author. If a user is the creator of a quiz they can edit and delete that quiz when logged in by clicking on edit and and delete icons that are displayed instead of the author information in this element and link to respective pages.
+    - Admin users can edit and delete all quizzes on database when logged in - the edit and delete options that are displayed to a quiz owner for their own quizzes are displayed for all quizzes to admin.
+    -  Number of questions for quiz displayed just above quiz results in small, subtle font (as it is secondary information)
+    - Each question in quiz is displayed in own card element in a list below the main, summary information card. Each card displays the number of the question in the quiz, text containing the quiz question, a small answer choices label followed by four answer options in a list each consisting of text and an empty checkbox icon. On initial page load all checkboxes have same default background color. At bottom of card for each question is a small text button 'show/hide answer' which uses JavaScript to toggle between one checkbox green and the rest red and all the same default color. The text in the link reads 'show' or 'hide' answer depending on current state of checkbox colors.
 
 - Edit quiz page
+
 
 - Create quiz page
 
@@ -243,6 +256,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 * Balsamiq for wireframing
 * Gitpod as IDE
 * Git and GitHub for version control
+* Trello for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
 
 ## 6. Deployment
 <hr>
@@ -250,11 +264,13 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 ## 7. Credits
 <hr>
 
-* Code institute 'gitpod-full-template' repository
+
 
 ### Content
 
 ### Code
+
+* Code institute 'gitpod-full-template' repository
 
 ### Acknowledgements
 

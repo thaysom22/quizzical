@@ -214,38 +214,60 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 
 ### Database choice
 
+[MongoDB]() is a NoSQL, document-based database which groups data as key-value pairs within documents grouped into collections. MongoDB excels at storing and providing access to unstructured data at scale. 
+The data schema for this project would be better suited to an SQL relational database due to the relationships between entities in different collections, however MongoDB was used because this is project is primarily a learning exercise and this was the specification for this project (a SQL database will be used in a future project) 
+
 ### Database collections structure
 
 #### Users collection
 
-- User_id (ObjectId)
-- Username (String)
-- Main_category (ObjectId)
-- Main_age_range (ObjectId)
-- Password (String)
+Collection name: users
+
+| Title | Key in DB | Form validation | Data Type | Details |
+| --- | --- | --- | --- | --- |
+| User ID | _id | None | ObjectId | Primary Key |
+| Username | username | text, `maxlength=20` | string | not null, unique |
+| Password | password | text, `maxlength=20` | string | not null |
+| User category | user_category | None | ObjectId | not null |
+| User age range | user_age_range | None | ObjectId | not null |
 
 #### Quizzes collection
 
-- Quiz_id (ObjectId)
-- Owner_id (ObjectId)
-- Category_id (ObjectId)
-- AgeRange_id (ObjectId)
-- Quiz_title (String)
-- Questions (Array)
-    - Question_text (String)
-    - Answers (Array)
-        - Answer_text (String)
-        - Correct (Boolean)
- 
+Collection name: quizzes
+
+| Title | Key in DB | Form validation | Data Type | Details |
+| --- | --- | --- | --- | --- |
+| Quiz ID | _id | None | ObjectId | Primary Key |
+| Quiz Title | title | text, `maxlength=20` | string | not null |
+| Owner ID | owner_id | None | ObjectId | ref: > users._id  |
+| Category ID | category_id | None | ObjectId | ref: > categories._id |
+| Age Range ID | age_range_id | None | ObjectId | ref: >age_ranges._id |
+|   |   |   |   |   |
+| **Questions** | questions |   | **object** |   |
+| Question Text | question_text | text, `maxlength=150` | string | not null |
+| **Answers** | answers |   | **object** |  Embedded in questions object |
+| Answer Text | answer_text | text, `maxlength=100` | string | not null, unique |
+| Correct Boolean | correct_bool | radio | Boolean | not null |
+
 #### Categories collection
 
-- Category_id (ObjectId)
-- Category_name (String)
+Collection name: categories
+
+| Title | Key in DB | Form validation | Data Type | Details |
+| --- | --- | --- | --- | --- |
+| Category ID | _id | None | ObjectId | Primary Key |
+| Category Name | category_name | Dropdown menu | string | not null, unique |
+
 
 #### Age ranges collection
 
-- Age_range_id (ObjectId)
-- Age_range (String)
+Collection name: age_ranges
+
+| Title | Key in DB | Form validation | Data Type | Details |
+| --- | --- | --- | --- | --- |
+| Age Range ID | _id | None | ObjectId | Primary Key |
+| Age Range | age_range | Dropdown menu | string | not null, unique |
+
 
 ## 4. Testing
 <hr>
@@ -253,10 +275,11 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 ## 5. Technologies Used
 <hr>
 
-* Balsamiq for wireframing
-* Gitpod as IDE
-* Git and GitHub for version control
-* Trello for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
+* [Balsamiq]() for wireframing
+* [Gitpod]() as IDE
+* [Git]() command line utility and GitHub for version control
+* [Trello]() for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
+* [MongoDB]() NoSQL document-based database 
 
 ## 6. Deployment
 <hr>

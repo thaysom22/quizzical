@@ -170,6 +170,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Inverse color contrast with background of elements above.
 
 - Landing page
+    - Visible to all users
     - Main title, tagline and Sign Up/ Log In links. Sign Up button is call to action for new users and is larger and more prominent.
     - Photo of engaged learners
     - List of benefits of using site
@@ -178,6 +179,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Final call to action section: 'Ready to get Quizzical' prompt and large, prominent button to sign up page.
 
 - Discover page
+    - Visible to logged in users only
     - Main title with compass icon helps orientate user and provide context for page
     - Primary search bar CTA with text input and placeholder text 'find a quiz' on intial page load. Magnify icon acts as submit button for search input
     - Recommended section. Includes quizzes belonging to main category of interest and age range specified in current user settings. Arrow icon links to view search results page with all recommended quizzes. Carousel of three quizzes from recommended list is displayed on a card element. Each item in carousel shows quiz image and caption with title of quiz. Carousel cycles through each quiz automatically and arrows left and right allow user to cycle manually. Ellipsis icon is shown to specifiy position of currently viewed quiz.
@@ -185,21 +187,33 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Secondary search bar CTA at end of main page content. Subtitle - "Can't find what you're looking for?". Another search bar, same as above so user can serach without scrolling up to top of page again. Create button linking to create quiz page and smaller link to 'see all quizzes' which links to view search results page. 
 
 - Search results page
+    - Visible to logged in users only
     - Search bar input and magnify icon submit (as as element on discover page).
     - Number of results displayed just above quiz results in small, subtle font (as it is secondary information)
     - Each quiz found in database that matches search criteria (from search box or via selecting from discover page) is displayed inside discrete card elementseparated by margin in a list. Each card displays the quiz title, quiz image, number of questions, category and age range information relating to that quiz.  Each card has a 'view' CTA button with an icon and text which links to a page displaying the specific quiz.
     - At bottom of main page content there is a section with subtitle: "Can't find what you're looking for?" and a CTA 'Create' button with icon which links to the create quiz page. There is a smller link 'see all quizzes' which links to view search results page. 
 
 - View quiz page
+    - Visible to logged in users only
     - Card element displays main, summary information about the selected quiz: quiz title, image, category, age range and author. If a user is the creator of a quiz they can edit and delete that quiz when logged in by clicking on edit and and delete icons that are displayed instead of the author information in this element and link to respective pages.
     - Admin users can edit and delete all quizzes on database when logged in - the edit and delete options that are displayed to a quiz owner for their own quizzes are displayed for all quizzes to admin.
-    -  Number of questions for quiz displayed just above quiz results in small, subtle font (as it is secondary information)
-    - Each question in quiz is displayed in own card element in a list below the main, summary information card. Each card displays the number of the question in the quiz, text containing the quiz question, a small answer choices label followed by four answer options in a list each consisting of text and an empty checkbox icon. On initial page load all checkboxes have same default background color. At bottom of card for each question is a small text button 'show/hide answer' which uses JavaScript to toggle between one checkbox green and the rest red and all the same default color. The text in the link reads 'show' or 'hide' answer depending on current state of checkbox colors.
+    - Number of questions for quiz displayed just above quiz results in small, subtle font (as it is secondary information)
+    - Each question in quiz is displayed in own card element in a list below the main, summary information card. Each card displays the number of the question in the quiz, text containing the quiz question, a small answer choices label followed by four answer options in a list each consisting of text and an empty checkbox icon. On initial page load all checkboxes have same default background color. At bottom of card for each question is a small text button 'show/hide answer' which uses JavaScript to toggle between one checkbox green and the rest red and all the same default color. The text in the link reads 'show' or 'hide' answer depending on current state.
 
 - Edit quiz page
-
+    - Visible to logged in users only
+    - Title and edit icon at top of page to give context to user
+    - 'Finish editing' button submits form data to db and redirects user to view quiz page for same quiz. Feedback is given if form fields are not validated. Adjacent to 'Finish editing' button is a smaller link to discard changes made and return to view quiz page for current quiz.
+    - Input fields for quiz information. Quiz name is a text input, Category and Age Range fields are dropdown menu inputs with the selection options read from respective collections in db. Each input has a corresponding label.
+    - Add question is large call to action icon. When clicked the focus moves to a newly created question card at end of current question card list.
+    - Question list: each question is displayed as part of a list within it's own card component. 
+    - Each question card contains: 'edit question {number}' text, a delete icon (triggers a defensive confrimation message, if confirmed the current card is removed from the display), a textarea input for question text (prefilled with current value on db on page load), 'edit answer choices' text label, four text input boxes each (prefilled with current value in db on page load) each with adjacent radio icon (one of which can be selected at a time to signify the correct answer to each question - selected answer is solid and green wheras others are grey and faded)
+    - Duplicate of 'add question' button above. Adjacent and smaller 'delete quiz' button (triggers defensive confirmatory message) which when clicked and confirmed will remove current quiz from db and redirect user to profile page.
+    - Duplicate of finish editing button and discard changes link displayed at bottom of main content of page.
 
 - Create quiz page
+    - Visible to logged in users only
+    - 
 
 - Profile page
 

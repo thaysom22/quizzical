@@ -116,13 +116,28 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 
 #### Colors
 
+[Link to color palette](https://coolors.co/000000-386b4d-0839d9-fadcb2-e0e0e0-ffffff)
+
+The color palette was chosen using the [Coolors](https://coolors.co/) color picker.
+
+* The overall theme of the pallete is a mixture of earthy colors and tactile office stationary colors.
+* The palette contains some vibrance and color to engage younger users. 
+* There are three lighter and three darker tones: one of each group is a more vibrant and garish and is used on the site to help bring contrast to certain elements - in particular, calls to action.
+* There are not too many constrasting colors in the pallete overall to overwhelm the user and each group of three lighter and darker colors blend well together respectively
+* White is used as a primary font color on darker blue or green background to provide maximum contrast and also as a background color paired with black or 'persian blue' text for a clean, high contrast effect when there is alot of content or smaller text.
+* Main solid backgrounds for elements use the vibrant 'persian blue' and 'wheat' colors to visually separate elements and convey structure to help user easily navigate the page.
+* 'Amazon green' and 'gainsboro gray' are used as secondary accent and styling colors for elements (horizontal rule elements, borders, minor text, secondary icons and buttons). These help add depth to the page but are not essential to the site experience so that users who need very high contast can still use the page effectively.
+
 #### Icons
 
-- Icons are used across the site to help users navigate the site more easily to find and interact with the data they need. 
+- Icons are used from [Font Awesome]()
+- Icons are used across the site to help users navigate the site more easily to find and interact with the data they need.
+- Icons are used to provide context concisely and universally to users to help them navigate the site with greater ease and confidence - aids a first time learning curve.
 - Icons help to provide a familiar user experience so new users and younger users can understand how to use and navigate the site more easily. 
 - Icons reduce the need for textual information and labels and facilitate a cleaner and less cluttered user interface - particularly on smaller devices.
-- Icons are used to help orientate the user and communicate the purpose of a particular feature or page on the site. 
+- Icons are used to help orientate the user and communicate the purpose of a particular feature or page on the site - particularly important for non-English speaking users.
 - Icons are also used as links (or in combination with a textual link) to help all users understand the site and particularly non-English speaking users. 
+- Icons are always accompanied by appropriate aria-labels and attributes to meet accessibility guidelines for users with screen readers.
 
 #### Styling 
 
@@ -203,7 +218,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 - Edit quiz page
     - Visible to logged in users only
     - Title and edit icon at top of page to give context to user
-    - 'Finish editing' button submits form data to db and redirects user to view quiz page for same quiz. Feedback is given if form fields are not validated. Adjacent to 'Finish editing' button is a smaller link to discard changes made and return to view quiz page for current quiz.
+    - 'Finish editing' button submits form data to db (in update operation) and redirects user to view quiz page for same quiz. Feedback is given if form fields are not validated. Adjacent to 'Finish editing' button is a smaller link to discard changes made and return to view quiz page for current quiz.
     - Input fields for quiz information. Quiz name is a text input, Category and Age Range fields are dropdown menu inputs with the selection options read from respective collections in db. Each input has a corresponding label.
     - Add question is large call to action icon. When clicked the focus moves to a newly created question card at end of current question card list.
     - Question list: each question is displayed as part of a list within it's own card component. 
@@ -213,15 +228,75 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
 
 - Create quiz page
     - Visible to logged in users only
-    - 
+    - Title and build icon at top of page to give context to user
+    - 'Publish' button submits form data to db (in create operation) and redirects user to view quiz page for created quiz if form is validated. Feedback is given if form fields are not validated. Adjacent to 'Publish' button is a smaller link to discard changes made and return to view quiz page for current quiz.
+    - Same input fields displayed as 'edit quiz' page but without prefilled values.
+    - Same large 'add question' call to action button appears directly below main quiz information form on page load. This button has same function to add a new empty card component for a question to the display. The 'add question' button always displays below the last question in the list.
+    - Duplicate of 'publish' and 'discard' links displayed at bottom of main page content. 
 
 - Profile page
+    - Visible to logged in users only
+    - Username of logged in user displayed next to user icon
+    - 'Create' button displayed which links to create quiz page
+    - Link icon to edit profile of current user page displayed to right of username. 
+    - Subtitle of My Quizzes displayed next to button which links to create quiz page.
+    - Small '{number} of results' label displayed.
+    - List of quizzes authored by current user displayed. Each quiz summary is displayed within a card component containing: quiz title, quiz image, number of questions in quiz, category of quiz, age range of quiz, icon link to view current quiz page and icon link to edit current quiz page.
+    - A subtitle is displayed "Help grow our quizzical community!" and a larger duplicate of 'create' button.
+    - At bottom of main page contnet is a logout button (icon and label) if clicked user is logged out and redirected to login page.
 
 - Register account/edit profile page
+    - If user logged out: Main title: "Let's get quizzical!" and subtitle of create account with add user icon. 
+    - If user logged in: Main title: current user username and user icon is displayed and subtitle of change setting with settings icon.
+    - Form with inputs: username (text), main category of interest (dropdown), main age range (dropdown) and password text displayed with labels. If user is logged in the fields are prefilled on page load with values for user from db.
+    - If user logged out: Create account button to submit form and send to db (create operation). Form validates input to meet regex criteria and user is given feedback if a value in a field is invalid - user redirected to discover page. Smaller link to login page with 'already registered' label. 
+    - If user logged in: Save changes button to submit form and send to db (update operation), user redirected to profile page. Smaller link to discard changes and user redirected to profile page. Beneath is a 'delete profile' button (icon and label) which when clicked displays a confirmatory message before deleting user and all associated quiz data from db and redirecting to landing page.
 
 - Login page
+    - Reachable via navigation to logged out users only (if logged in user tries to access corresponding route manually in URL bar they are redirected to profile page)
+    - Title 'Login' and login icon to orientate and communicate context of page to user
+    - Username and password input fields (with form validation for length and regex) with labels
+    - Login button submits form (after validation) and redirects user to discover page. Smaller link 'create account' with 'new here' label redirects to registration page (displayed for logged out user)
 
 ### Features left to implement
+
+Not implemented due to a balanced consideration of time constraints, developer skill and experience linitations and due to specific assessment guidelines of Code Institute course which this project was created for.
+
+- Further admin user functionality: create/edit categories and age ranges. Page on site that only admin users can access. 
+- Contact page with form hooked up to emailJS where users can ask questions, make comments, offer suggestions.
+- Option to play each quiz interactively within the application. Button to play quiz added to search results and view quiz card element for each quiz. Play quiz is separate page where user selects an answer to each question before scrolling to next question in quiz. 
+    - Quiz owner can set an optional time limit for users playing quiz interactively from the edit quiz page
+    - User is given a high score based on percentages of answers correct and time taken for a quiz
+    - Option to input high score manually if quiz is played offline
+    - Each quiz has a high score leaderboard of top 10 scores displayed on view quiz page
+- Users can upload a custom image for each quiz to be displayed in search results, discover and view quiz pages
+- Users can add a custom number of answers to a question (2 or more) instead of a fixed number of four.
+- Users can upload an image in addition to, or instead of, question text for each question in edit quiz page
+- Button on view quix page to download or print quiz as a pdf file - users can then use quiz content more easily when no access to tecnology/internet
+- Favorites (star) button on each quiz card on search results, discover and view quiz pages. Toggle on/off (checkbox) icon. 
+    - Add/remove quiz from favorites section for current user which is displayed on user profile page
+    - Discover page also includes a 'most favorited' section which displays quizzes which appear most times in favorited list for all users.
+- Custom 404 error page. Consistent with overall site theme and styling. Allows user to redirect back to site easily.
+- Rate up / down button on each quiz card on search results, discover and view quiz pages. 
+    - A quiz can be labbled as 'like' or 'dislike' by current user. 
+    - Each section organized by catergory/age range on discover page displays quizzes prioritized by net likes - dislikes score for all users.
+- Carousel of similar quizzes at bottom of view quiz page (same category or age range) to help users find content they want
+- Sort quizzes dropdown links at top of search results and user profile quiz lists. Sort alphabetically, most/least recently updated (db also stores date quizzes were created and last updated)
+- Extra field to repeat password input on create/edit account page which must match first password input field exactly
+- Forgotten password link on login page. User enters email address associated with account (user input and db stores an email address when account is created) and email JS sends a temporary password and db is updated. User is directed to page to enter and confirm a new password when they first login to account with temporary password.
+- User can select account type on login page (and change this setting on edit account page) from teacher, student, other. Teacher accounts can create and edit quizzes and add scores manually, Students can play quizzes and register high scores interactively. Other users can do both teacher and student functions. 
+- User can select mutiple categories and age ranges (primary and secondary) on login page (and change these settings on edit account page). Users are recommended quizzes from mutiple categories and age ranges on discover page.
+- Terms and conditions checkbox on create account page which must be selected for form to submit. Terms and conditions can be viewed on separate page (in new window) or modal.
+- Each quiz create and edit page has an optional secondary catergory and secondary age range selectable from dropdown menu
+- Questions are stored in separate collection in db and referenced from each quiz. All questions added by all users can be searched from create/edit quiz page and added to the cuurent quiz.
+- Questions and answers can be reordered on edit/create quiz page by dragging cards containing them (leveraging draggable.js library)
+- Username of currently logged in user is displayed in Navbar element
+- Navbar scrolls with page until 80% hidden then botton 20% remains visible only: until user scrolls up and 100%of navbar height slides back into view
+- If a list of quizzes or questions displayed on any page is over 10, the list is paginated to display quizzes/questions in blocks of 10.
+- Each quiz has a 'short description' and 'full description' field stored in db. The short description is generated programatically from full description by slicing the string. The short description is displayed on view quiz page with a link to view long description as tooptip/dropdown element.
+- Each quiz has a last last updated field in db and discover page displays 'new content' carousel of quizzes with most recent values for this field.
+- Edit quiz, edit profile an view quiz pages have a 'back' arrow element to easily naviagte back to previous page (without previous page reloading as default when using browser navigation)
+- Login fields and button appears in navbar instead of separate page to limit navigation between separate pages on site.
 
 ## 3. Information Architecture
 <hr>
@@ -294,6 +369,10 @@ Collection name: age_ranges
 * [Git]() command line utility and GitHub for version control
 * [Trello]() for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
 * [MongoDB]() NoSQL document-based database 
+* [Font Awesome for icons]()
+* CDN for content delivery
+* [Coolors]() to select color palette for website
+
 
 ## 6. Deployment
 <hr>

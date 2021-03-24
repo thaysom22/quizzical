@@ -144,7 +144,7 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 - Icons are also used as links (or in combination with a textual link) to help all users understand the site and particularly non-English speaking users. 
 - Icons are always accompanied by appropriate aria-labels and attributes to meet accessibility guidelines for users with screen readers.
 
-#### Styling 
+#### Styling and effects for components
 
 - Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
 - Buttons of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
@@ -152,7 +152,7 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 - Carousels with images
 - Cards to display groups of information (discrete quiz / question)
 - Collapsible footer
-- Navbar
+- Collapsible navbar from Bootstrap & Material Design
 - Progression indicators
 - Box shadows and text shadows are used to add depth and definition to certain content and areas of the page.
 - 
@@ -305,6 +305,7 @@ Not implemented due to a balanced consideration of time constraints, developer s
 - Each quiz has a last last updated field in db and discover page displays 'new content' carousel of quizzes with most recent values for this field.
 - Edit quiz, edit profile an view quiz pages have a 'back' arrow element to easily naviagte back to previous page (without previous page reloading as default when using browser navigation)
 - Login fields and button appears in navbar instead of separate page to limit navigation between separate pages on site.
+- A 'flag question' link displayed on every question catd. sends an email to quiz owner and to admin that a question needs correcting or updating. When clickeda new page is opened up to input details and send email.
 
 ## 3. Information Architecture
 <hr>
@@ -325,8 +326,8 @@ Collection name: users
 | User ID | _id | None | ObjectId | Primary Key |
 | Username | username | text, `maxlength=20` | string | not null, unique |
 | Password | password | text, `maxlength=20` | string | not null |
-| User category | user_category | None | ObjectId | not null |
-| User age range | user_age_range | None | ObjectId | not null |
+| User category | user_category | None | ObjectId |   |
+| User age range | user_age_range | None | ObjectId |   |
 
 #### Quizzes collection
 
@@ -402,6 +403,11 @@ Collection name: age_ranges
 * [Kahoot](https://kahoot.com/) inspiration for design of layout, icons, colors and styling.
 * [Quizizz](https://quizizz.com/) inspiration for design of layout, icons, colors and styling.
 
+
+## 8. Evaluation
+<hr>
+
+* [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided decision to use null values for empty fields in mongodb rather than leaving fields out
 
 
 

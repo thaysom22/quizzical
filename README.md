@@ -114,6 +114,11 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 
 #### Fonts 
 
+* Fonts were chosen to help communicate the overall theme and feel of the site. Sans-serif, readable fonts were chosen for both the main title and main body fonts so they complement each other well.
+* `Raleway` was used as a main title font. It is sans-serif, rounded and extremely clear, so is a good choice to engage student users. It is not frivilous or unserious to put off older users. The site is not intended to be used primarly for serious academic material and therefore clarity, accessibility and a bit of lightheartedness were reasons to choose this font. Some preliminary research into the aesthetic design of edTech applications suggested that this font is a popular choice in the industry due to it's readability and spacious feel. 
+* `Open Sans` was selected as the main body font. It complements the main title font very well with rounded glyphs and ample spacing. It scales very well to small sizes so is appropriate for more granular elements on smaller device sizes. 
+* `Oswald` was chosen as a third font for it's clear contrast both with the main title and main body fonts. It is much more clsely spaces and has taller, narrower glyphs. It is also a popular choice for education websites according to research.
+
 #### Colors
 
 [Link to color palette](https://coolors.co/000000-386b4d-0839d9-fadcb2-e0e0e0-ffffff)
@@ -142,12 +147,15 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 #### Styling 
 
 - Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
-- Buttons of various sizes and styles are used from [MaterializeCSS](https://materializecss.com/) to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. Icons are used with buttons to convey clear meaning to all users. Buttons have inbuilt interaction effects to provide reliable, useful and expected feedback to users.
+- Buttons of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
+- Hover and active psuedoclass effects are used to improve user experience through feedback across site. Buttons have interaction effects to provide reliable, useful and expected feedback to users.
 - Carousels with images
 - Cards to display groups of information (discrete quiz / question)
 - Collapsible footer
 - Navbar
 - Progression indicators
+- Box shadows and text shadows are used to add depth and definition to certain content and areas of the page.
+- 
 
 #### Images
 
@@ -372,6 +380,7 @@ Collection name: age_ranges
 * [Font Awesome for icons]()
 * CDN for content delivery
 * [Coolors]() to select color palette for website
+* [Bootstrap & Material Design](https://mdbootstrap.com/)
 
 
 ## 6. Deployment

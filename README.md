@@ -269,6 +269,11 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - Username and password input fields (with form validation for length and regex) with labels
     - Login button submits form (after validation) and redirects user to discover page. Smaller link 'create account' with 'new here' label redirects to registration page (displayed for logged out user)
 
+### Changes made to wireframes and designs during implementation
+
+
+
+
 ### Features left to implement
 
 Not implemented due to a balanced consideration of time constraints, developer skill and experience linitations and due to specific assessment guidelines of Code Institute course which this project was created for.
@@ -309,6 +314,7 @@ Not implemented due to a balanced consideration of time constraints, developer s
 - Edit quiz, edit profile an view quiz pages have a 'back' arrow element to easily naviagte back to previous page (without previous page reloading as default when using browser navigation)
 - Login fields and button appears in navbar instead of separate page to limit navigation between separate pages on site.
 - A 'flag question' link displayed on every question catd. sends an email to quiz owner and to admin that a question needs correcting or updating. When clickeda new page is opened up to input details and send email.
+- An element on homepage (larger screens only) showing a map from google maps API of where users are located in the world - to encourage community growth.
 
 ## 3. Information Architecture
 <hr>

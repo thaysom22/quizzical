@@ -1,0 +1,38 @@
+/* import google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Oswald:wght@200;300;400;500&family=Raleway:wght@300;400;500;600&display=swap');
+
+/* global styles */
+html {
+    font-size: 62.5%;
+}
+
+/* navbar */
+.navbar {
+    font-size: 1.2rem;
+    background-color: #0839D9;
+    font-family: 'Open Sans', sans-serif;
+}
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+.navbar-collapse .navbar-nav {
+    align-items: center;
+}
+.navbar .nav-link {
+    color: #FFFFFF;
+}
+.navbar .nav-link .btn {
+    background-color: #FADCB2;
+    color: #000000;
+    font-size: 1.1rem;
+    line-height: initial;
+    text-transform: initial;
+}
+.navbar .navbar-toggler {
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    padding: 1rem;
+}
+

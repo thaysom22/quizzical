@@ -9,6 +9,8 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous"
     />
+    <!-- google fonts -->
+    
     <!-- mdbootsrap css cdn -->
     <link 
         rel="stylesheet" 
@@ -26,7 +28,36 @@
     <title>Quizzical - create, share and play</title>
 </head>
 <body>
-    <header>I am inherited from base.html template</header>
+    <header>
+        <!-- CREDIT navbar: "https://mdbootstrap.com/docs/standard/navigation/navbar/" -->
+        <nav class="navbar fixed-top navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="" alt="" >
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-rounded">Sign Up</button>
+                        </a>
+                        <a class="nav-link text-center" href="#">Login</a>
+                        <a class="nav-link text-center" aria-current="page" href="#">Welcome</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main class="container">
         {% block content %}
         {% endblock %}

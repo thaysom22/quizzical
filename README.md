@@ -132,6 +132,7 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 * White is used as a primary font color on darker blue or green background to provide maximum contrast and also as a background color paired with black or 'persian blue' text for a clean, high contrast effect when there is alot of content or smaller text.
 * Main solid backgrounds for elements use the vibrant 'persian blue' and 'wheat' colors to visually separate elements and convey structure to help user easily navigate the page.
 * 'Amazon green' and 'gainsboro gray' are used as secondary accent and styling colors for elements (horizontal rule elements, borders, minor text, secondary icons and buttons). These help add depth to the page but are not essential to the site experience so that users who need very high contast can still use the page effectively.
+* Research into the designs of other similar applications showed that many use a shade of purple paired with white font as primary colors so I decided not to use purple to make this app distinctive from the competition in this way.
 
 #### Icons
 

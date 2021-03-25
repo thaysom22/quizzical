@@ -366,6 +366,8 @@ Collection name: age_ranges
 | Age Range ID | _id | None | ObjectId | Primary Key |
 | Age Range | age_range | Dropdown menu | string | not null, unique |
 
+* ObjectIds for documents in `categories` and `age_ranges` collections are stored as field values in both `users` and `quizzes` collections - serves to define a relationship between documents in these different collections.
+* ObjectIds for documents in `users` collection are stored as field values in `quizzes` collection - serves to define a relationship between documents in these different collections.
 
 ## 4. Testing
 <hr>
@@ -373,6 +375,11 @@ Collection name: age_ranges
 ## 5. Technologies Used
 <hr>
 
+* [Python3]() language and standard libraries
+* [Flask]() web application framework used to simplify building appeal
+* [Jinja]() template engine (Flask dependency)
+* [Werkzeug]() WSGI toolkit (Flask dependency)
+* [pip]() used to install dependencies for project
 * [Balsamiq]() for wireframing
 * [Gitpod]() as IDE
 * [Git]() command line utility and GitHub for version control
@@ -396,7 +403,8 @@ Collection name: age_ranges
 
 ### Code
 
-* Code institute 'gitpod-full-template' repository
+* Code Institute 'gitpod-full-template' repository
+* Code Institute Task Manager walkthrough project
 
 ### Acknowledgements
 

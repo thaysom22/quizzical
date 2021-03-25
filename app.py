@@ -20,8 +20,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 @app.route("/") # default route for app
-def home():
-    return render_template("landing.html")
+def index():
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

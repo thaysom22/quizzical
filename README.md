@@ -146,6 +146,8 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 
 #### Styling and effects for components
 
+* [Material Design for Bootstrap](https://mdbootstrap.com/) was used for this project as it provided an easy to use framework for building a responsive site quickly and effectively via Bootstrap's grid system. The prebuilt components offer a user experience appropriate for this app so these are used where possible to provide structure, styling and feedback for components on this site. Many have been edited with custom css to meet the specific design requirements for this site.
+
 - Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
 - Buttons of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
 - Hover and active psuedoclass effects are used to improve user experience through feedback across site. Buttons have interaction effects to provide reliable, useful and expected feedback to users.
@@ -386,10 +388,10 @@ Collection name: age_ranges
 * [Trello]() for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
 * [MongoDB]() NoSQL document-based database 
 * [Font Awesome for icons]()
-* CDN for content delivery
+* [cdnjs](https://cdnjs.com/) for css and js file content delivery 
 * [Coolors]() to select color palette for website
-* [Bootstrap & Material Design](https://mdbootstrap.com/)
-
+* [Material Design for Bootstrap](https://mdbootstrap.com/)
+* [randomkeygen](https://randomkeygen.com/) to generate secure keys and passwords for app
 
 ## 6. Deployment
 <hr>
@@ -416,7 +418,7 @@ Collection name: age_ranges
 <hr>
 
 * [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided decision to use null values for empty fields in mongodb rather than leaving fields out
-
+* Decided not to use css pre-compiler (Sass) for thsi project as most of the styles and classes will come from Material Design Bootstrap.
 
 
 

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     I am part of index.html template
+    <ul>
+        {% for quiz in quizzes %}
+            <li>Title: {{ quiz.title }}, Owner: {{ quiz.owner_id}}, Questions: {{ quiz.questions }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

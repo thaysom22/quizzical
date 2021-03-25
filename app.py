@@ -21,7 +21,8 @@ mongo = PyMongo(app)
 
 @app.route("/") # default route for app
 def index():
-    return render_template("index.html")
+    quizzes = list(mongo.db.quizzes.find())  # test
+    return render_template("index.html", quizzes=quizzes)
 
 
 if __name__ == "__main__":

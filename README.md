@@ -169,9 +169,15 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 
 #### Wireframes
 
-Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/):
-
 - [View all wireframes]()
+
+Wireframes for this project were created using [Balsamiq](https://balsamiq.com/):
+
+#### Flowchart
+
+[Flowchart](https://drive.google.com/file/d/15qV6-4HKJ9E3Yz0v8qGknZRC-tVGFY5b/view?usp=sharing) to show user interaction pathways for login and register functionality of application
+
+This flowchart was created using [draw.io](https://www.draw.io/)
 
 ## 2. Features
 <hr>
@@ -260,7 +266,7 @@ Wireframes for this project were created using [Balsamiq] (https://balsamiq.com/
     - If user logged out: Main title: "Let's get quizzical!" and subtitle of create account with add user icon. 
     - If user logged in: Main title: current user username and user icon is displayed and subtitle of change setting with settings icon.
     - Form with inputs: username (text), main category of interest (dropdown), main age range (dropdown) and password text displayed with labels. If user is logged in the fields are prefilled on page load with values for user from db.
-    - If user logged out: Create account button to submit form and send to db (create operation). Form validates input to meet regex criteria and user is given feedback if a value in a field is invalid - user redirected to discover page. Smaller link to login page with 'already registered' label. 
+    - If user logged out: Create account button to submit form and send to db (create operation): Form validates input to meet regex criteria and user is given feedback if a value in a field is invalid - **user is logged in** and is redirected to discover page. Page also displays a smaller link to login page with 'already registered?' label
     - If user logged in: Save changes button to submit form and send to db (update operation), user redirected to profile page. Smaller link to discard changes and user redirected to profile page. Beneath is a 'delete profile' button (icon and label) which when clicked displays a confirmatory message before deleting user and all associated quiz data from db and redirecting to landing page.
 
 - Login page
@@ -399,6 +405,8 @@ Collection name: age_ranges
 * [Coolors]() to select color palette for website
 * [Material Design for Bootstrap](https://mdbootstrap.com/)
 * [randomkeygen](https://randomkeygen.com/) to generate secure keys and passwords for app
+* [google fonts]() for webfonts used on site
+* [draw.io](https://www.draw.io/) to create flowchart for user interaction
 
 ## 6. Deployment
 <hr>

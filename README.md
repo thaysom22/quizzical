@@ -427,13 +427,14 @@ Collection name: age_ranges
 
 * [Kahoot](https://kahoot.com/) inspiration for design of layout, icons, colors and styling.
 * [Quizizz](https://quizizz.com/) inspiration for design of layout, icons, colors and styling.
+* [AJGreaves Family Hub project](https://github.com/AJGreaves/familyhub/) for guidance on structuring README, directories and naming conventions for Flask project.
 
 
 ## 8. Evaluation
 <hr>
 
 * [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided decision to use null values for empty fields in mongodb rather than leaving fields out
-* Decided not to use css pre-compiler (Sass) for thsi project as most of the styles and classes will come from Material Design Bootstrap.
+*
 
 
 

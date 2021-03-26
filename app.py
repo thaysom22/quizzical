@@ -19,10 +19,23 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-@app.route("/") # default route for app
-def index():
-    quizzes = list(mongo.db.quizzes.find())  # test
-    return render_template("index.html", quizzes=quizzes)
+# default route for app
+@app.route("/")
+@app.route("/index")  
+def default():
+    """
+    docstring here
+    """
+    # test
+    return render_template("pages/landing.html")
+    loggedIn = 'user' in session  # check if user is logged in
+    if loggedIn == False:
+        return redirect(url_for("landing_page", loggedIn=loggedIn))
+    else:
+        # get data from db
+        # pass username to discover_page view
+        return redirect(url_for("discover_page", loggedIn=loggedIn))
+
 
 
 if __name__ == "__main__":

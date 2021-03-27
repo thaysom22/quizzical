@@ -36,3 +36,7 @@ html {
     padding: 1rem;
 }
 
+/* main body content */
+main {
+    margin-top: 7rem;
+}

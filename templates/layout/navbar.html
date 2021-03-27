@@ -17,11 +17,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav">
-                <a class="nav-link" href="#">
-                    <button class="btn btn-rounded">Sign Up</button>
-                </a>
-                <a class="nav-link text-center" href="#">Login</a>
-                <a class="nav-link text-center" aria-current="page" href="#">Welcome</a>
+                {% if loggedIn == False %}
+                    <a class="nav-link" href="#">
+                        <button class="btn btn-rounded">Sign Up</button>
+                    </a>
+                    <a class="nav-link text-center" href="#">Login</a>
+                    <a class="nav-link text-center" href="#">Welcome</a>
+                {% elif loggedIn == True %}
+                    <a class="nav-link" href="#">
+                        <button class="btn btn-rounded">Create</button>
+                    </a>
+                    <a class="nav-link" href="#">
+                        <button class="btn btn-rounded">Discover</button>
+                    </a>
+                    <a class="nav-link text-center" href="#">Profile</a>
+                    <a class="nav-link text-center" href="#">Help</a>
+                    <a class="nav-link text-center" href="#">Logout</a>
+                {% endif %}
             </div>
         </div>
     </div>

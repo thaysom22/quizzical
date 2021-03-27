@@ -26,16 +26,31 @@ def default():
     """
     docstring here
     """
-    # test
-    return render_template("pages/landing.html")
-    loggedIn = 'user' in session  # check if user is logged in
+    loggedIn = 'user' in session  # check in cookies if user is logged in
     if loggedIn == False:
-        return redirect(url_for("landing_page", loggedIn=loggedIn))
+        return redirect(url_for("landing_page"))
     else:
         # get data from db
         # pass username to discover_page view
-        return redirect(url_for("discover_page", loggedIn=loggedIn))
+        return redirect(url_for("discover_page"))
 
+@app.route("/landing")
+def landing_page():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    return render_template("pages/landing.html",
+        loggedIn=loggedIn)
+
+@app.route("/discover")
+def discover_page():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    return render_template("pages/discover.html",
+        loggedIn=loggedIn)
 
 
 if __name__ == "__main__":

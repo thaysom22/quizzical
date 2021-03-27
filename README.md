@@ -65,12 +65,15 @@ Quizzical is a great way to meet these user needs because:
 
 Site owner's goals:
 
+
 * Provide an easy to use, useful site that helps educators teach better and students enjoy learning and progress
 * To practice building a full stack application using front end languages plus Python, Flask and MongoDB
-* To collate searchable quiz content from users that I can use in my own teaching practice and design of resources
+* To collate searchable quiz content from user's ideas and expertise that I can use in my own teaching practice and design of resources
+* To collate searchable quiz content from user's ideas and expertise that will increase the popularity and number of users for site which in turn will help achieve all other goals!
 * To provide a virtual community where ideas can be shared and collaboration in teaching and learning is fostered
 * To provide an educational means of fun!
 * To create a scalable platform tha can be expanded in scope to include many more categories of topic and features such as ability to play quizzes interactively.
+
 
 ### User Stories
 

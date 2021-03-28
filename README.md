@@ -22,7 +22,7 @@ Quizzical was developed by Tom Haysom [thaysom22]() for data-centric project of 
     * 4.1 Link to TESTING.md file
 5. [Technologies Used](#technologies-used)
 6. [Deployment](#deployment)
-    * 6.1 Deployment to PaaS
+    * 6.1 Deployment to Heroku
     * 6.2 How to run this project locally
 7. [Credits](#credits)
     * 7.1 Content
@@ -410,9 +410,64 @@ Collection name: age_ranges
 * [randomkeygen](https://randomkeygen.com/) to generate secure keys and passwords for app
 * [google fonts]() for webfonts used on site
 * [draw.io](https://www.draw.io/) to create flowchart for user interaction
+* [Heroku]() cloud provider of 'Platform as a Service' used to deploy application and make available via public url.
 
 ## 6. Deployment
 <hr>
+
+### Deployment to Heroku
+
+The following process was followed by the developer to deploy this project to [Heroku]():
+
+1. Create `requirements.txt` file in project root directory which lists all project dependencies (generated after installing all dependencies by running `pip freeze > requirements.txt` command in terminal when in project root directory)
+2. Create `Procfile` file in project root directory with content: `web: python app.py` which tells Heroku how to build and run the application
+3. If project root directory contains `env.py` file, add this to `.gitignore` file so that it is not pushed to remote repository (GitHub)
+4. Stage, commit and push local git repository to remote repository (GitHub)
+5. Open [Heroku.com](heroku.com), go to login or sign up
+6. Click on 'New', then 'Create new app'
+7. Enter a valid, available  and appropriate app name and choose appropriate region, click 'Create app'
+8. Go to 'deploy' tab and under 'Deployment method' select 'Github - Connect to GitHub'
+9. Under 'Connect to GitHub' search for the name of the GitHub repo for the project and click 'Connect'
+10. 'Automatic deploys' and 'Manual deploy' sections will appear once the app has been successfully connected to GitHub
+11. Under 'Automatic deploys' select `master` branch and click 'Enable Automatic Deploys' 
+12. Go to 'Settings' tab and click 'Reveal Config Vars' 
+13. Add the following KEY-VALUE pairs:
+```
+{
+    "IP": "0.0.0.0",
+    "PORT": "5000",
+    "MONGO_URI": <MONGO_URI>,
+    "MONGO_DBNAME": <MONGO_DBNAME>,
+    "SECRET_KEY": <SECRET_KEY>
+}
+```
+Note: the documentation on how to set up a MongoDB account and get a `MONGO_URI` is [here](https://docs.atlas.mongodb.com/) 
+14. Go back to 'Deploy' tab, scroll down to 'Manual deploy', select `master` as branch to deploy and click `Deploy Branch'
+15. The app will now begin the build process and be deployed once this process successfully completes. 
+16. The app can be opened and the public url obtained by clicking 'Open app' at the top of the same page.
+
+### Local deployment
+
+The following process can be followed by anyone with an internet connection to run this project locally on their own computer:
+
+1. Ensure you have access to an IDE (local or cloud)
+2. Install `pip`, `python3` and `git` commandline tools (up to date versions)
+3. Run `git clone https://github.com/thaysom22/quizzical` in terminal to create local clone of GitHub repository for this project
+4. Ensure you are in the project root directory at the terminal prompt
+5. Run `pip install -r requirements.txt` (-r option tells pip that following <file> argument is a requirements formatted file) to install all dependencies required to run application
+6. Create a file named `env.py` in project root directory
+7. Inside `env.py` file enter the following code:
+```
+import os
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("MONGO_URI", <MONGO_URI>)
+os.environ.setdefault("MONGO_DBNAME", <MONGO_DBNAME>)
+os.environ.setdefault("SECRET_KEY", <SECRET_KEY>)
+```
+Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` is [here](https://docs.atlas.mongodb.com/). Database must contain the collections: `users`, `quizzes`, `age_ranges`, and `categories`
+8. Run `python3 app.py` command from the terminal to run the application
+9. The website can be viewed by clicking 'open browser' in IDE for the relevant port or entering the url: `http://<IP>:<PORT>/` 
 
 ## 7. Credits
 <hr>

@@ -413,6 +413,8 @@ Collection name: age_ranges
 * [google fonts]() for webfonts used on site
 * [draw.io](https://www.draw.io/) to create flowchart for user interaction
 * [Heroku]() cloud provider of 'Platform as a Service' used to deploy application and make available via public url.
+* [Favicon.io](https://favicon.io/) used to convert png icon into favicon files and for html to optimize browser display
+* [FreeLogoDesign](https://www.freelogodesign.org/) to generate and edit logo and favicon png file
 
 ## 6. Deployment
 <hr>

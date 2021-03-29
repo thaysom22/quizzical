@@ -21,6 +21,16 @@ html {
   font-size: 2.5rem;
   padding: 1rem;
 }
+.navbar #nav-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0.5rem;
+}
+.navbar #nav-logo-title {
+  font-size: 2.5rem;
+  color: #FADCB2;
+  margin: 0.5rem;
+}
 .navbar .nav-link {
   color: #FFFFFF;
 }

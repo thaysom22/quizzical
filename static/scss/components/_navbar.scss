@@ -9,6 +9,16 @@
         font-size: 2.5rem;
         padding: 1rem;
     }
+    #nav-logo{
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: .5rem;
+    }
+    #nav-logo-title{
+        font-size: 2.5rem;
+        color: $wheat;
+        margin: .5rem;
+    }
     .nav-link {
         color: $white;
         .btn {

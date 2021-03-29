@@ -18,8 +18,11 @@
     />
     <!-- custom css for all templates-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}" type="text/css">
-    <!-- Favicon in browser tab -->
-    <link rel="icon" href="">
+    <!-- favicon credit: https://favicon.io/favicon-converter/ for optimization and https://www.freelogodesign.org/ for icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='img/favicons/site.webmanifest') }}">
     <title>{{headTitle}} | Quizzical - create, share and play</title>
 </head>
 <body>

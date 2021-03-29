@@ -1,0 +1,30 @@
+/* ******* NAVBAR ******* */
+
+.navbar {
+    font-size: 1.2rem;
+    background-color: $persian-blue;
+    font-family: $heading;
+}
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+.navbar-collapse .navbar-nav {
+    align-items: center;
+}
+.navbar .nav-link {
+    color: $white;
+}
+.navbar .nav-link .btn {
+    background-color: $wheat;
+    color: $black;
+    font-size: 1.1rem;
+    line-height: initial;
+    text-transform: initial;
+}
+.navbar .navbar-toggler {
+    color: $white;
+    font-size: 2.5rem;
+    padding: 1rem;
+}

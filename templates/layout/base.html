@@ -9,8 +9,6 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
         crossorigin="anonymous"
     />
-    <!-- google fonts -->
-    
     <!-- mdbootsrap css cdn -->
     <link 
         rel="stylesheet" 
@@ -19,10 +17,7 @@
         crossorigin="anonymous"
     />
     <!-- custom css for all templates-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    <!-- stylesheets loaded dependent on page -->
-    {% block styles %}
-    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}" type="text/css">
     <!-- Favicon in browser tab -->
     <link rel="icon" href="">
     <title>{{headTitle}} | Quizzical - create, share and play</title>

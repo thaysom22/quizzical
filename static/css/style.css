@@ -14,23 +14,16 @@ html {
 .navbar {
   font-size: 1.2rem;
   background-color: #0839D9;
-  font-family: "Raleway", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
-
-.navbar-collapse {
-  display: flex;
-  justify-content: flex-end;
-  align-items: stretch;
+.navbar .navbar-toggler {
+  color: #FFFFFF;
+  font-size: 2.5rem;
+  padding: 1rem;
 }
-
-.navbar-collapse .navbar-nav {
-  align-items: center;
-}
-
 .navbar .nav-link {
   color: #FFFFFF;
 }
-
 .navbar .nav-link .btn {
   background-color: #FADCB2;
   color: #000000;
@@ -39,10 +32,13 @@ html {
   text-transform: initial;
 }
 
-.navbar .navbar-toggler {
-  color: #FFFFFF;
-  font-size: 2.5rem;
-  padding: 1rem;
+.navbar-collapse {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+.navbar-collapse .navbar-nav {
+  align-items: center;
 }
 
 /* PAGES */

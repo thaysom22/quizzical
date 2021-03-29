@@ -119,8 +119,8 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 
 * Fonts were chosen to help communicate the overall theme and feel of the site. Sans-serif, readable fonts were chosen for both the main title and main body fonts so they complement each other well.
 * `Raleway` was used as a main title font. It is rounded and extremely clear, so is a good choice to engage student users. It is not frivilous or unserious to put off older users. The site is not intended to be used primarly for serious academic material and therefore clarity, accessibility and a bit of lightheartedness were reasons to choose this font. Some preliminary research into the aesthetic design of edTech applications suggested that this font is a popular choice in the industry due to it's readability and spacious feel. 
-* `Open Sans` was selected as the main body font. It complements the main title font very well with rounded glyphs and ample spacing. It scales very well to small sizes so is appropriate for more granular elements on smaller device sizes. 
-* `Oswald` was chosen as a third font for it's clear contrast both with the main title and main body fonts. It is much more clsely spaces and has taller, narrower glyphs. It is also a popular choice for education websites according to research.
+* `Open Sans` was selected as the main body font. It complements the main title font very well with rounded glyphs and ample spacing. It scales very well to small sizes so is also used for more granular elements and element with more text content.
+* `Oswald` was chosen as a third font for it's contrast both with the main title and main body fonts. It is much more closely spaces and has taller, narrower glyphs that stay legible at smaller sizes so it can be used for smaller elements like links and buttons to help to visually distinguish them from main page content. It is also a popular choice for education websites according to research.
 
 #### Colors
 
@@ -148,20 +148,22 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 - Icons are also used as links (or in combination with a textual link) to help all users understand the site and particularly non-English speaking users. 
 - Icons are always accompanied by appropriate aria-labels and attributes to meet accessibility guidelines for users with screen readers.
 
-#### Styling and effects for components
+#### Components, styling and effects 
 
-* [Material Design for Bootstrap](https://mdbootstrap.com/) was used for this project as it provided an easy to use framework for building a responsive site quickly and effectively via Bootstrap's grid system. The prebuilt components offer a user experience appropriate for this app so these are used where possible to provide structure, styling and feedback for components on this site. Many have been edited with custom css to meet the specific design requirements for this site.
+* [Material Design for Bootstrap](https://mdbootstrap.com/) was used for layout and components for this project as it provided an easy to use framework for building a responsive site quickly and effectively via Bootstrap's grid system. The prebuilt components offer a user experience appropriate for this app so these are used where possible to provide structure, styling and feedback for components on this site. Many have been edited with custom css to meet the specific design requirements for this site:
+
+- [Buttons](https://mdbootstrap.com/docs/standard/components/buttons/) of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
+- [Progression indicators (spinners)](https://mdbootstrap.com/docs/standard/components/spinners/) are used as visual indicators to user when app is loading or waiting for a response
+- [Collapsible navbar](https://mdbootstrap.com/docs/standard/navigation/navbar/) used to make navbar reponsive and to create smooth user experience when using collapsible menu with burger icon
+- [Footer](https://mdbootstrap.com/docs/standard/navigation/footer/) for responsive layout with Bootstrap Grid system
+- [Carousel](https://mdbootstrap.com/docs/standard/components/carousel/) used to display selection of images on landing page and quiz content from db on other pages
+- [Cards](https://mdbootstrap.com/docs/standard/components/cards/) to display discrete piece of data: either fixed content or a quiz/question loaded from db
+
+Other components and styling used:
 
 - Horizontal rules are used to divide sections of page wherethere are multiple call to action sections and/or areas that are not as clearly delineated by color or layout of elements
-- Buttons of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
-- Hover and active psuedoclass effects are used to improve user experience through feedback across site. Buttons have interaction effects to provide reliable, useful and expected feedback to users.
-- Carousels with images
-- Cards to display groups of information (discrete quiz / question)
-- Collapsible footer
-- Collapsible navbar from Bootstrap & Material Design
-- Progression indicators
 - Box shadows and text shadows are used to add depth and definition to certain content and areas of the page.
-- 
+- Hover and active psuedoclass effects are used to improve user experience through feedback across site. Buttons have interaction effects to provide reliable, useful and expected feedback to users.
 
 #### Images
 

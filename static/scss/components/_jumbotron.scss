@@ -1,0 +1,12 @@
+.jumbotron {
+    font-family: $heading;
+    background-color: $white;
+    position: relative;
+    top: 2rem;
+    h1 {
+        font-size: 4rem;
+    }
+    h5 {
+        font-size: 2.5rem;
+    }
+}

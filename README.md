@@ -124,18 +124,17 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 
 #### Colors
 
-[Link to color palette](https://coolors.co/000000-386b4d-0839d9-fadcb2-e0e0e0-ffffff)
+[Link to color palette](https://coolors.co/000000-c60f7b-0839d9-80ced7-fadcb2-e0e0e0-ffffff)
 
 The color palette was chosen using the [Coolors](https://coolors.co/) color picker.
 
-* The overall theme of the pallete is a mixture of earthy colors and tactile office stationary colors.
-* The palette contains some vibrance and color to engage younger users. 
-* There are three lighter and three darker tones: one of each group is a more vibrant and garish and is used on the site to help bring contrast to certain elements - in particular, calls to action.
+* The overall theme of the pallete is a mixture of vibrant contrast and tactile office stationary colors.
+* There are a mixture of lighter and darker tones with more vibrant and garish colors used on the site to help bring contrast to certain elements - in particular, calls to action.
 * There are not too many constrasting colors in the pallete overall to overwhelm the user and each group of three lighter and darker colors blend well together respectively
 * White is used as a primary font color on darker blue or green background to provide maximum contrast and also as a background color paired with black or 'persian blue' text for a clean, high contrast effect when there is alot of content or smaller text.
 * Main solid backgrounds for elements use the vibrant 'persian blue' and 'wheat' colors to visually separate elements and convey structure to help user easily navigate the page.
-* 'Amazon green' and 'gainsboro gray' are used as secondary accent and styling colors for elements (horizontal rule elements, borders, minor text, secondary icons and buttons). These help add depth to the page but are not essential to the site experience so that users who need very high contast can still use the page effectively.
-* Research into the designs of other similar applications showed that many use a shade of purple paired with white font as primary colors so I decided not to use purple to make this app distinctive from the competition in this way.
+* 'Middle blue' and 'gainsboro gray' are used as secondary accent and styling colors for elements (horizontal rule elements, borders, minor text, secondary icons and buttons). These help add depth to the page but are not essential to the site experience so that users who need very high contast can still use the page effectively.
+* Research into the designs of other similar applications showed that many use a shade of purple paired with white font as primary colors so I decided not to use this color to make this app distinctive from the competition in this way.
 
 #### Icons
 
@@ -415,6 +414,7 @@ Collection name: age_ranges
 * [Heroku]() cloud provider of 'Platform as a Service' used to deploy application and make available via public url.
 * [Favicon.io](https://favicon.io/) used to convert png icon into favicon files and for html to optimize browser display
 * [FreeLogoDesign](https://www.freelogodesign.org/) to generate and edit logo and favicon png file
+* [Vector Stock](https://www.vectorstock.com/) for image content
 
 ## 6. Deployment
 <hr>
@@ -479,6 +479,8 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 
 
 ### Content
+
+* Question marks background image attributed to Vector Stock: https://www.vectorstock.com/royalty-free-vector/black-seamless-background-with-question-marks-vector-30182680
 
 ### Code
 

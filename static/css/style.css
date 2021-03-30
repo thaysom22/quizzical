@@ -9,6 +9,10 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  color: #000000;
+}
+
 /* COMPONENTS */
 /* ******* NAVBAR ******* */
 .navbar {
@@ -69,9 +73,25 @@ footer #footer-thdev-icon {
   border-radius: 0.5rem;
 }
 
+.jumbotron {
+  font-family: "Raleway", sans-serif;
+  background-color: #FFFFFF;
+  position: relative;
+  top: 2rem;
+}
+.jumbotron h1 {
+  font-size: 4rem;
+}
+.jumbotron h5 {
+  font-size: 2.5rem;
+}
+
 /* PAGES */
 /* ******* ALLPAGES ******* */
-/* main element  */
+/* main element in base.html  */
 main {
-  margin-top: 7rem;
+  min-height: 100vh;
+  background-image: url("./../img/question-mark-background.png");
+  background-attachment: fixed;
+  margin-top: 6.663rem;
 }/*# sourceMappingURL=style.css.map */

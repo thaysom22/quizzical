@@ -26,12 +26,10 @@
     <title>{{headTitle}} | Quizzical - create, share and play</title>
 </head>
 <body>
-    <header>
-        <!-- navbar -->
-        {% include "layout/navbar.html" %}
-    </header>
+    <!-- navbar -->
+    {% include "layout/navbar.html" %}
 
-    <main class="container">
+    <main class="container-fluid">
         {% block content %}
         {% endblock %}
     </main>

@@ -1,0 +1,18 @@
+/* ******* FOOTER ******* */
+
+footer {
+    font-family: $main;
+    i.fab {
+        font-size: 1.2rem;
+    }
+    background-color: $gray;
+    #footer-thdev-icon,
+    #footer-logo {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin: .5rem;
+    }
+    #footer-thdev-icon {
+        border-radius: .5rem;
+    }
+}

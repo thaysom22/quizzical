@@ -51,6 +51,24 @@ html {
   align-items: center;
 }
 
+/* ******* FOOTER ******* */
+footer {
+  font-family: "Open Sans", sans-serif;
+  background-color: #E0E0E0;
+}
+footer i.fab {
+  font-size: 1.2rem;
+}
+footer #footer-thdev-icon,
+footer #footer-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.5rem;
+}
+footer #footer-thdev-icon {
+  border-radius: 0.5rem;
+}
+
 /* PAGES */
 /* ******* ALLPAGES ******* */
 /* main element  */

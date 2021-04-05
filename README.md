@@ -151,7 +151,7 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 
 * [Material Design for Bootstrap](https://mdbootstrap.com/) was used for layout and components for this project as it provided an easy to use framework for building a responsive site quickly and effectively via Bootstrap's grid system. The prebuilt components offer a user experience appropriate for this app so these are used where possible to provide structure, styling and feedback for components on this site. Many have been edited with custom css to meet the specific design requirements for this site:
 
-- [Buttons](https://mdbootstrap.com/docs/standard/components/buttons/) of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
+- [Buttons](https://mdbootstrap.com/docs/standard/components/buttons/) and links of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
 - [Progression indicators (spinners)](https://mdbootstrap.com/docs/standard/components/spinners/) are used as visual indicators to user when app is loading or waiting for a response
 - [Collapsible navbar](https://mdbootstrap.com/docs/standard/navigation/navbar/) used to make navbar reponsive and to create smooth user experience when using collapsible menu with burger icon
 - [Footer](https://mdbootstrap.com/docs/standard/navigation/footer/) for responsive layout with Bootstrap Grid system
@@ -486,6 +486,7 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 
 * Code Institute 'gitpod-full-template' repository
 * Code Institute Task Manager walkthrough project
+* [Material Design for Bootstrap](https://mdbootstrap.com/) classes and scripts used for layout and base for many components on this site
 
 ### Acknowledgements
 

@@ -13,6 +13,15 @@ body {
   color: #000000;
 }
 
+/* ******* BUTTONS ******* */
+.btn.main-cta {
+  background-color: #FADCB2;
+  color: #000000;
+  font-size: 1.1rem;
+  line-height: initial;
+  text-transform: initial;
+}
+
 /* COMPONENTS */
 /* ******* NAVBAR ******* */
 .navbar {
@@ -26,8 +35,8 @@ body {
   padding: 1rem;
 }
 .navbar #nav-logo {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   margin: 0.5rem;
 }
 .navbar #nav-logo-title {
@@ -37,13 +46,6 @@ body {
 }
 .navbar .nav-link {
   color: #FFFFFF;
-}
-.navbar .nav-link .btn {
-  background-color: #FADCB2;
-  color: #000000;
-  font-size: 1.1rem;
-  line-height: initial;
-  text-transform: initial;
 }
 
 .navbar-collapse {

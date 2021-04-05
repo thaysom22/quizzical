@@ -10,8 +10,8 @@
         padding: 1rem;
     }
     #nav-logo {
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 4rem;
+        height: 4rem;
         margin: .5rem;
     }
     #nav-logo-title {
@@ -21,13 +21,6 @@
     }
     .nav-link {
         color: $white;
-        .btn {
-            background-color: $wheat;
-            color: $black;
-            font-size: 1.1rem;
-            line-height: initial;
-            text-transform: initial;
-        }
     }
 }
 

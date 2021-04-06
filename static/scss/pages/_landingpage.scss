@@ -1,13 +1,25 @@
 /* ******* LANDING PAGE ******* */
 
 .hero-image-wrapper {
-    
+    position: relative;
     .hero-image {
         background-image: url("./../img/class-with-raised-hands-1.jpg"); 
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         min-height: 50vh;
+    }
+    .hero-caption {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 15%;
+        width: 100%;
+        h2 {
+            padding: 3rem 6rem;
+            background: rgba(0,0,0,.4);
+            border-radius: 1rem;
+        }
     }
    
 }

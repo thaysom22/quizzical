@@ -36,11 +36,18 @@ a {
 .jumbotron h1 {
   font-size: 4rem;
 }
-.jumbotron h5 {
+.jumbotron h4 {
   font-size: 2.5rem;
 }
 .jumbotron a {
   font-size: 1.4rem;
+}
+
+.hero-caption h2 {
+  font-size: 3rem;
+  color: #FFFFFF;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
 }
 
 /* ******* MIXINS ******* */
@@ -129,12 +136,27 @@ footer .footer-inner-wrapper {
 }
 
 /* ******* LANDING PAGE ******* */
+.hero-image-wrapper {
+  position: relative;
+}
 .hero-image-wrapper .hero-image {
   background-image: url("./../img/class-with-raised-hands-1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   min-height: 50vh;
+}
+.hero-image-wrapper .hero-caption {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+}
+.hero-image-wrapper .hero-caption h2 {
+  padding: 3rem 6rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
 }
 
 /* ******* MEDIA QUERIES ******* */
@@ -155,10 +177,9 @@ footer .footer-inner-wrapper {
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
   .hero-image-wrapper {
-    /* add border radius and box shadow */
+    /* add border radius */
   }
   .hero-image-wrapper .hero-image {
-    box-shadow: 0 0 2rem;
     border-radius: 2rem;
     min-height: 70vh;
   }

@@ -20,9 +20,9 @@
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
     .hero-image-wrapper {
-        /* add border radius and box shadow */
+        /* add border radius */
         .hero-image {
-            @include container-box-shadow();
+            border-radius: 2rem;
             min-height: 70vh;
         }
     }

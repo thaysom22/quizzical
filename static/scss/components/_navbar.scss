@@ -1,9 +1,7 @@
 /* ******* NAVBAR ******* */
 
 .navbar {
-    font-size: 1.2rem;
     background-color: $persian-blue;
-    font-family: $tertiary;
     .navbar-toggler {
         color: $white;
         font-size: 2.5rem;
@@ -21,6 +19,7 @@
     }
     .nav-link {
         color: $white;
+        font-size: 1.4rem;
     }
 }
 

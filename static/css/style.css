@@ -14,20 +14,40 @@ body {
 }
 
 /* ******* BUTTONS ******* */
-.btn.main-cta {
-  background-color: #FADCB2;
-  color: #000000;
-  font-size: 1.1rem;
+.btn {
+  font-size: 1.4rem;
   line-height: initial;
   text-transform: initial;
 }
 
+.btn.main-cta {
+  background-color: #C60F7B;
+  color: #FFFFFF;
+}
+
+/* ******* FONTS ******* */
+a {
+  font-family: "Oswald", sans-serif;
+}
+
+.jumbotron {
+  font-family: "Raleway", sans-serif;
+}
+.jumbotron h1 {
+  font-size: 4rem;
+}
+.jumbotron h5 {
+  font-size: 2.5rem;
+}
+.jumbotron a {
+  font-size: 1.4rem;
+}
+
+/* ******* MIXINS ******* */
 /* COMPONENTS */
 /* ******* NAVBAR ******* */
 .navbar {
-  font-size: 1.2rem;
   background-color: #0839D9;
-  font-family: "Oswald", sans-serif;
 }
 .navbar .navbar-toggler {
   color: #FFFFFF;
@@ -46,6 +66,7 @@ body {
 }
 .navbar .nav-link {
   color: #FFFFFF;
+  font-size: 1.4rem;
 }
 
 .navbar-collapse {
@@ -76,24 +97,69 @@ footer #footer-thdev-icon {
 }
 
 .jumbotron {
-  font-family: "Raleway", sans-serif;
   background-color: #FFFFFF;
-  position: relative;
-  top: 2rem;
 }
-.jumbotron h1 {
-  font-size: 4rem;
+.jumbotron a {
+  padding: 0.75rem 2rem;
+  margin: 0.25rem;
 }
-.jumbotron h5 {
-  font-size: 2.5rem;
+.jumbotron .flex-align-justify {
+  justify-content: center;
+  align-items: center;
 }
 
 /* PAGES */
 /* ******* ALLPAGES ******* */
-/* main element in base.html  */
 main {
   min-height: 100vh;
   background-image: url("./../img/question-mark-background.png");
   background-attachment: fixed;
   margin-top: 6.663rem;
+  padding-bottom: 8rem;
+}
+
+.main-inner-wrapper {
+  position: relative;
+  top: 6rem;
+}
+
+footer .footer-inner-wrapper {
+  position: relative;
+  top: 6rem;
+}
+
+/* ******* LANDING PAGE ******* */
+.hero-image-wrapper .hero-image {
+  background-image: url("./../img/class-with-raised-hands-1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 50vh;
+}
+
+/* ******* MEDIA QUERIES ******* */
+/* small screen sizes and above */
+@media screen and (min-width: 576px) {
+  /* add border radius and box shadow */
+  .jumbotron {
+    box-shadow: 0 0 2rem;
+    border-radius: 2rem;
+  }
+}
+/* medium screen sizes and above */
+@media screen and (min-width: 768px) {
+  .jumbotron h1 {
+    font-size: 5rem;
+  }
+}
+/* large screen sizes and above */
+@media screen and (min-width: 992px) {
+  .hero-image-wrapper {
+    /* add border radius and box shadow */
+  }
+  .hero-image-wrapper .hero-image {
+    box-shadow: 0 0 2rem;
+    border-radius: 2rem;
+    min-height: 70vh;
+  }
 }/*# sourceMappingURL=style.css.map */

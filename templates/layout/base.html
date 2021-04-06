@@ -29,9 +29,11 @@
     <!-- navbar -->
     {% include "layout/navbar.html" %}
 
-    <main class="container-fluid">
-        {% block content %}
-        {% endblock %}
+    <main class="container-fluid g-0">
+        <div class="main-inner-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
     </main>
     
     <!-- footer -->

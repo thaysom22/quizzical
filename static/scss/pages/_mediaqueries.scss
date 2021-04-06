@@ -1,0 +1,29 @@
+/* ******* MEDIA QUERIES ******* */
+
+/* small screen sizes and above */
+@media screen and (min-width: 576px) {
+    /* add border radius and box shadow */
+    .jumbotron {
+        @include container-box-shadow();
+    }
+}
+
+/* medium screen sizes and above */
+@media screen and (min-width: 768px) {
+    .jumbotron{
+        h1 {
+            font-size: 5rem;
+        }
+    }
+}
+
+/* large screen sizes and above */
+@media screen and (min-width: 992px) {
+    .hero-image-wrapper {
+        /* add border radius and box shadow */
+        .hero-image {
+            @include container-box-shadow();
+            min-height: 70vh;
+        }
+    }
+}

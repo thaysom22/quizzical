@@ -1,9 +1,12 @@
 /* ******* BUTTONS ******* */
 
-.btn.main-cta {
-    background-color: $wheat;
-    color: $black;
-    font-size: 1.1rem;
+.btn {
+    font-size: 1.4rem;
     line-height: initial;
     text-transform: initial;     
+}
+
+.btn.main-cta {
+    background-color: $magenta;   
+    color: $white;
 }

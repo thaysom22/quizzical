@@ -2,6 +2,8 @@
 @import "helpers/_variables";
 @import "helpers/_globalresets";
 @import "helpers/buttons";
+@import "helpers/fonts";
+@import "helpers/mixins";
 
 /* COMPONENTS */
 @import "components/_navbar";
@@ -10,3 +12,5 @@
 
 /* PAGES */
 @import "pages/_allpages";
+@import "pages/landingpage";
+@import "pages/mediaqueries";

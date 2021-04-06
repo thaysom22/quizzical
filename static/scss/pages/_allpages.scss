@@ -1,10 +1,23 @@
 /* ******* ALLPAGES ******* */
 
-/* main element in base.html  */
+
 main {
     min-height: 100vh;
     // background image from vectorstock: www.vectorstock.com/royalty-free-vector/black-seamless-background-with-question-marks-vector-30182680
     background-image: url("./../img/question-mark-background.png");
     background-attachment: fixed;
     margin-top: 6.663rem;
+    padding-bottom: 8rem;
+}
+
+.main-inner-wrapper  {
+    position: relative;
+    top: 6rem;
+}
+
+footer {
+    .footer-inner-wrapper{
+    position: relative;
+    top: 6rem;
+    }
 }

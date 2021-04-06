@@ -1,0 +1,11 @@
+/* ******* MIXINS ******* */
+
+@mixin flex-align-justify($justify: center, $align: center) {
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin container-box-shadow($radius: 2rem, $blur: 2rem) {
+    box-shadow: 0 0 $blur;
+    border-radius: $radius;
+}

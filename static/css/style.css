@@ -159,6 +159,14 @@ footer .footer-inner-wrapper {
   border-radius: 1rem;
 }
 
+.benefits-wrapper {
+  background-color: #FADCB2;
+}
+.benefits-wrapper .benefits-icon {
+  font-size: 3rem;
+  padding: 0.5rem;
+}
+
 /* ******* MEDIA QUERIES ******* */
 /* small screen sizes and above */
 @media screen and (min-width: 576px) {

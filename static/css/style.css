@@ -35,6 +35,9 @@ a {
 }
 .jumbotron h1 {
   font-size: 4rem;
+  text-shadow: 0.2rem 0.4rem 0.5rem #C60F7B;
+  color: #C60F7B;
+  font-weight: 600;
 }
 .jumbotron h4 {
   font-size: 2.5rem;
@@ -48,6 +51,17 @@ a {
   color: #FFFFFF;
   font-family: "Raleway", sans-serif;
   text-align: center;
+}
+
+.benefit span {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.4em;
+}
+.benefit.light-blue span {
+  color: #FFFFFF;
+}
+.benefit.light-wheat span {
+  color: #000000;
 }
 
 /* ******* MIXINS ******* */
@@ -160,11 +174,22 @@ footer .footer-inner-wrapper {
 }
 
 .benefits-wrapper {
-  background-color: #FADCB2;
+  background-color: rgba(127, 206, 215, 0.7);
 }
-.benefits-wrapper .benefits-icon {
+
+.benefit {
+  box-shadow: 0 0 2rem;
+  border-radius: 2rem;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  background-color: #FFFFFF;
+}
+.benefit .benefits-icon {
   font-size: 3rem;
   padding: 0.5rem;
+}
+.benefit span {
+  padding: 1rem;
 }
 
 /* ******* MEDIA QUERIES ******* */
@@ -175,11 +200,21 @@ footer .footer-inner-wrapper {
     box-shadow: 0 0 2rem;
     border-radius: 2rem;
   }
+
+  .benefit {
+    justify-content: center;
+  }
 }
 /* medium screen sizes and above */
 @media screen and (min-width: 768px) {
   .jumbotron h1 {
     font-size: 5rem;
+  }
+
+  .benefits-wrapper .benefit {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 /* large screen sizes and above */
@@ -191,4 +226,10 @@ footer .footer-inner-wrapper {
     border-radius: 2rem;
     min-height: 70vh;
   }
-}/*# sourceMappingURL=style.css.map */
+
+  .benefits-wrapper {
+    border-radius: 2rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -6,6 +6,9 @@
     .jumbotron {
         @include container-box-shadow();
     }
+    .benefit {
+        justify-content: center;
+    }
 }
 
 /* medium screen sizes and above */
@@ -15,6 +18,14 @@
             font-size: 5rem;
         }
     }
+    .benefits-wrapper {
+        .benefit {
+            max-width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    
 }
 
 /* large screen sizes and above */
@@ -26,4 +37,8 @@
             min-height: 70vh;
         }
     }
+    .benefits-wrapper {
+        border-radius: 2rem;
+    }
+  
 }

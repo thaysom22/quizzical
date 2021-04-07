@@ -24,9 +24,22 @@
 }
 
 .benefits-wrapper {
-    background-color: $wheat;
+    background-color: $middle-blue-translucent;
+    }
+    .benefit{
+        @include container-box-shadow();
+        padding: 2rem;
+        margin: 1.5rem 0;
+        background-color: $white;
+   
     .benefits-icon {
         font-size: 3rem;
         padding: .5rem;
     }
+    span {
+        padding: 1rem;
+    }
 }
+
+
+

@@ -8,6 +8,9 @@ a {
     font-family: $heading;
     h1 {
         font-size: 4rem;
+        text-shadow: .2rem .4rem .5rem $magenta;  
+        color: $magenta;
+        font-weight: 600;
     }
     h4 {
         font-size: 2.5rem;
@@ -23,5 +26,22 @@ a {
         color: $white;
         font-family: $heading;
         text-align: center;
+    }
+}
+
+.benefit {
+    span {
+        font-family: $main;
+        font-size: 1.4em;
+    }
+    &.light-blue {
+        span {
+            color: $white;
+        }
+    }
+    &.light-wheat {
+        span {
+            color: $black;
+        }
     }
 }

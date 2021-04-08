@@ -26,6 +26,26 @@ body {
 }
 
 /* ******* FONTS ******* */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  font-size: calc(3.5rem + 1vw);
+}
+
+h2 {
+  font-size: calc(2.5rem + .6vw);
+}
+
+h3 {
+  font-size: calc(2rem + .4vw);
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
 a {
   font-family: "Oswald", sans-serif;
 }
@@ -34,7 +54,6 @@ a {
   font-family: "Raleway", sans-serif;
 }
 .jumbotron h1 {
-  font-size: 4rem;
   text-shadow: 0.2rem 0.4rem 0.5rem #C60F7B;
   color: #C60F7B;
   font-weight: 600;
@@ -47,7 +66,6 @@ a {
 }
 
 .hero-caption h2 {
-  font-size: 3rem;
   color: #FFFFFF;
   font-family: "Raleway", sans-serif;
   text-align: center;
@@ -55,13 +73,16 @@ a {
 
 .benefit span {
   font-family: "Open Sans", sans-serif;
-  font-size: 1.4em;
+  font-size: calc(1.2rem + .8vw);
 }
-.benefit.light-blue span {
+
+.carousel p {
+  font-size: calc(1rem + .4vw);
+}
+
+footer {
+  font-family: "Open Sans", sans-serif;
   color: #FFFFFF;
-}
-.benefit.light-wheat span {
-  color: #000000;
 }
 
 /* ******* MIXINS ******* */
@@ -101,8 +122,7 @@ a {
 
 /* ******* FOOTER ******* */
 footer {
-  font-family: "Open Sans", sans-serif;
-  background-color: #E0E0E0;
+  background-color: #0839D9;
 }
 footer i.fab {
   font-size: 1.2rem;
@@ -115,6 +135,9 @@ footer #footer-logo {
 }
 footer #footer-thdev-icon {
   border-radius: 0.5rem;
+}
+footer a.wheat {
+  color: #FADCB2;
 }
 
 .jumbotron {
@@ -129,11 +152,22 @@ footer #footer-thdev-icon {
   align-items: center;
 }
 
+/* ******* CAROUSEL ******* */
+.carousel .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 2rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+}
+.carousel .carousel-indicators {
+  margin-bottom: 4rem;
+}
+
 /* PAGES */
 /* ******* ALLPAGES ******* */
 main {
   min-height: 100vh;
-  background-image: url("./../img/question-mark-background.png");
+  background-image: url("./../img/question-mark-background-colored.png");
   background-attachment: fixed;
   margin-top: 6.663rem;
   padding-bottom: 8rem;
@@ -158,7 +192,7 @@ footer .footer-inner-wrapper {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 50vh;
+  min-height: 60vh;
 }
 .hero-image-wrapper .hero-caption {
   display: flex;
@@ -169,27 +203,46 @@ footer .footer-inner-wrapper {
 }
 .hero-image-wrapper .hero-caption h2 {
   padding: 3rem 6rem;
-  background: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
 }
 
 .benefits-wrapper {
-  background-color: rgba(127, 206, 215, 0.7);
-}
-
-.benefit {
-  box-shadow: 0 0 2rem;
+  background-color: #FFFFFF;
   border-radius: 2rem;
+}
+.benefits-wrapper .benefit {
   padding: 2rem;
   margin: 1.5rem 0;
-  background-color: #FFFFFF;
+  text-align: center;
 }
-.benefit .benefits-icon {
-  font-size: 3rem;
+.benefits-wrapper .benefits-icon {
+  font-size: 4rem;
   padding: 0.5rem;
 }
-.benefit span {
+.benefits-wrapper span {
   padding: 1rem;
+}
+
+.get-started-wrapper {
+  background-color: #FFFFFF;
+  border-radius: 2rem;
+}
+.get-started-wrapper h2 {
+  text-align: center;
+  margin: 3rem 0 3rem 0;
+}
+.get-started-wrapper .get-started-step {
+  padding: 2rem;
+}
+.get-started-wrapper .get-started-step img {
+  width: calc(5rem + 1vw);
+  height: calc(5rem + 1vw);
+}
+.get-started-wrapper .get-started-step .number-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 /* ******* MEDIA QUERIES ******* */
@@ -201,7 +254,10 @@ footer .footer-inner-wrapper {
     border-radius: 2rem;
   }
 
-  .benefit {
+  .benefits-wrapper .benefit {
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
     justify-content: center;
   }
 }
@@ -209,12 +265,6 @@ footer .footer-inner-wrapper {
 @media screen and (min-width: 768px) {
   .jumbotron h1 {
     font-size: 5rem;
-  }
-
-  .benefits-wrapper .benefit {
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 /* large screen sizes and above */
@@ -224,12 +274,16 @@ footer .footer-inner-wrapper {
   }
   .hero-image-wrapper .hero-image {
     border-radius: 2rem;
-    min-height: 70vh;
+  }
+
+  .carousel .carousel-inner {
+    border-radius: 2rem;
   }
 
   .benefits-wrapper {
     border-radius: 2rem;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+  .benefits-wrapper .benefit {
+    padding: 3rem;
+  }
+}/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,26 @@
 /* ******* FONTS ******* */
 
+h1,h2,h3,h4,h5,h6 {
+    font-family: $heading;
+}
+
+h1{
+    font-size: calc(3.5rem + 1vw);
+}
+
+h2 {
+    font-size: calc(2.5rem + .6vw);
+}
+
+h3 {
+    font-size: calc(2rem + .4vw);
+}
+
+body {
+    font-family: $main;
+}
+
+
 a {
     font-family: $tertiary;
 }
@@ -7,7 +28,6 @@ a {
 .jumbotron {
     font-family: $heading;
     h1 {
-        font-size: 4rem;
         text-shadow: .2rem .4rem .5rem $magenta;  
         color: $magenta;
         font-weight: 600;
@@ -22,7 +42,6 @@ a {
 
 .hero-caption {
     h2 {
-        font-size: 3rem;
         color: $white;
         font-family: $heading;
         text-align: center;
@@ -32,16 +51,17 @@ a {
 .benefit {
     span {
         font-family: $main;
-        font-size: 1.4em;
+        font-size: calc(1.2rem + .8vw)
     }
-    &.light-blue {
-        span {
-            color: $white;
-        }
+}
+
+.carousel {
+    p {
+        font-size: calc(1rem + .4vw)
     }
-    &.light-wheat {
-        span {
-            color: $black;
-        }
-    }
+}
+
+footer {
+    font-family: $main;
+    color: $white;
 }

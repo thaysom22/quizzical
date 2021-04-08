@@ -7,7 +7,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        min-height: 50vh;
+        min-height: 60vh;
     }
     .hero-caption {
         display: flex;
@@ -17,27 +17,47 @@
         width: 100%;
         h2 {
             padding: 3rem 6rem;
-            background: rgba(0,0,0,.4);
+            background-color: $dark-overlay;
             border-radius: 1rem;
         }
     } 
 }
 
 .benefits-wrapper {
-    background-color: $middle-blue-translucent;
-    }
+    background-color: $white;
+    border-radius: 2rem;
     .benefit{
-        @include container-box-shadow();
         padding: 2rem;
         margin: 1.5rem 0;
-        background-color: $white;
-   
+        text-align: center;
+    }
     .benefits-icon {
-        font-size: 3rem;
+        font-size: 4rem;
         padding: .5rem;
     }
     span {
         padding: 1rem;
+    }
+}
+
+.get-started-wrapper{
+    background-color: $white;
+    border-radius: 2rem;
+    h2 {
+        text-align: center;
+        margin: 3rem 0 3rem 0;
+    }
+    .get-started-step {
+        padding: 2rem;
+        img {
+            width: calc(5rem + 1vw);
+            height: calc(5rem + 1vw);
+        }
+        .number-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
     }
 }
 

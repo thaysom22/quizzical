@@ -6,8 +6,13 @@
     .jumbotron {
         @include container-box-shadow();
     }
-    .benefit {
-        justify-content: center;
+    .benefits-wrapper {
+        .benefit {
+            max-width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+        }
     }
 }
 
@@ -16,13 +21,6 @@
     .jumbotron{
         h1 {
             font-size: 5rem;
-        }
-    }
-    .benefits-wrapper {
-        .benefit {
-            max-width: 60%;
-            margin-left: auto;
-            margin-right: auto;
         }
     }
     
@@ -34,11 +32,19 @@
         /* add border radius */
         .hero-image {
             border-radius: 2rem;
-            min-height: 70vh;
         }
     }
+    .carousel {
+        .carousel-inner{
+            border-radius: 2rem;
+        }
+    }
+
     .benefits-wrapper {
         border-radius: 2rem;
+        .benefit {
+            padding: 3rem;
+        }
     }
   
 }

@@ -404,7 +404,6 @@ Collection name: age_ranges
 * [Git]() command line utility and GitHub for version control
 * [Trello]() for planning and organizing project workflow and tasks. [Link to Trello board for project](https://trello.com/b/mleZppxL/quizzical-ms3)
 * [MongoDB]() NoSQL document-based database 
-* [Font Awesome for icons]()
 * [cdnjs](https://cdnjs.com/) for css and js file content delivery 
 * [Coolors]() to select color palette for website
 * [Material Design for Bootstrap](https://mdbootstrap.com/)
@@ -481,6 +480,8 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 ### Content
 
 * Question marks background image attributed to Vector Stock: https://www.vectorstock.com/royalty-free-vector/black-seamless-background-with-question-marks-vector-30182680
+* [Font Awesome]() for icons
+* [icons8](https://icons8.com/) for number icons
 
 ### Code
 

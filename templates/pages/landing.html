@@ -6,7 +6,7 @@
 <header>
     <div class="p-5 text-center jumbotron container">
         <h1 class="mb-3">Let's get Quizzical</h1>
-        <h4 class="mb-4">Find, create and share engaging quizzes</h4>
+        <h3 class="mb-4">Find, create and share engaging quizzes</h3>
         <div class="d-flex flex-align-justify flex-column flex-lg-row mt-3">
             <a class="btn btn-rounded btn-lg main-cta" href="" role="button">Sign up</a>
             <a href="" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Log In</a>
@@ -25,17 +25,147 @@
     <div class="row py-4 px-2 justify-content-lg-between"> 
         <div class="benefit d-flex align-items-center col-12 col-lg-3">
             <i class="fas fa-lightbulb benefits-icon"></i>
-            <span>Find great questions shared by the Quizzical community</span>
+            <span>Find great lesson content for your teaching</span>
         </div>
         <div class="benefit d-flex align-items-center col-12 col-lg-3">
             <i class="fas fa-graduation-cap benefits-icon"></i>
-            <span>Share your knowledge for the benefit of others</span>
+            <span>Learn as part of a curious community</span>
         </div>
         <div class="benefit d-flex align-items-center col-12 col-lg-3">
             <i class="fas fa-chart-line benefits-icon"></i>
-            <span>Use quiz content to assess learners and improve attainment</span>
+            <span>Source quality questions for your next quiz</span>
         </div>
     </div>
 </div>
-
+<!-- carousel -->
+<div class="carousel-wrapper container-lg my-5 p-0">
+    <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
+    <div id="landing-page-carousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+        <div class="carousel-indicators">
+            <button
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+            ></button>
+            <button
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide-to="1"
+            aria-label="Slide 2"
+            ></button>
+            <button
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide-to="2"
+            aria-label="Slide 3"
+            ></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <!-- credit: Photo from https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText CDC on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/boy-working-in-class.jpg') }}"
+                class="d-block w-100"
+                alt="Boy working in classroom"
+            />
+            <div class="carousel-caption">
+                <h3>Recommended content</h3>
+                <p>Quizzical helps teachers to find great questions for their students</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <!-- credit: Photo by https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText Tim Mossholder on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/love-to-learn.jpg') }}"
+                class="d-block w-100"
+                alt="'Love to learn' sign"
+            />
+            <div class="carousel-caption">
+                <h3>Create and collaborate</h3>
+                <p>Design and share questions for your students and other educators with Quizzical</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <!-- credit: Photo by https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText ThisisEngineering RAEng on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/smiling-teacher.jpg') }}"
+                class="d-block w-100"
+                alt="Smiling teacher in front of whiteboard"
+            />
+            <div class="carousel-caption">
+                <h3>Search by topic and age range</h3>
+                <p>Quizzical organizes quizzes so you can find the questions you need</p>
+            </div>
+            </div>
+        </div>
+        <button
+            class="carousel-control-prev"
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide="prev"
+        >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+            class="carousel-control-next"
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide="next"
+        >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<div class="get-started-wrapper container-lg my-5 p-3">
+    <h2>Easy to get started...</h2>
+    <div class="row g-0">
+        <div class="get-started-step col-12 col-lg-4">
+            <div class="row g-0">
+                <div class="number-icon col-12 order-md-1">
+                    <!-- credit: https://icons8.com/icon/116651/1st 1st icon by Icons8 -->
+                    <img src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png"/>
+                </div>
+                <div class="description col-12 col-md-11 order-md-3 col-lg-12 order-lg-2">
+                    <p>Create an account and personalize your recommendations to view quizzes</p>
+                </div>
+                <div class="text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="get-started-step col-12 col-lg-4">
+            <div class="row g-0">
+                <div class="number-icon col-12 order-md-1">
+                    <!-- credit: https://icons8.com/icon/116654/circled-2 Circled 2 icon by Icons8 -->
+                    <img src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"/>
+                </div>
+                <div class="description col-12 col-md-11 order-md-3 col-lg-12 order-lg-2">
+                    <p>Browse 'Discover' page by category, view quizzes recommended for you, search for quizzes or create your own</p>
+                </div>
+                <div class="text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="get-started-step col-12 col-lg-4">
+            <div class="justify-content-center row g-0">
+                <div class="number-icon col-12 order-md-1">
+                    <!-- credit: https://icons8.com/icon/116660/circled-3 Circled 3 icon by Icons8 -->
+                    <img src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"/>
+                </div>
+                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
+                    <p class="text-center">Click on a quiz to view questions and toggle answers!</p>
+                </div>
+                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
+                    <i class="fas fa-eye"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

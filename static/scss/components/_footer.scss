@@ -1,11 +1,10 @@
 /* ******* FOOTER ******* */
 
 footer {
-    font-family: $main;
     i.fab {
         font-size: 1.2rem;
     }
-    background-color: $gray;
+    background-color: $persian-blue;
     #footer-thdev-icon,
     #footer-logo {
         width: 2.5rem;
@@ -14,5 +13,8 @@ footer {
     }
     #footer-thdev-icon {
         border-radius: .5rem;
+    }
+    a.wheat {
+        color: $wheat;
     }
 }

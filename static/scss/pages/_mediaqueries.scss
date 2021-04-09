@@ -23,6 +23,14 @@
             font-size: 5rem;
         }
     }
+
+    .get-started-wrapper {
+        .get-started-step {
+            p {
+                text-align: justify;
+            }
+        }
+    }
     
 }
 
@@ -44,6 +52,14 @@
         border-radius: 2rem;
         .benefit {
             padding: 3rem;
+        }
+    }
+
+    .get-started-wrapper {
+        .get-started-step {
+            p {
+                text-align: center;
+            }
         }
     }
   

@@ -1,5 +1,8 @@
 /* ******* LANDING PAGE ******* */
 
+.jumbotron {
+    background-color: $white;
+}
 .hero-image-wrapper {
     position: relative;
     .hero-image {
@@ -32,7 +35,6 @@
         text-align: center;
     }
     .benefits-icon {
-        font-size: 4rem;
         padding: .5rem;
     }
     span {
@@ -58,6 +60,23 @@
             justify-content: center;
             margin-bottom: 1rem;
         }
+        i {
+            padding: 1rem;
+            color: $gray;
+        }
+        p {
+            padding: 0 1rem;
+            text-align: center;
+        }
+    }
+}
+
+.final-cta-wrapper{
+    background-color: $white;
+    border-radius: 2rem;
+    padding: 3rem;
+    h2 {
+        margin-bottom: 2rem;
     }
 }
 

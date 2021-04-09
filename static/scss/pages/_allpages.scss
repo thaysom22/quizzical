@@ -21,3 +21,7 @@ footer {
     top: 6rem;
     }
 }
+
+.flex-align-justify {
+        @include flex-align-justify();
+    }

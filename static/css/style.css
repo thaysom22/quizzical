@@ -15,17 +15,30 @@ body {
 
 /* ******* BUTTONS ******* */
 .btn {
-  font-size: 1.4rem;
+  font-size: calc(1.4rem + .6vw);
   line-height: initial;
   text-transform: initial;
 }
 
-.btn.main-cta {
+.btn.cta {
   background-color: #C60F7B;
   color: #FFFFFF;
 }
 
+.btn.cta.btn-lg {
+  font-size: calc(1.4rem + .8vw);
+  padding: 1rem 2.5rem;
+  margin: 0.5rem;
+}
+
+.btn.cta.btn-nav {
+  font-size: calc(1rem + .4vw);
+  padding: 0.75rem 1.5rem;
+  margin: 0.25rem;
+}
+
 /* ******* FONTS ******* */
+/* all pages fonts */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
@@ -50,11 +63,16 @@ a {
   font-family: "Oswald", sans-serif;
 }
 
+footer {
+  font-family: "Open Sans", sans-serif;
+  color: #FFFFFF;
+}
+
+/* landing page fonts */
 .jumbotron {
   font-family: "Raleway", sans-serif;
 }
 .jumbotron h1 {
-  text-shadow: 0.2rem 0.4rem 0.5rem #C60F7B;
   color: #C60F7B;
   font-weight: 600;
 }
@@ -71,18 +89,22 @@ a {
   text-align: center;
 }
 
-.benefit span {
-  font-family: "Open Sans", sans-serif;
+.benefits-wrapper .benefit span {
   font-size: calc(1.2rem + .8vw);
+}
+.benefits-wrapper .benefits-icon {
+  font-size: calc(3.5rem + .8vw);
 }
 
 .carousel p {
   font-size: calc(1rem + .4vw);
 }
 
-footer {
-  font-family: "Open Sans", sans-serif;
-  color: #FFFFFF;
+.get-started-step i {
+  font-size: calc(3.5rem + .8vw);
+}
+.get-started-step p {
+  font-size: calc(1.2rem + .8vw);
 }
 
 /* ******* MIXINS ******* */
@@ -140,18 +162,6 @@ footer a.wheat {
   color: #FADCB2;
 }
 
-.jumbotron {
-  background-color: #FFFFFF;
-}
-.jumbotron a {
-  padding: 0.75rem 2rem;
-  margin: 0.25rem;
-}
-.jumbotron .flex-align-justify {
-  justify-content: center;
-  align-items: center;
-}
-
 /* ******* CAROUSEL ******* */
 .carousel .carousel-caption {
   background-color: rgba(0, 0, 0, 0.4);
@@ -183,7 +193,16 @@ footer .footer-inner-wrapper {
   top: 6rem;
 }
 
+.flex-align-justify {
+  justify-content: center;
+  align-items: center;
+}
+
 /* ******* LANDING PAGE ******* */
+.jumbotron {
+  background-color: #FFFFFF;
+}
+
 .hero-image-wrapper {
   position: relative;
 }
@@ -217,7 +236,6 @@ footer .footer-inner-wrapper {
   text-align: center;
 }
 .benefits-wrapper .benefits-icon {
-  font-size: 4rem;
   padding: 0.5rem;
 }
 .benefits-wrapper span {
@@ -244,6 +262,23 @@ footer .footer-inner-wrapper {
   justify-content: center;
   margin-bottom: 1rem;
 }
+.get-started-wrapper .get-started-step i {
+  padding: 1rem;
+  color: #E0E0E0;
+}
+.get-started-wrapper .get-started-step p {
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.final-cta-wrapper {
+  background-color: #FFFFFF;
+  border-radius: 2rem;
+  padding: 3rem;
+}
+.final-cta-wrapper h2 {
+  margin-bottom: 2rem;
+}
 
 /* ******* MEDIA QUERIES ******* */
 /* small screen sizes and above */
@@ -266,6 +301,10 @@ footer .footer-inner-wrapper {
   .jumbotron h1 {
     font-size: 5rem;
   }
+
+  .get-started-wrapper .get-started-step p {
+    text-align: justify;
+  }
 }
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
@@ -285,5 +324,9 @@ footer .footer-inner-wrapper {
   }
   .benefits-wrapper .benefit {
     padding: 3rem;
+  }
+
+  .get-started-wrapper .get-started-step p {
+    text-align: center;
   }
 }/*# sourceMappingURL=style.css.map */

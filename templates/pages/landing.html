@@ -8,8 +8,8 @@
         <h1 class="mb-3">Let's get Quizzical</h1>
         <h3 class="mb-4">Find, create and share engaging quizzes</h3>
         <div class="d-flex flex-align-justify flex-column flex-lg-row mt-3">
-            <a class="btn btn-rounded btn-lg main-cta" href="" role="button">Sign up</a>
-            <a href="" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Log In</a>
+            <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
+            <a href="{{ url_for('login') }}" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Log In</a>
         </div>
     </div>
 </header>
@@ -121,33 +121,34 @@
         </button>
     </div>
 </div>
+<!-- lets get started section -->
 <div class="get-started-wrapper container-lg my-5 p-3">
     <h2>Easy to get started...</h2>
     <div class="row g-0">
         <div class="get-started-step col-12 col-lg-4">
-            <div class="row g-0">
+            <div class="justify-content-center row g-0">
                 <div class="number-icon col-12 order-md-1">
                     <!-- credit: https://icons8.com/icon/116651/1st 1st icon by Icons8 -->
                     <img src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png"/>
                 </div>
-                <div class="description col-12 col-md-11 order-md-3 col-lg-12 order-lg-2">
+                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
                     <p>Create an account and personalize your recommendations to view quizzes</p>
                 </div>
-                <div class="text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
+                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
                     <i class="fas fa-user-plus"></i>
                 </div>
             </div>
         </div>
         <div class="get-started-step col-12 col-lg-4">
-            <div class="row g-0">
+            <div class="justify-content-center row g-0">
                 <div class="number-icon col-12 order-md-1">
                     <!-- credit: https://icons8.com/icon/116654/circled-2 Circled 2 icon by Icons8 -->
                     <img src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"/>
                 </div>
-                <div class="description col-12 col-md-11 order-md-3 col-lg-12 order-lg-2">
+                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
                     <p>Browse 'Discover' page by category, view quizzes recommended for you, search for quizzes or create your own</p>
                 </div>
-                <div class="text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
+                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
                     <i class="fas fa-search-plus"></i>
                 </div>
             </div>
@@ -159,7 +160,7 @@
                     <img src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"/>
                 </div>
                 <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
-                    <p class="text-center">Click on a quiz to view questions and toggle answers!</p>
+                    <p>Click on a quiz to view questions and toggle answers!</p>
                 </div>
                 <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
                     <i class="fas fa-eye"></i>
@@ -167,5 +168,14 @@
             </div>
         </div>
     </div>
+</div>
+<!-- final call to action section -->
+<div class="final-cta-wrapper container-lg my-5">
+    <div class="d-flex flex-column flex-align-justify">
+        <h2>Ready to get Quizzical?</h2>
+        <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
+    </div>
+    
+
 </div>
 {% endblock %}

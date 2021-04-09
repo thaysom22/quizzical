@@ -1,5 +1,7 @@
 /* ******* FONTS ******* */
 
+/* all pages fonts */
+
 h1,h2,h3,h4,h5,h6 {
     font-family: $heading;
 }
@@ -20,15 +22,21 @@ body {
     font-family: $main;
 }
 
-
 a {
     font-family: $tertiary;
 }
 
+footer {
+    font-family: $main;
+    color: $white;
+}
+
+
+/* landing page fonts */
+
 .jumbotron {
     font-family: $heading;
-    h1 {
-        text-shadow: .2rem .4rem .5rem $magenta;  
+    h1 {  
         color: $magenta;
         font-weight: 600;
     }
@@ -48,10 +56,14 @@ a {
     }
 }
 
-.benefit {
-    span {
-        font-family: $main;
-        font-size: calc(1.2rem + .8vw)
+.benefits-wrapper {
+    .benefit {
+        span {
+            font-size: calc(1.2rem + .8vw)
+        }
+    }
+    .benefits-icon {
+        font-size: calc(3.5rem + .8vw);
     }
 }
 
@@ -61,7 +73,12 @@ a {
     }
 }
 
-footer {
-    font-family: $main;
-    color: $white;
+.get-started-step {
+    i {
+        font-size: calc(3.5rem + .8vw);
+    }
+    p {
+        font-size: calc(1.2rem + .8vw)
+    }
 }
+

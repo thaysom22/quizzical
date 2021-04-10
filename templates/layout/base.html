@@ -28,17 +28,29 @@
 <body>
     <!-- navbar -->
     {% include "layout/navbar.html" %}
-
     <main>
         <div class="main-inner-wrapper">
+            <section>
+                <!-- flash messages -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="row flashed-messages">
+                                <h4 class="center-align">{{ message }}</h4>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </section>
+          
+            <!-- child template content -->
             {% block content %}
             {% endblock %}
+            
         </div>
     </main>
-    
     <!-- footer -->
     {% include "layout/footer.html" %}
-    
     <!-- mdbootstrap js cdn -->
     <script 
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.4.0/mdb.min.js" 

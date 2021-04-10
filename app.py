@@ -43,7 +43,7 @@ def landing():
     if loggedIn:
         return redirect(url_for("discover"))
 
-    return render_template("pages/landing.html")
+    return render_template("pages/landing.html", loggedIn=loggedIn)
 
 @app.route("/discover")
 def discover():
@@ -54,7 +54,7 @@ def discover():
     if not loggedIn:
         return redirect(url_for("landing"))
 
-    return render_template("pages/discover.html")
+    return render_template("pages/discover.html", loggedIn=loggedIn)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -67,7 +67,7 @@ def login():
         return redirect(url_for("profile"))
     
     if request.method == "GET":
-        return render_template("pages/login.html")
+        return render_template("pages/login.html", loggedIn=loggedIn)
 
     username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
     existing_user = mongo.db.users.find_one(
@@ -101,14 +101,15 @@ def register():
         redirect(url_for("profile"))  # if logged in redirect to profile page
 
     if request.method == "GET":
-        return render_template("pages/register.html")
+        return render_template("pages/register.html", loggedIn=loggedIn)
 
     username_form = request.form.get("username").lower()  # form input validation done client-side
     existing_user = mongo.db.users.find_one(
         {"username": username_form})
     
     if existing_user:
-        flash(f"The username: '{existing_user["username"]}' already exists")
+        username = existing_user["username"]
+        flash(f"The username: {username} already exists")
         return redirect(url_for("register"))
 
     password_form = request.form.get("password")
@@ -141,7 +142,7 @@ def profile():
     
     username = session["user"]["username"]
 
-    return render_template("pages/profile.html", username)
+    return render_template("pages/profile.html", username=username, loggedIn=loggedIn)
 
 
 ### START APP ###

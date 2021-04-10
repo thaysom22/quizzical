@@ -15,9 +15,10 @@ body {
 
 /* ******* BUTTONS ******* */
 .btn {
-  font-size: calc(1.4rem + .6vw);
+  font-size: calc(1.2rem + .6vw);
   line-height: initial;
-  text-transform: initial;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .btn.cta {
@@ -37,8 +38,12 @@ body {
   margin: 0.25rem;
 }
 
+.btn.btn-link {
+  font-size: calc(0.8rem + .2vw);
+}
+
 /* ******* FONTS ******* */
-/* all pages fonts */
+/* fonts for all elements */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
@@ -68,6 +73,10 @@ footer {
   color: #FFFFFF;
 }
 
+.btn {
+  font-family: "Oswald", sans-serif;
+}
+
 /* landing page fonts */
 .jumbotron {
   font-family: "Raleway", sans-serif;
@@ -92,19 +101,22 @@ footer {
 .benefits-wrapper .benefit span {
   font-size: calc(1.2rem + .8vw);
 }
-.benefits-wrapper .benefits-icon {
-  font-size: calc(3.5rem + .8vw);
-}
 
 .carousel p {
   font-size: calc(1rem + .4vw);
 }
 
-.get-started-step i {
-  font-size: calc(3.5rem + .8vw);
-}
 .get-started-step p {
   font-size: calc(1.2rem + .8vw);
+}
+
+/* FA icons */
+.icon-sm {
+  font-size: calc(1.4rem + .4vw);
+}
+
+.icon-lg {
+  font-size: calc(3.5rem + .8vw);
 }
 
 /* ******* MIXINS ******* */
@@ -145,9 +157,6 @@ footer {
 /* ******* FOOTER ******* */
 footer {
   background-color: #0839D9;
-}
-footer i.fab {
-  font-size: 1.2rem;
 }
 footer #footer-thdev-icon,
 footer #footer-logo {
@@ -280,6 +289,25 @@ footer .footer-inner-wrapper {
   margin-bottom: 2rem;
 }
 
+/* ******* LOGIN PAGE ******* */
+.login-wrapper .login-title * {
+  padding: 0 calc(1rem + .4vw);
+}
+.login-wrapper .form-new-user * {
+  padding: 0 calc(.5rem + .2vw);
+}
+.login-wrapper .card {
+  width: 100%;
+  padding: calc(3rem + 2vw);
+}
+.login-wrapper form {
+  padding: calc(1rem + 1vw);
+}
+.login-wrapper form span {
+  white-space: nowrap;
+  font-size: calc(0.8rem + .2vw);
+}
+
 /* ******* MEDIA QUERIES ******* */
 /* small screen sizes and above */
 @media screen and (min-width: 576px) {
@@ -304,6 +332,12 @@ footer .footer-inner-wrapper {
 
   .get-started-wrapper .get-started-step p {
     text-align: justify;
+  }
+
+  .login-wrapper .card {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 }
 /* large screen sizes and above */

@@ -1,6 +1,6 @@
 /* ******* FONTS ******* */
 
-/* all pages fonts */
+/* fonts for all elements */
 
 h1,h2,h3,h4,h5,h6 {
     font-family: $heading;
@@ -30,6 +30,13 @@ footer {
     font-family: $main;
     color: $white;
 }
+
+.btn {
+    font-family: $tertiary;
+}
+
+
+
 
 
 /* landing page fonts */
@@ -62,9 +69,6 @@ footer {
             font-size: calc(1.2rem + .8vw)
         }
     }
-    .benefits-icon {
-        font-size: calc(3.5rem + .8vw);
-    }
 }
 
 .carousel {
@@ -74,11 +78,18 @@ footer {
 }
 
 .get-started-step {
-    i {
-        font-size: calc(3.5rem + .8vw);
-    }
     p {
         font-size: calc(1.2rem + .8vw)
     }
+}
+
+/* FA icons */
+
+.icon-sm {
+    font-size: calc(1.4rem + .4vw);
+}
+
+.icon-lg {
+    font-size: calc(3.5rem + .8vw);
 }
 

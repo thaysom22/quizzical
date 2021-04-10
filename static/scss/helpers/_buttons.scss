@@ -1,9 +1,10 @@
 /* ******* BUTTONS ******* */
 
 .btn {
-    font-size: calc(1.4rem + .6vw);
+    font-size: calc(1.2rem + .6vw);
     line-height: initial;
-    text-transform: initial;     
+    text-transform: uppercase;  
+    white-space: nowrap;   
 }
 
 .btn.cta {
@@ -23,4 +24,8 @@
     font-size: calc(1rem + .4vw);
     padding: .75rem 1.5rem;
     margin: .25rem;
+}
+
+.btn.btn-link {
+    font-size: calc(0.8rem + .2vw);
 }

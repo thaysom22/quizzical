@@ -1,0 +1,25 @@
+/* ******* LOGIN PAGE ******* */
+
+.login-wrapper {
+    .login-title {
+        * {
+            padding: 0 calc(1rem + .4vw);
+        }
+    }
+    .form-new-user {
+        * {
+            padding: 0 calc(.5rem + .2vw);
+        }
+    }
+    .card {
+        width: 100%; // full width on small screens
+        padding: calc(3rem + 2vw);
+    }
+    form {
+        padding: calc(1rem + 1vw);
+        span{
+            white-space: nowrap;
+            font-size: calc(0.8rem + .2vw);
+        }
+    }
+}

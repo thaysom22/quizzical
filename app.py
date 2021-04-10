@@ -78,7 +78,8 @@ def login():
         return redirect(url_for("login"))
 
     password_form = request.form.get("password")  # get password from form (not case-sensitive)
-    correct_password = check_password_hash(existing_user["password"], password_form)
+    correct_password = check_password_hash(
+        existing_user["password"], password_form)
 
     if not correct_password:
         flash("Incorrect Username and/or Password")  # notify user of failure
@@ -142,7 +143,10 @@ def profile():
     
     username = session["user"]["username"]
 
-    return render_template("pages/profile.html", username=username, loggedIn=loggedIn)
+    return render_template(
+        "pages/profile.html",
+        username=username,
+        loggedIn=loggedIn)
 
 
 ### START APP ###

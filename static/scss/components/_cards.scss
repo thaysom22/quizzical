@@ -1,0 +1,7 @@
+/* ******* CARDS ******* */
+
+.card {
+    width: 100%; // full width on small screens
+    min-width: 60%;
+    padding: calc(1.5rem + 2vw) calc(3rem + 2vw);
+}

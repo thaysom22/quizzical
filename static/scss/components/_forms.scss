@@ -1,0 +1,24 @@
+/* ******* FORMS ******* */
+
+form {
+    padding: calc(1rem + 1vw);
+    span{
+        white-space: nowrap;
+        font-size: calc(0.8rem + .2vw);
+    }
+    label,.form-control {
+        font-size: calc(1rem + .4vw);
+    }
+    .form-outline {
+        .form-control{
+            ~.form-label {
+                padding-top: calc(.4rem + .1vw);
+            }
+        }
+        .form-control:focus{
+            ~.form-label {
+                padding-top: 0;
+            }
+        }
+    }
+}

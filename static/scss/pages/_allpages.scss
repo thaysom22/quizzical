@@ -1,5 +1,43 @@
 /* ******* ALLPAGES ******* */
 
+/* global resets */
+
+html {
+    font-size: 62.5%;
+}
+
+body{
+    color: #000000;
+}
+
+/* fonts */
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: $heading;
+}
+h1{
+    font-size: calc(3.5rem + 1vw);
+}
+h2 {
+    font-size: calc(2.5rem + .6vw);
+}
+h3 {
+    font-size: calc(2rem + .4vw);
+}
+h4 {
+    font-size: calc(1.5rem + .4vw);
+}
+body {
+    font-family: $main;
+}
+a {
+    font-family: $tertiary;
+    font-size: calc(1.4rem +.5vw);
+}
+span {
+    font-size: calc(1.2rem + .8vw);
+}
+
 
 main {
     min-height: 100vh;

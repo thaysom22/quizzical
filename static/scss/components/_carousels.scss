@@ -1,4 +1,4 @@
-/* ******* CAROUSEL ******* */
+/* ******* CAROUSELS ******* */
 
 .carousel {
     .carousel-caption {
@@ -9,5 +9,8 @@
     }
     .carousel-indicators {
         margin-bottom: 4rem;
+    }
+    p {
+        font-size: calc(1rem + .4vw);
     }
 }

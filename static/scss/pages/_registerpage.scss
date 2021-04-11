@@ -1,0 +1,11 @@
+/* ******* REGISTER PAGE ******* */
+
+.register-wrapper {
+    .register-title,.register-sub-title {
+        padding: calc(1.5rem + .5vw);
+        padding-left: 0;
+        * {
+            padding: 0 calc(1rem + .4vw);
+        }
+    }
+}

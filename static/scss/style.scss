@@ -1,17 +1,21 @@
 /* HELPERS */
 @import "helpers/_variables";
-@import "helpers/_globalresets";
-@import "helpers/buttons";
-@import "helpers/fonts";
-@import "helpers/mixins";
+@import "helpers/_buttons";
+@import "helpers/_icons";
+@import "helpers/_mixins";
 
 /* COMPONENTS */
 @import "components/_navbar";
 @import "components/_footer";
-@import "components/carousel";
+@import "components/_cards";
+@import "components/_carousels";
+@import "components/_forms";
 
 /* PAGES */
 @import "pages/_allpages";
-@import "pages/landingpage";
-@import "pages/loginpage";
-@import "pages/mediaqueries";
+@import "pages/_landingpage";
+@import "pages/_loginpage";
+@import "pages/_registerpage";
+
+/* MEDIA QUERIES */
+@import "helpers/_mediaqueries";

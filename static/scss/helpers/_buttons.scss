@@ -2,30 +2,25 @@
 
 .btn {
     font-size: calc(1.2rem + .6vw);
+    font-family: $tertiary;
     line-height: initial;
     text-transform: uppercase;  
-    white-space: nowrap;   
-}
-
-.btn.cta {
-    background-color: $magenta;   
-    color: $white;
-
-}
-
-.btn.cta.btn-lg {
-    font-size: calc(1.4rem + .8vw);
-    padding: 1rem 2.5rem;
-    margin: .5rem;
-    
-}
-
-.btn.cta.btn-nav {
-    font-size: calc(1rem + .4vw);
-    padding: .75rem 1.5rem;
-    margin: .25rem;
-}
-
-.btn.btn-link {
-    font-size: calc(0.8rem + .2vw);
+    white-space: nowrap;  
+    &.btn-link {
+        font-size: calc(0.8rem + .2vw);
+    } 
+    &.cta {
+        background-color: $magenta;   
+        color: $white;
+        &.btn-lg {
+            font-size: calc(1.4rem + .8vw);
+            padding: 1rem 2.5rem;
+            margin: .5rem;
+        }
+        &.btn-nav {
+            font-size: calc(1rem + .4vw);
+            padding: .75rem 1.5rem;
+            margin: .25rem;
+        }
+    }
 }

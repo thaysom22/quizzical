@@ -4,113 +4,33 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Oswald:wght@200;300;400;500&family=Raleway:wght@300;400;500;600&display=swap");
 /* COLOR VARIABLES */
 /* FONT VARIABLES */
-/* ******* GLOBAL RESETS ******* */
-html {
-  font-size: 62.5%;
-}
-
-body {
-  color: #000000;
-}
-
 /* ******* BUTTONS ******* */
 .btn {
   font-size: calc(1.2rem + .6vw);
+  font-family: "Oswald", sans-serif;
   line-height: initial;
   text-transform: uppercase;
   white-space: nowrap;
 }
-
+.btn.btn-link {
+  font-size: calc(0.8rem + .2vw);
+}
 .btn.cta {
   background-color: #C60F7B;
   color: #FFFFFF;
 }
-
 .btn.cta.btn-lg {
   font-size: calc(1.4rem + .8vw);
   padding: 1rem 2.5rem;
   margin: 0.5rem;
 }
-
 .btn.cta.btn-nav {
   font-size: calc(1rem + .4vw);
   padding: 0.75rem 1.5rem;
   margin: 0.25rem;
 }
 
-.btn.btn-link {
-  font-size: calc(0.8rem + .2vw);
-}
-
-/* ******* FONTS ******* */
-/* fonts for all elements */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
-}
-
-h1 {
-  font-size: calc(3.5rem + 1vw);
-}
-
-h2 {
-  font-size: calc(2.5rem + .6vw);
-}
-
-h3 {
-  font-size: calc(2rem + .4vw);
-}
-
-body {
-  font-family: "Open Sans", sans-serif;
-}
-
-a {
-  font-family: "Oswald", sans-serif;
-}
-
-footer {
-  font-family: "Open Sans", sans-serif;
-  color: #FFFFFF;
-}
-
-.btn {
-  font-family: "Oswald", sans-serif;
-}
-
-/* landing page fonts */
-.jumbotron {
-  font-family: "Raleway", sans-serif;
-}
-.jumbotron h1 {
-  color: #C60F7B;
-  font-weight: 600;
-}
-.jumbotron h4 {
-  font-size: 2.5rem;
-}
-.jumbotron a {
-  font-size: 1.4rem;
-}
-
-.hero-caption h2 {
-  color: #FFFFFF;
-  font-family: "Raleway", sans-serif;
-  text-align: center;
-}
-
-.benefits-wrapper .benefit span {
-  font-size: calc(1.2rem + .8vw);
-}
-
-.carousel p {
-  font-size: calc(1rem + .4vw);
-}
-
-.get-started-step p {
-  font-size: calc(1.2rem + .8vw);
-}
-
-/* FA icons */
+/* ******* ICONS ******* */
 .icon-sm {
   font-size: calc(1.4rem + .4vw);
 }
@@ -156,6 +76,8 @@ footer {
 
 /* ******* FOOTER ******* */
 footer {
+  font-family: "Open Sans", sans-serif;
+  color: #FFFFFF;
   background-color: #0839D9;
 }
 footer #footer-thdev-icon,
@@ -171,7 +93,14 @@ footer a.wheat {
   color: #FADCB2;
 }
 
-/* ******* CAROUSEL ******* */
+/* ******* CARDS ******* */
+.card {
+  width: 100%;
+  min-width: 60%;
+  padding: calc(1.5rem + 2vw) calc(3rem + 2vw);
+}
+
+/* ******* CAROUSELS ******* */
 .carousel .carousel-caption {
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 2rem;
@@ -181,9 +110,73 @@ footer a.wheat {
 .carousel .carousel-indicators {
   margin-bottom: 4rem;
 }
+.carousel p {
+  font-size: calc(1rem + .4vw);
+}
+
+/* ******* FORMS ******* */
+form {
+  padding: calc(1rem + 1vw);
+}
+form span {
+  white-space: nowrap;
+  font-size: calc(0.8rem + .2vw);
+}
+form label, form .form-control {
+  font-size: calc(1rem + .4vw);
+}
+form .form-outline .form-control ~ .form-label {
+  padding-top: calc(.4rem + .1vw);
+}
+form .form-outline .form-control:focus ~ .form-label {
+  padding-top: 0;
+}
 
 /* PAGES */
 /* ******* ALLPAGES ******* */
+/* global resets */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: #000000;
+}
+
+/* fonts */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+h1 {
+  font-size: calc(3.5rem + 1vw);
+}
+
+h2 {
+  font-size: calc(2.5rem + .6vw);
+}
+
+h3 {
+  font-size: calc(2rem + .4vw);
+}
+
+h4 {
+  font-size: calc(1.5rem + .4vw);
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+a {
+  font-family: "Oswald", sans-serif;
+  font-size: calc(1.4rem +.5vw);
+}
+
+span {
+  font-size: calc(1.2rem + .8vw);
+}
+
 main {
   min-height: 100vh;
   background-image: url("./../img/question-mark-background-colored.png");
@@ -208,10 +201,16 @@ footer .footer-inner-wrapper {
 }
 
 /* ******* LANDING PAGE ******* */
+/* jumbotron */
 .jumbotron {
   background-color: #FFFFFF;
 }
+.jumbotron h1 {
+  color: #C60F7B;
+  font-weight: 600;
+}
 
+/* hero image section */
 .hero-image-wrapper {
   position: relative;
 }
@@ -233,8 +232,11 @@ footer .footer-inner-wrapper {
   padding: 3rem 6rem;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
+  color: #FFFFFF;
+  text-align: center;
 }
 
+/* benefits section */
 .benefits-wrapper {
   background-color: #FFFFFF;
   border-radius: 2rem;
@@ -251,6 +253,7 @@ footer .footer-inner-wrapper {
   padding: 1rem;
 }
 
+/* get started section */
 .get-started-wrapper {
   background-color: #FFFFFF;
   border-radius: 2rem;
@@ -278,8 +281,10 @@ footer .footer-inner-wrapper {
 .get-started-wrapper .get-started-step p {
   padding: 0 1rem;
   text-align: center;
+  font-size: calc(1.2rem + .8vw);
 }
 
+/* final cta section */
 .final-cta-wrapper {
   background-color: #FFFFFF;
   border-radius: 2rem;
@@ -296,18 +301,17 @@ footer .footer-inner-wrapper {
 .login-wrapper .form-new-user * {
   padding: 0 calc(.5rem + .2vw);
 }
-.login-wrapper .card {
-  width: 100%;
-  padding: calc(3rem + 2vw);
+
+/* ******* REGISTER PAGE ******* */
+.register-wrapper .register-title, .register-wrapper .register-sub-title {
+  padding: calc(1.5rem + .5vw);
+  padding-left: 0;
 }
-.login-wrapper form {
-  padding: calc(1rem + 1vw);
-}
-.login-wrapper form span {
-  white-space: nowrap;
-  font-size: calc(0.8rem + .2vw);
+.register-wrapper .register-title *, .register-wrapper .register-sub-title * {
+  padding: 0 calc(1rem + .4vw);
 }
 
+/* MEDIA QUERIES */
 /* ******* MEDIA QUERIES ******* */
 /* small screen sizes and above */
 @media screen and (min-width: 576px) {
@@ -334,7 +338,7 @@ footer .footer-inner-wrapper {
     text-align: justify;
   }
 
-  .login-wrapper .card {
+  .login-wrapper .card, .register-wrapper .card {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;

@@ -358,7 +358,7 @@ Collection name: quizzes
 | Quiz Title | title | text, `maxlength=20` | string | not null |
 | Owner ID | owner_id | None | ObjectId | ref: > users._id  |
 | Category ID | category_id | None | ObjectId | ref: > categories._id |
-| Age Range ID | age_range_id | None | ObjectId | ref: >age_ranges._id |
+| Age Range ID | age_range_id | None | ObjectId | ref: > age_ranges._id |
 |   |   |   |   |   |
 | **Questions** | questions |   | **object** |   |
 | Question Text | question_text | text, `maxlength=150` | string | not null |
@@ -384,6 +384,7 @@ Collection name: age_ranges
 | --- | --- | --- | --- | --- |
 | Age Range ID | _id | None | ObjectId | Primary Key |
 | Age Range | age_range | Dropdown menu | string | not null, unique |
+| Order | order | None | integer | not null, unique. used for sorting documents |
 
 * ObjectIds for documents in `categories` and `age_ranges` collections are stored as field values in both `users` and `quizzes` collections - serves to define a relationship between documents in these different collections.
 * ObjectIds for documents in `users` collection are stored as field values in `quizzes` collection - serves to define a relationship between documents in these different collections.

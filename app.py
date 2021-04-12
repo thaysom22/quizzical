@@ -102,7 +102,19 @@ def register():
         redirect(url_for("profile"))  # if logged in redirect to profile page
 
     if request.method == "GET":
-        return render_template("pages/register.html", loggedIn=loggedIn)
+        # read from categories and age_ranges collections in db
+        category_names = list(mongo.db.categories.find(
+            projection={'_id':False})
+            .sort("category_name", 1))
+        age_ranges = list(mongo.db.age_ranges.find(
+            projection={'_id':False, 'order':False})
+            .sort("order", 1))
+
+        return render_template(
+            "pages/register.html", 
+            loggedIn=loggedIn, 
+            category_names=category_names,
+            age_ranges=age_ranges)
 
     username_form = request.form.get("username").lower()  # form input validation done client-side
     existing_user = mongo.db.users.find_one(

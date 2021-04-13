@@ -122,7 +122,7 @@ def register():
     
     if existing_user:
         username = existing_user["username"]
-        flash(f"The username: {username} already exists")
+        flash(f"The username {username} already exists")
         return redirect(url_for("register"))
 
     password_form = request.form.get("password")

@@ -46,6 +46,12 @@ main {
     background-attachment: fixed;
     margin-top: 6.663rem;
     padding-bottom: 8rem;
+
+    .flashed-messages {
+        h4 {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .main-inner-wrapper {
@@ -53,12 +59,6 @@ main {
     top: 6rem;
 }
 
-footer {
-    .footer-inner-wrapper{
-    position: relative;
-    top: 6rem;
-    }
-}
 
 .flex-align-justify {
         @include flex-align-justify();

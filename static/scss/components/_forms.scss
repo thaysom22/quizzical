@@ -2,23 +2,51 @@
 
 form {
     padding: calc(1rem + 1vw);
+    select,.form-outline {
+        max-width: 40rem;
+    }
     span{
         white-space: nowrap;
         font-size: calc(0.8rem + .2vw);
     }
-    label,.form-control {
-        font-size: calc(1rem + .4vw);
+    label {
+        font-size: calc(1.1rem + .2vw);
+        font-family: inherit;
+        line-height: 3rem;
+    }
+    .form-control,
+    .form-select {
+        padding: .33em .75em;  
+        height: 4rem;
     }
     .form-outline {
-        .form-control{
-            ~.form-label {
-                padding-top: calc(.4rem + .1vw);
-            }
-        }
-        .form-control:focus{
+        .form-control:focus {
             ~.form-label {
                 padding-top: 0;
             }
         }
     }
+}
+    
+
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+    margin-bottom: 1.5rem;
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    margin-bottom: 0;
+}
+
+.invalid-feedback {
+    top: 4rem;
+}
+
+.form-select.is-invalid, 
+.was-validated .form-select:invalid,
+.form-select.is-valid, 
+.was-validated .form-select:valid {
+    background-position: right .75rem center,center right 3rem;
 }

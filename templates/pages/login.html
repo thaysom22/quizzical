@@ -9,17 +9,18 @@
         </div>
         <hr>
         <!-- login form -->
-        <form method="POST" action="{{ url_for('login') }}">
+        <form method="POST" action="{{ url_for('login') }}" novalidate>
             <!-- username -->
             <div class="row mb-3">
                 <div class="col-2 d-flex justify-content-center align-items-center">
                     <i class="fas fa-user icon-sm"></i>
                 </div>
-                <div class="col-8 d-flex justify-content-center form-outline">
+                <div class="col-8 d-flex form-outline">
                     <input id="username" name="username" type="text" 
                     min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
                     class="form-control" required>
                     <label for="username" class="form-label">Username</label>
+                    <div class="invalid-feedback">Invalid username</div>
                 </div>
             </div>
             <!-- password -->
@@ -27,23 +28,24 @@
                 <div class="col-2 d-flex justify-content-center align-items-center">
                     <i class="fas fa-lock icon-sm"></i>
                 </div>
-                <div class="col-8 d-flex justify-content-center form-outline">
+                <div class="col-8 d-flex form-outline">
                     <input id="password" name="password" type="password" 
                         min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control" required
                     >
                     <label for="password" class="form-label">Password</label>
+                    <div class="invalid-feedback">Invalid password</div>
                 </div>
             </div>
             <!-- submit -->
              <div class="row mt-5 d-flex justify-content-center align-items-center">
-                 <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
+                 <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
                     <button type="submit" class="btn btn-rounded cta m-2">
                         Log In 
                         <i class="fas fa-sign-in-alt icon-sm"></i>
                     </button>
                  </div>
-                <div class="form-new-user col-12 col-lg-6 d-flex justify-content-center align-items-center">
+                <div class="form-new-user col-12 col-lg-4 d-flex justify-content-center align-items-center">
                     <span>New here?</span>
                     <a href="{{ url_for('register') }}" type="button" 
                         class="btn btn-link" data-mdb-ripple-color="dark"
@@ -55,4 +57,8 @@
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
 {% endblock %}

@@ -8,103 +8,113 @@
         </div>
         <hr>
         <!-- register sub title -->
-        <div class="col-12 register-sub-title d-flex justify-content-start align-items-center mb-3">
+        <div class="col-12 register-sub-title d-flex justify-content-start align-items-center my-3">
             <i class="icon-lg fas fa-user-plus"></i>
             <h4>Create account</h4>
         </div>
         <!-- register form -->
-         <form method="POST" action="{{ url_for('register') }}">
+         <form method="POST" class="row justify-content-center" 
+            action="{{ url_for('register') }}" novalidate
+         >
             <!-- username -->
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-6 order-1">
                 <div class="row mb-3">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <i class="fas fa-user icon-sm"></i>
                     </div>
-                    <div class="col-8 d-flex justify-content-center form-outline">
+                    <div class="col-8 d-flex form-outline">
                         <input id="username" name="username" type="text" 
-                        min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control" required>
+                            min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                            class="form-control form-control-lg" required
+                        />
                         <label for="username" class="form-label">Username</label>
+                        <div class="invalid-feedback">Choose a 5-20 character alphanumeric username</div>
                     </div>
+                    
                 </div>
             </div>
-            <!-- main category select-->
-            <div class="col-12 col-lg-6">
+            <!-- main category select -->
+            <div class="col-12 col-lg-6 order-2">
                 <div class="row mb-3">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <i class="fas fa-folder-open icon-sm"></i>
                     </div>
-                    <div class="col-8 d-flex justify-content-center form-outline">
-                        <input id="main-category" name="main-category" type="text" 
-                        role="listbox" aria-multiselectable="false" 
-                        aria-disabled="false" aria-haspopup="true"
-                        aria-expanded="false"
-                        class="form-control select-input" required>
+                    <div class="col-8 d-flex px-0">
+                        <select id="main-category" name="main_category"
+                            class="form-select" required
+                        >
+                            <option value="" disabled selected>Choose main category</option>
+                            <!-- read category names from db -->
+                            {% for category_name in category_names %}
+                                <option value="{{ category_name.category_name }}">
+                                    {{ category_name.category_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <select class="select">
-                        {% for category_name in category_names %}
-                            <option value="{{ category_name.category_name }}">
-                                {{ category_name.category_name }}
-                            </option>
-                        {% endfor %}
-                    </select>
                 </div>
-            </div>
+            </div> 
             <!-- main age range select-->
-            <div class="col-12 col-lg-6 order-lg-4">
+            <div class="col-12 col-lg-6 order-3 order-lg-4">
                 <div class="row mb-3">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <i class="fas fa-users icon-sm"></i>
                     </div>
-                    <div class="col-8 d-flex justify-content-center form-outline">
-                        <input id="main-age-range" name="main-age-range" type="text" 
-                        role="listbox" aria-multiselectable="false" 
-                        aria-disabled="false" aria-haspopup="true"
-                        aria-expanded="false"
-                        class="form-control select-input" required>
+                    <div class="col-8 d-flex px-0">
+                        <select id="main-age-range" name="main_age_range"
+                            class="form-select" required
+                        >
+                            <option value="" disabled selected>Choose main age range</option>
+                            {% for age_range in age_ranges %}
+                                <option value="{{ age_range.age_range }}">
+                                    {{ age_range.age_range }}
+                                </option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <select class="select">
-                        {% for age_range in age_ranges %}
-                            <option value="{{ age_range.age_range }}">
-                                {{ age_range.age_range }}
-                            </option>
-                        {% endfor %}
-                    </select>
                 </div>
             </div>
             <!-- password -->
-            <div class="row mb-3">
-                <div class="col-2 d-flex justify-content-center align-items-center">
-                    <i class="fas fa-lock icon-sm"></i>
-                </div>
-                <div class="col-8 d-flex justify-content-center form-outline">
-                    <input id="password" name="password" type="password" 
-                        min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control" required
-                    >
-                    <label for="password" class="form-label">Password</label>
+            <div class="col-12 col-lg-6 order-4 order-lg-3">
+                <div class="row mb-3">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <i class="fas fa-lock icon-sm"></i>
+                    </div>
+                    <div class="col-8 d-flex form-outline">
+                        <input id="password" name="password" type="password" 
+                            min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                            class="form-control form-control-lg" required
+                        />
+                        <label for="password" class="form-label">Password</label>
+                        <div class="invalid-feedback">Choose a 5-20 character alphanumeric password</div>
+                    </div>
                 </div>
             </div>
+            
             <!-- submit -->
-             <div class="row mt-5 d-flex justify-content-center align-items-center">
-                 <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
-                    <button type="submit" class="btn btn-rounded cta m-2">
-                        Log In 
-                        <i class="fas fa-sign-in-alt icon-sm"></i>
-                    </button>
-                 </div>
-                <div class="form-new-user col-12 col-lg-6 d-flex justify-content-center align-items-center">
-                    <span>New here?</span>
-                    <a href="{{ url_for('register') }}" type="button" 
-                        class="btn btn-link" data-mdb-ripple-color="dark"
-                    >
-                    Create account
-                    </a>
+            <div class="col-12 order-5">
+                <div class="row mt-5 d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
+                        <button type="submit" class="btn btn-rounded cta m-2">
+                            Submit
+                        </button>
+                    </div>
+                    <div class="form-new-user col-12 col-lg-2 d-flex justify-content-center align-items-center">
+                        <span>Already registered?</span>
+                        <a href="{{ url_for('login') }}" type="button" 
+                            class="btn btn-link" data-mdb-ripple-color="dark"
+                        >
+                        Login
+                        </a>
+                    </div>
                 </div>
-             </div>
+            </div>
         </form>
     </div>
 </div>
+{% endblock %}
 
-
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+    <script src="{{url_for('static', filename='js/alerts.js')}}"></script>
 {% endblock %}

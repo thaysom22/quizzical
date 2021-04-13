@@ -1,8 +1,9 @@
 /* HELPERS */
 @import "helpers/_variables";
+@import "helpers/_mixins";
 @import "helpers/_buttons";
 @import "helpers/_icons";
-@import "helpers/_mixins";
+@import "helpers/_alerts";
 
 /* COMPONENTS */
 @import "components/_navbar";

@@ -4,6 +4,10 @@ footer {
     font-family: $main;
     color: $white;
     background-color: $persian-blue;
+    .footer-inner-wrapper{
+    position: relative;
+    top: 6rem;
+    }
     #footer-thdev-icon,
     #footer-logo {
         width: 2.5rem;
@@ -17,3 +21,4 @@ footer {
         color: $wheat;
     }
 }
+

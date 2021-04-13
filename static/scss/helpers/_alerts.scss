@@ -1,0 +1,9 @@
+/* ******* ALERTS ******* */
+
+.alert-dismissible .btn-close {
+    top: initial;
+    margin-right: .75rem;
+    &.remove {
+        display: none;
+    }
+}

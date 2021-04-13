@@ -45,9 +45,9 @@
                         >
                             <option value="" disabled selected>Choose main category</option>
                             <!-- read category names from db -->
-                            {% for category_name in category_names %}
-                                <option value="{{ category_name.category_name }}">
-                                    {{ category_name.category_name }}
+                            {% for category in all_categories %}
+                                <option value="{{ category._id }}">
+                                    {{ category.category_name }}
                                 </option>
                             {% endfor %}
                         </select>
@@ -65,8 +65,8 @@
                             class="form-select" required
                         >
                             <option value="" disabled selected>Choose main age range</option>
-                            {% for age_range in age_ranges %}
-                                <option value="{{ age_range.age_range }}">
+                            {% for age_range in all_age_ranges %}
+                                <option value="{{ age_range._id }}">
                                     {{ age_range.age_range }}
                                 </option>
                             {% endfor %}

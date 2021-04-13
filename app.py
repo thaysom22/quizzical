@@ -53,26 +53,25 @@ def discover():
         return redirect(url_for("landing"))
     
     if request.method == "GET":
+        # read all categories and all age_ranges from db
+        all_category_names = list(mongo.db.categories
+            .find()
+            .sort("category_name", 1))
+        all_age_ranges = list(mongo.db.age_ranges
+            .find()
+            .sort("order", 1))
+
         user = session["user"]  # get data from session object
         username = user.get("username")
-        user_category = user.get("user_category")
+        user_category_objectid = ObjectId(user.get("user_category"))
+        user_age_range_objectid = ObjectId(user.get("user_age_range"))
 
-    
-    # read from categories and age_ranges collections in db
-    category_names = list(mongo.db.categories.find(
-        projection={'_id':False})
-        .sort("category_name", 1))
-    age_ranges = list(mongo.db.age_ranges.find(
-        projection={'_id':False, 'order':False})
-        .sort("order", 1))
-
-    # for category_name in category_names:
-
-    return render_template("pages/discover.html", 
-        loggedIn=loggedIn, 
-        username=username, 
-        category_names=category_names, 
-        age_ranges=age_ranges)
+        return render_template("pages/discover.html", 
+            loggedIn=loggedIn, 
+            username=username, 
+            all_category_names=all_category_names, 
+            all_age_ranges=all_age_ranges)
+        
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -88,8 +87,7 @@ def login():
 
     username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
     existing_user = mongo.db.users.find_one(
-        {"username": username_form},
-        projection={'_id':False})  # get user document from db (returns dict or None )
+        {"username": username_form})  # get user document from db (returns dict or None )
     
     if not existing_user:
         flash("Incorrect Username and/or Password")  # notify user of failure
@@ -103,9 +101,9 @@ def login():
         flash("Incorrect Username and/or Password")  # notify user of failure
         return redirect(url_for("login")) 
 
+    existing_user["_id"] = str(existing_user["_id"])  # convert _id value from ObjectId to string
     session["user"] = existing_user  # add existing_user dict to session object 
-    username = existing_user["username"]
-    flash(f"Welcome back to Quizzical, {username}") #  flash message to newly logged in user on discover page
+    flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
     
     return redirect(url_for("discover"))  # redirect to discover if login successful
 
@@ -121,43 +119,55 @@ def register():
 
     if request.method == "GET":
         # read from categories and age_ranges collections in db
-        category_names = list(mongo.db.categories.find(
-            projection={'_id':False})
+        all_categories = list(mongo.db.categories
+            .find()
             .sort("category_name", 1))
-        age_ranges = list(mongo.db.age_ranges.find(
-            projection={'_id':False, 'order':False})
+        all_age_ranges = list(mongo.db.age_ranges
+            .find()
             .sort("order", 1))
 
         return render_template(
             "pages/register.html", 
             loggedIn=loggedIn, 
-            category_names=category_names,
-            age_ranges=age_ranges)
+            all_categories=all_categories,
+            all_age_ranges=all_age_ranges)
 
+    # if request.method == "POST":
     username_form = request.form.get("username").lower()  # form input validation done client-side
     existing_user = mongo.db.users.find_one(
         {"username": username_form})
     
     if existing_user:
-        username = existing_user["username"]
-        flash(f"The username {username} already exists")
+        flash(f"The username {username_form} already exists")
         return redirect(url_for("register"))
 
+    # generate password hash from user password input
     password_form = request.form.get("password")
     password_hash = generate_password_hash(
         password_form,
         method='pbkdf2:sha512',
         salt_length=12)
+
+    # get user category and age range inputs from form
+    category_form_id = request.form.get("main_category")
+    age_range_form_id = request.form.get("main_age_range")
     
-    new_user = {
+    new_user_db = {
         "username": username_form,
         "password": password_hash,
-        "user_category":
-        "user_age_range":
+        "user_category": category_form_id,  
+        "user_age_range": age_range_form_id  
     }
 
-    mongo.db.users.insert_one(new_user)  # insert new user as document in db.users 
-    session["user"] = new_user  # add to session dict 
+    mongo.db.users.insert_one(new_user_db)  # insert new user as document in db.users 
+
+    new_user_session = {
+        "username": username_form,
+        "user_category": category_form_id,  
+        "user_age_range": age_range_form_id  
+    }
+
+    session["user"] = new_user_session  # add to session dict 
     flash(f"Welcome to Quizzical, {username_form}") 
     
     return redirect(url_for("discover"))

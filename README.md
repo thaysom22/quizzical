@@ -343,10 +343,10 @@ Collection name: users
 | Title | Key in DB | Form validation | Data Type | Details |
 | --- | --- | --- | --- | --- |
 | User ID | _id | None | ObjectId | Primary Key |
-| Username | username | text, `maxlength=20` | string | not null, unique |
-| Password | password | text, `maxlength=20` | string | not null |
-| User category | user_category | None | ObjectId |   |
-| User age range | user_age_range | None | ObjectId |   |
+| Username | username | text, `minlength=5`, `maxlength=20` | string | not null, unique |
+| Password | password | text, `minlength=5`, `maxlength=20` | string | not null |
+| User category | user_category | `required` | ObjectId | not null  |
+| User age range | user_age_range | `required` | ObjectId | not null  |
 
 #### Quizzes collection
 

@@ -26,12 +26,10 @@ def default():
     """
     docstring here
     """
-    loggedIn = 'user' in session  # check in session dict if user is logged in
+    loggedIn = 'user' in session  # check in session dict
     if not loggedIn:
         return redirect(url_for("landing"))
-   
-    # get data from db
-    # pass username to discover_page view
+
     return redirect(url_for("discover"))
 
 @app.route("/landing")
@@ -45,7 +43,7 @@ def landing():
 
     return render_template("pages/landing.html", loggedIn=loggedIn)
 
-@app.route("/discover")
+@app.route("/discover", methods=["GET", "POST"])
 def discover():
     """
     docstring here
@@ -53,8 +51,28 @@ def discover():
     loggedIn = 'user' in session
     if not loggedIn:
         return redirect(url_for("landing"))
+    
+    if request.method == "GET":
+        user = session["user"]  # get data from session object
+        username = user.get("username")
+        user_category = user.get("user_category")
 
-    return render_template("pages/discover.html", loggedIn=loggedIn)
+    
+    # read from categories and age_ranges collections in db
+    category_names = list(mongo.db.categories.find(
+        projection={'_id':False})
+        .sort("category_name", 1))
+    age_ranges = list(mongo.db.age_ranges.find(
+        projection={'_id':False, 'order':False})
+        .sort("order", 1))
+
+    # for category_name in category_names:
+
+    return render_template("pages/discover.html", 
+        loggedIn=loggedIn, 
+        username=username, 
+        category_names=category_names, 
+        age_ranges=age_ranges)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -63,7 +81,6 @@ def login():
     """
     loggedIn = 'user' in session
     if loggedIn:
-        username = session["user"]  # get user_id from session dict and pass to redirect function
         return redirect(url_for("profile"))
     
     if request.method == "GET":
@@ -71,7 +88,8 @@ def login():
 
     username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
     existing_user = mongo.db.users.find_one(
-        {"username": username_form})  # get user document from db (returns None if not found in db)
+        {"username": username_form},
+        projection={'_id':False})  # get user document from db (returns dict or None )
     
     if not existing_user:
         flash("Incorrect Username and/or Password")  # notify user of failure
@@ -85,8 +103,8 @@ def login():
         flash("Incorrect Username and/or Password")  # notify user of failure
         return redirect(url_for("login")) 
 
+    session["user"] = existing_user  # add existing_user dict to session object 
     username = existing_user["username"]
-    session["user"] = username  # add to session dict 
     flash(f"Welcome back to Quizzical, {username}") #  flash message to newly logged in user on discover page
     
     return redirect(url_for("discover"))  # redirect to discover if login successful
@@ -133,16 +151,17 @@ def register():
     
     new_user = {
         "username": username_form,
-        "password": password_hash
+        "password": password_hash,
+        "user_category":
+        "user_age_range":
     }
 
     mongo.db.users.insert_one(new_user)  # insert new user as document in db.users 
-    session["user"] = username_form  # add to session dict 
+    session["user"] = new_user  # add to session dict 
     flash(f"Welcome to Quizzical, {username_form}") 
     
     return redirect(url_for("discover"))
 
-# receives user_id as param or gets it from session dict
 @app.route("/profile")
 def profile():
     """

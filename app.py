@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash, check_password_hash)
 from helpers import ObjectIdHelper 
+from random import sample
 # will not import env when running on cloud platform
 if os.path.exists("env.py"):
     import env
@@ -193,29 +194,51 @@ def discover():
         return redirect(url_for("landing"))
     
     if request.method == "GET":
+
         # read all categories and all age_ranges from db
         all_categories = list(mongo.db.categories
-            .find()
-            .sort("category_name", 1))
+            .find(sort=[("category_name", 1)]))
         all_age_ranges = list(mongo.db.age_ranges
-            .find()
-            .sort("order", 1))
+            .find(sort=[("order", 1)]))
+        
+        # read from quizzes collection by category
+        quizzes_by_category = {}
+        for category in all_categories:
+            quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
+                { "$match": {"category_id": category["_id"]} },
+                { "$sample": { "size": 3 } } ]))
+
+        # query quizzes collection by age_range
+        quizzes_by_age_range = {}
+        for age_range in all_age_ranges:
+            quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
+                { "$match": {"age_range_id": age_range["_id"]} },
+                { "$sample": { "size": 3 } } ]))    
 
         user = session["user"]  # get data from session object
         username = user.get("username")
-        user_category_id = ObjectIdHelper.toObjectId(user.get("user_category"))
-        user_age_range_id = ObjectIdHelper.toObjectId(user.get("user_age_range"))
-        
+        # query quizzes collection by user_category and user_age_range
+        recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
+                { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_category"))} },
+                { "$sample": { "size": 3 } } ]))
 
-        # query quizzes collection for matches by category and age range
-
-
+        recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
+                { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_age_range"))} },
+                { "$sample": { "size": 3 } } ]))
+    
+        # create set of 3 quizzes (which are unique if concatenated lists have unique elements
+        recc_quizzes = sample(list(set(
+            recc_quizzes_by_category + recc_quizzes_by_age_range)))  # set() constructor removes duplicates 
 
         return render_template("pages/discover.html", 
             loggedIn=loggedIn, 
             username=username, 
             all_categories=all_categories, 
-            all_age_ranges=all_age_ranges)
+            all_age_ranges=all_age_ranges,
+            quizzes_by_category=quizzes_by_category,
+            quizzes_by_age_range=quizzes_by_age_range,
+            recc_quizzes=recc_quizzes
+            )
         
 
 @app.route("/profile")

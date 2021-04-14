@@ -495,7 +495,7 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 * [Kahoot](https://kahoot.com/) inspiration for design of layout, icons, colors and styling.
 * [Quizizz](https://quizizz.com/) inspiration for design of layout, icons, colors and styling.
 * [AJGreaves Family Hub project](https://github.com/AJGreaves/familyhub/) for guidance on structuring README, directories and naming conventions for Flask project.
-
+* [mongodb aggregation pipeline article](https://studio3t.com/knowledge-base/articles/mongodb-aggregation-framework/) - helped greatly in my understanding of how to aggregate queries to mongodb
 
 ## 8. Evaluation
 <hr>

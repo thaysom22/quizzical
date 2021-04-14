@@ -74,10 +74,21 @@ def login():
         flash("Incorrect Username and/or Password")  # notify user of failure
         return redirect(url_for("login")) 
 
-    # convert ObjectId values to string type
+    # use existing_user dict to get category and age_range names from respective collections
+    user_category_name = db.categories.find_one(
+        {"_id": existing_user["user_category"]}
+    )
+    user_age_range_name = db.age_ranges.find_one(
+        {"_id": existing_user["user_age_range"]}
+    )
+    
+    # convert ObjectId types to string types before adding to session
     for k,v in existing_user.items():
         existing_user[k] = ObjectIdHelper.fromObjectId(v)
-    
+
+    # add name strings to existing_user dict before storing in session
+    existing_user["user_category_name"] = user_category_name.category_name
+    existing_user["user_age_range_name"] = user_age_range_name.age_range
     session["user"] = existing_user  # add existing_user dict to session object 
     flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
     
@@ -134,13 +145,7 @@ def register():
     # get user category and age range ids from form as strings
     category_form_id = request.form.get("main_category")
     age_range_form_id = request.form.get("main_age_range")
-    # add to session dict
-    session["user"] = {
-        "username": username_form,
-        "user_category": category_form_id,  
-        "user_age_range": age_range_form_id  
-    } 
-    
+
     # convert ids to ObjectId type and insert in users collection
     new_user_db = {
         "username": username_form,
@@ -149,22 +154,36 @@ def register():
         "user_age_range": ObjectIdHelper.toObjectId(age_range_form_id)  
     }
 
-    mongo.db.users.insert_one(new_user_db)
+    insert_new_user_result = mongo.db.users.insert_one(new_user_db)
+    if not insert_new_user_result:
+        flash("Could not register account, please try again later.")
+        return redirect(url_for("register"))
+    
+    # get category and age_range names from db by id
+    user_category_name = db.categories.find_one(
+        {"_id": new_user_db["user_category"]}
+    )
+    user_age_range_name = db.age_ranges.find_one(
+        {"_id": new_user_db["user_age_range"]}
+    )
+
+    # add user to session including inserted document ObjectId
+    session["user"] = {
+        "user_id": ObjectIdHelper.fromObjectId(
+            insert_new_user_result.inserted_id),
+        "username": username_form,
+        "user_category_id": category_form_id,  
+        "user_category_name": user_category_name.category_name,
+        "user_age_range_id": age_range_form_id,
+        "user_age_range_name": user_age_range_name.age_range  
+    } 
+    
     flash(f"Welcome to Quizzical, {username_form}") 
     
     return redirect(url_for("discover"))
 
 
-
-
-
-
-
-
-
-
-@app.route("/discover",
-    methods=["GET", "POST"])
+@app.route("/discover", methods=["GET", "POST"])
 def discover():
     """
     docstring here
@@ -175,7 +194,7 @@ def discover():
     
     if request.method == "GET":
         # read all categories and all age_ranges from db
-        all_category_names = list(mongo.db.categories
+        all_categories = list(mongo.db.categories
             .find()
             .sort("category_name", 1))
         all_age_ranges = list(mongo.db.age_ranges
@@ -184,13 +203,18 @@ def discover():
 
         user = session["user"]  # get data from session object
         username = user.get("username")
-        user_category_objectid = ObjectId(user.get("user_category"))
-        user_age_range_objectid = ObjectId(user.get("user_age_range"))
+        user_category_id = ObjectIdHelper.toObjectId(user.get("user_category"))
+        user_age_range_id = ObjectIdHelper.toObjectId(user.get("user_age_range"))
+        
+
+        # query quizzes collection for matches by category and age range
+
+
 
         return render_template("pages/discover.html", 
             loggedIn=loggedIn, 
             username=username, 
-            all_category_names=all_category_names, 
+            all_categories=all_categories, 
             all_age_ranges=all_age_ranges)
         
 

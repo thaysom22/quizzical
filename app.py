@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash, check_password_hash)
+from helpers import ObjectIdHelper 
 # will not import env when running on cloud platform
 if os.path.exists("env.py"):
     import env
@@ -32,6 +33,7 @@ def default():
 
     return redirect(url_for("discover"))
 
+
 @app.route("/landing")
 def landing():
     """
@@ -43,35 +45,6 @@ def landing():
 
     return render_template("pages/landing.html", loggedIn=loggedIn)
 
-@app.route("/discover", methods=["GET", "POST"])
-def discover():
-    """
-    docstring here
-    """
-    loggedIn = 'user' in session
-    if not loggedIn:
-        return redirect(url_for("landing"))
-    
-    if request.method == "GET":
-        # read all categories and all age_ranges from db
-        all_category_names = list(mongo.db.categories
-            .find()
-            .sort("category_name", 1))
-        all_age_ranges = list(mongo.db.age_ranges
-            .find()
-            .sort("order", 1))
-
-        user = session["user"]  # get data from session object
-        username = user.get("username")
-        user_category_objectid = ObjectId(user.get("user_category"))
-        user_age_range_objectid = ObjectId(user.get("user_age_range"))
-
-        return render_template("pages/discover.html", 
-            loggedIn=loggedIn, 
-            username=username, 
-            all_category_names=all_category_names, 
-            all_age_ranges=all_age_ranges)
-        
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -101,7 +74,10 @@ def login():
         flash("Incorrect Username and/or Password")  # notify user of failure
         return redirect(url_for("login")) 
 
-    existing_user["_id"] = str(existing_user["_id"])  # convert _id value from ObjectId to string
+    # convert ObjectId values to string type
+    for k,v in existing_user.items():
+        existing_user[k] = ObjectIdHelper.fromObjectId(v)
+    
     session["user"] = existing_user  # add existing_user dict to session object 
     flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
     
@@ -124,7 +100,14 @@ def register():
             .sort("category_name", 1))
         all_age_ranges = list(mongo.db.age_ranges
             .find()
-            .sort("order", 1))
+            .sort("order", 1)) 
+
+        # convert ObjectId values to strings
+        for category in all_categories:
+            category["_id"] = ObjectIdHelper.fromObjectId(category["_id"])
+
+        for age_range in all_age_ranges:
+            age_range["_id"] = ObjectIdHelper.fromObjectId(age_range["_id"])
 
         return render_template(
             "pages/register.html", 
@@ -148,29 +131,68 @@ def register():
         method='pbkdf2:sha512',
         salt_length=12)
 
-    # get user category and age range inputs from form
+    # get user category and age range ids from form as strings
     category_form_id = request.form.get("main_category")
     age_range_form_id = request.form.get("main_age_range")
+    # add to session dict
+    session["user"] = {
+        "username": username_form,
+        "user_category": category_form_id,  
+        "user_age_range": age_range_form_id  
+    } 
     
+    # convert ids to ObjectId type and insert in users collection
     new_user_db = {
         "username": username_form,
         "password": password_hash,
-        "user_category": category_form_id,  
-        "user_age_range": age_range_form_id  
+        "user_category": ObjectIdHelper.toObjectId(category_form_id),  
+        "user_age_range": ObjectIdHelper.toObjectId(age_range_form_id)  
     }
 
-    mongo.db.users.insert_one(new_user_db)  # insert new user as document in db.users 
-
-    new_user_session = {
-        "username": username_form,
-        "user_category": category_form_id,  
-        "user_age_range": age_range_form_id  
-    }
-
-    session["user"] = new_user_session  # add to session dict 
+    mongo.db.users.insert_one(new_user_db)
     flash(f"Welcome to Quizzical, {username_form}") 
     
     return redirect(url_for("discover"))
+
+
+
+
+
+
+
+
+
+
+@app.route("/discover",
+    methods=["GET", "POST"])
+def discover():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        return redirect(url_for("landing"))
+    
+    if request.method == "GET":
+        # read all categories and all age_ranges from db
+        all_category_names = list(mongo.db.categories
+            .find()
+            .sort("category_name", 1))
+        all_age_ranges = list(mongo.db.age_ranges
+            .find()
+            .sort("order", 1))
+
+        user = session["user"]  # get data from session object
+        username = user.get("username")
+        user_category_objectid = ObjectId(user.get("user_category"))
+        user_age_range_objectid = ObjectId(user.get("user_age_range"))
+
+        return render_template("pages/discover.html", 
+            loggedIn=loggedIn, 
+            username=username, 
+            all_category_names=all_category_names, 
+            all_age_ranges=all_age_ranges)
+        
 
 @app.route("/profile")
 def profile():

@@ -17,6 +17,9 @@
 .btn.btn-link {
   font-size: calc(0.8rem + .2vw);
 }
+.btn.btn-search {
+  padding: 0.5rem 1rem;
+}
 .btn.cta {
   background-color: #C60F7B;
   color: #FFFFFF;
@@ -111,7 +114,7 @@ footer a.wheat {
 .main-heading {
   background-color: #FFFFFF;
 }
-.main-heading h1 {
+.main-heading h1, .main-heading h2 {
   color: #C60F7B;
   font-weight: 600;
 }
@@ -157,6 +160,12 @@ form .form-control,
 form .form-select {
   padding: 0.33em 0.75em;
   height: 4rem;
+}
+form .form-outline {
+  padding-left: 0.75rem;
+}
+form .form-outline.searchbar-outline {
+  width: 75%;
 }
 form .form-outline .form-control:focus ~ .form-label {
   padding-top: 0;
@@ -244,6 +253,7 @@ main .flashed-messages h4 {
   top: 6rem;
 }
 
+/*** mixins ***/
 .flex-align-justify {
   justify-content: center;
   align-items: center;

@@ -20,6 +20,10 @@ form {
         height: 4rem;
     }
     .form-outline {
+        padding-left: .75rem;
+        &.searchbar-outline{
+            width: 75%;
+        }
         .form-control:focus {
             ~.form-label {
                 padding-top: 0;

@@ -185,7 +185,7 @@ def register():
     return redirect(url_for("discover"))
 
 
-@app.route("/discover", methods=["GET", "POST"])
+@app.route("/discover")
 def discover():
     """
     docstring here
@@ -194,65 +194,62 @@ def discover():
     if not loggedIn:
         return redirect(url_for("landing"))
     
-    if request.method == "GET":
-
-        # read all categories and all age_ranges from db
-        all_categories = list(mongo.db.categories
-            .find(sort=[("category_name", 1)]))
-        all_age_ranges = list(mongo.db.age_ranges
-            .find(sort=[("order", 1)]))
-        
-        # read from quizzes collection by category
-        quizzes_by_category = {}
-        for category in all_categories:
-            quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
-                { "$match": { "category_id": category["_id"] } },
-                { "$project": { "title": True } },
-                { "$sample": { "size": 3 } }]))
-
-        # query quizzes collection by age_range
-        quizzes_by_age_range = {}
-        for age_range in all_age_ranges:
-            quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
-                { "$match": {"age_range_id": age_range["_id"]} },
-                { "$project": { "title": True, "category_id": True } },
-                { "$sample": { "size": 3 } } ]))    
-
-        user = session["user"]  # get data from session object
-        username = user.get("username")
-        # query quizzes collection by user_category and user_age_range for different sample
-        recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
-                { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
-                { "$project": { "title": True } },
-                { "$sample": { "size": 3 } } ]))
-        
-        print("recc by category:", recc_quizzes_by_category)
-
-        recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
-                { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
-                { "$project": { "title": True, "category_id": True } },
-                { "$sample": { "size": 3 } } ]))
-
-        print("recc by age range:", recc_quizzes_by_age_range)
+    # read all categories and all age_ranges from db
+    all_categories = list(mongo.db.categories
+        .find(sort=[("category_name", 1)]))
+    all_age_ranges = list(mongo.db.age_ranges
+        .find(sort=[("order", 1)]))
     
-        # create list of max 3 unique quizzes 
-        recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
-        # frozenset with dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
-        recc_quizzes = list({frozenset(item.items()) : item for item in recc_quizzes}.values())
-        if len(recc_quizzes) > 3:
-            recc_quizzes = sample(recc_quizzes, 3)   
+    # read from quizzes collection by category
+    quizzes_by_category = {}
+    for category in all_categories:
+        quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
+            { "$match": { "category_id": category["_id"] } },
+            { "$project": { "title": True } },
+            { "$sample": { "size": 3 } }]))
 
-        return render_template("pages/discover.html", 
-            loggedIn=loggedIn, 
-            username=username, 
-            all_categories=all_categories, 
-            all_age_ranges=all_age_ranges,
-            quizzes_by_category=quizzes_by_category,
-            quizzes_by_age_range=quizzes_by_age_range,
-            recc_quizzes_by_category=recc_quizzes_by_category,
-            recc_quizzes_by_age_range=recc_quizzes_by_age_range,
-            recc_quizzes=recc_quizzes
-            )
+    # query quizzes collection by age_range
+    quizzes_by_age_range = {}
+    for age_range in all_age_ranges:
+        quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
+            { "$match": {"age_range_id": age_range["_id"]} },
+            { "$project": { "title": True, "category_id": True } },
+            { "$sample": { "size": 3 } } ]))    
+
+    user = session["user"]  # get data from session object
+    username = user.get("username")
+    # query quizzes collection by user_category and user_age_range for different sample
+    recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
+            { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
+            { "$project": { "title": True } },
+            { "$sample": { "size": 3 } } ]))
+    
+    print("recc by category:", recc_quizzes_by_category)
+
+    recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
+            { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
+            { "$project": { "title": True, "category_id": True } },
+            { "$sample": { "size": 3 } } ]))
+
+    print("recc by age range:", recc_quizzes_by_age_range)
+
+    # create list of max 3 unique quizzes
+    recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
+    # frozenset with dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
+    recc_quizzes = list({frozenset(item.items()): item for item in recc_quizzes}.values())
+    if len(recc_quizzes) > 3:
+        recc_quizzes = sample(recc_quizzes, 3)   
+
+    return render_template("pages/discover.html", 
+        loggedIn=loggedIn, 
+        username=username, 
+        all_categories=all_categories, 
+        all_age_ranges=all_age_ranges,
+        quizzes_by_category=quizzes_by_category,
+        quizzes_by_age_range=quizzes_by_age_range,
+        recc_quizzes=recc_quizzes,
+        search_query=""
+        )
         
 
 @app.route("/profile")
@@ -273,6 +270,33 @@ def profile():
         loggedIn=loggedIn)
 
 
+@app.route("/search/<search_query>", methods=["GET", "POST"])
+def search(search_query):
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to search quizzes")
+        return redirect(url_for("login"))
+
+    # GET and POST do same thing?
+    if request.method == "GET":
+        # this would be a manual url query entry
+        # read quizzes from db
+        return render_template("pages/search.html", 
+            loggedIn=loggedIn,
+            search_query=search_query)
+
+
+
+    return render_template("pages/search.html")
+
+
+
+
+
+
 ### START APP ###
 if __name__ == "__main__":
     app.run(
@@ -280,3 +304,4 @@ if __name__ == "__main__":
         port=int(os.environ.get("PORT")),
         debug=os.environ.get("DEBUG") == "True"
     )
+

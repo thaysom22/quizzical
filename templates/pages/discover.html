@@ -4,17 +4,12 @@
 <!-- main heading -->
 <header>
     <div class="p-5 text-center main-heading container">
-        <div class="d-flex justify-content-center col-12 col-lg-3 mb-3">
+        <div class="d-flex justify-content-center col-12 mb-3">
             <i class="fas fa-compass icon-lg p-2"></i>
             <h2 class="text-center p-2">Discover</h2> 
         </div>
-        {% include "components/search.html" %}
-        
-
-        <div class="d-flex flex-align-justify flex-column flex-lg-row mt-3">
-            <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
-            <a href="{{ url_for('login') }}" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Log In</a>
-        </div>
+        <!-- searchbar -->
+        {% include "components/searchbar.html" %}
     </div>
 </header>
 
@@ -58,6 +53,9 @@
 
     <!-- final create cta section -->
 
+{% endblock %}
 
-
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+    <script src="{{url_for('static', filename='js/alerts.js')}}"></script>
 {% endblock %}

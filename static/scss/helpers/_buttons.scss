@@ -10,6 +10,9 @@
     &.btn-link {
         font-size: calc(0.8rem + .2vw);
     } 
+    &.btn-search {
+        padding: .5rem 1rem;
+    }
     &.cta {
         background-color: $magenta;   
         color: $white;

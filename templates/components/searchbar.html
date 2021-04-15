@@ -1,0 +1,32 @@
+<!-- SEARCHBAR -->
+
+<div class="col-12 mb-3">
+    <form method="POST"
+        action="{{ url_for('search', search_query=search_query) }}"
+        class="d-flex flex-align-justify"
+        novalidate
+    >
+        <div class="form-outline searchbar-outline mx-3">
+            {% if search_query %}
+                <input type="text" name="search_query"
+                    id="search_query"
+                    class="form-control form-control-lg"
+                    required
+                    value="{{ search_query }}"
+                >
+            {% else %}
+                <input type="text" name="search_query"
+                    id="search_query"
+                    class="form-control form-control-lg"
+                    required
+                >
+            <label for="search_query" class="form-label">Find a quiz...</label>
+            {% endif %}
+            <div class="invalid-feedback">Your search is empty!</div>
+        </div>
+        
+        <button type="submit" class="btn btn-search">
+            <i class="fas fa-search icon-sm"></i>
+        </button>
+    </form>
+</div>

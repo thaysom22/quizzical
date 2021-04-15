@@ -59,6 +59,7 @@ main {
     top: 6rem;
 }
 
+/*** mixins ***/
 
 .flex-align-justify {
         @include flex-align-justify();

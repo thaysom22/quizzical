@@ -1,5 +1,17 @@
-### Helper classes and methods###
+### Helper classes, methods and constants ###
 from bson.objectid import ObjectId
+from flask import url_for
+
+### REMOVE
+def build_category_urls():
+    """
+    builds dict of urls to category images
+    """
+    CATEGORY_IMG_URLS = {
+        "General Knowledge": url_for('static', filename='img/smiling-teacher.jpg') # test
+    }
+
+    return CATEGORY_IMG_URLS
 
 
 class ObjectIdHelper():

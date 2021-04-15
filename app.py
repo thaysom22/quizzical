@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash, check_password_hash)
-from helpers import ObjectIdHelper 
+from helpers import ObjectIdHelper, build_category_urls
 from random import sample
 # will not import env when running on cloud platform
 if os.path.exists("env.py"):
@@ -14,12 +14,11 @@ if os.path.exists("env.py"):
 
 
 app = Flask(__name__)
-
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME") 
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
-
 mongo = PyMongo(app)
+
 
 # default route for app
 @app.route("/")
@@ -44,7 +43,9 @@ def landing():
     if loggedIn:
         return redirect(url_for("discover"))
 
-    return render_template("pages/landing.html", loggedIn=loggedIn)
+    return render_template("pages/landing.html", 
+        loggedIn=loggedIn,
+        active_page="Welcome")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -57,7 +58,9 @@ def login():
         return redirect(url_for("profile"))
     
     if request.method == "GET":
-        return render_template("pages/login.html", loggedIn=loggedIn)
+        return render_template("pages/login.html", 
+            loggedIn=loggedIn,
+            active_page="Log in")
 
     username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
     existing_user = mongo.db.users.find_one(
@@ -124,7 +127,8 @@ def register():
 
         return render_template(
             "pages/register.html", 
-            loggedIn=loggedIn, 
+            loggedIn=loggedIn,
+            active_page="Register", 
             all_categories=all_categories,
             all_age_ranges=all_age_ranges)
 
@@ -205,7 +209,7 @@ def discover():
     for category in all_categories:
         quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
             { "$match": { "category_id": category["_id"] } },
-            { "$project": { "title": True } },
+            { "$project": { "title": True, "category_id": True } },
             { "$sample": { "size": 3 } }]))
 
     # query quizzes collection by age_range
@@ -221,17 +225,13 @@ def discover():
     # query quizzes collection by user_category and user_age_range for different sample
     recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
             { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
-            { "$project": { "title": True } },
+            { "$project": { "title": True, "category_id": True } },
             { "$sample": { "size": 3 } } ]))
     
-    print("recc by category:", recc_quizzes_by_category)
-
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
             { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
             { "$project": { "title": True, "category_id": True } },
             { "$sample": { "size": 3 } } ]))
-
-    print("recc by age range:", recc_quizzes_by_age_range)
 
     # create list of max 3 unique quizzes
     recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
@@ -241,14 +241,16 @@ def discover():
         recc_quizzes = sample(recc_quizzes, 3)   
 
     return render_template("pages/discover.html", 
-        loggedIn=loggedIn, 
+        loggedIn=loggedIn,
+        active_page="Discover", 
         username=username, 
         all_categories=all_categories, 
         all_age_ranges=all_age_ranges,
         quizzes_by_category=quizzes_by_category,
         quizzes_by_age_range=quizzes_by_age_range,
         recc_quizzes=recc_quizzes,
-        search_query=""
+        search_query="",
+        category_urls=build_category_urls() ### CHANGE THIS
         )
         
 
@@ -266,6 +268,7 @@ def profile():
 
     return render_template(
         "pages/profile.html",
+        active_page=f"Profile: {username}",
         username=username,
         loggedIn=loggedIn)
 
@@ -284,11 +287,10 @@ def search(search_query):
     if request.method == "GET":
         # this would be a manual url query entry
         # read quizzes from db
-        return render_template("pages/search.html", 
+        return render_template("pages/search.html",
+            active_page="Search", 
             loggedIn=loggedIn,
             search_query=search_query)
-
-
 
     return render_template("pages/search.html")
 

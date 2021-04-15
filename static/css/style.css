@@ -46,6 +46,9 @@
   top: initial;
   margin-right: 0.75rem;
 }
+.alert-dismissible .btn-close.remove {
+  display: none;
+}
 
 /* COMPONENTS */
 /* ******* NAVBAR ******* */
@@ -102,6 +105,15 @@ footer #footer-thdev-icon {
 }
 footer a.wheat {
   color: #FADCB2;
+}
+
+/*** MAIN HEADING ***/
+.main-heading {
+  background-color: #FFFFFF;
+}
+.main-heading h1 {
+  color: #C60F7B;
+  font-weight: 600;
 }
 
 /* ******* CARDS ******* */
@@ -192,7 +204,7 @@ h1 {
 }
 
 h2 {
-  font-size: calc(2.5rem + .6vw);
+  font-size: calc(3rem + .6vw);
 }
 
 h3 {
@@ -238,15 +250,6 @@ main .flashed-messages h4 {
 }
 
 /* ******* LANDING PAGE ******* */
-/* jumbotron */
-.jumbotron {
-  background-color: #FFFFFF;
-}
-.jumbotron h1 {
-  color: #C60F7B;
-  font-weight: 600;
-}
-
 /* hero image section */
 .hero-image-wrapper {
   position: relative;
@@ -353,7 +356,7 @@ main .flashed-messages h4 {
 /* small screen sizes and above */
 @media screen and (min-width: 576px) {
   /* add border radius and box shadow */
-  .jumbotron {
+  .main-heading {
     box-shadow: 0 0 2rem;
     border-radius: 2rem;
   }
@@ -367,7 +370,7 @@ main .flashed-messages h4 {
 }
 /* medium screen sizes and above */
 @media screen and (min-width: 768px) {
-  .jumbotron h1 {
+  .main-heading h1 {
     font-size: 5rem;
   }
 

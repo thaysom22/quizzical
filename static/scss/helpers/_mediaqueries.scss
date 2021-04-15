@@ -3,7 +3,7 @@
 /* small screen sizes and above */
 @media screen and (min-width: 576px) {
     /* add border radius and box shadow */
-    .jumbotron {
+    .main-heading {
         @include container-box-shadow();
     }
     .benefits-wrapper {
@@ -18,7 +18,7 @@
 
 /* medium screen sizes and above */
 @media screen and (min-width: 768px) {
-    .jumbotron{
+    .main-heading{
         h1 {
             font-size: 5rem;
         }

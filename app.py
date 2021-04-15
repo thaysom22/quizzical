@@ -77,20 +77,20 @@ def login():
 
     # use existing_user dict to get category and age_range names from respective collections
     user_category_name = mongo.db.categories.find_one(
-        {"_id": ObjectIdHelper.toObjectId(existing_user["user_category"])}
+        {"_id": existing_user["user_category"]}
     )
 
     user_age_range_name = mongo.db.age_ranges.find_one(
-        {"_id": ObjectIdHelper.toObjectId(existing_user["user_age_range"])}
+        {"_id": existing_user["user_age_range"]}
     )
     
     # convert ObjectId types to string types before adding to session
-    for k,v in existing_user.items():
+    for k, v in existing_user.items():
         existing_user[k] = ObjectIdHelper.fromObjectId(v)
 
     # add name strings to existing_user dict before storing in session
-    existing_user["user_category_name"] = user_category_name.get("category_name")
-    existing_user["user_age_range_name"] = user_age_range_name.get("age_range")
+    existing_user["user_category_name"] = user_category_name["category_name"]
+    existing_user["user_age_range_name"] = user_age_range_name["age_range"]
     session["user"] = existing_user  # add existing_user dict to session object 
     flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
     
@@ -235,13 +235,12 @@ def discover():
 
         print("recc by age range:", recc_quizzes_by_age_range)
     
-        # create list of max 3 quizzes (which are unique if concatenated lists have unique elements)
+        # create list of max 3 unique quizzes 
         recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
+        # frozenset with dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
+        recc_quizzes = list({frozenset(item.items()) : item for item in recc_quizzes}.values())
         if len(recc_quizzes) > 3:
-            recc_quizzes = sample(list(set(
-                recc_quizzes_by_category + recc_quizzes_by_age_range)), 3)   
-        else:
-            recc_quizzes = list(set(recc_quizzes)) # set() constructor removes duplicates
+            recc_quizzes = sample(recc_quizzes, 3)   
 
         return render_template("pages/discover.html", 
             loggedIn=loggedIn, 

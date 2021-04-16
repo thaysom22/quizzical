@@ -16,8 +16,35 @@
 
 <!-- recommended quiz carousel section -->
 <section class="recommended-quiz-carousel">
-    
+    {{ quiz_carousel("Recommended",
+        rec_quizzes) 
+    }}
+    <hr>
 </section>
+
+<!-- categories quiz carousels section -->
+<section class="category-quiz-carousels">
+    {% for category in all_categories %}
+        {{ quiz_carousel(category.category_name,
+           quizzes_by_category[category._id],
+           category=category.category_name) 
+        }}
+        <hr>
+    {% endfor %}
+</section>
+
+<!-- age range quiz carousels section -->
+<section class="age-range-quiz-carousels">
+    {% for age_range in all_age_ranges %}
+        {{ quiz_carousel(age_range.age_range_name,
+           quizzes_by_age_range[age_range._id],
+           age_range=age_range.age_range_name) 
+        }}
+        <hr>
+    {% endfor %}
+</section>
+
+<!-- final create cta section (NO SEARCHBAR) -->
 
 
 <hr>

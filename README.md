@@ -345,8 +345,8 @@ Collection name: users
 | User ID | _id | None | ObjectId | Primary Key |
 | Username | username | text, `minlength=5`, `maxlength=20` | string | not null, unique |
 | Password | password | text, `minlength=5`, `maxlength=20` | string | not null |
-| User category | user_category | `required` | ObjectId | not null  |
-| User age range | user_age_range | `required` | ObjectId | not null  |
+| User category ID | user_category_id | `required` | ObjectId | not null  |
+| User age range ID | user_age_range_id | `required` | ObjectId | not null  |
 
 #### Quizzes collection
 
@@ -356,9 +356,9 @@ Collection name: quizzes
 | --- | --- | --- | --- | --- |
 | Quiz ID | _id | None | ObjectId | Primary Key |
 | Quiz Title | title | text, `maxlength=20` | string | not null |
-| Owner ID | owner_id | None | ObjectId | ref: > users._id  |
-| Category ID | category_id | None | ObjectId | ref: > categories._id |
-| Age Range ID | age_range_id | None | ObjectId | ref: > age_ranges._id |
+| Quiz Owner ID | quiz_owner_id | None | ObjectId | ref: > users._id  |
+| Quiz Category ID | quiz_category_id | None | ObjectId | ref: > categories._id |
+| Quiz Age Range ID | quiz_age_range_id | None | ObjectId | ref: > age_ranges._id |
 |   |   |   |   |   |
 | **Questions** | questions |   | **object** |   |
 | Question Text | question_text | text, `maxlength=150` | string | not null |

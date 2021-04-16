@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash, check_password_hash)
-from helpers import ObjectIdHelper, build_category_urls
+from helpers import ObjectIdHelper, build_category_img_url
 from random import sample
 # will not import env when running on cloud platform
 if os.path.exists("env.py"):
@@ -78,13 +78,12 @@ def login():
         flash("Incorrect Username and/or Password")  # notify user of failure
         return redirect(url_for("login")) 
 
-    # use existing_user dict to get category and age_range names from respective collections
-    user_category_name = mongo.db.categories.find_one(
-        {"_id": existing_user["user_category"]}
+    # use existing_user dict to get category and age_range data from respective collections
+    user_category_data = mongo.db.categories.find_one(
+        {"_id": existing_user["user_category_id"]}
     )
-
-    user_age_range_name = mongo.db.age_ranges.find_one(
-        {"_id": existing_user["user_age_range"]}
+    user_age_range_data = mongo.db.age_ranges.find_one(
+        {"_id": existing_user["user_age_range_id"]}
     )
     
     # convert ObjectId types to string types before adding to session
@@ -92,12 +91,13 @@ def login():
         existing_user[k] = ObjectIdHelper.fromObjectId(v)
 
     # add name strings to existing_user dict before storing in session
-    existing_user["user_category_name"] = user_category_name["category_name"]
-    existing_user["user_age_range_name"] = user_age_range_name["age_range"]
+    existing_user["user_category_name"] = user_category_data["category_name"]
+    existing_user["user_age_range_name"] = user_age_range_data["age_range"]
     session["user"] = existing_user  # add existing_user dict to session object 
     flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
     
     return redirect(url_for("discover"))  # redirect to discover if login successful
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -156,8 +156,8 @@ def register():
     new_user_db = {
         "username": username_form,
         "password": password_hash,
-        "user_category": ObjectIdHelper.toObjectId(category_form_id),  
-        "user_age_range": ObjectIdHelper.toObjectId(age_range_form_id)  
+        "user_category_id": ObjectIdHelper.toObjectId(category_form_id),  
+        "user_age_range_id": ObjectIdHelper.toObjectId(age_range_form_id)  
     }
 
     insert_new_user_result = mongo.db.users.insert_one(new_user_db)
@@ -167,10 +167,10 @@ def register():
     
     # get category and age_range documents from db by id
     user_category = mongo.db.categories.find_one(
-        {"_id": new_user_db["user_category"]}
+        {"_id": new_user_db["user_category_id"]}
     )
     user_age_range = mongo.db.age_ranges.find_one(
-        {"_id": new_user_db["user_age_range"]}
+        {"_id": new_user_db["user_age_range_id"]}
     )
 
     # add user to session including inserted document ObjectId
@@ -208,35 +208,58 @@ def discover():
     quizzes_by_category = {}
     for category in all_categories:
         quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
-            { "$match": { "category_id": category["_id"] } },
-            { "$project": { "title": True, "category_id": True } },
-            { "$sample": { "size": 3 } }]))
+            { "$match": { "quiz_category_id": category["_id"] } },
+            { "$sample": { "size": 3 } },
+            { "$addFields": { "quiz_category_data": category } },  # use $addFields because category has category_img_url
+            { "$project": { "title": True, "quiz_category_data": True } }]))
 
     # query quizzes collection by age_range
     quizzes_by_age_range = {}
     for age_range in all_age_ranges:
         quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
-            { "$match": {"age_range_id": age_range["_id"]} },
-            { "$project": { "title": True, "category_id": True } },
-            { "$sample": { "size": 3 } } ]))    
+            { "$match": {"quiz_age_range_id": age_range["_id"]} },
+            { "$sample": { "size": 3 } },
+            { "$lookup": {  # use $lookup s age_range does not have category_img_url
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
+            } },
+            { "$project": { "title": True, "quiz_category_data": True } }]))    
 
     user = session["user"]  # get data from session object
     username = user.get("username")
     # query quizzes collection by user_category and user_age_range for different sample
     recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
-            { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
-            { "$project": { "title": True, "category_id": True } },
-            { "$sample": { "size": 3 } } ]))
+            { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
+            { "$sample": { "size": 3 } },
+            { "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
+            } },
+            { "$project": { "title": True, "quiz_category_data": True } }]))
     
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
-            { "$match": {"category_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
-            { "$project": { "title": True, "category_id": True } },
-            { "$sample": { "size": 3 } } ]))
+            { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
+            { "$sample": { "size": 3 } },
+            { "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
+            } },
+            { "$project": { "title": True, "quiz_category_data": True } }]))
 
     # create list of max 3 unique quizzes
     recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
-    # frozenset with dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
-    recc_quizzes = list({frozenset(item.items()): item for item in recc_quizzes}.values())
+
+    print(recc_quizzes_by_category)
+    print(recc_quizzes_by_age_range)
+
+    # dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
+    recc_quizzes = list({item["_id"]: item for item in recc_quizzes}.values())
     if len(recc_quizzes) > 3:
         recc_quizzes = sample(recc_quizzes, 3)   
 
@@ -250,7 +273,6 @@ def discover():
         quizzes_by_age_range=quizzes_by_age_range,
         recc_quizzes=recc_quizzes,
         search_query="",
-        category_urls=build_category_urls() ### CHANGE THIS
         )
         
 

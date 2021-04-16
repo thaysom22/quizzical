@@ -14,14 +14,14 @@
     </div>
 </header>
 <!-- Hero image -->
-<div class="hero-image-wrapper container-lg my-5 g-0">
+<section class="hero-image-wrapper wrapper container-lg my-5 g-0">
     <div class="hero-image w-100"></div>
     <div class="hero-caption">
         <h2>Boost student engagement and learning</h2>
     </div>
-</div>
+</section>
 <!-- List of benefits -->
-<div class="benefits-wrapper container-lg my-5 p-3 px-lg-0">
+<section class="benefits-wrapper wrapper container-lg my-5 p-3 px-lg-0">
     <div class="row py-4 px-2 justify-content-lg-between"> 
         <div class="benefit d-flex align-items-center col-12 col-lg-3">
             <i class="fas fa-lightbulb benefits-icon icon-lg"></i>
@@ -36,9 +36,9 @@
             <span>Source quality questions for your next quiz</span>
         </div>
     </div>
-</div>
+</section>
 <!-- carousel -->
-<div class="carousel-wrapper container-lg my-5 p-0">
+<section class="carousel-wrapper wrapper container-lg my-5 p-0">
     <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
     <div id="landing-page-carousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
         <div class="carousel-indicators">
@@ -120,9 +120,9 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
+</section>
 <!-- lets get started section -->
-<div class="get-started-wrapper container-lg my-5 p-3">
+<section class="get-started-wrapper wrapper container-lg my-5 p-3">
     <h2>Easy to get started...</h2>
     <div class="row g-0">
         <div class="get-started-step col-12 col-lg-4">
@@ -168,14 +168,12 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 <!-- final call to action section -->
-<div class="final-cta-wrapper container-lg my-5">
+<section class="final-cta-wrapper wrapper container-lg my-5">
     <div class="d-flex flex-column flex-align-justify">
         <h2>Ready to get Quizzical?</h2>
         <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
     </div>
-    
-
-</div>
+</section>
 {% endblock %}

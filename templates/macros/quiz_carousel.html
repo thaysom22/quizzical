@@ -1,9 +1,99 @@
 <!-- MACRO TEMPLATES -->
 
-{% macro quiz_carousel(title, quizzes, category=None, age_range=None) -%}
-        
+{% macro quiz_carousel(type, title, quizzes, category=None, age_range=None) -%}
 
+{% if not quizzes %}
 
+    <!-- TODO: display 'No quizzes found' message -->
+
+{% endif %}
+
+<div class="carousel-wrapper container-lg my-5 p-0">
+    <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
+    <div id="{{ type }}" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+        <div class="carousel-indicators">
+            <button
+            type="button"
+            data-mdb-target="#{{ type }}"
+            data-mdb-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+            ></button>
+            <button
+            type="button"
+            data-mdb-target="#{{ type }}"
+            data-mdb-slide-to="1"
+            aria-label="Slide 2"
+            ></button>
+            <button
+            type="button"
+            data-mdb-target="#{{ type }}"
+            data-mdb-slide-to="2"
+            aria-label="Slide 3"
+            ></button>
+        </div>
+        <div class="carousel-inner">
+            {% for quiz in  %}
+
+            {% endfor %}
+            <div class="carousel-item active">
+            <!-- credit: Photo from https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText CDC on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/boy-working-in-class.jpg') }}"
+                class="d-block w-100"
+                alt="Boy working in classroom"
+            />
+            <div class="carousel-caption">
+                <h3>Recommended content</h3>
+                <p>Quizzical helps teachers to find great questions for their students</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <!-- credit: Photo by https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText Tim Mossholder on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/love-to-learn.jpg') }}"
+                class="d-block w-100"
+                alt="'Love to learn' sign"
+            />
+            <div class="carousel-caption">
+                <h3>Create and collaborate</h3>
+                <p>Design and share questions for your students and other educators with Quizzical</p>
+            </div>
+            </div>
+            <div class="carousel-item">
+            <!-- credit: Photo by https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText ThisisEngineering RAEng on Unsplash -->
+            <img
+                src="{{ url_for('static', filename='img/smiling-teacher.jpg') }}"
+                class="d-block w-100"
+                alt="Smiling teacher in front of whiteboard"
+            />
+            <div class="carousel-caption">
+                <h3>Search by topic and age range</h3>
+                <p>Quizzical organizes quizzes so you can find the questions you need</p>
+            </div>
+            </div>
+        </div>
+        <button
+            class="carousel-control-prev"
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide="prev"
+        >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+            class="carousel-control-next"
+            type="button"
+            data-mdb-target="#landing-page-carousel"
+            data-mdb-slide="next"
+        >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>        
 
 {%- endmacro %}
 

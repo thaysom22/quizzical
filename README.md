@@ -483,6 +483,13 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 * Question marks background image attributed to Vector Stock: https://www.vectorstock.com/royalty-free-vector/black-seamless-background-with-question-marks-vector-30182680
 * [Font Awesome]() for icons
 * [icons8](https://icons8.com/) for number icons
+* Images for categories taken from [Unsplash](unsplash.com):
+    - [image for science category](https://unsplash.com/photos/G66K_ERZRhM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+    - [image for general knowledge category](https://unsplash.com/photos/jedKD4yaTvk?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+    - [image for geography category](https://unsplash.com/photos/S8MSj5VzHxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+    - [image for languages category](https://unsplash.com/photos/S8MSj5VzHxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+    - [image for history category](https://unsplash.com/photos/xBeid9r1paU?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+    - [image for math category](https://unsplash.com/photos/S8MSj5VzHxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
 
 ### Code
 

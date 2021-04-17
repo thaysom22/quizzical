@@ -204,14 +204,37 @@ def discover():
     all_age_ranges = list(mongo.db.age_ranges
         .find(sort=[("order", 1)]))
     
-    # read from quizzes collection by category
+    # read from quizzes collection by 
+    # credit for "$arrayElemAt" workaround to use $loopup as findOne: https://stackoverflow.com/questions/37691727/how-to-use-mongodbs-aggregate-lookup-as-findone  
     quizzes_by_category = {}
     for category in all_categories:
         quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
             { "$match": { "quiz_category_id": category["_id"] } },
             { "$sample": { "size": 3 } },
-            { "$addFields": { "quiz_category_data": category } },  # use $addFields because category has category_img_url
-            { "$project": { "title": True, "quiz_category_data": True } }]))
+            { 
+                "$lookup": {  
+                    "from": "age_ranges",
+                    "localField": "quiz_age_range_id",
+                    "foreignField": "_id",
+                    "as": "quiz_age_range_data"
+                } 
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { "$addFields": {
+                "quiz_category_data": category,
+                # specifying an existing field name in an $addFields operation causes the original field to be replaced
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                }
+            },  
+            { "$project": { "questions": False  } }]))
 
     # query quizzes collection by age_range
     quizzes_by_age_range = {}
@@ -219,45 +242,106 @@ def discover():
         quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
             { "$match": {"quiz_age_range_id": age_range["_id"]} },
             { "$sample": { "size": 3 } },
-            { "$lookup": {  # use $lookup s age_range does not have category_img_url
-                "from": "categories",
-                "localField": "quiz_category_id",
-                "foreignField": "_id",
-                "as": "quiz_category_data"
-            } },
-            { "$project": { "title": True, "quiz_category_data": True } }]))    
+            { 
+                "$lookup": {  
+                    "from": "categories",
+                    "localField": "quiz_category_id",
+                    "foreignField": "_id",
+                    "as": "quiz_category_data"
+                } 
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { "$addFields": {
+                "quiz_age_range_data": age_range,
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                } 
+            },
+            { "$project": { "questions": False } }]))    
 
     user = session["user"]  # get data from session object
+    print(user)
     username = user.get("username")
     # query quizzes collection by user_category and user_age_range for different sample
     recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
             { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
             { "$sample": { "size": 3 } },
-            { "$lookup": {
-                "from": "categories",
-                "localField": "quiz_category_id",
-                "foreignField": "_id",
-                "as": "quiz_category_data"
-            } },
-            { "$project": { "title": True, "quiz_category_data": True } }]))
+            {   
+                "$lookup": {
+                    "from": "categories",
+                    "localField": "quiz_category_id",
+                    "foreignField": "_id",
+                    "as": "quiz_category_data"
+                }
+            },
+            {   
+                "$lookup": {
+                    "from": "age_ranges",
+                    "localField": "quiz_age_range_id",
+                    "foreignField": "_id",
+                    "as": "quiz_age_range_data"
+                }
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { "$addFields": {
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                } 
+            },
+            { "$project": { "questions": False } }]))
     
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
             { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
             { "$sample": { "size": 3 } },
-            { "$lookup": {
-                "from": "categories",
-                "localField": "quiz_category_id",
-                "foreignField": "_id",
-                "as": "quiz_category_data"
-            } },
-            { "$project": { "title": True, "quiz_category_data": True } }]))
+            {   
+                "$lookup": {
+                    "from": "categories",
+                    "localField": "quiz_category_id",
+                    "foreignField": "_id",
+                    "as": "quiz_category_data"
+                }
+            },
+            {   
+                "$lookup": {
+                    "from": "age_ranges",
+                    "localField": "quiz_age_range_id",
+                    "foreignField": "_id",
+                    "as": "quiz_age_range_data"
+                }
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { "$addFields": {
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                } 
+            },
+            { "$project": { "questions": False } }]))
 
     # create list of max 3 unique quizzes
     recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
-
-    print(recc_quizzes_by_category)
-    print(recc_quizzes_by_age_range)
-
     # dict comp. to remove duplicates, CREDIT: https://www.geeksforgeeks.org/python-removing-duplicate-dicts-in-list/ 
     recc_quizzes = list({item["_id"]: item for item in recc_quizzes}.values())
     if len(recc_quizzes) > 3:

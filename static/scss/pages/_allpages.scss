@@ -4,10 +4,12 @@
 
 html {
     font-size: 62.5%;
-}
-
-body{
-    color: #000000;
+    body {
+        color: #000000;
+        * {
+            overflow-x: hidden;
+        }
+    }
 }
 
 /* fonts */
@@ -32,7 +34,7 @@ body {
 }
 a {
     font-family: $tertiary;
-    font-size: calc(1.4rem +.5vw);
+    font-size: calc(1.4rem + .5vw);
 }
 span {
     font-size: calc(1.2rem + .8vw);

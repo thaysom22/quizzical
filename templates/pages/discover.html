@@ -17,7 +17,8 @@
 <!-- recommended quiz carousel section -->
 <section class="recommended-quiz-carousel">
     {{ quiz_carousel("Recommended",
-        rec_quizzes) 
+        rec_quizzes,
+        recc=True) 
     }}
     <hr>
 </section>
@@ -36,9 +37,9 @@
 <!-- age range quiz carousels section -->
 <section class="age-range-quiz-carousels">
     {% for age_range in all_age_ranges %}
-        {{ quiz_carousel(age_range.age_range_name,
+        {{ quiz_carousel(age_range.age_range,
            quizzes_by_age_range[age_range._id],
-           age_range=age_range.age_range_name) 
+           age_range=age_range.age_range) 
         }}
         <hr>
     {% endfor %}
@@ -46,17 +47,26 @@
 
 <!-- final create cta section (NO SEARCHBAR) -->
 
-
 <hr>
-{{ loggedIn }} 
-<hr>
+<h1>username</h1>
 {{ username }}
 <hr>
+<h1>recommended quizzes</h1>
+{{ recc_quizzes }}
+<hr>
+<h1>quizzes_by_category</h1>
 {{ quizzes_by_category }}
 <hr>
+<h1>quizzes by age range</h1>
 {{ quizzes_by_age_range }}
 <hr>
-{{ recc_quizzes }}
+<h1>all_age_ranges</h1>
+{{ all_age_ranges }}
+<hr>
+<h1>all_categories</h1>
+{{ all_categories }}
+
+
     
     <!-- title and search bar -->
 

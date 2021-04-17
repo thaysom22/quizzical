@@ -8,7 +8,7 @@ def build_category_img_url(category_name):
     build url to category image from category name
     """
     # make category_name url compatible
-    filename = "img/categories/" + category_name.lower().replace(" ", "_") + ".jpg"  
+    filename = "img/categories/" + category_name.lower().replace(" ", "-") + ".jpg"  
     return url_for('static', filename=filename)
 
 
@@ -19,17 +19,21 @@ class ObjectIdHelper():
     @staticmethod
     def fromObjectId(value):
         """
-        if value is ObjectId convert it to string
+        if value is ObjectId type convert it to string else leave unchanged
         """
         if isinstance(value, ObjectId):
             return str(value)
+        
+        return value
 
     @staticmethod
     def toObjectId(value):
         """
-        if value is string and valid convert it to ObjectId
+        if value is valid string convert it to ObjectId else leave unchanged
         """
         if isinstance(value, str) and ObjectId.is_valid(value):
             return  ObjectId(value)
+
+        return value
     
 

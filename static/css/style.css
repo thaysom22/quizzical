@@ -140,6 +140,53 @@ footer a.wheat {
   font-size: calc(1rem + .4vw);
 }
 
+.quiz-carousel {
+  background-color: #FFFFFF;
+}
+.quiz-carousel .carousel-heading-wrapper a {
+  justify-self: end;
+}
+.quiz-carousel .carousel-inner {
+  width: 100%;
+  min-width: 60%;
+}
+.quiz-carousel .carousel-item {
+  margin: 0 auto;
+  height: 70rem;
+  max-height: 40vh;
+  width: 70%;
+}
+.quiz-carousel .carousel-item img {
+  height: 70%;
+}
+.quiz-carousel .carousel-item .carousel-text {
+  height: 30%;
+}
+.quiz-carousel .carousel-item .carousel-text h4 {
+  padding: calc(1rem + .2vw) 0.5rem;
+}
+.quiz-carousel .carousel-item .carousel-text span {
+  font-size: calc(1rem + .2vw);
+  color: rgba(0, 0, 0, 0.7);
+  padding: calc(1rem + .2vw) 0.5rem;
+}
+.quiz-carousel .carousel-control-next,
+.quiz-carousel .carousel-control-prev {
+  color: rgba(0, 0, 0, 0.7);
+}
+.quiz-carousel .carousel-control-next .carousel-control-next-icon,
+.quiz-carousel .carousel-control-next .carousel-control-prev-icon,
+.quiz-carousel .carousel-control-prev .carousel-control-next-icon,
+.quiz-carousel .carousel-control-prev .carousel-control-prev-icon {
+  overflow-x: visible;
+}
+.quiz-carousel .carousel-control-next .carousel-control-next-icon:after,
+.quiz-carousel .carousel-control-next .carousel-control-prev-icon:after,
+.quiz-carousel .carousel-control-prev .carousel-control-next-icon:after,
+.quiz-carousel .carousel-control-prev .carousel-control-prev-icon:after {
+  font-size: 3rem;
+}
+
 /* ******* FORMS ******* */
 form {
   padding: calc(1rem + 1vw);
@@ -198,9 +245,11 @@ form .form-outline .form-control:focus ~ .form-label {
 html {
   font-size: 62.5%;
 }
-
-body {
+html body {
   color: #000000;
+}
+html body * {
+  overflow-x: hidden;
 }
 
 /* fonts */

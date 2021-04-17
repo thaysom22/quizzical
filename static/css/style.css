@@ -18,7 +18,7 @@
   font-size: calc(0.8rem + .2vw);
 }
 .btn.btn-search {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem 0.5rem 1rem;
 }
 .btn.cta {
   background-color: #C60F7B;
@@ -38,10 +38,17 @@
 /* ******* ICONS ******* */
 .icon-sm {
   font-size: calc(1.4rem + .4vw);
+  padding: 0.3rem;
+}
+
+.icon-med {
+  font-size: calc(2.5rem + .5vw);
+  padding: 0.5rem;
 }
 
 .icon-lg {
   font-size: calc(3.5rem + .8vw);
+  padding: 0.7rem;
 }
 
 /* ******* ALERTS ******* */
@@ -144,7 +151,7 @@ footer a.wheat {
   background-color: #FFFFFF;
 }
 .quiz-carousel .carousel-heading-wrapper a {
-  justify-self: end;
+  color: #0839D9;
 }
 .quiz-carousel .carousel-inner {
   width: 100%;
@@ -214,8 +221,13 @@ form .form-outline {
 form .form-outline.searchbar-outline {
   width: 75%;
 }
-form .form-outline .form-control:focus ~ .form-label {
-  padding-top: 0;
+form .form-outline .form-control ~ .form-label {
+  padding-top: 0.5rem;
+}
+form .form-outline .form-control:focus ~ .form-label,
+form .form-outline .form-control.active ~ .form-label {
+  padding-top: 0.2rem;
+  left: 1.5rem;
 }
 
 .form-control.is-invalid,
@@ -279,7 +291,7 @@ body {
 
 a {
   font-family: "Oswald", sans-serif;
-  font-size: calc(1.4rem +.5vw);
+  font-size: calc(1.4rem + .5vw);
 }
 
 span {

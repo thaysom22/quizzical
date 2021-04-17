@@ -394,13 +394,28 @@ def search(search_query):
         # this would be a manual url query entry
         # read quizzes from db
         return render_template("pages/search.html",
-            active_page="Search", 
+            active_page="search", 
             loggedIn=loggedIn,
             search_query=search_query)
 
     return render_template("pages/search.html")
 
 
+@app.route("/create_quiz", methods=["GET", "POST"])
+def create_quiz():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to create quizzes")
+        return redirect(url_for("login"))
+
+    if request.method == "GET":
+        
+        return render_template("pages/create-quiz.html",
+            active_page="create_quiz", 
+            loggedIn=loggedIn)
 
 
 

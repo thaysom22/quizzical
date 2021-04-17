@@ -2,8 +2,15 @@
 
 .icon-sm {
     font-size: calc(1.4rem + .4vw);
+    padding: .3rem;
+}
+
+.icon-med {
+    font-size: calc(2.5rem + .5vw);
+    padding: .5rem;
 }
 
 .icon-lg {
     font-size: calc(3.5rem + .8vw);
+    padding: .7rem;
 }

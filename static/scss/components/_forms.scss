@@ -24,9 +24,16 @@ form {
         &.searchbar-outline{
             width: 75%;
         }
-        .form-control:focus {
+        .form-control {
             ~.form-label {
-                padding-top: 0;
+                padding-top: .5rem;
+            }
+        }     
+        .form-control:focus,
+        .form-control.active{
+            ~.form-label {
+                padding-top: .2rem;
+                left: 1.5rem;
             }
         }
     }

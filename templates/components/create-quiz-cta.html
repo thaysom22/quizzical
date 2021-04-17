@@ -1,0 +1,8 @@
+<div class="p-5 container-lg text-center card">
+    <h2 class="mb-3">Can't find what you're looking for?</h2>
+    <h4 class="mb-4">Find, create and share engaging quizzes</h4>
+    <div class="d-flex flex-align-justify flex-column mt-3">
+        <a href="{{ url_for('create_quiz') }}" class="btn btn-rounded btn-lg cta" role="button">Create Quiz</a>
+        <a href="{{ url_for('search', search_query='all_quizzes') }}" type="button" class="btn btn-link" data-mdb-ripple-color="dark">See All Quizzes</a>
+    </div>
+</div>

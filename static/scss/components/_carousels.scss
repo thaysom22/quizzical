@@ -22,29 +22,14 @@
             color: $persian-blue;
         }
     }
+    .carousel {
+        max-width: 35rem;
+        margin: 0 auto;
+    }
     .carousel-inner {
         width: 100%; // full width on small screens
         min-width: 60%;
-    }
-    .carousel-item {
-        margin: 0 auto;
-        height: 70rem;
-        max-height: 40vh;
-        width: 70%;
-        img {
-            height: 70%;
-        }
-        .carousel-text {
-            height: 30%;
-            h4 {
-               padding: calc(1rem + .2vw) .5rem; 
-            }
-            span {
-                font-size: calc(1rem + .2vw);
-                color: $black-fade;
-                padding: calc(1rem + .2vw) .5rem;
-            }
-        }
+        
     }
     .carousel-control-next,
     .carousel-control-prev {

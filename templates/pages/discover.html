@@ -1,5 +1,6 @@
 {% extends "layout/base.html" %}
 {% from 'macros/quiz_carousel.html' import quiz_carousel %}
+{% from 'macros/quiz_cards.html' import quiz_cards %}
 {% block content %}
 
 <!-- main heading -->
@@ -14,17 +15,31 @@
     </div>
 </header>
 
-<!-- recommended quiz carousel section -->
-<section class="recommended-quiz-carousel">
+<!-- recommended quizzes section -->
+<section class="d-md-none">
     {{ quiz_carousel("Recommended",
-        rec_quizzes,
+        recc_quizzes,
+        recc=True) 
+    }}
+    <hr>
+</section>
+<section class="d-none d-md-block d-lg-none">
+    {{ quiz_cards("Recommended",
+        recc_quizzes[:2],
+        recc=True) 
+    }}
+    <hr>
+</section>
+<section class="d-none d-lg-block">
+    {{ quiz_cards("Recommended",
+        recc_quizzes,
         recc=True) 
     }}
     <hr>
 </section>
 
 <!-- categories quiz carousels section -->
-<section class="category-quiz-carousels">
+<section class="category-quiz-carousels d-md-none">
     {% for category in all_categories %}
         {{ quiz_carousel(category.category_name,
            quizzes_by_category[category._id],
@@ -35,7 +50,7 @@
 </section>
 
 <!-- age range quiz carousels section -->
-<section class="age-range-quiz-carousels">
+<section class="age-range-quiz-carousels d-md-none">
     {% for age_range in all_age_ranges %}
         {{ quiz_carousel(age_range.age_range,
            quizzes_by_age_range[age_range._id],

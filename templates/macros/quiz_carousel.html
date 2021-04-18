@@ -11,11 +11,8 @@
         justify-content-md-start 
         align-items-center
         my-3">
-        <h3 class="p-3">{{ title }}</h3>
-        {% if title=="Recommended" %}
-            <i class="far fa-star icon-sm d-none d-md-block"></i>
-        {% endif %}
-        <a href="{{ url_for('search', search_query=title) }}" class="d-md-none me-5">
+        <h3 class="p-3 m-0">{{ title }}</h3>
+        <a href="{{ url_for('search', search_query=title) }}" class="me-5">
             <i class="fas fa-arrow-circle-right icon-med"></i>
         </a>
     </div>
@@ -23,7 +20,7 @@
 
     {% if not quizzes %}
 
-    <!-- TODO: display 'No quizzes found' message -->
+    <h6 class="text-center p-3">No quizzes found</h6>
 
     {% else %}
 
@@ -59,19 +56,19 @@
         <div class="carousel-inner d-flex justify-content-center py-3">
             {% for quiz in quizzes  %}
                     {% if loop.index == 1 %}
-                    <div class="card carousel-item active">
+                    <div class="card carousel-item quiz-cards-item active">
                     {% else %}
-                    <div class="card carousel-item">
+                    <div class="card carousel-item quiz-cards-item">
                     {% endif %}    
                         <img
                             src="{{ quiz.quiz_category_data.img_url }}"
                             class="d-block w-100"
                             alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
                         />
-                        <div class="carousel-text d-flex flex-column justify-content-between">
+                        <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
                             <h4>{{ quiz.title }}</h4>
 
-                            <div class="carousel-info d-flex justify-content-between">
+                            <div class="carousel-info quiz-cards-info d-flex justify-content-between">
                                 {% if category %}
                                     <span>{{ quiz.quiz_age_range_data.age_range }}</span>
                                 {% endif %}

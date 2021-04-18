@@ -2,7 +2,7 @@
 
 {% macro quiz_cards(title, quizzes, category=None, age_range=None, recc=False) -%}
 
-<div class="quiz-cards-wrapper container-lg my-5 p-0">
+<div class="quiz-cards-wrapper container-lg py-5 my-5">
 
     <!-- quiz cards heading section -->
     <div class="quiz-cards-heading-wrapper
@@ -13,7 +13,7 @@
         my-3">
         <h3 class="p-3 m-0">{{ title }}</h3>
         {% if recc %}
-            <i class="far fa-star icon-med"></i>
+            <i class="fas fa-star icon-med"></i>
         {% endif %}
     </div>
 
@@ -24,33 +24,32 @@
     {% else %}
 
     <div id="{{ title|lower|replace(' ', '-') }}-quiz-cards" >
-        <div class="quiz-cards-inner d-flex justify-content-center py-3">
+        <div class="quiz-cards-inner d-flex justify-content-evenly py-3">
             {% for quiz in quizzes  %}
-                    <div class="card quiz-cards-item">
-                        <img
-                            src="{{ quiz.quiz_category_data.img_url }}"
-                            class="d-block w-100"
-                            alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                        />
-                        <div class="quiz-cards-text d-flex flex-column justify-content-between">
-                            <h4>{{ quiz.title }}</h4>
+                    <div class="quiz-cards-item d-flex justify-content-center align-items-center">
+                        <div class="card item-inner">
+                            <img
+                                src="{{ quiz.quiz_category_data.img_url }}"
+                                class="d-block w-100"
+                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                            />
+                            <div class="quiz-cards-text d-flex flex-column justify-content-between">
+                                <h4>{{ quiz.title }}</h4>
 
-                            <div class="quiz-cards-info d-flex justify-content-between">
-                                {% if category %}
-                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                {% endif %}
-                                {% if age_range %}
-                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                {% endif %}
-                                {% if recc %}
-                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                {% endif %}
-                                <!-- if quiz was added by a user -->
-                                {% if quiz.get(quiz_owner_data) %}
-                                <span>{{ quiz.quiz_owner_data.username }}</span>
-                                {% endif %}
-                            </div>  
+                                <div class="quiz-cards-info d-flex justify-content-between">
+                                    {% if category %}
+                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                    {% endif %}
+                                    {% if age_range %}
+                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                    {% endif %}
+                                    {% if recc %}
+                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                    {% endif %}
+                                    <span>{{ quiz.quiz_owner_data.username }}</span>
+                                </div>  
+                            </div>
                         </div>
                     </div>
             {% endfor %}

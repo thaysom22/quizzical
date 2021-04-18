@@ -24,10 +24,16 @@ h2 {
     font-size: calc(3rem + .6vw);
 }
 h3 {
-    font-size: calc(2rem + .4vw);
+    font-size: calc(2.5rem + .4vw);
 }
 h4 {
-    font-size: calc(1.5rem + .4vw);
+    font-size: calc(2rem + .3vw);
+}
+h5 {
+    font-size: calc(1.75rem + .3vw);
+}
+h6 {
+    font-size: calc(1.5rem + .3vw);
 }
 body {
     font-family: $main;

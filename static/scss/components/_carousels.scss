@@ -16,21 +16,18 @@
 }
 
 .quiz-carousel {
+    .carousel-item {
+        .item-inner {
+            margin: 0 auto;
+        }
+    }
     background-color: $white;
     .carousel-heading-wrapper {
         a {
             color: $persian-blue;
         }
     }
-    .carousel {
-        max-width: 35rem;
-        margin: 0 auto;
-    }
-    .carousel-inner {
-        width: 100%; // full width on small screens
-        min-width: 60%;
-        
-    }
+   
     .carousel-control-next,
     .carousel-control-prev {
         color: $black-fade;

@@ -18,7 +18,7 @@
   font-size: calc(0.8rem + .2vw);
 }
 .btn.btn-search {
-  padding: 0.8rem 1rem 0.5rem 1rem;
+  padding: 0.6rem 1rem 0.6rem 1rem;
 }
 .btn.cta {
   background-color: #C60F7B;
@@ -49,6 +49,10 @@
 .icon-lg {
   font-size: calc(3.5rem + .8vw);
   padding: 0.7rem;
+}
+
+.fa-star {
+  color: gold;
 }
 
 /* ******* ALERTS ******* */
@@ -141,26 +145,25 @@ footer a.wheat {
   color: #0839D9;
 }
 
-.quiz-cards-item {
-  margin: 0 auto;
-  height: 70rem;
-  max-height: 40vh;
-  width: 70%;
-  max-width: 30rem;
+.quiz-cards-item .item-inner {
+  height: 35rem;
+  max-height: 50vh;
+  max-width: 25rem;
 }
-.quiz-cards-item img {
-  height: 70%;
+.quiz-cards-item .item-inner img {
+  height: 65%;
 }
-.quiz-cards-item .quiz-cards-text {
-  height: 30%;
+.quiz-cards-item .item-inner .quiz-cards-text {
+  height: 35%;
 }
-.quiz-cards-item .quiz-cards-text h4 {
-  padding: calc(1rem + .2vw) 0.5rem;
+.quiz-cards-item .item-inner .quiz-cards-text h4 {
+  padding: calc(1rem + .2vw) 0.5rem 0 0.5rem;
+  margin: 0;
 }
-.quiz-cards-item .quiz-cards-text span {
+.quiz-cards-item .item-inner .quiz-cards-text span {
   font-size: calc(1rem + .2vw);
   color: rgba(0, 0, 0, 0.7);
-  padding: calc(1rem + .2vw) 0.5rem;
+  padding: 0 0.5rem calc(.5rem + .2vw) 0.5rem;
 }
 
 /* ******* CAROUSELS ******* */
@@ -180,16 +183,11 @@ footer a.wheat {
 .quiz-carousel {
   background-color: #FFFFFF;
 }
-.quiz-carousel .carousel-heading-wrapper a {
-  color: #0839D9;
-}
-.quiz-carousel .carousel {
-  max-width: 35rem;
+.quiz-carousel .carousel-item .item-inner {
   margin: 0 auto;
 }
-.quiz-carousel .carousel-inner {
-  width: 100%;
-  min-width: 60%;
+.quiz-carousel .carousel-heading-wrapper a {
+  color: #0839D9;
 }
 .quiz-carousel .carousel-control-next,
 .quiz-carousel .carousel-control-prev {
@@ -288,11 +286,19 @@ h2 {
 }
 
 h3 {
-  font-size: calc(2rem + .4vw);
+  font-size: calc(2.5rem + .4vw);
 }
 
 h4 {
-  font-size: calc(1.5rem + .4vw);
+  font-size: calc(2rem + .3vw);
+}
+
+h5 {
+  font-size: calc(1.75rem + .3vw);
+}
+
+h6 {
+  font-size: calc(1.5rem + .3vw);
 }
 
 body {
@@ -464,6 +470,10 @@ main .flashed-messages h4 {
     width: -moz-fit-content;
     width: fit-content;
   }
+
+  .quiz-cards-item {
+    height: 40rem;
+  }
 }
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
@@ -487,5 +497,9 @@ main .flashed-messages h4 {
 
   .get-started-wrapper .get-started-step p {
     text-align: center;
+  }
+
+  .quiz-cards-item {
+    height: 50rem;
   }
 }/*# sourceMappingURL=style.css.map */

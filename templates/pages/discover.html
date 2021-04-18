@@ -21,42 +21,69 @@
         recc_quizzes,
         recc=True) 
     }}
-    <hr>
 </section>
 <section class="d-none d-md-block d-lg-none">
     {{ quiz_cards("Recommended",
         recc_quizzes[:2],
         recc=True) 
     }}
-    <hr>
 </section>
 <section class="d-none d-lg-block">
     {{ quiz_cards("Recommended",
         recc_quizzes,
         recc=True) 
     }}
-    <hr>
 </section>
 
 <!-- categories quiz carousels section -->
-<section class="category-quiz-carousels d-md-none">
+<section class="d-md-none">
     {% for category in all_categories %}
         {{ quiz_carousel(category.category_name,
            quizzes_by_category[category._id],
            category=category.category_name) 
         }}
-        <hr>
+    {% endfor %}
+</section>
+<section class="d-none d-md-block d-lg-none">
+    {% for category in all_categories %}
+        {{ quiz_cards(category.category_name,
+           quizzes_by_category[category._id][:2],
+           category=category.category_name) 
+        }}
+    {% endfor %}
+</section>
+<section class="d-none d-lg-block">
+    {% for category in all_categories %}
+        {{ quiz_cards(category.category_name,
+           quizzes_by_category[category._id],
+           category=category.category_name) 
+        }}
     {% endfor %}
 </section>
 
 <!-- age range quiz carousels section -->
-<section class="age-range-quiz-carousels d-md-none">
+<section class="d-md-none">
     {% for age_range in all_age_ranges %}
         {{ quiz_carousel(age_range.age_range,
            quizzes_by_age_range[age_range._id],
            age_range=age_range.age_range) 
         }}
-        <hr>
+    {% endfor %}
+</section>
+<section class="d-none d-md-block d-lg-none">
+    {% for age_range in all_age_ranges %}
+        {{ quiz_cards(age_range.age_range,
+           quizzes_by_age_range[age_range._id][:2],
+           age_range=age_range.age_range) 
+        }}
+    {% endfor %}
+</section>
+<section class="d-none d-lg-block">
+    {% for age_range in all_age_ranges %}
+        {{ quiz_cards(age_range.age_range,
+           quizzes_by_age_range[age_range._id],
+           age_range=age_range.age_range) 
+        }}
     {% endfor %}
 </section>
 
@@ -64,46 +91,6 @@
 <section class="age-range-quiz-carousels">
     {% include "components/create-quiz-cta.html" %}
 </section>
-
-
-
-
-
-<hr>
-<h1>username</h1>
-{{ username }}
-<hr>
-<h1>recommended quizzes</h1>
-{{ recc_quizzes }}
-<hr>
-<h1>quizzes_by_category</h1>
-{{ quizzes_by_category }}
-<hr>
-<h1>quizzes by age range</h1>
-{{ quizzes_by_age_range }}
-<hr>
-<h1>all_age_ranges</h1>
-{{ all_age_ranges }}
-<hr>
-<h1>all_categories</h1>
-{{ all_categories }}
-
-
-    
-    <!-- title and search bar -->
-
-
-    <!-- recommended section -->
-
-        <!-- recommended for <username> -->
-
-    <!-- categories section -->
-
-
-    <!-- final search bar section -->
-
-
-    <!-- final create cta section -->
 
 {% endblock %}
 

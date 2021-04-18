@@ -10,7 +10,7 @@
         justify-content-between
         justify-content-md-start 
         align-items-center
-        my-3">
+        py-3">
         <h3 class="p-3 m-0">{{ title }}</h3>
         <a href="{{ url_for('search', search_query=title) }}" class="me-5">
             <i class="fas fa-arrow-circle-right icon-med"></i>
@@ -53,39 +53,36 @@
         </div> -->
 
 
-        <div class="carousel-inner d-flex justify-content-center py-3">
+        <div class="carousel-inner py-5">
             {% for quiz in quizzes  %}
                     {% if loop.index == 1 %}
-                    <div class="card carousel-item quiz-cards-item active">
+                    <div class="carousel-item quiz-cards-item active">
                     {% else %}
-                    <div class="card carousel-item quiz-cards-item">
+                    <div class="carousel-item quiz-cards-item">
                     {% endif %}    
-                        <img
-                            src="{{ quiz.quiz_category_data.img_url }}"
-                            class="d-block w-100"
-                            alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                        />
-                        <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
-                            <h4>{{ quiz.title }}</h4>
+                        <div class="card item-inner">
+                            <img
+                                src="{{ quiz.quiz_category_data.img_url }}"
+                                class="d-block w-100"
+                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                            />
+                            <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
+                                <h4>{{ quiz.title }}</h4>
 
-                            <div class="carousel-info quiz-cards-info d-flex justify-content-between">
-                                {% if category %}
-                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                {% endif %}
-                                {% if age_range %}
-                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                {% endif %}
-                                {% if recc %}
-                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                {% endif %}
-                                <!-- if quiz was added by a user -->
-                                {% if quiz.get(quiz_owner_data) %}
-                                <span>{{ quiz.quiz_owner_data.username }}</span>
-                                {% endif %}
+                                <div class="carousel-info quiz-cards-info d-flex justify-content-between">
+                                    {% if category %}
+                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                    {% endif %}
+                                    {% if age_range %}
+                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                    {% endif %}
+                                    {% if recc %}
+                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                    {% endif %}
+                                    <span>{{ quiz.quiz_owner_data.username }}</span>
+                                </div>
                             </div>
-                            
-
                         </div>
                     </div>
             {% endfor %}

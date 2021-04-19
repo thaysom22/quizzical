@@ -18,50 +18,72 @@
     </div>
 
     {% if not quizzes %}
-
-    <h6 class="text-center p-3">No quizzes found</h6>
-
+        <h6 class="text-center p-3">No quizzes found</h6>
     {% else %}
+        <div id="{{ title|lower|replace(' ', '-') }}-quiz-cards" >
+            <div class="quiz-cards-inner d-flex justify-content-evenly py-3">
+                {% for quiz in quizzes  %}
+                        <div class="quiz-cards-item d-flex justify-content-center align-items-center">
+                            <div class="card item-inner">
+                                <img
+                                    src="{{ quiz.quiz_category_data.img_url }}"
+                                    class="d-block w-100"
+                                    alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                                />
+                                <div class="quiz-cards-text d-flex flex-column justify-content-between">
+                                    <h4>{{ quiz.title }}</h4>
 
-    <div id="{{ title|lower|replace(' ', '-') }}-quiz-cards" >
-        <div class="quiz-cards-inner d-flex justify-content-evenly py-3">
-            {% for quiz in quizzes  %}
-                    <div class="quiz-cards-item d-flex justify-content-center align-items-center">
-                        <div class="card item-inner">
-                            <img
-                                src="{{ quiz.quiz_category_data.img_url }}"
-                                class="d-block w-100"
-                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                            />
-                            <div class="quiz-cards-text d-flex flex-column justify-content-between">
-                                <h4>{{ quiz.title }}</h4>
-
-                                <div class="quiz-cards-info d-flex justify-content-between">
-                                    {% if category %}
-                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                    {% endif %}
-                                    {% if age_range %}
-                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                    {% endif %}
-                                    {% if recc %}
-                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                    {% endif %}
-                                    <span>{{ quiz.quiz_owner_data.username }}</span>
-                                </div>  
+                                    <div class="quiz-cards-info d-flex justify-content-between">
+                                        {% if category %}
+                                            <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                        {% endif %}
+                                        {% if age_range %}
+                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                        {% endif %}
+                                        {% if recc %}
+                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                            <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                        {% endif %}
+                                        <span>{{ quiz.quiz_owner_data.username }}</span>
+                                    </div>  
+                                </div>
                             </div>
                         </div>
-                    </div>
-            {% endfor %}
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <a href="{{ url_for('search', search_query=title) }}" class="d-flex flex-column text-center">
-                    <i class="fas fa-arrow-circle-right icon-med"></i>
-                    <span>View more</span>
-                </a>
+                {% endfor %}
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    {% if recc %}
+                        <a href="{{ url_for('search',
+                            category=str(category['_id']),
+                            age_range=str(age_range['_id']),
+                            recc='true') }}" 
+                            class="d-flex flex-column text-center"
+                        >
+                            <i class="fas fa-arrow-circle-right icon-med"></i>
+                            <span>View more</span>
+                        </a>
+                    {% elif category %}
+                        <a href="{{ url_for('search',
+                            category=str(category['_id']),
+                            age_range=None,
+                            recc='false') }}" 
+                            class="d-flex flex-column text-center"
+                        >
+                            <i class="fas fa-arrow-circle-right icon-med"></i>
+                            <span>View more</span>
+                        </a>
+                    {% elif age_range %}
+                        <a href="{{ url_for('search',
+                            category=None,
+                            age_range=str(age_range['_id']),
+                            recc='false') }}" 
+                            class="d-flex flex-column text-center"
+                        >
+                            <i class="fas fa-arrow-circle-right icon-med"></i>
+                            <span>View more</span>
+                        </a>
+                </div>
             </div>
         </div>
-    </div>
-
     {% endif %}
 </div>        
 

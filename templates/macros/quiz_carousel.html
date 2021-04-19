@@ -12,11 +12,31 @@
         align-items-center
         py-3">
         <h3 class="p-3 m-0">{{ title }}</h3>
-        <a href="{{ url_for('search', search_query=title) }}" class="me-5">
-            <i class="fas fa-arrow-circle-right icon-med"></i>
-        </a>
+        {% if recc %}
+            <a href="{{ url_for('search',
+                category=category['_id'],
+                age_range=age_range['_id'],
+                recc='true') }}" class="me-5"
+            >
+                <i class="fas fa-arrow-circle-right icon-med"></i>
+            </a>
+        {% elif category %}
+            <a href="{{ url_for('search',
+                category=category['_id'],
+                age_range=None,
+                recc='false') }}" class="me-5"
+            >
+                <i class="fas fa-arrow-circle-right icon-med"></i>
+            </a>
+        {% elif age_range %}
+            <a href="{{ url_for('search',
+                category=None,
+                age_range=age_range['_id'],
+                recc='false') }}" class="me-5"
+            >
+                <i class="fas fa-arrow-circle-right icon-med"></i>
+            </a>
     </div>
-
 
     {% if not quizzes %}
 

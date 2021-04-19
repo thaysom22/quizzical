@@ -2,7 +2,9 @@
 
 <div class="col-12 mb-3">
     <form method="POST"
-        action="{{ url_for('search', search_query=search_query) }}"
+        action="{{ url_for('search',
+            search_query=search_query
+            ) }}"
         class="d-flex flex-align-justify"
         novalidate
     >

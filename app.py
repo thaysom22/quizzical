@@ -268,8 +268,10 @@ def discover():
 
     user = session["user"]  # get data from session object
     username = user.get("username")
+    user_category_id = user.get("user_category_id")
+    user_age_range_id = user.get("user_age_range_id")
     recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
-            { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user.get("user_category_id"))} },
+            { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user_category_id)} },
             { "$sample": { "size": 3 } },
             {   
                 "$lookup": {
@@ -304,7 +306,7 @@ def discover():
             { "$project": { "questions": False } }]))
     
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
-            { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user.get("user_age_range_id"))} },
+            { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user_age_range_id)} },
             { "$sample": { "size": 3 } },
             {   
                 "$lookup": {
@@ -347,10 +349,12 @@ def discover():
 
     return render_template("pages/discover.html", 
         loggedIn=loggedIn,
-        active_page="Discover", 
+        active_page="discover", 
         username=username, 
         all_categories=all_categories, 
         all_age_ranges=all_age_ranges,
+        user_category_id=user_category_id,
+        user_age_range_id=user_age_range_id,
         quizzes_by_category=quizzes_by_category,
         quizzes_by_age_range=quizzes_by_age_range,
         recc_quizzes=recc_quizzes,
@@ -359,6 +363,8 @@ def discover():
         
 
 @app.route("/search")
+@app.route("/search/<category>/<recc>")
+@app.route("/search/<age_range>/<recc>")
 @app.route("/search/<category>/<age_range>/<recc>")
 @app.route("/search/<string:search_query>", methods=["POST"])
 def search(search_query=None, category=None, age_range=None, recc=False):
@@ -370,10 +376,10 @@ def search(search_query=None, category=None, age_range=None, recc=False):
         flash("Login first to search quizzes")
         return redirect(url_for("login"))
 
+    user = session["user"]  # get data from session object
+    username = user.get("username")
     if request.method == "GET":
         if recc == "true":
-            user = session["user"]  # get data from session object
-            username = user.get("username")
             recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
                 { 
                     "$match": {
@@ -505,7 +511,7 @@ def search(search_query=None, category=None, age_range=None, recc=False):
             search_results = list(mongo.db.quizzes.aggregate([
                 { 
                     "$match": {
-                        "quiz_age_range_id": age_range["_id"]
+                        "quiz_age_range_id": ObjectIdHelper.toObjectId(age_range) 
                     } 
                 },
                 { 
@@ -541,64 +547,62 @@ def search(search_query=None, category=None, age_range=None, recc=False):
         else:
             return redirect(url_for("discover"))  # GET request without required url parameters
 
-    # if request.method == "POST":
-    # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
-    if not search_query:
-        # check if POST request is coming from discover page searchbar or search page searchbar (use request object?)
-
-
-    search_results = list(mongo.db.quizzes.aggregate(
-        [
-            { 
-                "$match": {
-                    "$text": { "$search": search_query }
+    if request.method == "POST":
+        # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
+        search_results = list(mongo.db.quizzes.aggregate(
+            [
+                { 
+                    "$match": {
+                        "$text": { "$search": search_query }
+                    }
+                },
+                {   
+                    "$lookup": {
+                        "from": "categories",
+                        "localField": "quiz_category_id",
+                        "foreignField": "_id",
+                        "as": "quiz_category_data"
+                    }
+                },
+                {   
+                    "$lookup": {
+                        "from": "age_ranges",
+                        "localField": "quiz_age_range_id",
+                        "foreignField": "_id",
+                        "as": "quiz_age_range_data"
+                    }
+                },
+                { 
+                    "$lookup": {  
+                        "from": "users",
+                        "localField": "quiz_owner_id",
+                        "foreignField": "_id",
+                        "as": "quiz_owner_data"
+                    } 
+                },
+                { 
+                    "$addFields": {
+                        "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                        "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                    } 
+                },
+                {
+                    "$project": {
+                        "score": { "$meta": "textScore" },
+                        "questions": { "$size": "$questions" }
+                    }
                 }
-            },
-            {   
-                "$lookup": {
-                    "from": "categories",
-                    "localField": "quiz_category_id",
-                    "foreignField": "_id",
-                    "as": "quiz_category_data"
-                }
-            },
-            {   
-                "$lookup": {
-                    "from": "age_ranges",
-                    "localField": "quiz_age_range_id",
-                    "foreignField": "_id",
-                    "as": "quiz_age_range_data"
-                }
-            },
-            { 
-                "$lookup": {  
-                    "from": "users",
-                    "localField": "quiz_owner_id",
-                    "foreignField": "_id",
-                    "as": "quiz_owner_data"
-                } 
-            },
-            { 
-                "$addFields": {
-                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
-                } 
-            },
-            {
-                "$project": {
-                    "score": { "$meta": "textScore" },
-                    "questions": { "$size": "$questions" }
-                }
-            }
-        ]
-    ))
+            ]
+        ))
 
     return render_template("pages/search.html",
         active_page="search", 
+        username=username,
         loggedIn=loggedIn,
         search_query=search_query,
-        search_results=search_results)
+        search_results=search_results
+    )
 
 
 @app.route("/create_quiz", methods=["GET", "POST"])

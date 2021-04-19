@@ -14,15 +14,15 @@
         <h3 class="p-3 m-0">{{ title }}</h3>
         {% if recc %}
             <a href="{{ url_for('search',
-                category=category['_id'],
-                age_range=age_range['_id'],
+                category=category,
+                age_range=age_range,
                 recc='true') }}" class="me-5"
             >
                 <i class="fas fa-arrow-circle-right icon-med"></i>
             </a>
         {% elif category %}
             <a href="{{ url_for('search',
-                category=category['_id'],
+                category=category,
                 age_range=None,
                 recc='false') }}" class="me-5"
             >
@@ -31,11 +31,12 @@
         {% elif age_range %}
             <a href="{{ url_for('search',
                 category=None,
-                age_range=age_range['_id'],
+                age_range=age_range,
                 recc='false') }}" class="me-5"
             >
                 <i class="fas fa-arrow-circle-right icon-med"></i>
             </a>
+        {% endif %}
     </div>
 
     {% if not quizzes %}

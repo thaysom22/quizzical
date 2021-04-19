@@ -19,6 +19,8 @@
 <section class="d-md-none">
     {{ quiz_carousel("Recommended",
         recc_quizzes,
+        category=user_category_id,
+        age_range=user_age_range_id,
         recc=True) 
     }}
 </section>
@@ -40,7 +42,7 @@
     {% for category in all_categories %}
         {{ quiz_carousel(category.category_name,
            quizzes_by_category[category._id],
-           category=category.category_name) 
+           category=category._id) 
         }}
     {% endfor %}
 </section>
@@ -48,7 +50,7 @@
     {% for category in all_categories %}
         {{ quiz_cards(category.category_name,
            quizzes_by_category[category._id][:2],
-           category=category.category_name) 
+           category=category._id) 
         }}
     {% endfor %}
 </section>
@@ -56,7 +58,7 @@
     {% for category in all_categories %}
         {{ quiz_cards(category.category_name,
            quizzes_by_category[category._id],
-           category=category.category_name) 
+           category=category._id) 
         }}
     {% endfor %}
 </section>
@@ -66,7 +68,7 @@
     {% for age_range in all_age_ranges %}
         {{ quiz_carousel(age_range.age_range,
            quizzes_by_age_range[age_range._id],
-           age_range=age_range.age_range) 
+           age_range=age_range._id) 
         }}
     {% endfor %}
 </section>
@@ -74,7 +76,7 @@
     {% for age_range in all_age_ranges %}
         {{ quiz_cards(age_range.age_range,
            quizzes_by_age_range[age_range._id][:2],
-           age_range=age_range.age_range) 
+           age_range=age_range._id) 
         }}
     {% endfor %}
 </section>
@@ -82,7 +84,7 @@
     {% for age_range in all_age_ranges %}
         {{ quiz_cards(age_range.age_range,
            quizzes_by_age_range[age_range._id],
-           age_range=age_range.age_range) 
+           age_range=age_range._id) 
         }}
     {% endfor %}
 </section>

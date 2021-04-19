@@ -53,8 +53,8 @@
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     {% if recc %}
                         <a href="{{ url_for('search',
-                            category=str(category['_id']),
-                            age_range=str(age_range['_id']),
+                            category=category,
+                            age_range=age_range,
                             recc='true') }}" 
                             class="d-flex flex-column text-center"
                         >
@@ -63,7 +63,7 @@
                         </a>
                     {% elif category %}
                         <a href="{{ url_for('search',
-                            category=str(category['_id']),
+                            category=category,
                             age_range=None,
                             recc='false') }}" 
                             class="d-flex flex-column text-center"
@@ -74,13 +74,14 @@
                     {% elif age_range %}
                         <a href="{{ url_for('search',
                             category=None,
-                            age_range=str(age_range['_id']),
+                            age_range=age_range,
                             recc='false') }}" 
                             class="d-flex flex-column text-center"
                         >
                             <i class="fas fa-arrow-circle-right icon-med"></i>
                             <span>View more</span>
                         </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

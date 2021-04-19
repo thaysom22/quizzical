@@ -389,16 +389,64 @@ def search(search_query):
         flash("Login first to search quizzes")
         return redirect(url_for("login"))
 
-    # GET and POST do same thing?
-    if request.method == "GET":
-        # this would be a manual url query entry
-        # read quizzes from db
-        return render_template("pages/search.html",
-            active_page="search", 
-            loggedIn=loggedIn,
-            search_query=search_query)
+    if not search_query:
+        flash("Search field is empty - please enter a search term")
+        return redirect(url_for("discover"))
 
-    return render_template("pages/search.html")
+    #  note: GET (manual url input) and POST (submit of searchbar or click on link) request have same functionality
+    # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
+    quizzes = list(mongo.db,quizzes.aggregate(
+        [
+            { 
+                "$match": {
+                    "$text": { "$search": search_query }
+                }
+            },
+            {   
+                "$lookup": {
+                    "from": "categories",
+                    "localField": "quiz_category_id",
+                    "foreignField": "_id",
+                    "as": "quiz_category_data"
+                }
+            },
+            {   
+                "$lookup": {
+                    "from": "age_ranges",
+                    "localField": "quiz_age_range_id",
+                    "foreignField": "_id",
+                    "as": "quiz_age_range_data"
+                }
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { 
+                "$addFields": {
+                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                } 
+            },
+            {
+                "$project": {
+                    "score": { "$meta": "textScore" },
+                    "questions": { "$size": "$questions" }
+                }
+            }
+        ]
+    ))
+
+    return render_template("pages/search.html",
+        active_page="search", 
+        loggedIn=loggedIn,
+        search_query=search_query,
+        quizzes=quizzes)
 
 
 @app.route("/create_quiz", methods=["GET", "POST"])

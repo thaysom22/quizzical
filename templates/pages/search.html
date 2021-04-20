@@ -13,6 +13,43 @@
     </div>
 </header>
 
+<!-- number of results caption -->
+<div class="num-results my-2 text-center">
+    <span class="p-3">{{ search_results|length }} quizzes found</span>
+</div>
+
+{% if search_results %}
+    <!-- search results section -->
+    <section class="search-results-wrapper container-lg my-5 px-4">
+        {% for quiz in search_results %}
+            {{ quiz_search_result(quiz) }}
+        {% endfor %}
+    </section>
+{% else %}
+    <!-- no quizzes found section -->
+    <section class="no-quizzes-found container-lg my-3">
+        <h6>No quizzes found...</h6>
+        <span>Try a different search?</span>
+        <a href="{{ url_for('discover') }}" 
+            class="btn btn-rounded" 
+            role="button"
+        >
+            <i class="fas fa-arrow-circle-left icon-sm"></i>
+            Discover
+        </a>
+    </section>
+{% endif %}
+
+<hr>
+
+<!-- final create quiz cta section -->
+<section class="final-create-cta">
+    {% include "components/create-quiz-cta.html" %}
+</section>
+
+
+
+
 <h4>
     search query: {{ search_query }}
 </h4>

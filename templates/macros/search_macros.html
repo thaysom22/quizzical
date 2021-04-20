@@ -2,7 +2,35 @@
 
 {% macro quiz_search_result(quiz_data) -%}
 
+{{ quiz_data }}
 
+<div class="quiz-search-result-wrapper my-2">
+    <div class="card quiz-search-result grid-container">
+        <div class="quiz-title">
+            <h4 class="p-3">
+                {{ quiz_data.title }}
+            </h4>
+        </div>
+        <div class="quiz-img">
+            <img
+                src="{{ quiz_data.quiz_category_data.img_url }}"
+                class="d-block"
+                alt="Image for {{ quiz_data.quiz_category_data.category_name }} quiz"     
+            />
+        </div>
+        <div class="view-quiz-button d-flex justify-content-center align-items-start">
+            <a href="{{ url_for('register') }}" 
+                class="btn btn-rounded btn-lg cta d-flex align-items-center" 
+                role="button"
+            >
+                <i class="fas fa-eye icon-med"></i>
+                View
+            </a>
+        </div>
+        <div class="quiz-info">
 
+        </div>
+    </div>
+</div>
 
 {%- endmacro %}

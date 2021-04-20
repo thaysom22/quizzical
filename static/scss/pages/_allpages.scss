@@ -16,6 +16,7 @@ html {
 
 h1,h2,h3,h4,h5,h6 {
     font-family: $heading;
+    margin: 0;  // remove default margin-bottom 
 }
 h1{
     font-size: calc(3.5rem + 1vw);
@@ -46,6 +47,7 @@ span {
     font-size: calc(1.2rem + .8vw);
 }
 
+/* containers */
 
 main {
     min-height: 100vh;
@@ -67,7 +69,12 @@ main {
     top: 6rem;
 }
 
-/*** mixins ***/
+.container,
+.container-lg {
+    background-color: $white;
+}
+
+/*** mixins as classes ***/
 
 .flex-align-justify {
         @include flex-align-justify();

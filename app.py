@@ -227,14 +227,21 @@ def discover():
                     "as": "quiz_owner_data"
                 } 
             },
-            { "$addFields": {
-                "quiz_category_data": category,
-                # specifying an existing field name in an $addFields operation causes the original field to be replaced
-                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            { 
+                "$addFields": {
+                    "quiz_category_data": category,
+                    # specifying an existing field name in an $addFields operation causes the original field to be replaced
+                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
                 }
             },  
-            { "$project": { "questions": False  } }]))
+            { 
+                "$project": {
+                    "questions": False,
+                    "quiz_owner_data.password": False
+                } 
+            }
+        ]))
 
     # query quizzes collection by age_range
     quizzes_by_age_range = {}
@@ -258,13 +265,20 @@ def discover():
                     "as": "quiz_owner_data"
                 } 
             },
-            { "$addFields": {
-                "quiz_age_range_data": age_range,
-                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            { 
+                "$addFields": {
+                    "quiz_age_range_data": age_range,
+                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
                 } 
             },
-            { "$project": { "questions": False } }]))    
+            { 
+                "$project": {
+                    "questions": False,
+                    "quiz_owner_data.password": False
+                } 
+            }
+        ]))    
 
     user = session["user"]  # get data from session object
     username = user.get("username")
@@ -297,13 +311,20 @@ def discover():
                     "as": "quiz_owner_data"
                 } 
             },
-            { "$addFields": {
-                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            { 
+                "$addFields": {
+                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
                 } 
             },
-            { "$project": { "questions": False } }]))
+            { 
+                "$project": {
+                    "questions": False,
+                    "quiz_owner_data.password": False
+                } 
+            }
+        ]))
     
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
             { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user_age_range_id)} },
@@ -332,13 +353,20 @@ def discover():
                     "as": "quiz_owner_data"
                 } 
             },
-            { "$addFields": {
-                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            { 
+                "$addFields": {
+                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
                 } 
             },
-            { "$project": { "questions": False } }]))
+            { 
+                "$project": {
+                    "questions": False,
+                    "quiz_owner_data.password": False
+                } 
+            }
+        ]))
 
     # create list of max 3 unique quizzes
     recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
@@ -380,6 +408,7 @@ def search():
         recc = request_args.get('recc')
         category = request_args.get('category')
         age_range = request_args.get('age_range')
+        search_query = None 
         if recc == "true":
             recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
                 { 
@@ -419,7 +448,10 @@ def search():
                     } 
                 },
                 { 
-                    "$project": { "questions": False } 
+                    "$project": {
+                        "questions": False,
+                        "quiz_owner_data.password": False
+                    } 
                 }
             ]))
         
@@ -461,8 +493,9 @@ def search():
                     } 
                 },
                 { 
-                    "$project": { 
-                        "questions": False 
+                    "$project": {
+                        "questions": False,
+                        "quiz_owner_data.password": False
                     } 
                 }
             ]))
@@ -502,8 +535,9 @@ def search():
                     }
                 },  
                 { 
-                    "$project": { 
-                        "questions": False  
+                    "$project": {
+                        "questions": False,
+                        "quiz_owner_data.password": False
                     } 
                 }
             ]))            
@@ -539,8 +573,9 @@ def search():
                     } 
                 },
                 { 
-                    "$project": { 
-                        "questions": False 
+                    "$project": {
+                        "questions": False,
+                        "quiz_owner_data.password": False
                     } 
                 }
             ]))    
@@ -593,10 +628,11 @@ def search():
                         "num_questions": { "$size": "$questions" }
                     } 
                 },
-                {
+                { 
                     "$project": {
-                        "questions": False
-                    }
+                        "questions": False,
+                        "quiz_owner_data.password": False
+                    } 
                 },
                 {
                     "$sort": {

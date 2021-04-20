@@ -1,7 +1,24 @@
+{% extends "layout/base.html" %}
+{% from 'macros/search_macros.html' import quiz_search_result %}
+{% block content %}
+
+<!-- main heading with searchbar -->
+<header>
+    <div class="p-5 text-center main-heading container">
+        <div class="d-flex justify-content-center col-12 mb-3">
+            <i class="fas fa-search icon-lg p-2"></i>
+            <h2 class="text-center p-2">Search</h2> 
+        </div>
+        {% include "components/searchbar.html" %}
+    </div>
+</header>
+
 <h4>
-    search term: {{ search_term }}
+    search query: {{ search_query }}
 </h4>
 <hr>
 <h5>
     {{ search_results }}
 </h5>
+
+{% endblock %}

@@ -550,6 +550,9 @@ def search():
 
     if request.method == "POST":
         search_query = request.form.get('search_query').lower()
+
+        print(search_query)
+
         # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
         search_results = list(mongo.db.quizzes.aggregate(
             [
@@ -586,14 +589,18 @@ def search():
                     "$addFields": {
                         "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
                         "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
                     } 
                 },
                 {
                     "$project": {
-                        "score": { "$meta": "textScore" },
-                        "questions": { "$size": "$questions" }
+                        "questions": False
                     }
+                },
+                {
+                    "$sort": {
+                        "score": { "$meta": "textScore" }, "num_questions": -1 }
                 }
             ]
         ))

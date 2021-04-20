@@ -1,16 +1,14 @@
 {% extends "layout/base.html" %}
-{% from 'macros/quiz_carousel.html' import quiz_carousel %}
-{% from 'macros/quiz_cards.html' import quiz_cards %}
+{% from 'macros/discover_macros.html' import quiz_carousel, quiz_cards %}
 {% block content %}
 
-<!-- main heading -->
+<!-- main heading with searchbar -->
 <header>
     <div class="p-5 text-center main-heading container">
         <div class="d-flex justify-content-center col-12 mb-3">
             <i class="fas fa-compass icon-lg p-2"></i>
             <h2 class="text-center p-2">Discover</h2> 
         </div>
-        <!-- searchbar -->
         {% include "components/searchbar.html" %}
     </div>
 </header>

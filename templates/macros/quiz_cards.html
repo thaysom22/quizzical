@@ -35,13 +35,9 @@
 
                                     <div class="quiz-cards-info d-flex justify-content-between">
                                         {% if category %}
-                                            <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
                                         {% endif %}
                                         {% if age_range %}
-                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                        {% endif %}
-                                        {% if recc %}
-                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
                                             <span>{{ quiz.quiz_age_range_data.age_range }}</span>
                                         {% endif %}
                                         <span>{{ quiz.quiz_owner_data.username }}</span>
@@ -63,9 +59,7 @@
                         </a>
                     {% elif category %}
                         <a href="{{ url_for('search',
-                            category=category,
-                            age_range=None,
-                            recc='false') }}" 
+                            category=category) }}" 
                             class="d-flex flex-column text-center"
                         >
                             <i class="fas fa-arrow-circle-right icon-med"></i>
@@ -73,9 +67,7 @@
                         </a>
                     {% elif age_range %}
                         <a href="{{ url_for('search',
-                            category=None,
-                            age_range=age_range,
-                            recc='false') }}" 
+                            age_range=age_range) }}" 
                             class="d-flex flex-column text-center"
                         >
                             <i class="fas fa-arrow-circle-right icon-med"></i>

@@ -362,12 +362,8 @@ def discover():
     )
         
 
-@app.route("/search")
-@app.route("/search/<category>/<recc>")
-@app.route("/search/<age_range>/<recc>")
-@app.route("/search/<category>/<age_range>/<recc>")
-@app.route("/search/<string:search_query>", methods=["POST"])
-def search(search_query=None, category=None, age_range=None, recc=False):
+@app.route("/search", methods=["GET", "POST"])
+def search():
     """
     docstring here
     """
@@ -375,10 +371,15 @@ def search(search_query=None, category=None, age_range=None, recc=False):
     if not loggedIn:
         flash("Login first to search quizzes")
         return redirect(url_for("login"))
-
+       
     user = session["user"]  # get data from session object
     username = user.get("username")
+    # use request.args to parse optional url params. CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
+    request_args = request.args
     if request.method == "GET":
+        recc = request_args.get('recc')
+        category = request_args.get('category')
+        age_range = request_args.get('age_range')
         if recc == "true":
             recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
                 { 
@@ -545,9 +546,10 @@ def search(search_query=None, category=None, age_range=None, recc=False):
             ]))    
             
         else:
-            return redirect(url_for("discover"))  # GET request without required url parameters
+            return redirect(url_for("discover"))  # GET request to /search endpoint w/o required url parameters
 
     if request.method == "POST":
+        search_query = request.form.get('search_query').lower()
         # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
         search_results = list(mongo.db.quizzes.aggregate(
             [

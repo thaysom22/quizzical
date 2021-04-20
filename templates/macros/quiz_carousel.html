@@ -12,67 +12,49 @@
         align-items-center
         py-3">
         <h3 class="p-3 m-0">{{ title }}</h3>
-        {% if recc %}
-            <a href="{{ url_for('search',
-                category=category,
-                age_range=age_range,
-                recc='true') }}" class="me-5"
-            >
-                <i class="fas fa-arrow-circle-right icon-med"></i>
-            </a>
-        {% elif category %}
-            <a href="{{ url_for('search',
-                category=category,
-                age_range=None,
-                recc='false') }}" class="me-5"
-            >
-                <i class="fas fa-arrow-circle-right icon-med"></i>
-            </a>
-        {% elif age_range %}
-            <a href="{{ url_for('search',
-                category=None,
-                age_range=age_range,
-                recc='false') }}" class="me-5"
-            >
-                <i class="fas fa-arrow-circle-right icon-med"></i>
-            </a>
+        {% if quizzes %}
+            {% if recc %}
+                <a href="{{ url_for('search',
+                    category=category,
+                    age_range=age_range,
+                    recc='true') }}" class="me-5"
+                >
+                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                </a>
+            {% elif category %}
+                <a href="{{ url_for('search',
+                    category=category) }}" class="me-5"
+                >
+                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                </a>
+            {% elif age_range %}
+                <a href="{{ url_for('search',
+                    age_range=age_range) }}" class="me-5"
+                >
+                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                </a>
+            {% endif %}
         {% endif %}
     </div>
 
     {% if not quizzes %}
 
-    <h6 class="text-center p-3">No quizzes found</h6>
+        <h6 class="text-center p-3">No quizzes found</h6>
 
     {% else %}
 
     <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
-    <div id="{{ title|lower|replace(' ', '-') }}-quiz-carousel" 
-        class="carousel slide carousel-fade" 
-        data-mdb-ride="carousel"
-    >
-        <!-- <div class="carousel-indicators">
-            <button
-            type="button"
-            data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
-            data-mdb-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-            ></button>
-            <button
-            type="button"
-            data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
-            data-mdb-slide-to="1"
-            aria-label="Slide 2"
-            ></button>
-            <button
-            type="button"
-            data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
-            data-mdb-slide-to="2"
-            aria-label="Slide 3"
-            ></button>
-        </div> -->
-
+        {% if category %}
+            <div id="{{ title|lower|replace(' ', '-') }}-quiz-carousel" 
+                class="carousel slide carousel-fade" 
+                data-mdb-ride="carousel"
+            >
+        {% elif age_range %}
+            <div id="age-{{ title|lower|replace(' ', '-') }}-quiz-carousel" 
+                class="carousel slide carousel-fade" 
+                data-mdb-ride="carousel"
+            >
+        {% endif %}
 
         <div class="carousel-inner py-5">
             {% for quiz in quizzes  %}
@@ -89,17 +71,12 @@
                             />
                             <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
                                 <h4>{{ quiz.title }}</h4>
-
                                 <div class="carousel-info quiz-cards-info d-flex justify-content-between">
                                     {% if category %}
                                         <span>{{ quiz.quiz_age_range_data.age_range }}</span>
                                     {% endif %}
                                     {% if age_range %}
                                         <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                    {% endif %}
-                                    {% if recc %}
-                                        <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                        <span>{{ quiz.quiz_age_range_data.age_range }}</span>
                                     {% endif %}
                                     <span>{{ quiz.quiz_owner_data.username }}</span>
                                 </div>
@@ -108,24 +85,45 @@
                     </div>
             {% endfor %}
         </div>
-        <button
-            class="carousel-control-prev"
-            type="button"
-            data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
-            data-mdb-slide="prev"
-        >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-            class="carousel-control-next"
-            type="button"
-            data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
-            data-mdb-slide="next"
-        >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        {% if category %}
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
+                data-mdb-slide="prev"
+            >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
+                data-mdb-slide="next"
+            >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        {% elif age_range %}
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-mdb-target="#age-{{ title|lower|replace(' ', '-') }}-quiz-carousel"
+                data-mdb-slide="prev"
+            >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-mdb-target="#age-{{ title|lower|replace(' ', '-') }}-quiz-carousel"
+                data-mdb-slide="next"
+            >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        {% endif %}
     </div>
 
     {% endif %}

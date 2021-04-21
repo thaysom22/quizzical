@@ -405,11 +405,61 @@ def search():
     # use request.args to parse optional url params. CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
     request_args = request.args
     if request.method == "GET":
+        all_quizzes = request_args.get('all_quizzes')
         recc = request_args.get('recc')
         category = request_args.get('category')
         age_range = request_args.get('age_range')
         search_query = None 
-        if recc == "true":
+        if all_quizzes == "true":
+            search_results = list(mongo.db.quizzes.aggregate([
+                {   
+                    "$lookup": {
+                        "from": "categories",
+                        "localField": "quiz_category_id",
+                        "foreignField": "_id",
+                        "as": "quiz_category_data"
+                    }
+                },
+                {   
+                    "$lookup": {
+                        "from": "age_ranges",
+                        "localField": "quiz_age_range_id",
+                        "foreignField": "_id",
+                        "as": "quiz_age_range_data"
+                    }
+                },
+                { 
+                    "$lookup": {  
+                        "from": "users",
+                        "localField": "quiz_owner_id",
+                        "foreignField": "_id",
+                        "as": "quiz_owner_data"
+                    } 
+                },
+                { 
+                    "$addFields": {
+                        "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                        "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
+                    } 
+                },
+                { 
+                    "$project": {
+                        "questions": False,
+                        "quiz_owner_data.password": False
+                    } 
+                },
+                {
+                    "$sort": {
+                        "num_questions": -1 }
+                }
+            ]
+        ))
+
+
+
+        elif recc == "true":
             recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
                 { 
                     "$match": {
@@ -504,7 +554,6 @@ def search():
 
             search_results = recc_quizzes_by_category + recc_quizzes_by_age_range
             search_results = list({item["_id"]: item for item in search_results}.values())  # remove duplicates
-
         elif category:
             search_results = list(mongo.db.quizzes.aggregate([
                 { 
@@ -544,7 +593,6 @@ def search():
                     } 
                 }
             ]))            
-
         elif age_range:
             search_results = list(mongo.db.quizzes.aggregate([
                 { 
@@ -590,57 +638,55 @@ def search():
     if request.method == "POST":
         search_query = request.form.get('search_query').lower()
         # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
-        search_results = list(mongo.db.quizzes.aggregate(
-            [
-                { 
-                    "$match": {
-                        "$text": { "$search": search_query }
-                    }
-                },
-                {   
-                    "$lookup": {
-                        "from": "categories",
-                        "localField": "quiz_category_id",
-                        "foreignField": "_id",
-                        "as": "quiz_category_data"
-                    }
-                },
-                {   
-                    "$lookup": {
-                        "from": "age_ranges",
-                        "localField": "quiz_age_range_id",
-                        "foreignField": "_id",
-                        "as": "quiz_age_range_data"
-                    }
-                },
-                { 
-                    "$lookup": {  
-                        "from": "users",
-                        "localField": "quiz_owner_id",
-                        "foreignField": "_id",
-                        "as": "quiz_owner_data"
-                    } 
-                },
-                { 
-                    "$addFields": {
-                        "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                        "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
-                        "num_questions": { "$size": "$questions" }
-                    } 
-                },
-                { 
-                    "$project": {
-                        "questions": False,
-                        "quiz_owner_data.password": False
-                    } 
-                },
-                {
-                    "$sort": {
-                        "score": { "$meta": "textScore" }, "num_questions": -1 }
+        search_results = list(mongo.db.quizzes.aggregate([
+            { 
+                "$match": {
+                    "$text": { "$search": search_query }
                 }
-            ]
-        ))
+            },
+            {   
+                "$lookup": {
+                    "from": "categories",
+                    "localField": "quiz_category_id",
+                    "foreignField": "_id",
+                    "as": "quiz_category_data"
+                }
+            },
+            {   
+                "$lookup": {
+                    "from": "age_ranges",
+                    "localField": "quiz_age_range_id",
+                    "foreignField": "_id",
+                    "as": "quiz_age_range_data"
+                }
+            },
+            { 
+                "$lookup": {  
+                    "from": "users",
+                    "localField": "quiz_owner_id",
+                    "foreignField": "_id",
+                    "as": "quiz_owner_data"
+                } 
+            },
+            { 
+                "$addFields": {
+                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                    "num_questions": { "$size": "$questions" }
+                } 
+            },
+            { 
+                "$project": {
+                    "questions": False,
+                    "quiz_owner_data.password": False
+                } 
+            },
+            {
+                "$sort": {
+                    "score": { "$meta": "textScore" }, "num_questions": -1 }
+            }
+        ]))
 
     return render_template("pages/search.html",
         active_page="search", 

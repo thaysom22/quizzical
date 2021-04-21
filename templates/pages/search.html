@@ -20,7 +20,7 @@
     <section class="search-results-wrapper container-lg my-5 px-4">
         <!-- number of results caption -->
         <div class="num-results my-2 text-center">
-            <span class="m-3">
+            <span>
                 {{ search_results|length }} quizzes found
             </span>
         </div>
@@ -30,11 +30,11 @@
     </section>
 {% else %}
     <!-- no quizzes found section -->
-    <section class="no-quizzes-found container-lg my-3">
-        <h6>No quizzes found...</h6>
-        <span>Try a different search?</span>
+    <section class="no-quizzes-found d-flex flex-column align-items-center container-lg p-3 my-5">
+        <h6 class="p-2">No quizzes found...</h6>
+        <span class="p-2 mb-2">Try a different search?</span>
         <a href="{{ url_for('discover') }}" 
-            class="btn btn-rounded" 
+            class="btn btn-rounded cta d-flex align-items-center" 
             role="button"
         >
             <i class="fas fa-arrow-circle-left icon-sm"></i>

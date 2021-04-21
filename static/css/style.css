@@ -38,12 +38,12 @@
 /* ******* ICONS ******* */
 .icon-sm {
   font-size: calc(1.4rem + .4vw);
-  padding: 0.3rem;
+  padding: 0.5rem;
 }
 
 .icon-med {
   font-size: calc(2.5rem + .5vw);
-  padding: 0.5rem;
+  padding: 0.6rem;
 }
 
 .icon-lg {

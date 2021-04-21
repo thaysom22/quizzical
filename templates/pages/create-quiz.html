@@ -1,0 +1,62 @@
+{% extends "layout/base.html" %}
+
+<!-- CREATE QUIZ PAGE -->
+{% block content %}
+
+<!-- main heading -->
+<header>
+    <div class="p-5 text-center main-heading container">
+        <div class="d-flex justify-content-center col-12">
+            <i class="fas fa-hammer icon-lg p-2"></i>
+            <h2 class="text-center p-2">Create Quiz</h2> 
+        </div>
+    </div>
+</header>
+
+<!-- create-quiz form section -->
+<section class="create-quiz-wrapper wrapper
+    container-lg my-5 p-0"
+>
+    <form method="POST" action="{{ url_for('create_quiz') }}" novalidate>
+        <!-- create-quiz form summary data -->
+        <div class="summary-data-wrapper 
+            d-flex flex-column 
+            align-items-center"
+        >
+            <!-- create-quiz title text input -->
+            <div class="d-flex form-outline">
+                <input id="username" name="username" type="text" 
+                    min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                    class="form-control form-control-lg" required
+                />
+                <label for="username" class="form-label">Username</label>
+                <div class="invalid-feedback">Choose a 5-20 character alphanumeric username</div>
+            </div>
+            <!-- create-quiz category select input -->
+            <div class="row">
+                <div class="col-2 d-flex justify-content-center align-items-center">
+                    <i class="fas fa-folder-open icon-sm"></i>
+                </div>
+                <div class="col-8 d-flex px-0">
+                    <select id="main-category" name="main_category"
+                        class="form-select" required
+                    >
+                        <option value="" disabled selected>Choose category</option>
+                        {% for category in all_categories %}
+                            <option value="{{ category._id }}">
+                                {{ category.category_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            
+        </div>
+
+
+    </form>
+</section>
+
+
+{% endblock %}

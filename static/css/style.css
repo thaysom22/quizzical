@@ -318,7 +318,7 @@ form {
   padding: calc(1rem + 1vw);
 }
 form select, form .form-outline {
-  max-width: 40rem;
+  max-width: 60rem;
 }
 form span {
   white-space: nowrap;

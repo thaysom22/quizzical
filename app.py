@@ -708,10 +708,17 @@ def create_quiz():
         return redirect(url_for("login"))
 
     if request.method == "GET":
+        # read all categories and all age_ranges from db
+        all_categories = list(mongo.db.categories
+            .find(sort=[("category_name", 1)]))
+        all_age_ranges = list(mongo.db.age_ranges
+            .find(sort=[("order", 1)]))
         
         return render_template("pages/create-quiz.html",
             active_page="create_quiz", 
-            loggedIn=loggedIn)
+            loggedIn=loggedIn,
+            all_categories=all_categories,
+            all_age_ranges=all_age_ranges)
 
 
 @app.route("/view_quiz")

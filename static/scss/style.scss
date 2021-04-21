@@ -4,6 +4,7 @@
 @import "helpers/_buttons";
 @import "helpers/_icons";
 @import "helpers/_alerts";
+@import "helpers/_allpages";
 
 /* COMPONENTS */
 @import "components/_navbar";
@@ -14,7 +15,7 @@
 @import "components/_forms";
 
 /* PAGES */
-@import "pages/_allpages";
+
 @import "pages/_landingpage";
 @import "pages/_loginpage";
 @import "pages/_registerpage";

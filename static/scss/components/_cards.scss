@@ -45,8 +45,8 @@
 .quiz-search-result {
     &.grid-container {
         display: grid;
-        height: 25rem;
-        grid-template: 33.33% 33.33% 33.33% / 60% 40%;
+        height: 20rem;
+        grid-template: 40% 40% 20% / 60% 40%;
         .quiz-title {
             grid-area: 1 / 1 / span 1 / span 1;
         }
@@ -59,11 +59,15 @@
         }
         .view-quiz-button {
             grid-area: 2 / 1 / span 1 / span 1;
+            align-items: flex-start;
         }
         .quiz-info {
             grid-area: 3 / 1 / span 1 / span 2;
+            span {
+                font-size: calc(1rem + .2vw);
+                color: $black-fade;
+                padding: 0 .75rem calc(.5rem + .2vw) .75rem;
+            }
         }
     }
-    
-
 }

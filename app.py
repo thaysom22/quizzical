@@ -444,7 +444,8 @@ def search():
                     "$addFields": {
                         "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
                         "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
                     } 
                 },
                 { 
@@ -489,7 +490,8 @@ def search():
                     "$addFields": {
                         "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
                         "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
                     } 
                 },
                 { 
@@ -531,7 +533,8 @@ def search():
                         "quiz_category_data": category,
                         # specifying an existing field name in an $addFields operation causes the original field to be replaced
                         "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
                     }
                 },  
                 { 
@@ -569,7 +572,8 @@ def search():
                     "$addFields": {
                         "quiz_age_range_data": age_range,
                         "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+                        "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+                        "num_questions": { "$size": "$questions" }
                     } 
                 },
                 { 
@@ -585,9 +589,6 @@ def search():
 
     if request.method == "POST":
         search_query = request.form.get('search_query').lower()
-
-        print(search_query)
-
         # CREDIT for constructing search with text index: https://docs.mongodb.com/manual/text-search/
         search_results = list(mongo.db.quizzes.aggregate(
             [
@@ -664,6 +665,23 @@ def create_quiz():
         
         return render_template("pages/create-quiz.html",
             active_page="create_quiz", 
+            loggedIn=loggedIn)
+
+
+@app.route("/view_quiz")
+def view_quiz():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to create quizzes")
+        return redirect(url_for("login"))
+
+    if request.method == "GET":
+        
+        return render_template("pages/view-quiz.html",
+            active_page="view_quiz", 
             loggedIn=loggedIn)
 
 

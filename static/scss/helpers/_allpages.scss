@@ -67,12 +67,14 @@ main {
 .main-inner-wrapper {
     position: relative;
     top: 6rem;
+
+    .container,
+    .container-lg {
+        background-color: $white;
+}
 }
 
-.container,
-.container-lg {
-    background-color: $white;
-}
+
 
 /*** mixins as classes ***/
 

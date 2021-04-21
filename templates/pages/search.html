@@ -13,14 +13,17 @@
     </div>
 </header>
 
-<!-- number of results caption -->
-<div class="num-results my-2 text-center">
-    <span class="p-3">{{ search_results|length }} quizzes found</span>
-</div>
+
 
 {% if search_results %}
     <!-- search results section -->
     <section class="search-results-wrapper container-lg my-5 px-4">
+        <!-- number of results caption -->
+        <div class="num-results my-2 text-center">
+            <span class="m-3">
+                {{ search_results|length }} quizzes found
+            </span>
+        </div>
         {% for quiz in search_results %}
             {{ quiz_search_result(quiz) }}
         {% endfor %}
@@ -46,16 +49,5 @@
 <section class="final-create-cta">
     {% include "components/create-quiz-cta.html" %}
 </section>
-
-
-
-
-<h4>
-    search query: {{ search_query }}
-</h4>
-<hr>
-<h5>
-    {{ search_results }}
-</h5>
 
 {% endblock %}

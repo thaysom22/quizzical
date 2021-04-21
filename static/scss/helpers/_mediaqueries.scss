@@ -40,9 +40,48 @@
 
     .quiz-cards-item {
         height: 40rem;
+    }  
+
+    /* search result cards */
+    .quiz-search-result {
+        &.grid-container {
+            grid-template: 50% 50% / 40% 30% 30%;
+            .quiz-title {
+                grid-area: 1 / 1 / span 1 / span 1;
+                h4 {
+                    font-size: calc(2.5rem + .5vw);
+                }
+            }
+            .quiz-img {
+                grid-area: 1 / 3 / span 2 / span 1;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .view-quiz-button{
+                grid-area: 1 / 2 / span 2 / span 1;
+                align-items: center;
+            }
+            .quiz-info {
+                grid-area: 2 / 1 / span 1 / span 1;
+                span {
+                    font-size: calc(1.5rem + .2vw);
+                    color: $black-fade;
+                    padding: 0 .75rem calc(.5rem + .2vw) .75rem;
+                }
+            }
+        }
     }
-    
+
+
+
+
+
 }
+
+
+
 
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
@@ -76,5 +115,5 @@
     .quiz-cards-item {
         height: 50rem;
     }
-  
 }
+

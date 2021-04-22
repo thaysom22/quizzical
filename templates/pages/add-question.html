@@ -1,0 +1,109 @@
+<!-- ADD QUESTION PAGE -->
+{% extends "layout/base.html" %}
+{% block content %}
+
+<!-- main heading -->
+<header>
+    <div class="p-5 text-center main-heading container">
+        <div class="d-flex justify-content-center col-12">
+            <h2 class="text-center p-2">Add Question</h2> 
+            <i class="fas fa-plus icon-lg px-3"></i>
+        </div>
+    </div>
+</header>
+
+<!-- add question form section -->
+<section class="add-question-wrapper wrapper
+    container-lg my-5 p-0"
+>
+    <form  
+        id="add-question-form"
+        method="POST"
+        action="{{ url_for('add_question') }}"
+        class="summary-data-wrapper 
+            d-flex flex-column
+            flex-lg-row"
+        novalidate
+    >
+        <!-- answer 1 text input (required) -->
+        <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
+            <div class="d-flex col-8 col-md-5 col-lg-9">
+                <div class="form-outline w-100">
+                    <input name="answer_1" id="answer_1" type="text" 
+                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_1" class="form-label">Enter answer option 1</label>
+                    <div class="invalid-feedback">
+                        Answer text must be less than 30 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- answer 2 text input (required) -->
+        <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
+            <div class="d-flex col-8 col-md-5 col-lg-9">
+                <div class="form-outline w-100">
+                    <input name="answer_2" id="answer_2" type="text" 
+                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_2" class="form-label">Enter answer option 2</label>
+                    <div class="invalid-feedback">
+                        Answer text must be less than 30 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- answer 3 text input (optional) -->
+        <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
+            <div class="d-flex col-8 col-md-5 col-lg-9">
+                <div class="form-outline w-100">
+                    <input name="answer_3" id="answer_3" type="text" 
+                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg"
+                    />
+                    <label for="answer_3" class="form-label">Enter answer option 3</label>
+                    <div class="invalid-feedback">
+                        Answer text must be less than 30 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- answer 4 text input (optional) -->
+        <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
+            <div class="d-flex col-8 col-md-5 col-lg-9">
+                <div class="form-outline w-100">
+                    <input name="answer_4" id="answer_4" type="text" 
+                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg"
+                    />
+                    <label for="answer_4" class="form-label">Enter answer option 4</label>
+                    <div class="invalid-feedback">
+                        Answer text must be less than 30 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- submit -->
+        <div class="col-12 order-5">
+            <div class="row mt-5 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
+                    <button type="submit" class="btn btn-rounded cta m-2 d-flex align-items-center">
+                        <i class="fas fa-plus-circle icon-med"></i>
+                        Add Question
+                    </button>
+                    <a href="{{ url_for('delete_quiz', delete_quiz_id=new_quiz_id ) }}" 
+                        type="button" class="btn btn-link" data-mdb-ripple-color="dark"
+                    >
+                        Discard Quiz
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+
+{% endblock %}

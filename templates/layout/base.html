@@ -62,8 +62,8 @@
         integrity="sha512-0gzi9FkmVsx8bjO4rb7BIwvGuAKWNAmsfVH9cPgAqbtEdxPvhEo9j2JIoZA/yHyRtf5dwQlbnZhKh1iROLvFqA==" 
         crossorigin="anonymous">
     </script>
-    <!-- custom js for all templates-->
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- js for all templates-->
+    <script src="{{url_for('static', filename='js/alerts.js')}}"></script>
     <!-- scipts loaded dependent on page -->
     {% block scripts %}
     

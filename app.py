@@ -64,7 +64,10 @@ def login():
 
     username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
     existing_user = mongo.db.users.find_one(
-        {"username": username_form})  # get user document from db (returns dict or None )
+        {
+            "username": username_form
+        }
+    ) 
     
     if not existing_user:
         flash("Incorrect Username and/or Password")  # notify user of failure
@@ -80,10 +83,14 @@ def login():
 
     # use existing_user dict to get category and age_range data from respective collections
     user_category_data = mongo.db.categories.find_one(
-        {"_id": existing_user["user_category_id"]}
+        {
+            "_id": existing_user["user_category_id"]
+        }
     )
     user_age_range_data = mongo.db.age_ranges.find_one(
-        {"_id": existing_user["user_age_range_id"]}
+        {
+            "_id": existing_user["user_age_range_id"]
+        }
     )
     
     # convert ObjectId types to string types before adding to session
@@ -135,7 +142,10 @@ def register():
     # if request.method == "POST":
     username_form = request.form.get("username").lower()  # form input validation done client-side
     existing_user = mongo.db.users.find_one(
-        {"username": username_form})
+        {
+            "username": username_form
+        }
+    )
     
     if existing_user:
         flash(f"The username {username_form} already exists")
@@ -167,10 +177,14 @@ def register():
     
     # get category and age_range documents from db by id
     user_category = mongo.db.categories.find_one(
-        {"_id": new_user_db["user_category_id"]}
+        {
+            "_id": new_user_db["user_category_id"]
+        }
     )
     user_age_range = mongo.db.age_ranges.find_one(
-        {"_id": new_user_db["user_age_range_id"]}
+        {
+            "_id": new_user_db["user_age_range_id"]
+        }
     )
 
     # add user to session including inserted document ObjectId
@@ -749,7 +763,8 @@ def add_question(new_quiz_id):
 
     if request.method == "POST":
 
-        # add new question data to quiz document identified by new_quiz_id
+        # update quiz document identified by new_quiz_id with new_question data
+        
         flash("Question added")
 
         return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
@@ -757,13 +772,36 @@ def add_question(new_quiz_id):
     # GET request
 
     # read title of quiz from db via new_quiz_id
+    new_quiz_title = mongo.db.quizzes.find_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(new_quiz_id)
+        },
+        {
+            "title": True,
+        }
+    ).title
 
-
-    return render_template("pages/create-quiz.html",
+    return render_template("pages/add-question.html",
             active_page="Add Question", 
+            new_quiz_title=new_quiz_title,
+            new_quiz_id=new_quiz_id,
             loggedIn=loggedIn)
         
 
+@app.route("/delete_quiz/<delete_quiz_id>")
+def delete_quiz(delete_quiz_id):
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to create quizzes")
+        return redirect(url_for("login"))
+
+    # find quiz document by delete_quiz_id
+    # find ids of questions stored in quiz document
+    # delete quiz from quizzes collection and questions from questions collection
+    
 
 
 

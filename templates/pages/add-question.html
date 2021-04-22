@@ -19,13 +19,32 @@
     <form  
         id="add-question-form"
         method="POST"
-        action="{{ url_for('add_question') }}"
+        action="{{ url_for('add_question', new_quiz_id=new_quiz_id) }}"
         class="summary-data-wrapper 
             d-flex flex-column
             flex-lg-row"
         novalidate
     >
-        <!-- answer 1 text input (required) -->
+
+        <!-- question textarea input (required) -->
+        <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
+            <div class="d-flex col-8 col-md-5 col-lg-9">
+                <div class="form-outline w-100">
+                    <textarea name="new_question_text" id="new_question_text" 
+                        maxlength="200" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    >
+                    </textarea>
+                    <label for="new_question_text" class="form-label">
+                        Question text
+                    </label>
+                    <div class="invalid-feedback">
+                        Question must be less than 200 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- answer 1 text input -->
         <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
             <div class="d-flex col-8 col-md-5 col-lg-9">
                 <div class="form-outline w-100">
@@ -33,14 +52,14 @@
                          maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control form-control-lg" required
                     />
-                    <label for="answer_1" class="form-label">Enter answer option 1</label>
+                    <label for="answer_1" class="form-label">Answer option 1</label>
                     <div class="invalid-feedback">
-                        Answer text must be less than 30 characters
+                        Answer must be less than 30 characters
                     </div>
                 </div>
             </div>
         </div>
-        <!-- answer 2 text input (required) -->
+        <!-- answer 2 text input -->
         <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
             <div class="d-flex col-8 col-md-5 col-lg-9">
                 <div class="form-outline w-100">
@@ -48,42 +67,49 @@
                          maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control form-control-lg" required
                     />
-                    <label for="answer_2" class="form-label">Enter answer option 2</label>
+                    <label for="answer_2" class="form-label">Answer option 2</label>
                     <div class="invalid-feedback">
-                        Answer text must be less than 30 characters
+                        Answer must be less than 30 characters
                     </div>
                 </div>
             </div>
         </div>
-        <!-- answer 3 text input (optional) -->
+        <!-- answer 3 text input -->
         <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
             <div class="d-flex col-8 col-md-5 col-lg-9">
                 <div class="form-outline w-100">
                     <input name="answer_3" id="answer_3" type="text" 
                          maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg"
+                        class="form-control form-control-lg" required
                     />
-                    <label for="answer_3" class="form-label">Enter answer option 3</label>
+                    <label for="answer_3" class="form-label">Answer option 3</label>
                     <div class="invalid-feedback">
-                        Answer text must be less than 30 characters
+                        Answer must be less than 30 characters
                     </div>
                 </div>
             </div>
         </div>
-        <!-- answer 4 text input (optional) -->
+        <!-- answer 4 text input -->
         <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
             <div class="d-flex col-8 col-md-5 col-lg-9">
                 <div class="form-outline w-100">
                     <input name="answer_4" id="answer_4" type="text" 
                          maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg"
+                        class="form-control form-control-lg" required
                     />
-                    <label for="answer_4" class="form-label">Enter answer option 4</label>
+                    <label for="answer_4" class="form-label">Answer option 4</label>
                     <div class="invalid-feedback">
-                        Answer text must be less than 30 characters
+                        Answer must be less than 30 characters
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- correct answer radio buttons group -->
+        <div class="form-group d-flex flex-column align-items-center">
+            <input type="radio" id="correct_answer_0" name="correct_answer" value="0">
+            <input type="radio" id="correct_answer_1" name="correct_answer" value="1">
+            <input type="radio" id="correct_answer_2" name="correct_answer" value="2">
+            <input type="radio" id="correct_answer_3" name="correct_answer" value="3">
         </div>
         <!-- submit -->
         <div class="col-12 order-5">

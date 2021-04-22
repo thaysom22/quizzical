@@ -729,11 +729,12 @@ def create_quiz():
             "questions": []  
         }
         
-        new_quiz_id = mongo.db.users.insert_one(new_quiz_data)
+        new_quiz_id = mongo.db.users.insert_one(new_quiz_data).get('inserted_id')
         if not new_quiz_id:
             flash("Could not create quiz, please try again later.")
             return redirect(url_for("create_quiz"))
 
+        flash(f"Quiz: {request.form.get('create_quiz_title')} has been created. Add the first question...")
         return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
 
 
@@ -762,8 +763,32 @@ def add_question(new_quiz_id):
         return redirect(url_for("login"))
 
     if request.method == "POST":
-
-        # update quiz document identified by new_quiz_id with new_question data
+        # construct form of questions document and add to questions collection
+        new_question_id = mongo.db.insert_one(
+            {
+                "question_text": request.form.get('new_question_text'),
+                "correct_answer": request.form.get('correct_answer'),
+                "answers": [
+                    {
+                        "answer_text": request.form.get('answer_1'),
+                    },
+                    {
+                        "answer_text": request.form.get('answer_2'),
+                    },
+                    {
+                        "answer_text": request.form.get('answer_3'),
+                    },
+                    {
+                        "answer_text": request.form.get('answer_4'),
+                    }
+                ]
+            }
+        )
+        
+        # update questions field of quiz document in quizzes collection identified by new_quiz_id with new_question_id
+        update_result = mongo.db.quizzes.update_one(
+            
+        )
         
         flash("Question added")
 
@@ -798,11 +823,23 @@ def delete_quiz(delete_quiz_id):
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
-    # find quiz document by delete_quiz_id
-    # find ids of questions stored in quiz document
-    # delete quiz from quizzes collection and questions from questions collection
-    
+    # return and delete quiz document by delete_quiz_id
+    delete_quiz_questions = mongo.db.find_one_and_delete(
+        { 
+            "_id": ObjectIdHelper.toObjectId(delete_quiz_id)
+        }
+    ).questions
 
+    # delete questions in quiz from questions collection
+    delete_result = mongo.db.questions.delete_many(
+        { 
+            "_id": { "$in": delete_quiz_questions } 
+        }
+    )
+
+    flash("Your quiz was deleted")
+    
+    return redirect(url_for('create_quiz'))
 
 
 @app.route("/view_quiz")

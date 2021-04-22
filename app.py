@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import (
     generate_password_hash, check_password_hash)
-from helpers import ObjectIdHelper, build_category_img_url
+from helpers import ObjectIdHelper
 from random import sample
 # will not import env when running on cloud platform
 if os.path.exists("env.py"):
@@ -280,7 +280,7 @@ def discover():
             }
         ]))    
 
-    user = session["user"]  # get data from session object
+    user = session.get("user")  # get data from session object
     username = user.get("username")
     user_category_id = user.get("user_category_id")
     user_age_range_id = user.get("user_age_range_id")
@@ -377,7 +377,7 @@ def discover():
 
     return render_template("pages/discover.html", 
         loggedIn=loggedIn,
-        active_page="discover", 
+        active_page="Discover", 
         username=username, 
         all_categories=all_categories, 
         all_age_ranges=all_age_ranges,
@@ -400,8 +400,7 @@ def search():
         flash("Login first to search quizzes")
         return redirect(url_for("login"))
        
-    user = session["user"]  # get data from session object
-    username = user.get("username")
+    username = session.get("user").get("username") 
     # use request.args to parse optional url params. CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
     request_args = request.args
     if request.method == "GET":
@@ -689,7 +688,7 @@ def search():
         ]))
 
     return render_template("pages/search.html",
-        active_page="search", 
+        active_page="Search", 
         username=username,
         loggedIn=loggedIn,
         search_query=search_query,
@@ -707,6 +706,23 @@ def create_quiz():
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
+    if request.method == "POST":
+        new_quiz_data = {
+            "title": request.form.get('create_quiz_title'),
+            "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user_id")),
+            "user_category_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_category')),  
+            "user_age_range_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_age_range')),
+            "questions": []  
+        }
+        
+        new_quiz_id = mongo.db.users.insert_one(new_quiz_data)
+        if not new_quiz_id:
+            flash("Could not create quiz, please try again later.")
+            return redirect(url_for("create_quiz"))
+
+        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+
+
     if request.method == "GET":
         # read all categories and all age_ranges from db
         all_categories = list(mongo.db.categories
@@ -715,10 +731,40 @@ def create_quiz():
             .find(sort=[("order", 1)]))
         
         return render_template("pages/create-quiz.html",
-            active_page="create_quiz", 
+            active_page="Create Quiz", 
             loggedIn=loggedIn,
             all_categories=all_categories,
             all_age_ranges=all_age_ranges)
+
+
+@app.route("/add_question/<new_quiz_id>", methods=["GET", "POST"])
+def add_question(new_quiz_id):
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to create quizzes")
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+
+        # add new question data to quiz document identified by new_quiz_id
+        flash("Question added")
+
+        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+
+    # GET request
+
+    # read title of quiz from db via new_quiz_id
+
+
+    return render_template("pages/create-quiz.html",
+            active_page="Add Question", 
+            loggedIn=loggedIn)
+        
+
+
 
 
 @app.route("/view_quiz")
@@ -734,7 +780,7 @@ def view_quiz():
     if request.method == "GET":
         
         return render_template("pages/view-quiz.html",
-            active_page="view_quiz", 
+            active_page="View Quiz", 
             loggedIn=loggedIn)
 
 

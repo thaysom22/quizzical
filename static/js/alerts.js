@@ -1,4 +1,4 @@
-/* dismiss alerts */
+/* dismiss flash alerts */
 
 (() => {
     'use strict';

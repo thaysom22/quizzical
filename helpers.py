@@ -2,14 +2,15 @@
 from bson.objectid import ObjectId
 from flask import url_for
 
+### NOT REQUIRED ? ###
 
-def build_category_img_url(category_name):
-    """
-    build url to category image from category name
-    """
-    # make category_name url compatible
-    filename = "img/categories/" + category_name.lower().replace(" ", "-") + ".jpg"  
-    return url_for('static', filename=filename)
+# def build_category_img_url(category_name):
+#     """
+#     build url to category image from category name
+#     """
+#     # make category_name url compatible
+#     filename = "img/categories/" + category_name.lower().replace(" ", "-") + ".jpg"  
+#     return url_for('static', filename=filename)
 
 
 class ObjectIdHelper():

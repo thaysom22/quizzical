@@ -1,6 +1,6 @@
+<!-- CREATE QUIZ PAGE -->
 {% extends "layout/base.html" %}
 
-<!-- CREATE QUIZ PAGE -->
 {% block content %}
 
 <!-- main heading -->
@@ -13,12 +13,16 @@
     </div>
 </header>
 
+
+
 <!-- create-quiz form section -->
 <section class="create-quiz-wrapper wrapper
     container-lg my-5 p-0"
 >
-    <form method="POST" 
-        action="{{ url_for('create_quiz') }}" 
+    <form  
+        id="create-quiz-form"
+        method="POST"
+        action="{{ url_for('create_quiz') }}"
         novalidate
     >
         <!-- create-quiz form summary data -->
@@ -31,13 +35,13 @@
                 <i class="fas fa-tag icon-sm col-2 col-md-1 col-lg-2 text-center"></i>
                 <div class="d-flex col-8 col-md-5 col-lg-9">
                     <div class="form-outline w-100">
-                        <input id="username" name="username" type="text" 
-                            min-length="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        <input id="create-quiz-title" name="create_quiz_title" type="text" 
+                            min-length="3" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
                             class="form-control form-control-lg" required
                         />
-                        <label for="username" class="form-label">Username</label>
+                        <label for="create-quiz-title" class="form-label">Title</label>
                         <div class="invalid-feedback">
-                            Choose a 5-20 character alphanumeric username
+                            Choose a 3-20 character alphanumeric title
                         </div>
                     </div>
                 </div>
@@ -77,8 +81,25 @@
                 </div>
             </div>
         </div>
+        <!-- submit -->
+        <div class="col-12 order-5">
+            <div class="row mt-5 d-flex justify-content-center align-items-center">
+                <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
+                    <button type="submit" class="btn btn-rounded cta m-2 d-flex align-items-center">
+                        <i class="fas fa-plus-circle icon-med"></i>
+                        Add Question
+                    </button>
+                    <a href="{{ url_for('discover') }}" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Discard</a>
+                </div>
+            </div>
+        </div>
     </form>
 </section>
 
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+    <script src="{{url_for('static', filename='js/alerts.js')}}"></script>
 {% endblock %}

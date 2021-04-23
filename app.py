@@ -751,7 +751,6 @@ def create_quiz():
         return redirect(url_for(
             'add_question', 
             quiz_id=new_quiz_id,
-            question_num=1
         ))
 
     else:
@@ -762,8 +761,8 @@ def create_quiz():
     
 
 
-@app.route("/add_question/<new_quiz_id>", methods=["GET", "POST"])
-def add_question(new_quiz_id):
+@app.route("/add_question/<quiz_id>", methods=["GET", "POST"])
+def add_question(quiz_id):
     """
     docstring here
     """
@@ -773,7 +772,6 @@ def add_question(new_quiz_id):
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        question_num = int(request.args.get('question_num'))
         # construct form of questions document and insert to questions collection
         insert_result = mongo.db.questions.insert_one(
             {
@@ -794,13 +792,12 @@ def add_question(new_quiz_id):
             return redirect(url_for(
                 'add_question', 
                 quiz_id=quiz_id,
-                question_num=question_num
             ))
 
         # if insertion to questions collection successful...
         # update questions field of quiz document in quizzes collection identified by new_quiz_id 
         update_result = mongo.db.quizzes.update_one(
-            { "_id": ObjectIdHelper.toObjectId(new_quiz_id) },
+            { "_id": ObjectIdHelper.toObjectId(quiz_id) },
             { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
         )
         
@@ -813,35 +810,37 @@ def add_question(new_quiz_id):
         return redirect(url_for(
             'add_question', 
             quiz_id=quiz_id,
-            question_num = question_num + 1
         ))
 
     # GET request
-    # read title of quiz from db via new_quiz_id
+    # read quiz data from db with quiz_id
     quiz_data = mongo.db.quizzes.find_one(
         { 
             "_id": ObjectIdHelper.toObjectId(quiz_id)
         },
-
         {
+            "_id": False,
             "title": True,
+            "num_questions": { "$size": "$questions" }
         }
     )
     
-    if not new_quiz_data:
+    if not quiz_data:
         flash("Error: Quiz does not exist. Create a new quiz...")
         
         return redirect(url_for('create_quiz'))
     
     # if quiz identified by new_quiz_id exists...
-    new_quiz_title = new_quiz_data.get('title')
+    quiz_title = quiz_data.get('title')
+    num_questions = quiz_data.get('num_questions')
 
     return render_template(
         "pages/add-question.html",
         active_page="Add Question",
-        new_quiz_id=new_quiz_id, 
-        new_quiz_title=new_quiz_title,
-        loggedIn=loggedIn
+        loggedIn=loggedIn,
+        quiz_id=quiz_id,
+        quiz_title=quiz_title,
+        num_questions=num_questions,
     )
         
 

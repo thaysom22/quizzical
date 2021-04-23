@@ -45,24 +45,41 @@
         <hr>
         <!-- add answers wrapper -->
         <div class="d-flex row justify-content-center align-items-center">
+            <!-- answer 0 text input -->
+            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                <div class="form-outline w-100">
+                    <input name="answer_0" id="answer_0" type="text" 
+                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_0" class="form-label">Answer option 1</label>
+                    <div class="invalid-feedback">
+                        Answer must be less than 30 characters
+                    </div>
+                </div>
+                <!-- answer 0 radio button -->
+                <div class="d-flex align-items-center p-3">
+                    <input type="radio" id="correct_answer_0" name="correct_answer_index" value="0" required>
+                </div>
+            </div>
+        
             <!-- answer 1 text input -->
             <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
                 <div class="form-outline w-100">
                     <input name="answer_1" id="answer_1" type="text" 
-                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control form-control-lg" required
                     />
-                    <label for="answer_1" class="form-label">Answer option 1</label>
+                    <label for="answer_1" class="form-label">Answer option 2</label>
                     <div class="invalid-feedback">
                         Answer must be less than 30 characters
                     </div>
                 </div>
                 <!-- answer 1 radio button -->
                 <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_1" name="correct_answer" value="0" required>
+                    <input type="radio" id="correct_answer_1" name="correct_answer_index" value="1" required>
                 </div>
             </div>
-        
             <!-- answer 2 text input -->
             <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
                 <div class="form-outline w-100">
@@ -70,14 +87,14 @@
                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control form-control-lg" required
                     />
-                    <label for="answer_2" class="form-label">Answer option 2</label>
+                    <label for="answer_2" class="form-label">Answer option 3</label>
                     <div class="invalid-feedback">
                         Answer must be less than 30 characters
                     </div>
                 </div>
                 <!-- answer 2 radio button -->
                 <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_2" name="correct_answer" value="1" required>
+                    <input type="radio" id="correct_answer_2" name="correct_answer_index" value="2" required>
                 </div>
             </div>
             <!-- answer 3 text input -->
@@ -87,31 +104,14 @@
                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
                         class="form-control form-control-lg" required
                     />
-                    <label for="answer_3" class="form-label">Answer option 3</label>
+                    <label for="answer_3" class="form-label">Answer option 4</label>
                     <div class="invalid-feedback">
                         Answer must be less than 30 characters
                     </div>
                 </div>
                 <!-- answer 3 radio button -->
                 <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_3" name="correct_answer" value="2" required>
-                </div>
-            </div>
-            <!-- answer 4 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_4" id="answer_4" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_4" class="form-label">Answer option 4</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 3 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_4" name="correct_answer" value="3" required>
+                    <input type="radio" id="correct_answer_3" name="correct_answer_index" value="3" required>
                 </div>
             </div>
         </div>

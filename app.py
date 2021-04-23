@@ -737,7 +737,7 @@ def create_quiz():
     # if request.method == "POST":
     new_quiz_data = {
         "title": request.form.get('create_quiz_title'),
-        "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user_id")),
+        "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user").get("user_id")),
         "quiz_category_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_category')),  
         "quiz_age_range_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_age_range')),
         "questions": []  
@@ -748,7 +748,12 @@ def create_quiz():
         new_quiz_id = insert_result.inserted_id
         flash(f"Quiz: {request.form.get('create_quiz_title')} has been created. Add the first question...")
         
-        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+        return redirect(url_for(
+            'add_question', 
+            quiz_id=new_quiz_id,
+            question_num=1
+        ))
+
     else:
         flash('Error. Quiz was not created. Try again later.')    
         
@@ -768,24 +773,29 @@ def add_question(new_quiz_id):
         return redirect(url_for("login"))
 
     if request.method == "POST":
+        question_num = int(request.args.get('question_num'))
         # construct form of questions document and insert to questions collection
         insert_result = mongo.db.questions.insert_one(
             {
                 "question_text": request.form.get('new_question_text'),
-                "correct_answer": int(request.form.get('correct_answer')),  # convert to int index for answers list
+                "correct_answer_index": int(request.form.get('correct_answer_index')),  # convert to int index for answers list
                 "answers": [
+                    {"answer_text": request.form.get('answer_0')},
                     {"answer_text": request.form.get('answer_1')},
                     {"answer_text": request.form.get('answer_2')},
-                    {"answer_text": request.form.get('answer_3')},
-                    {"answer_text": request.form.get('answer_4')}
+                    {"answer_text": request.form.get('answer_3')}
                 ]
             }
         )
 
         if not insert_result.acknowledged:
             flash('Error: question was not created. Try again later.')
-
-            return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+            # GET request to this endpoint
+            return redirect(url_for(
+                'add_question', 
+                quiz_id=quiz_id,
+                question_num=question_num
+            ))
 
         # if insertion to questions collection successful...
         # update questions field of quiz document in quizzes collection identified by new_quiz_id 
@@ -799,14 +809,20 @@ def add_question(new_quiz_id):
         else:
             flash("Error: question was not added to quiz. Try again later.")
 
-        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+        # GET request to this endpoint
+        return redirect(url_for(
+            'add_question', 
+            quiz_id=quiz_id,
+            question_num = question_num + 1
+        ))
 
     # GET request
     # read title of quiz from db via new_quiz_id
-    new_quiz_data = mongo.db.quizzes.find_one(
+    quiz_data = mongo.db.quizzes.find_one(
         { 
-            "_id": ObjectIdHelper.toObjectId(new_quiz_id)
+            "_id": ObjectIdHelper.toObjectId(quiz_id)
         },
+
         {
             "title": True,
         }

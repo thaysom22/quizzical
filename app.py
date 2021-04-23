@@ -720,36 +720,41 @@ def create_quiz():
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
-    if request.method == "POST":
-        new_quiz_data = {
-            "title": request.form.get('create_quiz_title'),
-            "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user_id")),
-            "user_category_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_category')),  
-            "user_age_range_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_age_range')),
-            "questions": []  
-        }
-        
-        new_quiz_id = mongo.db.users.insert_one(new_quiz_data).get('inserted_id')
-        if not new_quiz_id:
-            flash("Could not create quiz, please try again later.")
-            return redirect(url_for("create_quiz"))
-
-        flash(f"Quiz: {request.form.get('create_quiz_title')} has been created. Add the first question...")
-        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
-
-
     if request.method == "GET":
-        # read all categories and all age_ranges from db
         all_categories = list(mongo.db.categories
             .find(sort=[("category_name", 1)]))
         all_age_ranges = list(mongo.db.age_ranges
             .find(sort=[("order", 1)]))
         
-        return render_template("pages/create-quiz.html",
+        return render_template(
+            "pages/create-quiz.html",
             active_page="Create Quiz", 
             loggedIn=loggedIn,
             all_categories=all_categories,
-            all_age_ranges=all_age_ranges)
+            all_age_ranges=all_age_ranges
+        )
+    
+    # if request.method == "POST":
+    new_quiz_data = {
+        "title": request.form.get('create_quiz_title'),
+        "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user_id")),
+        "quiz_category_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_category')),  
+        "quiz_age_range_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_age_range')),
+        "questions": []  
+    }
+    
+    insert_result = mongo.db.quizzes.insert_one(new_quiz_data)
+    if insert_result.acknowledged:
+        new_quiz_id = insert_result.inserted_id
+        flash(f"Quiz: {request.form.get('create_quiz_title')} has been created. Add the first question...")
+        
+        return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+    else:
+        flash('Error. Quiz was not created. Try again later.')    
+        
+        return redirect(url_for("create_quiz"))
+
+    
 
 
 @app.route("/add_question/<new_quiz_id>", methods=["GET", "POST"])
@@ -763,54 +768,65 @@ def add_question(new_quiz_id):
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        # construct form of questions document and add to questions collection
-        new_question_id = mongo.db.insert_one(
+        # construct form of questions document and insert to questions collection
+        insert_result = mongo.db.questions.insert_one(
             {
                 "question_text": request.form.get('new_question_text'),
-                "correct_answer": request.form.get('correct_answer'),
+                "correct_answer": int(request.form.get('correct_answer')),  # convert to int index for answers list
                 "answers": [
-                    {
-                        "answer_text": request.form.get('answer_1'),
-                    },
-                    {
-                        "answer_text": request.form.get('answer_2'),
-                    },
-                    {
-                        "answer_text": request.form.get('answer_3'),
-                    },
-                    {
-                        "answer_text": request.form.get('answer_4'),
-                    }
+                    {"answer_text": request.form.get('answer_1')},
+                    {"answer_text": request.form.get('answer_2')},
+                    {"answer_text": request.form.get('answer_3')},
+                    {"answer_text": request.form.get('answer_4')}
                 ]
             }
         )
-        
-        # update questions field of quiz document in quizzes collection identified by new_quiz_id with new_question_id
+
+        if not insert_result.acknowledged:
+            flash('Error: question was not created. Try again later.')
+
+            return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
+
+        # if insertion to questions collection successful...
+        # update questions field of quiz document in quizzes collection identified by new_quiz_id 
         update_result = mongo.db.quizzes.update_one(
-            
+            { "_id": ObjectIdHelper.toObjectId(new_quiz_id) },
+            { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
         )
         
-        flash("Question added")
+        if update_result.acknowledged:
+            flash("Question added to quiz")
+        else:
+            flash("Error: question was not added to quiz. Try again later.")
 
         return redirect(url_for('add_question', new_quiz_id=new_quiz_id))
 
     # GET request
-
     # read title of quiz from db via new_quiz_id
-    new_quiz_title = mongo.db.quizzes.find_one(
+    new_quiz_data = mongo.db.quizzes.find_one(
         { 
             "_id": ObjectIdHelper.toObjectId(new_quiz_id)
         },
         {
             "title": True,
         }
-    ).title
+    )
+    
+    if not new_quiz_data:
+        flash("Error: Quiz does not exist. Create a new quiz...")
+        
+        return redirect(url_for('create_quiz'))
+    
+    # if quiz identified by new_quiz_id exists...
+    new_quiz_title = new_quiz_data.get('title')
 
-    return render_template("pages/add-question.html",
-            active_page="Add Question", 
-            new_quiz_title=new_quiz_title,
-            new_quiz_id=new_quiz_id,
-            loggedIn=loggedIn)
+    return render_template(
+        "pages/add-question.html",
+        active_page="Add Question",
+        new_quiz_id=new_quiz_id, 
+        new_quiz_title=new_quiz_title,
+        loggedIn=loggedIn
+    )
         
 
 @app.route("/delete_quiz/<delete_quiz_id>")

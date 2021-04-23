@@ -317,58 +317,6 @@ footer a.wheat {
 form {
   padding: calc(1rem + 1vw);
 }
-form select, form .form-outline {
-  max-width: 60rem;
-}
-form span {
-  white-space: nowrap;
-  font-size: calc(0.8rem + .2vw);
-}
-form label {
-  font-size: calc(1.1rem + .2vw);
-  font-family: inherit;
-  line-height: 3rem;
-}
-form .form-control,
-form .form-select {
-  padding: 0.33em 0.75em;
-  height: 4rem;
-}
-form .form-outline {
-  padding-left: 0.75rem;
-}
-form .form-outline.searchbar-outline {
-  width: 75%;
-}
-form .form-outline .form-control ~ .form-label {
-  padding-top: 0.5rem;
-}
-form .form-outline .form-control:focus ~ .form-label,
-form .form-outline .form-control.active ~ .form-label {
-  padding-top: 0.2rem;
-  left: 1.5rem;
-}
-
-.form-control.is-invalid,
-.was-validated .form-control:invalid {
-  margin-bottom: 1.5rem;
-}
-
-.form-control.is-valid,
-.was-validated .form-control:valid {
-  margin-bottom: 0;
-}
-
-.invalid-feedback {
-  top: 4rem;
-}
-
-.form-select.is-invalid,
-.was-validated .form-select:invalid,
-.form-select.is-valid,
-.was-validated .form-select:valid {
-  background-position: right 0.75rem center, center right 3rem;
-}
 
 /* PAGES */
 /* ******* LANDING PAGE ******* */

@@ -2,62 +2,62 @@
 
 form {
     padding: calc(1rem + 1vw);
-    select,.form-outline {
-        max-width: 60rem;
-    }
-    span{
-        white-space: nowrap;
-        font-size: calc(0.8rem + .2vw);
-    }
-    label {
-        font-size: calc(1.1rem + .2vw);
-        font-family: inherit;
-        line-height: 3rem;
-    }
-    .form-control,
-    .form-select {
-        padding: .33em .75em;  
-        height: 4rem;
-    }
-    .form-outline {
-        padding-left: .75rem;
-        &.searchbar-outline{
-            width: 75%;
-        }
-        .form-control {
-            ~.form-label {
-                padding-top: .5rem;
-            }
-        }     
-        .form-control:focus,
-        .form-control.active{
-            ~.form-label {
-                padding-top: .2rem;
-                left: 1.5rem;
-            }
-        }
-    }
+    // select,.form-outline {
+    //     max-width: 60rem;
+    // }
+    // span{
+    //     white-space: nowrap;
+    //     font-size: calc(0.8rem + .2vw);
+    // }
+    // label {
+    //     font-size: calc(1.1rem + .2vw);
+    //     font-family: inherit;
+    //     line-height: 3rem;
+    // }
+    // .form-control,
+    // .form-select {
+    //     padding: .33em .75em;  
+    //     height: 4rem;
+    // }
+    // .form-outline {
+    //     padding-left: .75rem;
+    //     &.searchbar-outline{
+    //         width: 75%;
+    //     }
+    //     .form-control {
+    //         ~.form-label {
+    //             padding-top: .5rem;
+    //         }
+    //     }     
+    //     .form-control:focus,
+    //     .form-control.active{
+    //         ~.form-label {
+    //             padding-top: .2rem;
+    //             left: 1.5rem;
+    //         }
+    //     }
+    // }
 }
     
 
 
-.form-control.is-invalid,
-.was-validated .form-control:invalid {
-    margin-bottom: 1.5rem;
-}
+// .form-control.is-invalid,
+// .was-validated .form-control:invalid {
+//     margin-bottom: 1.5rem;
+// }
 
-.form-control.is-valid,
-.was-validated .form-control:valid {
-    margin-bottom: 0;
-}
+// .form-control.is-valid,
+// .was-validated .form-control:valid {
+//     margin-bottom: 0;
+// }
 
-.invalid-feedback {
-    top: 4rem;
-}
+// .invalid-feedback {
+//     top: 4rem;
+// }
 
-.form-select.is-invalid, 
-.was-validated .form-select:invalid,
-.form-select.is-valid, 
-.was-validated .form-select:valid {
-    background-position: right .75rem center,center right 3rem;
-}
+// .form-select.is-invalid, 
+// .was-validated .form-select:invalid,
+// .form-select.is-valid, 
+// .was-validated .form-select:valid {
+//     background-position: right .75rem center,center right 3rem;
+// }

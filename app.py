@@ -189,7 +189,7 @@ def register():
 
     # add user to session including inserted document ObjectId
     session["user"] = {
-        "user_id": ObjectIdHelper.fromObjectId(
+        "_id": ObjectIdHelper.fromObjectId(
             insert_new_user_result.inserted_id),
         "username": username_form,
         "user_category_id": category_form_id,  
@@ -737,16 +737,16 @@ def create_quiz():
     # if request.method == "POST":
     new_quiz_data = {
         "title": request.form.get('create_quiz_title'),
-        "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user").get("user_id")),
+        "quiz_owner_id": ObjectIdHelper.toObjectId(session.get("user").get("_id")),
         "quiz_category_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_category')),  
         "quiz_age_range_id": ObjectIdHelper.toObjectId(request.form.get('create_quiz_age_range')),
         "questions": []  
     }
     
     insert_result = mongo.db.quizzes.insert_one(new_quiz_data)
-    if insert_result.acknowledged:
+    if insert_result:
         new_quiz_id = insert_result.inserted_id
-        flash(f"Quiz: {request.form.get('create_quiz_title')} has been created. Add the first question...")
+        flash(f"{request.form.get('create_quiz_title')} has been created")
         
         return redirect(url_for(
             'add_question', 
@@ -771,6 +771,26 @@ def add_question(quiz_id):
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
+    # read quiz data from db with quiz_id
+    quiz_data = mongo.db.quizzes.find_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(quiz_id)
+        },
+        {
+            "_id": False,
+            "title": True,
+            "num_questions": { "$size": "$questions" }
+        }
+    )
+    
+    if not quiz_data:
+        flash("Error: Quiz does not exist. Create a new quiz...")
+        return redirect(url_for('create_quiz'))
+    
+    # if quiz identified by new_quiz_id exists...
+    quiz_title = quiz_data.get('title')
+    num_questions = quiz_data.get('num_questions')
+
     if request.method == "POST":
         # construct form of questions document and insert to questions collection
         insert_result = mongo.db.questions.insert_one(
@@ -786,7 +806,7 @@ def add_question(quiz_id):
             }
         )
 
-        if not insert_result.acknowledged:
+        if not insert_result:
             flash('Error: question was not created. Try again later.')
             # GET request to this endpoint
             return redirect(url_for(
@@ -801,8 +821,8 @@ def add_question(quiz_id):
             { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
         )
         
-        if update_result.acknowledged:
-            flash("Question added to quiz")
+        if update_result:
+            flash(f"Question {num_questions+1} was added to {quiz_title}.")
         else:
             flash("Error: question was not added to quiz. Try again later.")
 
@@ -813,27 +833,6 @@ def add_question(quiz_id):
         ))
 
     # GET request
-    # read quiz data from db with quiz_id
-    quiz_data = mongo.db.quizzes.find_one(
-        { 
-            "_id": ObjectIdHelper.toObjectId(quiz_id)
-        },
-        {
-            "_id": False,
-            "title": True,
-            "num_questions": { "$size": "$questions" }
-        }
-    )
-    
-    if not quiz_data:
-        flash("Error: Quiz does not exist. Create a new quiz...")
-        
-        return redirect(url_for('create_quiz'))
-    
-    # if quiz identified by new_quiz_id exists...
-    quiz_title = quiz_data.get('title')
-    num_questions = quiz_data.get('num_questions')
-
     return render_template(
         "pages/add-question.html",
         active_page="Add Question",
@@ -855,26 +854,35 @@ def delete_quiz(delete_quiz_id):
         return redirect(url_for("login"))
 
     # return and delete quiz document by delete_quiz_id
-    delete_quiz_questions = mongo.db.find_one_and_delete(
+    delete_quiz_data = mongo.db.quizzes.find_one_and_delete(
         { 
             "_id": ObjectIdHelper.toObjectId(delete_quiz_id)
         }
-    ).questions
+    )
 
-    # delete questions in quiz from questions collection
+    if not delete_quiz_data:
+        flash(f"Error: {delete_quiz_data.get('title')} quiz could not be deleted. Try again later")
+        return redirect(url_for('add_question', quiz_id=delete_quiz_id))
+
+
+    # if quiz deleted successfully...
+    # delete all associated from questions collection using quiz data.questions ids 
     delete_result = mongo.db.questions.delete_many(
         { 
-            "_id": { "$in": delete_quiz_questions } 
+            "_id": { "$in": delete_quiz_data.get('questions') } 
         }
     )
 
-    flash("Your quiz was deleted")
+    if (not delete_result) or (not delete_result.deleted_count == len(delete_quiz_data.get('questions'))):
+        flash(f"Error: {delete_quiz_data.get('title')} was deleted but not all questions could be deleted")
+    else:
+        flash(f"{delete_quiz_data.get('title')} quiz and all questions were deleted")
     
     return redirect(url_for('create_quiz'))
 
 
-@app.route("/view_quiz")
-def view_quiz():
+@app.route("/view_quiz/<view_quiz_id>")
+def view_quiz(view_quiz_id):
     """
     docstring here
     """

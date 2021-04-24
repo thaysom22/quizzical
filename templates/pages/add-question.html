@@ -12,8 +12,6 @@
     </div>
 </header>
 
-<!-- add question to: quiz_title section -->
-
 <!-- add question form section -->
 <section class="add-question-wrapper wrapper
     container-lg my-5 p-0"
@@ -115,20 +113,52 @@
                 </div>
             </div>
         </div>
-        <!-- submit -->
-        <div class="row mt-5 d-flex justify-content-center align-items-center">
+
+        <!-- add question num section -->
+        <section>
+            {% if num_questions == 0 %}
+                <h6 class="m-3 p-3 text-center">You are adding the first question to {{ quiz_title }}</h6>
+            {% else %}    
+                <h6 class="m-3 p-3 text-center">You are adding question {{ num_questions + 1 }} to {{ quiz_title }}</h6>
+            {% endif %}
+        </section>
+
+
+        <!-- submit button -->
+        <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                <button type="submit" class="btn btn-rounded cta m-2 d-flex align-items-center">
-                    <i class="fas fa-plus-circle icon-med"></i>
+                <button type="submit" class="btn btn-rounded d-flex align-items-center">
+                    <i class="fas fa-plus-circle icon-sm"></i>
                     Add Question
                 </button>
-                <a href="{{ url_for('delete_quiz', delete_quiz_id=new_quiz_id ) }}" 
-                    type="button" class="btn btn-link" data-mdb-ripple-color="dark"
+            </div>
+        </div>
+        <hr>
+        <!-- publish/discard links -->
+        <div class="row mt-3">
+            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
+                {% if num_questions != 0 %}
+                <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
+                    <button class="btn btn-rounded cta m-2 d-flex align-items-center"
+                        type="button"
+                    >
+                        <i class="fas fa-save icon-med"></i>
+                        Publish
+                    </button>
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
+                <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id ) }}" 
+                    type="button" class="btn btn-link d-flex align-items-center"
+                    data-mdb-ripple-color="dark"
                 >
+                    <i class="fas fa-trash icon-sm"></i>
                     Discard Quiz
                 </a>
             </div>
         </div>
+        
     </form>
 </section>
 

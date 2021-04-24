@@ -458,7 +458,7 @@ The following process can be followed by anyone with an internet connection to r
 2. Install `pip`, `python3` and `git` commandline tools (up to date versions)
 3. Run `git clone https://github.com/thaysom22/quizzical` in terminal to create local clone of GitHub repository for this project
 4. Ensure you are in the project root directory at the terminal prompt
-5. Run `pip install -r requirements.txt` (-r option tells pip that following <file> argument is a requirements formatted file) to install all dependencies required to run application
+5. Run `pip install -r requirements.txt` (-r option tells pip that following <file> argument is a requirements formatted file) to install locally all the dependencies required to run application
 6. Create a file named `env.py` in project root directory
 7. Inside `env.py` file enter the following code:
 ```
@@ -469,6 +469,11 @@ os.environ.setdefault("MONGO_URI", <MONGO_URI>)
 os.environ.setdefault("MONGO_DBNAME", <MONGO_DBNAME>)
 os.environ.setdefault("SECRET_KEY", <SECRET_KEY>)
 ```
+if you wish to enable debug mode also add:
+```
+os.environ.setdefault("DEBUG", "True")
+```
+
 Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` is [here](https://docs.atlas.mongodb.com/). Database must contain the collections: `users`, `quizzes`, `age_ranges`, and `categories`
 8. Run `python3 app.py` command from the terminal to run the application
 9. The website can be viewed by clicking 'open browser' in IDE for the relevant port or entering the url: `http://<IP>:<PORT>/` 

@@ -187,7 +187,8 @@ def register():
         }
     )
 
-    # add user to session including inserted document ObjectId
+    # add user to session including inserted document ObjectId...
+    # include category name and age range name
     session["user"] = {
         "_id": ObjectIdHelper.fromObjectId(
             insert_new_user_result.inserted_id),
@@ -891,10 +892,76 @@ def view_quiz(view_quiz_id):
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
-    if request.method == "GET":
+    view_quiz_data = list(mongo.db.quizzes.aggregate([
+        { 
+            "$match": {
+                "_id": ObjectIdHelper.toObjectId(view_quiz_id) 
+            } 
+        },
+        { 
+            "$lookup": {  
+                "from": "questions",
+                # localField quizzes.questions is an array...
+                # $lookUp operation matches a document in questions coll for each element of arrray
+                "localField": "questions",  
+                "foreignField": "_id",
+                "as": "questions_data"
+            } 
+        },
+        {   
+            "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
+            }
+        },
+        {   
+            "$lookup": {
+                "from": "age_ranges",
+                "localField": "quiz_age_range_id",
+                "foreignField": "_id",
+                "as": "quiz_age_range_data"
+            }
+        },
+        { 
+            "$lookup": {  
+                "from": "users",
+                "localField": "quiz_owner_id",
+                "foreignField": "_id",
+                "as": "quiz_owner_data"
+            } 
+        },
+        { 
+            "$addFields": {
+                "num_questions": { "$size": "$questions" },
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+        } 
+        },
+        { 
+            "$project": {
+                "quiz_owner_data.password": False
+            } 
+        }
+    ]))
+
+    if not view_quiz_data:
+        flash('Error: quiz not found')
         
-        return render_template("pages/view-quiz.html",
+        return redirect(url_for('discover'))
+
+    # view-quiz.html template needs to know if current user is owner of viewed quiz
+    user_is_owner = (
+        # view_quiz_data is a one-element list so access first element
+        view_quiz_data[0].get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+    )
+
+    return render_template("pages/view-quiz.html",
             active_page="View Quiz", 
+            user_is_owner=user_is_owner,
+            view_quiz_data=view_quiz_data,
             loggedIn=loggedIn)
 
 

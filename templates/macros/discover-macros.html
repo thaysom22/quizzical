@@ -57,12 +57,12 @@
 
         <div class="carousel-inner py-5">
             {% for quiz in quizzes  %}
-                    {% if loop.index == 1 %}
+                {% if loop.index == 1 %}
                     <div class="carousel-item quiz-cards-item active">
-                    {% else %}
+                {% else %}
                     <div class="carousel-item quiz-cards-item">
-                    {% endif %}    
-                        <div class="card item-inner">
+                {% endif %}
+                        <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
                             <img
                                 src="{{ quiz.quiz_category_data.img_url }}"
                                 class="d-block w-100"
@@ -80,7 +80,7 @@
                                     <span>{{ quiz.quiz_owner_data.username }}</span>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
             {% endfor %}
         </div>
@@ -155,30 +155,30 @@
     {% else %}
         <div id="{{ title|lower|replace(' ', '-') }}-quiz-cards" >
             <div class="quiz-cards-inner d-flex justify-content-evenly py-3">
-                {% for quiz in quizzes  %}
-                        <div class="quiz-cards-item d-flex justify-content-center align-items-center">
-                            <div class="card item-inner">
-                                <img
-                                    src="{{ quiz.quiz_category_data.img_url }}"
-                                    class="d-block w-100"
-                                    alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                                />
-                                <div class="quiz-cards-text d-flex flex-column justify-content-between">
-                                    <h4>{{ quiz.title }}</h4>
+            {% for quiz in quizzes  %}
+                <div class="quiz-cards-item d-flex justify-content-center align-items-center">
+                    <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
+                        <img
+                            src="{{ quiz.quiz_category_data.img_url }}"
+                            class="d-block w-100"
+                            alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                        />
+                        <div class="quiz-cards-text d-flex flex-column justify-content-between">
+                            <h4>{{ quiz.title }}</h4>
 
-                                    <div class="quiz-cards-info d-flex justify-content-between">
-                                        {% if category %}
-                                            <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                        {% endif %}
-                                        {% if age_range %}
-                                            <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                        {% endif %}
-                                        <span>{{ quiz.quiz_owner_data.username }}</span>
-                                    </div>  
-                                </div>
-                            </div>
+                            <div class="quiz-cards-info d-flex justify-content-between">
+                                {% if category %}
+                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
+                                {% endif %}
+                                {% if age_range %}
+                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                {% endif %}
+                                <span>{{ quiz.quiz_owner_data.username }}</span>
+                            </div>  
                         </div>
-                {% endfor %}
+                    </a>
+                </div>
+            {% endfor %}
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     {% if recc %}
                         <a href="{{ url_for('search',

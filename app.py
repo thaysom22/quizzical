@@ -949,17 +949,18 @@ def view_quiz(view_quiz_id):
 
     if not view_quiz_data:
         flash('Error: quiz not found')
-        
         return redirect(url_for('discover'))
-
+    
+    # view_quiz_data is a one-element list so access first element
+    view_quiz_data = view_quiz_data[0]
     # view-quiz.html template needs to know if current user is owner of viewed quiz
     user_is_owner = (
-        # view_quiz_data is a one-element list so access first element
-        view_quiz_data[0].get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+        view_quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
 
     return render_template("pages/view-quiz.html",
-            active_page="View Quiz", 
+            active_page="View Quiz",
+            view_quiz_id=view_quiz_id, 
             user_is_owner=user_is_owner,
             view_quiz_data=view_quiz_data,
             loggedIn=loggedIn)

@@ -273,6 +273,34 @@ footer a.wheat {
   padding: 0 0.75rem calc(.5rem + .2vw) 0.75rem;
 }
 
+/* view quiz card */
+.quiz-view.grid-container {
+  display: grid;
+  height: 20rem;
+  grid-template: 40% 60%/50% 50%;
+}
+.quiz-view.grid-container span {
+  font-size: calc(1rem + .2vw);
+  color: rgba(0, 0, 0, 0.7);
+  padding: 0 0.75rem calc(.5rem + .2vw) 0.75rem;
+}
+.quiz-view.grid-container .quiz-title {
+  grid-area: 1/1/span 1/span 1;
+}
+.quiz-view.grid-container .quiz-img {
+  grid-area: 1/2/span 1/span 1;
+}
+.quiz-view.grid-container .quiz-img img {
+  width: 100%;
+  height: 100%;
+}
+.quiz-view.grid-container .quiz-info {
+  grid-area: 2/1/span 1/span 1;
+}
+.quiz-view.grid-container .quiz-owner {
+  grid-area: 2/2/span 1/span 1;
+}
+
 /* ******* CAROUSELS ******* */
 .carousel .carousel-caption {
   background-color: rgba(0, 0, 0, 0.4);

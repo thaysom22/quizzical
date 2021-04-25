@@ -2,9 +2,43 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
+<section class="quiz-view-wrapper container-lg my-2">
+    <div class="card quiz-view grid-container">
+        <div class="quiz-title">
+            <h4 class="p-3">
+                {{ view_quiz_data.title }}
+            </h4>
+        </div>
+        <div class="quiz-img">
+            <img
+                src="{{ view_quiz_data.quiz_category_data.img_url }}"
+                class="d-block"
+                alt="Image for {{ view_quiz_data.quiz_category_data.category_name }} quiz"     
+            />
+        </div>
+        <div class="quiz-info d-flex flex-column flex-md-row">
+            <span>{{ view_quiz_data.quiz_category_data.category_name }}</span>
+            <span>{{ view_quiz_data.quiz_age_range_data.age_range }}</span>
+        </div>
+        <div class="quiz-owner">
+        {% if user_is_owner %}
+            <div class="d-flex flex-column flex-md-row">
+                <a href="{{ url_for('edit_quiz', edit_quiz_id=view_quiz_id) }}">
+                    <i class="fas fa-edit icon-med"></i>
+                </a>
+                <a href="{{ url_for('delete_quiz', delete_quiz_id=view_quiz_id) }}">
+                    <i class="fas fa-trash icon-med"></i>
+                </a>
+            </div>
+        {% else %}
+            <span>{{ view_quiz_data.quiz_owner_data.username }}</span>
+        {% endif %}
+        </div>
+    </div>
+</section>
 
-{{ user_is_owner }}
 <hr>
+{{ user_is_owner }}
 {{ view_quiz_data }}
 
 {% endblock %}

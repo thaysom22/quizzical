@@ -966,6 +966,29 @@ def view_quiz(view_quiz_id):
             loggedIn=loggedIn)
 
 
+# needs POST endpoint?
+@app.route("/edit_quiz/<edit_quiz_id>")
+def edit_quiz(edit_quiz_id):
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if not loggedIn:
+        flash("Login first to view your profile")
+        return redirect(url_for("login"))
+
+    # check user is owner by reading from db with edit_quiz_id
+    
+    return render_template(
+        "pages/edit-quiz.html",
+        active_page="Edit Quiz",
+        edit_quiz_id=edit_quiz_id,
+        loggedIn=loggedIn
+    )
+
+
+
+
 @app.route("/profile")
 def profile():
     """

@@ -4,25 +4,35 @@
 
 <section class="quiz-view-wrapper container-lg my-2">
     <div class="card quiz-view grid-container">
-        <div class="quiz-title">
-            <h4 class="p-3">
+        <div class="quiz-title text-center">
+            <h3 class="p-3">
                 {{ view_quiz_data.title }}
-            </h4>
+            </h3>
         </div>
-        <div class="quiz-img">
+        <div class="quiz-img p-2">
             <img
-                src="{{ view_quiz_data.quiz_category_data.img_url }}"
+                src="{{ url_for('static', filename=view_quiz_data.quiz_category_data.img_url) }}"
                 class="d-block"
                 alt="Image for {{ view_quiz_data.quiz_category_data.category_name }} quiz"     
             />
         </div>
-        <div class="quiz-info d-flex flex-column flex-md-row">
+        <div class="quiz-info
+            d-flex flex-column 
+            flex-md-row p-2 
+            justify-content-around
+            align-items-center
+            align-items-md-end
+            text-center"
+        >
             <span>{{ view_quiz_data.quiz_category_data.category_name }}</span>
             <span>{{ view_quiz_data.quiz_age_range_data.age_range }}</span>
         </div>
-        <div class="quiz-owner">
         {% if user_is_owner %}
-            <div class="d-flex flex-column flex-md-row">
+            <div class="quiz-owner d-flex 
+                flex-column flex-md-row p-2
+                justify-content-around
+                align-items-center"
+            >
                 <a href="{{ url_for('edit_quiz', edit_quiz_id=view_quiz_id) }}">
                     <i class="fas fa-edit icon-med"></i>
                 </a>
@@ -31,9 +41,10 @@
                 </a>
             </div>
         {% else %}
-            <span>{{ view_quiz_data.quiz_owner_data.username }}</span>
+            <div class="quiz-owner d-flex justify-content-center align-items-end p-2">
+                <span>{{ view_quiz_data.quiz_owner_data.username }}</span>
+            </div>
         {% endif %}
-        </div>
     </div>
 </section>
 

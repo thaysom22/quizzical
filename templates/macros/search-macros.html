@@ -13,7 +13,7 @@
         </div>
         <div class="quiz-img">
             <img
-                src="{{ quiz_data.quiz_category_data.img_url }}"
+                src="{{ url_for('static', filename=quiz_data.quiz_category_data.img_url) }}"
                 class="d-block"
                 alt="Image for {{ quiz_data.quiz_category_data.category_name }} quiz"     
             />

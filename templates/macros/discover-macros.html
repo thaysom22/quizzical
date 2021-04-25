@@ -64,7 +64,7 @@
                 {% endif %}
                         <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
                             <img
-                                src="{{ quiz.quiz_category_data.img_url }}"
+                                src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
                                 class="d-block w-100"
                                 alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
                             />
@@ -159,7 +159,7 @@
                 <div class="quiz-cards-item d-flex justify-content-center align-items-center">
                     <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
                         <img
-                            src="{{ quiz.quiz_category_data.img_url }}"
+                            src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
                             class="d-block w-100"
                             alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
                         />

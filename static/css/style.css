@@ -112,7 +112,7 @@ a {
 }
 
 span {
-  font-size: calc(1.2rem + .8vw);
+  font-size: calc(1rem + .2vw);
 }
 
 /* containers */
@@ -280,9 +280,9 @@ footer a.wheat {
   grid-template: 35% 35% 30%/50% 50%;
 }
 .quiz-view.grid-container span {
-  font-size: calc(1rem + .2vw);
   color: rgba(0, 0, 0, 0.7);
   padding: 0 0.75rem calc(.5rem + .2vw) 0.75rem;
+  overflow-wrap: break-word;
 }
 .quiz-view.grid-container .quiz-title {
   grid-area: 1/1/span 1/span 1;
@@ -299,6 +299,13 @@ footer a.wheat {
 }
 .quiz-view.grid-container .quiz-owner {
   grid-area: 2/1/span 2/span 1;
+}
+
+/* view question card */
+.question-wrapper hr {
+  width: 90%;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 2rem;
 }
 
 /* ******* CAROUSELS ******* */
@@ -453,6 +460,17 @@ form {
 .num-results span {
   color: rgba(0, 0, 0, 0.7);
   font-size: calc(1.1rem + .4vw);
+}
+
+/* show/hide answer icons */
+.answer .fa-question-circle {
+  color: rgba(0, 0, 0, 0.7);
+}
+.answer .fa-check-circle {
+  color: #66ff00;
+}
+.answer .fa-times-circle {
+  color: #FF0000;
 }
 
 /* MEDIA QUERIES */

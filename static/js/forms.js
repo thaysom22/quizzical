@@ -1,7 +1,5 @@
-
-
-
-/* Form validation user feedback. credit: https://mdbootstrap.com/docs/standard/forms/validation/ */
+/* Form validation user feedback */
+/* credit: https://mdbootstrap.com/docs/standard/forms/validation/ */
 
 (() => {
     'use strict';

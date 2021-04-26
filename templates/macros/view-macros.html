@@ -4,40 +4,37 @@
     question_data, 
     question_num
 ) -%}
-<div class="question-wrapper my-2">
+<div class="question-wrapper my-4">
     <div class="question-inner d-flex 
         flex-column align-items-center 
         py-3 px-1 card"
     >   
         <!-- question number -->
-        <span>Question {{ question_num }}</span>
-
-        <!-- question title -->
-        <h6>{{ question_data.title }}</h6>
-
+        <span class="align-self-start p-3">Q {{ question_num }}</span>
+        <!-- question text -->
+        <h6 class="p-3">{{ question_data.question_text }}</h6>
         <hr>
-
-        <span>Answer choices:</span>
-
+        <span class="align-self-start p-3">Answer choices:</span>
         <!-- view answers -->
-        <div class="view-answers-wrapper row">
+        <div class="view-answers-wrapper row w-100 mt-3 px-5">
         {% for answer_data in question_data.answers %}
-            {% if question_data.correct_answer_index == loop.index %}
-                <div class="answer col-12 col-lg-6 p-2">
-                    <i class="far fa-question-circle icon-sm correct"></i>
-                    <span class="answer-text mx-2"></span>
+            {% if question_data.correct_answer_index == loop.index0 %}
+                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
+                    <i class="far fa-question-circle icon-med correct"></i>
+                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
                 </div>
             {% else %}
-                <div class="answer col-12 col-lg-6 p-2">
-                    <i class="far fa-question-circle icon-sm"></i>
-                    <span class="answer-text mx-2"></span>
+                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
+                    <i class="far fa-question-circle icon-med"></i>
+                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
                 </div>
             {% endif %}
         {% endfor %}
         </div>
         <!-- show/hide answer button -->
-        <button>Show/hide answer</button>
-
+        <div class="d-flex justify-content-center align-items-center p-3 mt-3">
+            <button class="toggle-answer-button">Show answer</button>
+        </div>
     </div>
 
 </div>

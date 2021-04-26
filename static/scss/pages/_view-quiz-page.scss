@@ -1,0 +1,14 @@
+/* show/hide answer icons */
+
+.answer {
+    .fa-question-circle {
+        color: $black-fade;
+    }
+    .fa-check-circle {
+        color: $bright-green;
+    }
+    .fa-times-circle {
+        color: $error-red;
+    }
+}
+

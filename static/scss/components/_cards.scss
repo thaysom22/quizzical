@@ -79,9 +79,9 @@
         min-height: 20rem;
         grid-template: 35% 35% 30% / 50% 50%;
         span {
-            font-size: calc(1rem + .2vw);
             color: $black-fade;
             padding: 0 .75rem calc(.5rem + .2vw) .75rem;
+            overflow-wrap: break-word;
         }
         .quiz-title {
             grid-area: 1 / 1 / span 1 / span 1;
@@ -99,5 +99,15 @@
         .quiz-owner {
             grid-area: 2 / 1 / span 2 / span 1;
         }
+    }
+}
+
+/* view question card */
+
+.question-wrapper {
+    hr {
+        width: 90%;
+        color: $black-fade;
+        margin: 2rem;
     }
 }

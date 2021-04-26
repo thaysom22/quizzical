@@ -957,12 +957,14 @@ def view_quiz(view_quiz_id):
     user_is_owner = (
         view_quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
+    num_questions = view_quiz_data.get('num_questions')
 
     return render_template("pages/view-quiz.html",
             active_page="View Quiz",
             view_quiz_id=view_quiz_id, 
             user_is_owner=user_is_owner,
             view_quiz_data=view_quiz_data,
+            num_questions=num_questions,
             loggedIn=loggedIn)
 
 

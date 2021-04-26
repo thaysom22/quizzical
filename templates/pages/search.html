@@ -25,6 +25,7 @@
                 {{ search_results|length }} quizzes found
             </span>
         </div>
+        <!-- quiz_search_result macros -->
         {% for quiz in search_results %}
             {{ quiz_search_result(quiz) }}
         {% endfor %}

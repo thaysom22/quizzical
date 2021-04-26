@@ -1,11 +1,12 @@
 <!-- VIEW QUIZ PAGE -->
 {% extends "layout/base.html" %}
+{% from 'macros/view-macros.html' import view_question %}
 {% block content %}
 
 <section class="quiz-view-wrapper container-lg my-2">
     <div class="card quiz-view grid-container">
-        <div class="quiz-title text-center">
-            <h3 class="p-3">
+        <div class="quiz-title d-flex justify-content-center justify-content-md-start">
+            <h3 class="p-4 text-center">
                 {{ view_quiz_data.title }}
             </h3>
         </div>
@@ -26,6 +27,13 @@
         >
             <span>{{ view_quiz_data.quiz_category_data.category_name }}</span>
             <span>{{ view_quiz_data.quiz_age_range_data.age_range }}</span>
+            <span>
+            {% if num_questions == 1 %}
+                1 question
+            {% else %}
+                {{ num_questions }} questions
+            {% endif %}
+            </span>
         </div>
         {% if user_is_owner %}
             <div class="quiz-owner d-flex 
@@ -47,6 +55,21 @@
         {% endif %}
     </div>
 </section>
+
+<!-- view questions section -->
+<section class="container-lg my-5 px-2 view-questions-wrapper">
+    <!-- view question macros -->
+    {% for question_data in view_quiz_data.questions_data %}
+        {{ view_question(question_data, loop.index) }}
+    {% endfor %}
+</section>
+
+    
+
+
+
+
+
 
 <hr>
 {{ user_is_owner }}

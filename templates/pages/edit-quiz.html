@@ -2,22 +2,77 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
+<!-- main heading -->
+<header>
+    <div class="p-5 text-center main-heading container">
+        <div class="d-flex justify-content-center align-items-center col-12">
+            <i class="fas fa-edit icon-med px-3"></i>
+            <h4 class="text-center px-2">{{ edit_quiz_data.title }}</h4> 
+        </div>
+    </div>
+</header>
+
+<!-- edit quiz form -->
 <section class="quiz-edit-wrapper container-lg my-2">
-    <form class="card quiz-edit-form grid-container"
+    <form class="card quiz-edit grid-container"
         method="POST" 
         action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
     >
-        <div class="quiz-title d-flex justify-content-center justify-content-md-start">
-            <label for="edit-title">Title:</label>
-            <div class="form-outline">
-                <input type="text" id="edit-title" 
-                    name="edit-title" class="form-control form-control-lg"
-                    placeholder="{{ edit_quiz_data.title }}"
-                />
-            </div>  
+        <div class="edit-quiz-data d-flex flex-column pe-3">
+            <div class="edit-quiz-title my-2">
+                <label for="edit-title" class="py-2">Title:</label>
+                <div class="form-outline">
+                    <input type="text" id="edit-title" 
+                        name="edit-title" class="form-control form-control-lg"
+                        value="{{ edit_quiz_data.title }}" required
+                    />
+                </div>  
+            </div>
+            <div class="edit-quiz-category my-2">
+                <label for="edit-category" class="py-2">Category:</label>
+                <select id="edit-category" 
+                    name="edit-category"
+                    class="form-select" required
+                >
+                    {% for category in all_categories %}
+                        {% if category._id == edit_quiz_data.quiz_category_id %}
+                            <option 
+                                value="{{ edit_quiz_data.quiz_category_id }}"
+                                selected
+                            >
+                                {{ edit_quiz_data.quiz_category_data.category_name }}
+                            </option>
+                        {% else %}
+                            <option value="{{ category._id }}">
+                                {{ category.category_name }}
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="edit-quiz-age-range my-2">
+                <label for="edit-age-range" class="py-2">Age range:</label>
+                <select id="edit-age-range" 
+                    name="edit-age-range"
+                    class="form-select" required
+                >
+                    {% for age_range in all_age_ranges %}
+                        {% if age_range._id == edit_quiz_data.quiz_age_range_id %}
+                            <option 
+                                value="{{ edit_quiz_data.quiz_age_range_id }}"
+                                selected
+                            >
+                                {{ edit_quiz_data.quiz_age_range_data.age_range }}
+                            </option>
+                        {% else %}
+                            <option value="{{ age_range._id }}">
+                                {{ age_range.age_range }}
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-
-
         <div class="quiz-img p-2">
             <img
                 src="{{ url_for('static', filename=edit_quiz_data.quiz_category_data.img_url) }}"
@@ -26,29 +81,36 @@
             />
         </div>
         <div class="quiz-info
-            d-flex flex-column 
-            flex-md-row p-2 
-            justify-content-around
-            align-items-center
-            align-items-md-end
-            text-center"
+            d-flex text-center
+            justify-content-center
+            p-2 align-items-center"
         >
-            <span>{{ edit_quiz_data.quiz_category_data.category_name }}</span>
-            <span>{{ edit_quiz_data.quiz_age_range_data.age_range }}</span>
             <span>
-            {% if num_questions == 1 %}
-                1 question
-            {% else %}
-                {{ num_questions }} questions
-            {% endif %}
+                {% if num_questions == 1 %}
+                    1 question
+                {% else %}
+                    {{ num_questions }} questions
+                {% endif %}
             </span>
+        </div>
+        <div class="quiz-edit-submit d-flex 
+            flex-column flex-md-row p-2
+            justify-content-around
+            align-items-center"
+        >
+            <button type="submit" class="btn btn-rounded">
+                Confirm changes
+                <i class="fas fa-check-square icon-sm"></i>
+            </button>
         </div>
     </form>
 </section>
 
-
-{% endblock %}
-
 <hr>
 <strong>edit_quiz_data</strong>
 {{ edit_quiz_data }}
+
+
+{% endblock %}
+
+

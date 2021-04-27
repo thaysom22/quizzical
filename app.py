@@ -968,7 +968,7 @@ def view_quiz(view_quiz_id):
             loggedIn=loggedIn)
 
 
-@app.route("/edit_quiz/<edit_quiz_id>")
+@app.route("/edit_quiz/<edit_quiz_id>", methods=["GET", "POST"])
 def edit_quiz(edit_quiz_id):
     """
     docstring here
@@ -978,9 +978,19 @@ def edit_quiz(edit_quiz_id):
         flash("Login first to view your profile")
         return redirect(url_for("login"))
 
-    # if request.method == "POST":
-        # gather form data
+    if request.method == "POST":
+        # input values validated client-side
+        new_title = request.form.get('edit-title')
+        new_category = request.form.get('edit-category')
+        new_age_range = request.form.get('edit-age-range')
 
+    
+    # if request.method == "GET":
+    # read all categories and all age_ranges from db
+    all_categories = list(mongo.db.categories
+        .find(sort=[("category_name", 1)]))
+    all_age_ranges = list(mongo.db.age_ranges
+        .find(sort=[("order", 1)]))
 
     edit_quiz_data = list(mongo.db.quizzes.aggregate([
         { 
@@ -1053,10 +1063,11 @@ def edit_quiz(edit_quiz_id):
 
     num_questions = edit_quiz_data.get('num_questions')
 
-
     return render_template(
         "pages/edit-quiz.html",
         active_page="Edit Quiz",
+        all_categories=all_categories,
+        all_age_ranges=all_age_ranges,
         edit_quiz_data=edit_quiz_data,
         num_questions=num_questions,
         edit_quiz_id=edit_quiz_id,

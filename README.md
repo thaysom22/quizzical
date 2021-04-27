@@ -500,7 +500,9 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 
 * Code Institute 'gitpod-full-template' repository used to setup image and dependencies for gitpod workspace
 * Code Institute Task Manager walkthrough project - app.py and directory structure referred to to build functionality and structure of this project
-* [Material Design for Bootstrap](https://mdbootstrap.com/) classes and scripts used for layout and base for many components on this site
+* [Material Design for Bootstrap](https://mdbootstrap.com/) classes and scripts used for layout and base for many components on this site:
+    * Form layout, input element styling and effects, validation
+    * Utility classes used for alignment, padding, margin, flexbox settings
 
 ### Acknowledgements
 

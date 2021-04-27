@@ -968,7 +968,6 @@ def view_quiz(view_quiz_id):
             loggedIn=loggedIn)
 
 
-# needs POST endpoint?
 @app.route("/edit_quiz/<edit_quiz_id>")
 def edit_quiz(edit_quiz_id):
     """
@@ -979,11 +978,87 @@ def edit_quiz(edit_quiz_id):
         flash("Login first to view your profile")
         return redirect(url_for("login"))
 
+    # if request.method == "POST":
+        # gather form data
+
+
+    edit_quiz_data = list(mongo.db.quizzes.aggregate([
+        { 
+            "$match": {
+                "_id": ObjectIdHelper.toObjectId(edit_quiz_id) 
+            } 
+        },
+        { 
+            "$lookup": {  
+                "from": "questions",
+                "localField": "questions",  
+                "foreignField": "_id",
+                "as": "questions_data"
+            } 
+        },
+        {   
+            "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
+            }
+        },
+        {   
+            "$lookup": {
+                "from": "age_ranges",
+                "localField": "quiz_age_range_id",
+                "foreignField": "_id",
+                "as": "quiz_age_range_data"
+            }
+        },
+        { 
+            "$lookup": {  
+                "from": "users",
+                "localField": "quiz_owner_id",
+                "foreignField": "_id",
+                "as": "quiz_owner_data"
+            } 
+        },
+        { 
+            "$addFields": {
+                "num_questions": { "$size": "$questions" },
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]},
+        } 
+        },
+        { 
+            "$project": {
+                "quiz_owner_data.password": False
+            } 
+        }
+    ]))
+
+    if not edit_quiz_data:
+        flash('Error: quiz not found')
+        return redirect(url_for('discover'))
+
     # check user is owner by reading from db with edit_quiz_id
-    
+    # edit_quiz_data is a one-element list so access first element
+    edit_quiz_data = edit_quiz_data[0]
+    # redirect if current user is not owner of quiz
+    user_is_owner = (
+        edit_quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+    )
+
+    if not user_is_owner:
+        flash('Warning: cannot edit quiz - current user is not quiz owner')
+        return redirect(url_for('view_quiz', view_quiz_id=edit_quiz_id))
+
+    num_questions = edit_quiz_data.get('num_questions')
+
+
     return render_template(
         "pages/edit-quiz.html",
         active_page="Edit Quiz",
+        edit_quiz_data=edit_quiz_data,
+        num_questions=num_questions,
         edit_quiz_id=edit_quiz_id,
         loggedIn=loggedIn
     )

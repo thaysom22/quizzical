@@ -2,6 +2,7 @@
 
 .main-heading {
     background-color: $white;
+    margin-bottom: calc(2.5rem + .5vw);
     h1,h2 {  
         color: $magenta;
         font-weight: 600;

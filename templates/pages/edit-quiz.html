@@ -15,11 +15,11 @@
 
 <!-- edit quiz form -->
 <section class="quiz-edit-wrapper container-lg my-2">
-    <form class="card quiz-edit grid-container"
-        method="POST" 
-        action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
-    >
-        <div class="edit-quiz-data d-flex flex-column pe-3">
+    <div class="card quiz-edit grid-container">
+        <form method="POST" 
+            action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
+            class="edit-quiz-data d-flex flex-column pe-3"
+        >
             <div class="edit-quiz-title my-2">
                 <label for="edit-title" class="py-2">Title:</label>
                 <div class="form-outline">
@@ -73,7 +73,16 @@
                     {% endfor %}
                 </select>
             </div>
-        </div>
+            <div class="edit-quiz-submit d-flex 
+                p-2 justify-content-center
+                align-items-center mt-3"
+            >
+                <button type="submit" class="btn btn-rounded">
+                    <i class="fas fa-save icon-sm"></i>
+                    Save changes
+                </button>
+            </div>
+        </form>
         <div class="quiz-img p-2">
             <img
                 src="{{ url_for('static', filename=edit_quiz_data.quiz_category_data.img_url) }}"
@@ -81,11 +90,10 @@
                 alt="Image for {{ edit_quiz_data.quiz_category_data.category_name }} quiz"     
             />
         </div>
-        <div class="quiz-info
-            d-flex text-center
-            justify-content-center
-            p-2 align-items-center"
-        >
+        <div class="quiz-edit-add-question d-flex 
+            p-2 justify-content-around my-2
+            align-items-center flex-column"
+        >   
             <span>
                 {% if num_questions == 1 %}
                     1 question
@@ -93,18 +101,14 @@
                     {{ num_questions }} questions
                 {% endif %}
             </span>
+            <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
+                <button class="btn btn-rounded cta">
+                    <i class="fas fa-plus-circle icon-sm"></i>
+                    Add Question
+                </button>
+            </a>
         </div>
-        <div class="quiz-edit-submit d-flex 
-            flex-column flex-md-row p-2
-            justify-content-around
-            align-items-center"
-        >
-            <button type="submit" class="btn btn-rounded">
-                Confirm changes
-                <i class="fas fa-check-square icon-sm"></i>
-            </button>
-        </div>
-    </form>
+    </div>
 </section>
 
 <!-- edit questions section -->

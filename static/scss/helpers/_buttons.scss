@@ -1,8 +1,8 @@
 /* ******* BUTTONS ******* */
 
 .btn {
-    padding: .75rem 2rem;
-    font-size: calc(1.2rem + .6vw);
+    padding: .5rem 1rem;
+    font-size: calc(1rem + .4vw);
     font-family: $tertiary;
     line-height: initial; 
     white-space: nowrap;  
@@ -17,8 +17,8 @@
         background-color: $magenta;   
         color: $white;
         &.btn-lg {
-            font-size: calc(1.4rem + .8vw);
-            padding: 1rem 2.5rem;
+            font-size: calc(1.2rem + .5vw);
+            padding: .75rem 1.5rem;
             margin: .5rem;
         }
         &.btn-nav {

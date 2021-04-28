@@ -865,10 +865,29 @@ def edit_quiz(edit_quiz_id):
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        # input values validated client-side
+        # input values have been validated client-side
         new_title = request.form.get('edit-title')
         new_category = request.form.get('edit-category')
         new_age_range = request.form.get('edit-age-range')
+        # update quiz document in db
+        update_quiz_result = mongo.db.quizzes.update_one(
+            { "_id": ObjectIdHelper.toObjectId(edit_quiz_id) },
+            { 
+                "$set": { 
+                    "title": new_title,
+                    "quiz_category_id": ObjectIdHelper.toObjectId(new_category),
+                    "quiz_age_range_id": ObjectIdHelper.toObjectId(new_age_range),
+                } 
+            }
+        )    
+        # update successful guard clause
+        if not update_quiz_result:
+            flash("Error: quiz could not be updated. Try again later.")
+        else:
+            flash("Quiz updated.")
+
+        # redirect to view same quiz
+        return redirect(url_for('view_quiz', view_quiz_id=edit_quiz_id))
 
     
     # if request.method == "GET":
@@ -1060,12 +1079,12 @@ def add_question(quiz_id):
 
         # if insertion to questions collection successful...
         # update questions field of quiz document in quizzes collection identified by new_quiz_id 
-        update_result = mongo.db.quizzes.update_one(
+        update_quiz_result = mongo.db.quizzes.update_one(
             { "_id": ObjectIdHelper.toObjectId(quiz_id) },
             { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
         )
         
-        if update_result:
+        if update_quiz_result:
             flash(f"Question {num_questions+1} was added to {quiz_title}.")
         else:
             flash("Error: question was not added to quiz. Try again later.")

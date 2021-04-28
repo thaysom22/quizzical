@@ -5,10 +5,10 @@
 
 <section class="quiz-view-wrapper container-lg my-2">
     <div class="card quiz-view grid-container">
-        <div class="quiz-title d-flex justify-content-center justify-content-md-start">
-            <h3 class="p-4 text-center">
+        <div class="quiz-title d-flex justify-content-center">
+            <h4 class="p-4">
                 {{ view_quiz_data.title }}
-            </h3>
+            </h4>
         </div>
         <div class="quiz-img p-2">
             <img
@@ -36,8 +36,7 @@
             </span>
         </div>
         {% if user_is_owner %}
-            <div class="quiz-owner d-flex 
-                flex-column flex-md-row p-2
+            <div class="quiz-owner d-flex p-2
                 justify-content-around
                 align-items-center"
             >

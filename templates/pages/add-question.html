@@ -134,7 +134,8 @@
             </div>
         </div>
         <hr>
-        <!-- publish/discard links -->
+        {% if previous_page|default(None) == "create" %}
+        <!-- from create quiz links -->
         <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center align-items-center mb-1">
                 {% if num_questions != 0 %}
@@ -143,7 +144,7 @@
                         type="button"
                     >
                         <i class="fas fa-save icon-med"></i>
-                        Publish
+                        Save Quiz
                     </button>
                 </a>
                 {% endif %}
@@ -158,7 +159,22 @@
                 </a>
             </div>
         </div>
-        
+        {% else %}
+        <!-- from edit quiz links -->
+        <div class="row mt-3">
+            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
+                <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
+                    <button class="btn btn-rounded cta 
+                        m-2 d-flex align-items-center"
+                        type="button"
+                    >
+                        <i class="fas fa-save icon-med"></i>
+                        Save
+                    </button>
+                </a>
+            </div>
+        </div>
+        {% endif %}
     </form>
 </section>
 

@@ -756,6 +756,7 @@ def create_quiz():
         return redirect(url_for(
             'add_question', 
             quiz_id=new_quiz_id,
+            create_quiz_process='true'
         ))
 
     else:
@@ -1054,6 +1055,9 @@ def add_question(quiz_id):
     quiz_title = quiz_data.get('title')
     num_questions = quiz_data.get('num_questions')
 
+    # determine if this endpoint was requested during a create quiz process
+    create_quiz_process = request.args.get('create_quiz_process')
+
     if request.method == "POST":
         # construct form of questions document and insert to questions collection
         insert_result = mongo.db.questions.insert_one(
@@ -1075,6 +1079,7 @@ def add_question(quiz_id):
             return redirect(url_for(
                 'add_question', 
                 quiz_id=quiz_id,
+                create_quiz_process=create_quiz_process
             ))
 
         # if insertion to questions collection successful...
@@ -1093,6 +1098,7 @@ def add_question(quiz_id):
         return redirect(url_for(
             'add_question', 
             quiz_id=quiz_id,
+            create_quiz_process=create_quiz_process
         ))
 
     # GET request
@@ -1103,6 +1109,7 @@ def add_question(quiz_id):
         quiz_id=quiz_id,
         quiz_title=quiz_title,
         num_questions=num_questions,
+        create_quiz_process=create_quiz_process
     )
 
 

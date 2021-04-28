@@ -14,8 +14,8 @@
         <!-- question number and edit/delete buttons -->
         {% if editing %}
             <div class="d-flex justify-content-between w-100">
-                <span class="p-3">Q {{ question_num }}</span>
-                <div class="edit-delete-buttons me-3">
+                <h6 class="p-3">Q {{ question_num }}</h6>
+                <div class="edit-delete-buttons m-3">
                     <a href="{{ url_for('edit_question', quiz_id=edit_quiz_id, edit_question_id=question_data._id)}}">
                         <i class="fas fa-edit icon-med p-3"></i>
                     </a>
@@ -50,7 +50,7 @@
         </div>
         <!-- show/hide answer button -->
         <div class="d-flex justify-content-center align-items-center p-3 mt-3">
-            <button class="toggle-answer-button">Show answer</button>
+            <button class="toggle-answer-button btn btn-rounded">Show answer</button>
         </div>
     </div>
 

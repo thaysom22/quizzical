@@ -119,6 +119,18 @@
     {% endfor %}
 </section>
 
+<!-- final add question button -->
+<section class="container-sm my-3">
+    <div class="d-flex justify-content-center align-items-center p-5">
+        <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
+            <button class="btn btn-rounded cta">
+                <i class="fas fa-plus-circle icon-sm"></i>
+                Add Question
+            </button>
+        </a>
+    </div>
+</section>
+
 
 <hr>
 <strong>edit_quiz_data</strong>
@@ -127,4 +139,7 @@
 
 {% endblock %}
 
-
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/view-question-answers.js')}}"></script>
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+{% endblock %}

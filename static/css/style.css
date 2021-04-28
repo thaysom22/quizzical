@@ -132,6 +132,7 @@ main .flashed-messages h4 {
   top: 6rem;
 }
 .main-inner-wrapper .container,
+.main-inner-wrapper .container-sm,
 .main-inner-wrapper .container-lg {
   background-color: #FFFFFF;
 }
@@ -313,7 +314,7 @@ footer a.wheat {
 .quiz-edit.grid-container {
   display: grid;
   min-height: 20rem;
-  grid-template: 70% 30%/50% 50%;
+  grid-template: 60% 40%/60% 40%;
 }
 .quiz-edit.grid-container span {
   color: rgba(0, 0, 0, 0.7);

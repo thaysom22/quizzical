@@ -1,16 +1,33 @@
-<!-- VIEW QUESTION MACRO  -->
+<!-- VIEW/EDIT QUESTION MACRO  -->
 
-{% macro view_question(
+{% macro view_edit_question(
     question_data, 
-    question_num
+    question_num, 
+    editing
 ) -%}
+
 <div class="question-wrapper my-4">
     <div class="question-inner d-flex 
         flex-column align-items-center 
         py-3 px-1 card"
     >   
-        <!-- question number -->
-        <span class="align-self-start p-3">Q {{ question_num }}</span>
+        <!-- question number and edit/delete buttons -->
+        {% if editing %}
+            <div class="d-flex justify-content-between w-100">
+                <span class="p-3">Q {{ question_num }}</span>
+                <div class="edit-delete-buttons me-3">
+                    <a href="{{ url_for('edit_question', quiz_id=edit_quiz_id, edit_question_id=question_data._id)}}">
+                        <i class="fas fa-edit icon-med p-3"></i>
+                    </a>
+                    <a href="{{ url_for('delete_question', quiz_id=delete_quiz_id, delete_question_id=question_data._id)}}">
+                        <i class="fas fa-trash icon-med p-3"></i>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <span class="p-3 align-self-start">Q {{ question_num }}</span>
+        {% endif %}
+        
         <!-- question text -->
         <h6 class="p-3">{{ question_data.question_text }}</h6>
         <hr>
@@ -38,6 +55,5 @@
     </div>
 
 </div>
-
 
 {%- endmacro %}

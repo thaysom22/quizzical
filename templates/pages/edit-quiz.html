@@ -1,5 +1,6 @@
 <!-- EDIT QUIZ PAGE -->
 {% extends "layout/base.html" %}
+{% from 'macros/view-edit-macros.html' import view_edit_question %}
 {% block content %}
 
 <!-- main heading -->
@@ -105,6 +106,15 @@
         </div>
     </form>
 </section>
+
+<!-- edit questions section -->
+<section class="container-lg my-5 px-2 view-questions-wrapper">
+    <!-- edit question macros -->
+    {% for question_data in edit_quiz_data.questions_data %}
+        {{ view_edit_question(question_data, loop.index, True) }}
+    {% endfor %}
+</section>
+
 
 <hr>
 <strong>edit_quiz_data</strong>

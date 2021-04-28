@@ -1,6 +1,6 @@
 <!-- VIEW QUIZ PAGE -->
 {% extends "layout/base.html" %}
-{% from 'macros/view-macros.html' import view_question %}
+{% from 'macros/view-edit-macros.html' import view_edit_question %}
 {% block content %}
 
 <section class="quiz-view-wrapper container-lg my-2">
@@ -60,7 +60,7 @@
 <section class="container-lg my-5 px-2 view-questions-wrapper">
     <!-- view question macros -->
     {% for question_data in view_quiz_data.questions_data %}
-        {{ view_question(question_data, loop.index) }}
+        {{ view_edit_question(question_data, loop.index, False) }}
     {% endfor %}
 </section>
 

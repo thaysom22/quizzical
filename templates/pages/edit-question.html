@@ -41,8 +41,92 @@
             </div>  
         </div>
         <hr>
-
         <span class="align-self-start p-3">Answer choices:</span>
+        <!-- edit answers wrapper -->
+        <div class="d-flex row justify-content-center align-items-center">
+            <!-- edit answers text inputs -->
+            {% for answer_data in question_data.answers %}
+                <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                    <label for="answer-0" class="form-label">Answer option 1</label>
+                    <div class="form-outline w-100">
+                        <input name="answer_0" id="answer-0" type="text" 
+                            maxlength="30" value="{{ edit_question_data_answers }}" 
+                            class="form-control form-control-lg" required
+
+                        />
+                        <div class="invalid-feedback">
+                            Answer must be less than 30 characters
+                        </div>
+                    </div>
+                    <!-- edit answer radio button -->
+                    {% if question_data.correct_answer_index == loop.index0 %}
+                        <div class="d-flex align-items-center p-3">
+                            <input type="radio" id="correct_answer_0" name="correct_answer_index" value="0" required>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+                
+        
+            <!-- answer 1 text input -->
+            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                <div class="form-outline w-100">
+                    <input name="answer_1" id="answer_1" type="text" 
+                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_1" class="form-label">Answer option 2</label>
+                    <div class="invalid-feedback">
+                        Answer must be less than 30 characters
+                    </div>
+                </div>
+                <!-- answer 1 radio button -->
+                <div class="d-flex align-items-center p-3">
+                    <input type="radio" id="correct_answer_1" name="correct_answer_index" value="1" required>
+                </div>
+            </div>
+            <!-- answer 2 text input -->
+            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                <div class="form-outline w-100">
+                    <input name="answer_2" id="answer_2" type="text" 
+                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_2" class="form-label">Answer option 3</label>
+                    <div class="invalid-feedback">
+                        Answer must be less than 30 characters
+                    </div>
+                </div>
+                <!-- answer 2 radio button -->
+                <div class="d-flex align-items-center p-3">
+                    <input type="radio" id="correct_answer_2" name="correct_answer_index" value="2" required>
+                </div>
+            </div>
+            <!-- answer 3 text input -->
+            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                <div class="form-outline w-100">
+                    <input name="answer_3" id="answer_3" type="text" 
+                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
+                        class="form-control form-control-lg" required
+                    />
+                    <label for="answer_3" class="form-label">Answer option 4</label>
+                    <div class="invalid-feedback">
+                        Answer must be less than 30 characters
+                    </div>
+                </div>
+                <!-- answer 3 radio button -->
+                <div class="d-flex align-items-center p-3">
+                    <input type="radio" id="correct_answer_3" name="correct_answer_index" value="3" required>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        
         <!-- view answers -->
         <div class="view-answers-wrapper row w-100 mt-3 px-5">
         {% for answer_data in question_data.answers %}

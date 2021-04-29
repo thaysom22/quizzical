@@ -1172,17 +1172,20 @@ def edit_question(quiz_id, edit_question_id):
         # redirect to where quiz id is not required
         return redirect(url_for('discover'))
     
+    # if quiz identified by new_quiz_id exists...
+    quiz_title = quiz_data.get('title')
     # confirm current user is quiz owner
     user_is_owner = (
         quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
 
     if not user_is_owner:
-        flash("Disallowed action: cannot edit quiz - you are not the owner.")
+        flash(f"Disallowed action: cannot edit ${quiz_title} - you are not the owner.")
         return redirect(url_for('view_quiz', view_quiz_id=quiz_id))
 
+    # read question data from db with edit_question_id
+    edit_question_data = mongo.db.questions
 
-    
 
     if request.method == "POST":
         # gather form data
@@ -1192,12 +1195,10 @@ def edit_question(quiz_id, edit_question_id):
     # GET request
     
     
-    # if quiz identified by new_quiz_id exists...
-    quiz_title = quiz_data.get('title')
+    
     num_questions = quiz_data.get('num_questions')
 
-    # read question data from db
-
+    
     
 
 

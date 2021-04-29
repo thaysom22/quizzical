@@ -990,40 +990,71 @@ def delete_quiz(delete_quiz_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to create quizzes")
+        flash("Disallowed action: login first to create quizzes")
         return redirect(url_for("login"))
 
+    # get url of previous page
+    previous_page_url = request.referrer or url_for('discover')
+
+    # read document from quizzes collection by delete_quiz_id
+    delete_quiz_data = mongo.db.quizzes.find_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(delete_quiz_id)
+        },
+        {
+            "title": True,
+            "quiz_owner_id": True,
+            "questions": True
+        }
+    )
+
+    if not delete_quiz_data:
+        flash("Error: quiz not deleted - quiz not found")
+        return redirect(previous_page_url)
+        
     # confirm current user is quiz owner
+    user_is_owner = (
+        delete_quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+    )
+
+    if not user_is_owner:
+        flash("Disallowed action: quiz not deleted - you are not the owner.")
+        return redirect(previous_page_url)
 
     # find and delete quiz document by delete_quiz_id
-    delete_quiz_data = mongo.db.quizzes.find_one_and_delete(
+    delete_quiz_result = mongo.db.quizzes.delete_one(
         { 
             "_id": ObjectIdHelper.toObjectId(delete_quiz_id)
         }
     )
 
-    # delete interaction will occur from view quiz page, edit quiz page...
-    # or from add question page during create quiz process
-
-    if not delete_quiz_data:
-        flash(f"Error: {delete_quiz_data.get('title')} quiz could not be deleted. Try again later")
-        return redirect(url_for('add_question', quiz_id=delete_quiz_id))
-
+    if not delete_quiz_result:
+        flash(f"Error: quiz could not be deleted - try again later")
+        return redirect(previous_page_url)
 
     # if quiz deleted successfully...
-    # delete all associated from questions collection using quiz data.questions ids 
-    delete_result = mongo.db.questions.delete_many(
-        { 
-            "_id": { "$in": delete_quiz_data.get('questions') } 
-        }
-    )
+    # delete all associated from questions collection using quiz data.questions ids
+    num_questions = len(delete_quiz_data.get('questions'))
+    if num_questions > 0: 
+        delete_questions_result = mongo.db.questions.delete_many(
+            { 
+                "_id": { "$in": delete_quiz_data.get('questions') } 
+            }
+        )
 
-    if (not delete_result) or (not delete_result.deleted_count == len(delete_quiz_data.get('questions'))):
-        flash(f"Error: {delete_quiz_data.get('title')} was deleted but not all questions could be deleted")
+        if (not delete_questions_result) or (not delete_questions_result.deleted_count == num_questions):
+            flash(f"Error: {delete_quiz_data.get('title')} was deleted but not all questions could be deleted")
+        else:
+            flash(f"Success: quiz and all questions were deleted")   
+
     else:
-        flash(f"{delete_quiz_data.get('title')} quiz and all questions were deleted")
-    
-    return redirect(url_for('create_quiz'))
+        flash(f"Success: quiz was deleted") 
+
+    # determine if this endpoint was requested during a create quiz process
+    if request.args.get('create_quiz_process') == 'true':
+        return redirect(url_for('create_quiz'))
+
+    return redirect(url_for('discover'))
 
 
 ### CREATE, UPDATE, DELETE QUESTIONS ###

@@ -19,7 +19,11 @@
     <form  
         id="add-question-form"
         method="POST"
-        action="{{ url_for('add_question', quiz_id=quiz_id) }}"
+        action="{{ url_for(
+            'add_question',
+            quiz_id=quiz_id,
+            create_quiz_process=create_quiz_process
+            ) }}"
         novalidate
     >
         <!-- question textarea input -->
@@ -123,7 +127,6 @@
             {% endif %}
         </section>
 
-
         <!-- submit button -->
         <div class="row mt-3">
             <div class="col-12 d-flex justify-content-center align-items-center mb-2">
@@ -134,10 +137,10 @@
             </div>
         </div>
         <hr>
-        {% if previous_page|default(None) == "create" %}
+        {% if create_quiz_process|default(None) == "true" %}
         <!-- from create quiz links -->
-        <div class="row mt-3">
-            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
+        <div class="row mt-3 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
                 {% if num_questions != 0 %}
                 <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
                     <button class="btn btn-rounded cta m-2 d-flex align-items-center"
@@ -149,8 +152,8 @@
                 </a>
                 {% endif %}
             </div>
-            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
-                <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id ) }}" 
+            <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
+                <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id) }}" 
                     type="button" class="btn btn-link d-flex align-items-center"
                     data-mdb-ripple-color="dark"
                 >

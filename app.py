@@ -993,12 +993,17 @@ def delete_quiz(delete_quiz_id):
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
-    # return and delete quiz document by delete_quiz_id
+    # confirm current user is quiz owner
+
+    # find and delete quiz document by delete_quiz_id
     delete_quiz_data = mongo.db.quizzes.find_one_and_delete(
         { 
             "_id": ObjectIdHelper.toObjectId(delete_quiz_id)
         }
     )
+
+    # delete interaction will occur from view quiz page, edit quiz page...
+    # or from add question page during create quiz process
 
     if not delete_quiz_data:
         flash(f"Error: {delete_quiz_data.get('title')} quiz could not be deleted. Try again later")
@@ -1075,33 +1080,27 @@ def add_question(quiz_id):
 
         if not insert_result:
             flash('Error: question was not created. Try again later.')
-            # GET request to this endpoint
-            return redirect(url_for(
-                'add_question', 
-                quiz_id=quiz_id,
-                create_quiz_process=create_quiz_process
-            ))
+        else:  
+            # if insertion to questions collection successful...
+            # update questions field of quiz document in quizzes collection identified by new_quiz_id 
+            update_quiz_result = mongo.db.quizzes.update_one(
+                { "_id": ObjectIdHelper.toObjectId(quiz_id) },
+                { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
+            )
+            
+            if update_quiz_result:
+                flash(f"Question {num_questions+1} was added to {quiz_title}.")
+            else:
+                flash("Error: question was not added to quiz. Try again later.")
 
-        # if insertion to questions collection successful...
-        # update questions field of quiz document in quizzes collection identified by new_quiz_id 
-        update_quiz_result = mongo.db.quizzes.update_one(
-            { "_id": ObjectIdHelper.toObjectId(quiz_id) },
-            { "$push": { "questions": ObjectIdHelper.toObjectId(insert_result.inserted_id) } }
-        )
-        
-        if update_quiz_result:
-            flash(f"Question {num_questions+1} was added to {quiz_title}.")
-        else:
-            flash("Error: question was not added to quiz. Try again later.")
-
-        # GET request to this endpoint
+        # send GET request to this endpoint
         return redirect(url_for(
             'add_question', 
             quiz_id=quiz_id,
             create_quiz_process=create_quiz_process
         ))
 
-    # GET request
+    # if request.method == "GET":
     return render_template(
         "pages/add-question.html",
         active_page="Add Question",
@@ -1157,7 +1156,7 @@ def edit_question(quiz_id, edit_question_id):
         "pages/edit-question.html",
         active_page="Edit Question",
         loggedIn=loggedIn,
-        edit_quiz_id=edit_quiz_id,
+        edit_quiz_id=quiz_id,
         edit_question_id=edit_question_id,
         quiz_title=quiz_title,
         num_questions=num_questions

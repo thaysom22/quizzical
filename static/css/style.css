@@ -313,7 +313,7 @@ footer a.wheat {
 /* edit quiz card */
 .quiz-edit.grid-container {
   display: grid;
-  min-height: 20rem;
+  max-height: 50rem;
   grid-template: 60% 40%/60% 40%;
 }
 .quiz-edit.grid-container span {

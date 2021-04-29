@@ -3,7 +3,7 @@
 {% from 'macros/view-edit-macros.html' import view_edit_question %}
 {% block content %}
 
-<!-- main heading -->
+<!-- edit quiz main heading -->
 <header>
     <div class="p-5 text-center main-heading container">
         <div class="d-flex justify-content-center align-items-center col-12">
@@ -89,7 +89,7 @@
                 <a href="{{ url_for('delete_quiz', delete_quiz_id=edit_quiz_id) }}"
                     class="d-flex align-items-center justify-content-center"
                 >
-                    <i class="fas fa-trash icon-sm"></i>
+                    <i class="fas fa-trash icon-sm mx-1"></i>
                     Delete Quiz
                 </a>
             </div>

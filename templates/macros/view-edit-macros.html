@@ -1,9 +1,9 @@
-<!-- VIEW/EDIT QUESTION MACRO  -->
+<!-- VIEW/EDIT QUESTION MACRO - child templates for view-quiz/edit-quiz templates -->
 
 {% macro view_edit_question(
     question_data, 
     question_num, 
-    editing
+    edit
 ) -%}
 
 <div class="question-wrapper my-4">
@@ -12,14 +12,23 @@
         py-3 px-1 card"
     >   
         <!-- question number and edit/delete buttons -->
-        {% if editing %}
+        {% if edit %}
             <div class="d-flex justify-content-between w-100">
                 <h6 class="p-3">Q {{ question_num }}</h6>
                 <div class="edit-delete-buttons m-3">
-                    <a href="{{ url_for('edit_question', quiz_id=edit_quiz_id, edit_question_id=question_data._id)}}">
+                    <a href="{{ url_for(
+                        'edit_question', 
+                        quiz_id=edit_quiz_id, 
+                        edit_question_id=question_data._id,
+                        question_num=question_num)}}"
+                    >
                         <i class="fas fa-edit icon-med p-3"></i>
                     </a>
-                    <a href="{{ url_for('delete_question', quiz_id=delete_quiz_id, delete_question_id=question_data._id)}}">
+                    <a href="{{ url_for(
+                        'delete_question', 
+                        quiz_id=delete_quiz_id, 
+                        delete_question_id=question_data._id)}}"
+                    >
                         <i class="fas fa-trash icon-med p-3"></i>
                     </a>
                 </div>

@@ -964,7 +964,7 @@ def edit_quiz(edit_quiz_id):
     )
 
     if not user_is_owner:
-        flash('Warning: cannot edit quiz - current user is not quiz owner')
+        flash('Disallowed action: cannot edit quiz - you are not quiz owner')
         return redirect(url_for('view_quiz', view_quiz_id=edit_quiz_id))
 
     num_questions = edit_quiz_data.get('num_questions')
@@ -1155,31 +1155,49 @@ def edit_question(quiz_id, edit_question_id):
         flash("Login first to create quizzes")
         return redirect(url_for("login"))
 
-
-    # GET request
-
     # read quiz data from db with quiz_id
     quiz_data = mongo.db.quizzes.find_one(
         { 
             "_id": ObjectIdHelper.toObjectId(quiz_id)
         },
         {
-            "_id": False,
             "title": True,
+            "quiz_owner_id": True,
             "num_questions": { "$size": "$questions" }
         }
     )
 
     if not quiz_data:
-        flash("Error: Quiz not found. Cannot edit question. Try again later.")
-        # redirect to where quiz id not required
+        flash("Error: Quiz not found.")
+        # redirect to where quiz id is not required
         return redirect(url_for('discover'))
+    
+    # confirm current user is quiz owner
+    user_is_owner = (
+        quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+    )
+
+    if not user_is_owner:
+        flash("Disallowed action: cannot edit quiz - you are not the owner.")
+        return redirect(url_for('view_quiz', view_quiz_id=quiz_id))
+
+
+    
+
+    if request.method == "POST":
+        # gather form data
+        new_question_text = request.form.get('edit_question_text')
+
+
+    # GET request
+    
     
     # if quiz identified by new_quiz_id exists...
     quiz_title = quiz_data.get('title')
     num_questions = quiz_data.get('num_questions')
 
     # read question data from db
+
     
 
 
@@ -1187,8 +1205,9 @@ def edit_question(quiz_id, edit_question_id):
         "pages/edit-question.html",
         active_page="Edit Question",
         loggedIn=loggedIn,
-        edit_quiz_id=quiz_id,
+        quiz_id=quiz_id,
         edit_question_id=edit_question_id,
+        edit_question_data=edit_question_data,
         quiz_title=quiz_title,
         num_questions=num_questions
     )

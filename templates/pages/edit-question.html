@@ -2,7 +2,65 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
+<!-- edit question main heading -->
+<header>
+    <div class="p-5 text-center main-heading container">
+        <div class="d-flex justify-content-center align-items-center col-12">
+            <i class="fas fa-edit icon-med px-3"></i>
+            <h4 class="text-center px-2">{{ edit_quiz_data.title }}</h4> 
+        </div>
+        <h6 class="m-2">Question {{ question_num }} of {{ num_questions }}</h6>
+    </div>
+</header>
+
 <!-- edit question form -->
+<div class="question-wrapper my-4">
+    <form 
+        class="question-inner d-flex 
+        flex-column align-items-center 
+        py-3 px-1 card"
+        method="POST"
+        action="{{ url_for(
+        'edit_question', 
+        quiz_id=quiz_id, 
+        edit_question_id=edit_question_id) }}"
+    >   
+        <!-- edit question text -->
+        <div class="edit-question-text my-2">
+            <label for="edit-question-text" class="py-2">Question text:</label>
+            <div class="form-outline">
+                <textarea name="edit_question_text" id="edit-question-text" 
+                    maxlength="200" rows="4" required
+                    class="form-control form-control-lg"
+                    value="{{ edit_question_data.question_text }}"
+                >
+                </textarea>
+                <div class="invalid-feedback">
+                    Question must be less than 200 characters
+                </div>
+            </div>  
+        </div>
+        <hr>
+
+        <span class="align-self-start p-3">Answer choices:</span>
+        <!-- view answers -->
+        <div class="view-answers-wrapper row w-100 mt-3 px-5">
+        {% for answer_data in question_data.answers %}
+            {% if question_data.correct_answer_index == loop.index0 %}
+                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
+                    <i class="far fa-question-circle icon-med correct"></i>
+                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
+                </div>
+            {% else %}
+                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
+                    <i class="far fa-question-circle icon-med"></i>
+                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </form>
+</div>
 
 
 {% endblock %}

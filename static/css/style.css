@@ -489,6 +489,7 @@ form {
   font-size: calc(1.1rem + .4vw);
 }
 
+/* ******* VIEW QUIZ PAGE ******* */
 /* show/hide answer icons */
 .answer .fa-question-circle {
   color: rgba(0, 0, 0, 0.7);
@@ -498,6 +499,18 @@ form {
 }
 .answer .fa-times-circle {
   color: #FF0000;
+}
+
+/* ******* EDIT QUESTION PAGE ******* */
+.edit-answers-wrapper label {
+  margin: 0 0.75rem;
+  white-space: nowrap;
+}
+
+.question-wrapper .edit-question-text {
+  width: 100%;
+  padding: 1rem;
+  max-width: 60rem;
 }
 
 /* MEDIA QUERIES */

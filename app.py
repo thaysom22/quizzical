@@ -1170,7 +1170,7 @@ def edit_question(quiz_id, edit_question_id):
                 "$indexOfArray": 
                 [
                     "$questions", 
-                    ObjectIdHelper.fromObjectId(edit_question_id)
+                    ObjectIdHelper.toObjectId(edit_question_id)
                 ] 
             }
         }

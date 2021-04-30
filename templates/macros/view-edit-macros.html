@@ -2,7 +2,8 @@
 
 {% macro view_edit_question(
     question_data, 
-    question_num, 
+    question_num,
+    quiz_id, 
     edit
 ) -%}
 
@@ -18,15 +19,14 @@
                 <div class="edit-delete-buttons m-3">
                     <a href="{{ url_for(
                         'edit_question', 
-                        quiz_id=edit_quiz_id, 
-                        edit_question_id=question_data._id,
-                        question_num=question_num)}}"
+                        quiz_id=quiz_id, 
+                        edit_question_id=question_data._id)}}"
                     >
                         <i class="fas fa-edit icon-med p-3"></i>
                     </a>
                     <a href="{{ url_for(
                         'delete_question', 
-                        quiz_id=delete_quiz_id, 
+                        quiz_id=quiz_id, 
                         delete_question_id=question_data._id)}}"
                     >
                         <i class="fas fa-trash icon-med p-3"></i>

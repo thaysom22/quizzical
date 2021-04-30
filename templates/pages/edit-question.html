@@ -7,9 +7,8 @@
     <div class="p-5 text-center main-heading container">
         <div class="d-flex justify-content-center align-items-center col-12">
             <i class="fas fa-edit icon-med px-3"></i>
-            <h4 class="text-center px-2">{{ edit_quiz_data.title }}</h4> 
+            <h4 class="text-center px-2">Question {{ edit_question_num }} of {{ quiz_title }}</h4> 
         </div>
-        <h6 class="m-2">Question {{ question_num }} of {{ num_questions }}</h6>
     </div>
 </header>
 
@@ -45,107 +44,65 @@
         <!-- edit answers wrapper -->
         <div class="d-flex row justify-content-center align-items-center">
             <!-- edit answers text inputs -->
-            {% for answer_data in question_data.answers %}
+            {% for answer_data in edit_question_data.answers %}
                 <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                    <label for="answer-0" class="form-label">Answer option 1</label>
+                    <label for="answer-{{ loop.index0 }}" class="form-label">
+                        Answer option {{ loop.index }}
+                    </label>
                     <div class="form-outline w-100">
-                        <input name="answer_0" id="answer-0" type="text" 
-                            maxlength="30" value="{{ edit_question_data_answers }}" 
+                        <input name="answer-{{ loop.index0 }}" 
+                            id="answer-{{ loop.index0 }}" type="text" 
+                            maxlength="30" value="{{ edit_question_data.answers }}" 
                             class="form-control form-control-lg" required
-
                         />
                         <div class="invalid-feedback">
-                            Answer must be less than 30 characters
+                            Max 30 characters
                         </div>
                     </div>
                     <!-- edit answer radio button -->
-                    {% if question_data.correct_answer_index == loop.index0 %}
-                        <div class="d-flex align-items-center p-3">
-                            <input type="radio" id="correct_answer_0" name="correct_answer_index" value="0" required>
-                        </div>
-                    {% endif %}
+                    <div class="d-flex align-items-center p-3">
+                        {% if edit_question_data.correct_answer_index == loop.index0 %}
+                        <input type="radio" 
+                            id="correct_answer_{{ loop.index0 }}" 
+                            name="correct_answer_index" 
+                            value="{{ loop.index0 }}" required
+                            selected
+                        >
+                        {% else %}
+                        <input type="radio" 
+                            id="correct_answer_{{ loop.index0 }}" 
+                            name="correct_answer_index" 
+                            value="{{ loop.index0 }}" required
+                        >
+                        {% endif %}
+                    </div>
                 </div>
             {% endfor %}
-                
-        
-            <!-- answer 1 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_1" id="answer_1" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_1" class="form-label">Answer option 2</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 1 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_1" name="correct_answer_index" value="1" required>
-                </div>
-            </div>
-            <!-- answer 2 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_2" id="answer_2" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_2" class="form-label">Answer option 3</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 2 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_2" name="correct_answer_index" value="2" required>
-                </div>
-            </div>
-            <!-- answer 3 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_3" id="answer_3" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_3" class="form-label">Answer option 4</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 3 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_3" name="correct_answer_index" value="3" required>
-                </div>
-            </div>
         </div>
-
-
-
-
-
-
-        
-        <!-- view answers -->
-        <div class="view-answers-wrapper row w-100 mt-3 px-5">
-        {% for answer_data in question_data.answers %}
-            {% if question_data.correct_answer_index == loop.index0 %}
-                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
-                    <i class="far fa-question-circle icon-med correct"></i>
-                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
-                </div>
-            {% else %}
-                <div class="answer col-12 col-lg-6 d-flex align-items-center p-3">
-                    <i class="far fa-question-circle icon-med"></i>
-                    <span class="answer-text mx-2">{{ answer_data.answer_text }}</span>
-                </div>
-            {% endif %}
-        {% endfor %}
+        <!-- submit edit question form -->
+        <div class="edit-question-submit d-flex 
+            p-2 justify-content-center
+            align-items-center mt-3"
+        >
+            <button type="submit" class="btn btn-rounded">
+                <i class="fas fa-save icon-sm"></i>
+                Save changes
+            </button>
+        </div> 
+        <!-- go back link -->
+        <div class="edit-question-back d-flex justify-content-center align-items-center">
+            <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}">
+                <button class="btn btn-rounded 
+                    m-2 d-flex align-items-center"
+                    type="button"
+                >
+                    <i class="fas fa-arrow-alt-circle-left icon-med"></i>
+                    Back
+                </button>
+            </a>
         </div>
     </form>
 </div>
-
 
 {% endblock %}
 

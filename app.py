@@ -8,7 +8,7 @@ from werkzeug.security import (
     generate_password_hash, check_password_hash)
 from helpers import ObjectIdHelper
 from random import sample
-# will not import env when running on cloud platform
+# will not import env.py when running on cloud platform
 if os.path.exists("env.py"):
     import env
 
@@ -43,9 +43,11 @@ def landing():
     if loggedIn:
         return redirect(url_for("discover"))
 
-    return render_template("pages/landing.html", 
+    return render_template(
+        "pages/landing.html", 
         loggedIn=loggedIn,
-        active_page="Welcome")
+        active_page="Welcome"
+    )
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -1110,7 +1112,7 @@ def add_question(quiz_id):
         )
 
         if not insert_result:
-            flash('Error: question was not created. Try again later.')
+            flash('Error: question was not created.')
         else:  
             # if insertion to questions collection successful...
             # update questions field of quiz document in quizzes collection identified by new_quiz_id 
@@ -1131,7 +1133,7 @@ def add_question(quiz_id):
             create_quiz_process=create_quiz_process
         ))
 
-    # if request.method == "GET":
+    ### GET ###
     return render_template(
         "pages/add-question.html",
         active_page="Add Question",
@@ -1152,7 +1154,7 @@ def edit_question(quiz_id, edit_question_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to create quizzes")
+        flash("Action not allowed: must login first to create quizzes")
         return redirect(url_for("login"))
 
     # read quiz data from db with quiz_id
@@ -1163,7 +1165,14 @@ def edit_question(quiz_id, edit_question_id):
         {
             "title": True,
             "quiz_owner_id": True,
-            "num_questions": { "$size": "$questions" }
+            "num_questions": { "$size": "$questions" },
+            "edit_question_num": { 
+                "$indexOfArray": 
+                [
+                    "$questions", 
+                    ObjectIdHelper.fromObjectId(edit_question_id)
+                ] 
+            }
         }
     )
 
@@ -1171,36 +1180,61 @@ def edit_question(quiz_id, edit_question_id):
         flash("Error: Quiz not found.")
         # redirect to where quiz id is not required
         return redirect(url_for('discover'))
-    
-    # if quiz identified by new_quiz_id exists...
-    quiz_title = quiz_data.get('title')
+
     # confirm current user is quiz owner
     user_is_owner = (
-        quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+        quiz_data.get('quiz_owner_id') ==
+            ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
 
     if not user_is_owner:
-        flash(f"Disallowed action: cannot edit ${quiz_title} - you are not the owner.")
+        flash("Action not allowed: you are not the quiz owner")
         return redirect(url_for('view_quiz', view_quiz_id=quiz_id))
 
-    # read question data from db with edit_question_id
-    edit_question_data = mongo.db.questions
+    # if quiz exists and current user is owner...    
+    edit_question_index = quiz_data.get('edit_question_num', -1)  
+    if edit_question_index == -1:
+        flash("Error: cannot edit - question could not be found in quiz")
+        return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
 
+    # add 1 b/c $indexOfArray returns zero-based index
+    edit_question_num = edit_question_index + 1
+    quiz_title = quiz_data.get('title')
 
+    ### POST ###
     if request.method == "POST":
-        # gather form data
-        new_question_text = request.form.get('edit_question_text')
+        # construct form of questions document for update
+        update_question_result = mongo.db.questions.update_one(
+            { "_id": ObjectIdHelper.toObjectId(edit_question_id) },
+            {
+                "$set": {
+                    "question_text": request.form.get('edit_question_text'),
+                    "correct_answer_index": int(request.form.get('correct_answer_index')),
+                    "answers": [
+                        {"answer_text": request.form.get('answer_0')},
+                        {"answer_text": request.form.get('answer_1')},
+                        {"answer_text": request.form.get('answer_2')},
+                        {"answer_text": request.form.get('answer_3')}
+                    ]
+                }
+            }
+        ) 
 
+        # update question guard clause
+        if update_question_result:
+            flash("Success: question was updated.")
+        else:    
+            flash("Error: question could not be updated. Try again later.")
 
-    # GET request
-    
-    
-    
-    num_questions = quiz_data.get('num_questions')
+        return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
 
-    
-    
-
+    ### GET ###
+    # read question data from db with edit_question_id
+    edit_question_data = mongo.db.questions.find_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(edit_question_id)
+        }
+    )
 
     return render_template(
         "pages/edit-question.html",
@@ -1210,7 +1244,7 @@ def edit_question(quiz_id, edit_question_id):
         edit_question_id=edit_question_id,
         edit_question_data=edit_question_data,
         quiz_title=quiz_title,
-        num_questions=num_questions
+        edit_question_num=edit_question_num
     )
 
 
@@ -1228,12 +1262,6 @@ def delete_question(quiz_id, delete_question_id):
 
     
     return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
-
-
-        
-
-
-
 
 
 

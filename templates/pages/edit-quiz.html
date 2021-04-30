@@ -126,7 +126,7 @@
 <section class="container-lg my-5 px-2 view-questions-wrapper">
     <!-- edit question macros -->
     {% for question_data in edit_quiz_data.questions_data %}
-        {{ view_edit_question(question_data, loop.index, True) }}
+        {{ view_edit_question(question_data, loop.index, edit_quiz_id, True) }}
     {% endfor %}
 </section>
 

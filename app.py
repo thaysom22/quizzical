@@ -26,28 +26,30 @@ mongo = PyMongo(app)
 @app.route("/index")  
 def default():
     """
-    docstring here
+    Check if user is logged in and return redirect
+    to welcome or discover template
     """
-    loggedIn = 'user' in session  # check in session dict
+    loggedIn = 'user' in session 
     if not loggedIn:
-        return redirect(url_for("landing"))
+        return redirect(url_for("welcome"))
 
     return redirect(url_for("discover"))
 
 
-### LANDING PAGE ###
+### WELCOME PAGE ###
 
-@app.route("/landing")
-def landing():
+@app.route("/welcome")
+def welcome():
     """
-    docstring here
+    Return render_template for welcome template
+    or redirect to discover if user logged in
     """
     loggedIn = 'user' in session
     if loggedIn:
         return redirect(url_for("discover"))
 
     return render_template(
-        "pages/landing.html", 
+        "pages/welcome.html",
         loggedIn=loggedIn,
         active_page="Welcome"
     )
@@ -60,37 +62,49 @@ def landing():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    docstring here
+    If GET request: return render_template for 
+    discover template.
+    If POST request: read form
+    data and check mongodb collections: return
+    redirect to login page if username not
+    found and/or password does not match; else update
+    found user document and add to session dict
+    as value for 'user' key, then return redirect to
+    discover
     """
     loggedIn = 'user' in session
     if loggedIn:
         return redirect(url_for("discover"))
     
     if request.method == "GET":
-        return render_template("pages/login.html", 
+        
+        return render_template(
+            "pages/login.html", 
             loggedIn=loggedIn,
-            active_page="Log in")
+            active_page="Login"
+        )
 
-    username_form = request.form.get("username").lower()  # get username from form (case-sensitive)
+    username_form = request.form.get("username").lower()  # (case-sensitive)
     existing_user = mongo.db.users.find_one(
         {
             "username": username_form
         }
-    ) 
-    
+    )
     if not existing_user:
-        flash("Incorrect Username and/or Password")  # notify user of failure
+        flash("Incorrect username and/or password", "not auth")  
+        
         return redirect(url_for("login"))
 
-    password_form = request.form.get("password")  # get password from form (not case-sensitive)
+    password_form = request.form.get("password") 
     correct_password = check_password_hash(
         existing_user["password"], password_form)
 
     if not correct_password:
-        flash("Incorrect Username and/or Password")  # notify user of failure
+        flash("Incorrect username and/or password", "not auth")  
+        
         return redirect(url_for("login")) 
 
-    # use existing_user dict to get category and age_range data from respective collections
+    # use existing_user dict to get category and age_range data
     user_category_data = mongo.db.categories.find_one(
         {
             "_id": existing_user["user_category_id"]
@@ -101,7 +115,6 @@ def login():
             "_id": existing_user["user_age_range_id"]
         }
     )
-    
     # convert ObjectId types to string types before adding to session
     for k, v in existing_user.items():
         existing_user[k] = ObjectIdHelper.fromObjectId(v)
@@ -109,10 +122,10 @@ def login():
     # add name strings to existing_user dict before storing in session
     existing_user["user_category_name"] = user_category_data["category_name"]
     existing_user["user_age_range_name"] = user_age_range_data["age_range"]
-    session["user"] = existing_user  # add existing_user dict to session object 
-    flash(f"Welcome back to Quizzical, {username_form}") #  flash message to newly logged in user on discover page
+    session["user"] = existing_user  
+    flash(f"Welcome back to Quizzical, {username_form}", "success") 
     
-    return redirect(url_for("discover"))  # redirect to discover if login successful
+    return redirect(url_for("discover"))  
 
 
 # LOGOUT #
@@ -120,15 +133,16 @@ def login():
 @app.route("/logout")
 def logout():
     """
-    docstring here
+    If user logged in: remove 'user' from session
+    dict. Return redirect to discover.
     """
     loggedIn = 'user' in session
-    if loggedIn:
-        redirect(url_for("discover"))  
+    if not loggedIn:
+        return redirect(url_for("login"))  
 
     username = session.get("user").get("username")
     session.pop("user")
-    flash(f"${username} has been logged out.")
+    flash(f"${username} has been logged out.", "success")
     
     return redirect(url_for("login"))
 
@@ -138,22 +152,30 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
-    docstring here
+    If GET request: read all category and age range
+    names from mongodb, return render_template for 
+    register template. If POST request: read form data, 
+    check mongodb that no document with same username field 
+    value exists, hash user password, add user document 
+    to mongodb and to session dict as value for 'user'
+    key, finally, redirect to discover.
     """
     loggedIn = 'user' in session
     if loggedIn:
-        flash("Logout first to register a new account")
-        redirect(url_for("discover"))  
+        flash(
+            "Logout first to register a new account", 
+            "invalid action"
+        )
+        return redirect(url_for("discover"))
 
     if request.method == "GET":
         # read from categories and age_ranges collections in db
-        all_categories = list(mongo.db.categories
-            .find()
-            .sort("category_name", 1))
-        all_age_ranges = list(mongo.db.age_ranges
-            .find()
-            .sort("order", 1)) 
-
+        all_categories = list(
+            mongo.db.categories.find().sort("category_name", 1)
+        )
+        all_age_ranges = list(
+            mongo.db.age_ranges.find().sort("order", 1)
+        )
         # convert ObjectId values to strings
         for category in all_categories:
             category["_id"] = ObjectIdHelper.fromObjectId(category["_id"])
@@ -175,9 +197,11 @@ def register():
             "username": username_form
         }
     )
-    
     if existing_user:
-        flash(f"The username {username_form} already exists")
+        flash(
+            f"The username {username_form} already exists",
+            "not auth"
+        )
         return redirect(url_for("register"))
 
     # generate password hash from user password input
@@ -198,10 +222,12 @@ def register():
         "user_category_id": ObjectIdHelper.toObjectId(category_form_id),  
         "user_age_range_id": ObjectIdHelper.toObjectId(age_range_form_id)  
     }
-
     insert_new_user_result = mongo.db.users.insert_one(new_user_db)
     if not insert_new_user_result:
-        flash("Could not register account, please try again later.")
+        flash(
+            "Could not register account, please try again later.",
+            "error"
+        )
         return redirect(url_for("register"))
     
     # get category and age_range documents from db by id
@@ -227,8 +253,7 @@ def register():
         "user_age_range_id": age_range_form_id,
         "user_age_range_name": user_age_range.get("age_range")  
     } 
-    
-    flash(f"Welcome to Quizzical, {username_form}") 
+    flash(f"Welcome to Quizzical, {username_form}", "success") 
     
     return redirect(url_for("discover"))
 
@@ -239,20 +264,27 @@ def register():
 @app.route("/discover")
 def discover():
     """
-    docstring here
+    Read all category names and all age range names from
+    mongodb collections, read and organize data from mongodb 
+    quizzes collection into dicts, read user data from session
+    dict: combine to create reccommended quizzes dicts and limit to
+    maximum of 3 quizzes by taking random sample. Return 
+    render_template for discover template with dicts passed as
+    arguments.
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        return redirect(url_for("landing"))
+        return redirect(url_for("welcome"))
     
     # read all categories and all age_ranges from db
-    all_categories = list(mongo.db.categories
-        .find(sort=[("category_name", 1)]))
-    all_age_ranges = list(mongo.db.age_ranges
-        .find(sort=[("order", 1)]))
-    
-    # read from quizzes collection by 
-    # credit for "$arrayElemAt" workaround to use $loopup as findOne: https://stackoverflow.com/questions/37691727/how-to-use-mongodbs-aggregate-lookup-as-findone  
+    all_categories = list(
+        mongo.db.categories.find(sort=[("category_name", 1)])
+    )
+    all_age_ranges = list(
+        mongo.db.age_ranges.find(sort=[("order", 1)])
+    )
+    # read from quizzes collection by category
+    # credit for "$arrayElemAt" workaround: https://stackoverflow.com/questions/37691727/how-to-use-mongodbs-aggregate-lookup-as-findone  
     quizzes_by_category = {}
     for category in all_categories:
         quizzes_by_category[category["_id"]] = list(mongo.db.quizzes.aggregate([
@@ -290,7 +322,7 @@ def discover():
             }
         ]))
 
-    # query quizzes collection by age_range
+    # read from quizzes collection by age_range
     quizzes_by_age_range = {}
     for age_range in all_age_ranges:
         quizzes_by_age_range[age_range["_id"]] = list(mongo.db.quizzes.aggregate([
@@ -326,7 +358,7 @@ def discover():
                 } 
             }
         ]))    
-
+    
     user = session.get("user")  # get data from session object
     username = user.get("username")
     user_category_id = user.get("user_category_id")
@@ -442,15 +474,26 @@ def discover():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     """
-    docstring here
+    If GET request: read values from request.args and
+    use values to determine query to send to mongodb to 
+    read all quizzes, reccommended quizzes, quizzes by
+    age range, quizzes by category; return redirect to
+    discover if no valid url arguments are provided.
+    If POST request: use search_query url parameter to 
+    send a query to read quizzes using existing text index 
+    on quizzes collection. 
+
+    Return render_template for search template with documents
+    returned from executed mongodb query passed as argument.
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to search quizzes")
+        flash("Login first to search quizzes", "not auth")
         return redirect(url_for("login"))
        
     username = session.get("user").get("username") 
-    # use request.args to parse optional url params. CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
+    # use request.args to parse optional url parameters...
+    # CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
     request_args = request.args
     if request.method == "GET":
         all_quizzes = request_args.get('all_quizzes')
@@ -505,8 +548,6 @@ def search():
             ]
         ))
 
-
-
         elif recc == "true":
             recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
                 { 
@@ -553,7 +594,6 @@ def search():
                     } 
                 }
             ]))
-        
             recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
                 { 
                     "$match": {
@@ -599,9 +639,9 @@ def search():
                     } 
                 }
             ]))
-
             search_results = recc_quizzes_by_category + recc_quizzes_by_age_range
             search_results = list({item["_id"]: item for item in search_results}.values())  # remove duplicates
+
         elif category:
             search_results = list(mongo.db.quizzes.aggregate([
                 { 
@@ -641,6 +681,7 @@ def search():
                     } 
                 }
             ]))            
+        
         elif age_range:
             search_results = list(mongo.db.quizzes.aggregate([
                 { 
@@ -681,7 +722,9 @@ def search():
             ]))    
             
         else:
-            return redirect(url_for("discover"))  # GET request to /search endpoint w/o required url parameters
+            # This is a GET request to /search endpoint...
+            #  w/o any required url parameters
+            return redirect(url_for("discover"))  
 
     if request.method == "POST":
         search_query = request.form.get('search_query').lower()

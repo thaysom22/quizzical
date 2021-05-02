@@ -3,6 +3,8 @@
 /* import google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Oswald:wght@200;300;400;500&family=Raleway:wght@300;400;500;600&display=swap");
 /* COLOR VARIABLES */
+/* warning color palette used for flash message backgrounds
+CREDIT: https://www.color-hex.com/color-palette/23357 */
 /* FONT VARIABLES */
 /* ******* MIXINS ******* */
 /* ******* BUTTONS ******* */
@@ -123,7 +125,19 @@ main {
   margin-top: 6.663rem;
   padding-bottom: 8rem;
 }
-main .flashed-messages h4 {
+main .flashed-message.not-auth {
+  background-color: #ffcc00;
+}
+main .flashed-message.success {
+  background-color: #99cc33;
+}
+main .flashed-message.invalid-action {
+  background-color: #ff9966;
+}
+main .flashed-message.error {
+  background-color: #cc3300;
+}
+main .flashed-message h4 {
   margin-bottom: 0;
 }
 
@@ -498,7 +512,7 @@ form {
   color: #66ff00;
 }
 .answer .fa-times-circle {
-  color: #FF0000;
+  color: #ff0000;
 }
 
 /* ******* EDIT QUESTION PAGE ******* */

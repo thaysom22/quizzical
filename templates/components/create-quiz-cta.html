@@ -9,11 +9,13 @@
             Create Quiz
             <i class="fas fa-hammer icon-sm"></i>
         </a>
+        {% if all_quizzes != "true" %}
         <a href="{{ url_for('search', all_quizzes='true') }}" 
             type="button" class="btn btn-link" 
             data-mdb-ripple-color="dark"
         >
             View All Quizzes
         </a>
+        {% endif %}
     </div>
 </div>

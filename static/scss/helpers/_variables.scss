@@ -17,7 +17,14 @@ $gray: #E0E0E0;
 $white: #FFFFFF;  
 $dark-overlay: rgba(0,0,0,.4);
 $bright-green: #66ff00;
-$error-red: #FF0000;
+$incorrect-red: #ff0000;
+/* warning color palette used for flash message backgrounds
+CREDIT: https://www.color-hex.com/color-palette/23357 */
+$error: #cc3300;
+$invalid-action: #ff9966;
+$not-auth: #ffcc00;
+$success: #99cc33;
+
 
 
 /* FONT VARIABLES */

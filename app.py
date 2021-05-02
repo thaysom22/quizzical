@@ -31,9 +31,9 @@ def default():
     """
     loggedIn = 'user' in session 
     if not loggedIn:
-        return redirect(url_for("welcome"))
+        return redirect(url_for("welcome", _external=True, _scheme='https'))
 
-    return redirect(url_for("discover"))
+    return redirect(url_for("discover", _external=True, _scheme='https'))
 
 
 ### WELCOME PAGE ###
@@ -46,7 +46,7 @@ def welcome():
     """
     loggedIn = 'user' in session
     if loggedIn:
-        return redirect(url_for("discover"))
+        return redirect(url_for("discover", _external=True, _scheme='https'))
 
     return render_template(
         "pages/welcome.html",
@@ -74,7 +74,7 @@ def login():
     """
     loggedIn = 'user' in session
     if loggedIn:
-        return redirect(url_for("discover"))
+        return redirect(url_for("discover", _external=True, _scheme='https'))
 
     # GET #    
     if request.method == "GET":
@@ -92,18 +92,18 @@ def login():
         }
     )
     if not existing_user:
-        flash("Incorrect username and/or password", "not auth")  
+        flash("Incorrect username and/or password", "not-auth")  
         
-        return redirect(url_for("login"))
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     password_form = request.form.get("password") 
     correct_password = check_password_hash(
         existing_user["password"], password_form)
 
     if not correct_password:
-        flash("Incorrect username and/or password", "not auth")  
+        flash("Incorrect username and/or password", "not-auth")  
         
-        return redirect(url_for("login")) 
+        return redirect(url_for("login", _external=True, _scheme='https')) 
 
     # use existing_user dict to get category and age_range data
     user_category_data = mongo.db.categories.find_one(
@@ -126,7 +126,7 @@ def login():
     session["user"] = existing_user  
     flash(f"Welcome back to Quizzical, {username_form}", "success") 
     
-    return redirect(url_for("discover"))  
+    return redirect(url_for("discover", _external=True, _scheme='https'))
 
 
 # LOGOUT #
@@ -139,13 +139,13 @@ def logout():
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        return redirect(url_for("login"))  
+        return redirect(url_for("login", _external=True, _scheme='https'))  
 
     username = session.get("user").get("username")
     session.pop("user")
-    flash(f"${username} has been logged out.", "success")
+    flash(f"{username} has been logged out.", "success")
     
-    return redirect(url_for("login"))
+    return redirect(url_for("login", _external=True, _scheme='https'))
 
 
 ### REGISTER ###
@@ -165,9 +165,9 @@ def register():
     if loggedIn:
         flash(
             "Logout first to register a new account", 
-            "invalid action"
+            "invalid-action"
         )
-        return redirect(url_for("discover"))
+        return redirect(url_for("discover", _external=True, _scheme='https'))
 
     # GET #
     if request.method == "GET":
@@ -202,9 +202,9 @@ def register():
     if existing_user:
         flash(
             f"The username {username_form} already exists",
-            "not auth"
+            "not-auth"
         )
-        return redirect(url_for("register"))
+        return redirect(url_for("register", _external=True, _scheme='https'))
 
     # generate password hash from user password input
     password_form = request.form.get("password")
@@ -230,7 +230,7 @@ def register():
             "Could not register account, please try again later.",
             "error"
         )
-        return redirect(url_for("register"))
+        return redirect(url_for("register", _external=True, _scheme='https'))
     
     # get category and age_range documents from db by id
     user_category = mongo.db.categories.find_one(
@@ -257,7 +257,7 @@ def register():
     } 
     flash(f"Welcome to Quizzical, {username_form}", "success") 
     
-    return redirect(url_for("discover"))
+    return redirect(url_for("discover", _external=True, _scheme='https'))
 
 
 
@@ -276,7 +276,7 @@ def discover():
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        return redirect(url_for("welcome"))
+        return redirect(url_for("welcome", _external=True, _scheme='https'))
     
     # read all categories and all age_ranges from db
     all_categories = list(
@@ -490,8 +490,8 @@ def search():
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to search quizzes", "not auth")
-        return redirect(url_for("login"))
+        flash("Login first to search quizzes", "not-auth")
+        return redirect(url_for("login", _external=True, _scheme='https'))
        
     username = session.get("user").get("username") 
     # use request.args to parse optional url parameters...
@@ -505,7 +505,14 @@ def search():
         age_range = request_args.get('age_range')
         search_query = None 
         if all_quizzes == "true":
+            # match all documents in collection
+            # CREDIT: https://stackoverflow.com/questions/59918113/mongodb-aggregate-match-a-document-or-all
             search_results = list(mongo.db.quizzes.aggregate([
+                { 
+                    "$match": {
+                         "_id" : {"$exists": "True"}
+                    }
+                },
                 {   
                     "$lookup": {
                         "from": "categories",
@@ -727,7 +734,7 @@ def search():
         else:
             # This is a GET request to /search endpoint...
             #  w/o any required url parameters
-            return redirect(url_for("discover"))  
+            return redirect(url_for("discover", _external=True, _scheme='https'))  
 
     # POST #
     if request.method == "POST":
@@ -782,14 +789,14 @@ def search():
                     "score": { "$meta": "textScore" }, "num_questions": -1 }
             }
         ]))
-
     # GET and POST #
     return render_template("pages/search.html",
         active_page="Search", 
         username=username,
         loggedIn=loggedIn,
         search_query=search_query,
-        search_results=search_results
+        search_results=search_results,
+        all_quizzes=all_quizzes
     )
 
 
@@ -810,8 +817,8 @@ def create_quiz():
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to create quizzes", "not auth")
-        return redirect(url_for("login"))
+        flash("Login first to create quizzes", "not-auth")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     # GET #
     if request.method == "GET":
@@ -842,15 +849,17 @@ def create_quiz():
     )
     if not insert_quiz_result:
         flash("Quiz was not created. Try again later.", "error") 
-        return redirect(url_for("create_quiz"))
+        return redirect(url_for("create_quiz", _external=True, _scheme='https'))
 
     new_quiz_id = insert_quiz_result.inserted_id
-    flash(f"{request.form.get('create_quiz_title')} has been created")
+    flash(f"{request.form.get('create_quiz_title')} has been created", "success")
         
     return redirect(url_for(
         "add_question", 
         quiz_id=new_quiz_id,
-        create_quiz_process="true"
+        create_quiz_process="true", 
+        _external=True,
+        _scheme='https'
     ))
 
 
@@ -871,8 +880,8 @@ def view_quiz(view_quiz_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to view quizzes", "not auth")
-        return redirect(url_for("login"))
+        flash("Login first to view quizzes", "not-auth")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     view_quiz_data = list(mongo.db.quizzes.aggregate([
         { 
@@ -931,7 +940,7 @@ def view_quiz(view_quiz_id):
 
     if not view_quiz_data:
         flash('Error: quiz not found')
-        return redirect(url_for('discover'))
+        return redirect(url_for('discover', _external=True, _scheme='https'))
     
     # view_quiz_data is a one-element list so access first element
     view_quiz_data = view_quiz_data[0]
@@ -967,16 +976,16 @@ def edit_quiz(edit_quiz_id):
 
     If POST request: read form data from request and update 
     quiz document identified by edit_quiz_id in mongodb quizzes
-    collection, return redirect to view_quiz passing edit_quiz_id
-    as argument.
+    collection, return redirect to edit_quiz (same route) 
+    passing edit_quiz_id as argument.
 
     Parameters:
     edit_quiz_id -- id for quiz document in mongodb to be updated
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to edit a quiz", "not auth")
-        return redirect(url_for("login"))
+        flash("Login first to edit a quiz", "not-auth")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     # POST #
     if request.method == "POST":
@@ -1000,7 +1009,12 @@ def edit_quiz(edit_quiz_id):
             flash("Quiz updated.", "success")
 
         # redirect to view quiz
-        return redirect(url_for('view_quiz', view_quiz_id=edit_quiz_id))
+        return redirect(url_for(
+            'edit_quiz', 
+            edit_quiz_id=edit_quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # GET #
     # read all categories and all age_ranges from db
@@ -1065,7 +1079,7 @@ def edit_quiz(edit_quiz_id):
 
     if not edit_quiz_data:
         flash('Cannot edit - quiz not found.', "error")
-        return redirect(url_for('discover'))
+        return redirect(url_for('discover', _external=True, _scheme='https'))
 
     # check user is owner by reading from db with edit_quiz_id
     # edit_quiz_data is a one-element list so access first element
@@ -1078,8 +1092,13 @@ def edit_quiz(edit_quiz_id):
     )
 
     if not user_is_owner:
-        flash('Cannot edit quiz - user is not quiz owner.', "invalid action")
-        return redirect(url_for('view_quiz', view_quiz_id=edit_quiz_id))
+        flash('Cannot edit quiz - user is not quiz owner.', "invalid-action")
+        return redirect(url_for(
+            'view_quiz', 
+            view_quiz_id=edit_quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     return render_template(
         "pages/edit-quiz.html",
@@ -1098,9 +1117,10 @@ def edit_quiz(edit_quiz_id):
 @app.route("/delete-quiz/<delete_quiz_id>")
 def delete_quiz(delete_quiz_id):
     """
-    Read url from which request to this route was made 
-    from request (default to url_for('discover')), read 
-    document from quizzes collection by delete_quiz_id 
+    Read request.args to determine if request made during
+    quiz creation or from edit_quiz page and construct
+    appropriate url for redirects, read document from 
+    quizzes collection by delete_quiz_id 
     (if not found redirect to previous url), check user 
     id value in session dict matches user_owner_id field 
     value in document (if not redirect to previous url), 
@@ -1116,11 +1136,15 @@ def delete_quiz(delete_quiz_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to create quiz.", "invalid action")
-        return redirect(url_for("login"))
+        flash("Login first to create quiz.", "invalid-action")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
-    # get url of previous page
-    previous_page_url = request.referrer or url_for('discover')
+    # use request.args to determine redirect location
+    if request.args.get('create_quiz_process') == 'true':
+        redirect_url = url_for('create_quiz', _external=True, _scheme='https')
+    else:
+        redirect_url = url_for('discover', _external=True, _scheme='https')
+
     # read document from quizzes collection by delete_quiz_id
     delete_quiz_data = mongo.db.quizzes.find_one(
         { 
@@ -1134,7 +1158,7 @@ def delete_quiz(delete_quiz_id):
     )
     if not delete_quiz_data:
         flash("Quiz not deleted - quiz not found.", "error")
-        return redirect(previous_page_url)
+        return redirect(redirect_url)
         
     # confirm current user is quiz owner
     user_is_owner = (
@@ -1142,8 +1166,8 @@ def delete_quiz(delete_quiz_id):
             ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
     if not user_is_owner:
-        flash("Quiz not deleted - you are not the owner.", "not auth")
-        return redirect(previous_page_url)
+        flash("Quiz not deleted - you are not the owner.", "not-auth")
+        return redirect(redirect_url)
 
     # find and delete quiz document by delete_quiz_id
     delete_quiz_result = mongo.db.quizzes.delete_one(
@@ -1152,8 +1176,8 @@ def delete_quiz(delete_quiz_id):
         }
     )
     if not delete_quiz_result:
-        flash(f"Error: quiz could not be deleted - try again later")
-        return redirect(previous_page_url)
+        flash(f"Quiz could not be deleted - try again later", "error")
+        return redirect(redirect_url)
 
     # if quiz deleted successfully...
     # delete all associated from questions collection using quiz_data.questions ids
@@ -1170,16 +1194,12 @@ def delete_quiz(delete_quiz_id):
                 "error" 
             )
         else:
-            flash(f"Quiz and all questions were deleted.", "error")   
+            flash(f"Quiz and all questions were deleted.", "success")   
 
     else:
-        flash(f"Quiz was deleted.", "error") 
+        flash(f"Quiz was deleted.", "success") 
 
-    # determine if this endpoint was requested during a create quiz process
-    if request.args.get('create_quiz_process') == 'true':
-        return redirect(url_for('create_quiz'))
-
-    return redirect(url_for('discover'))
+    return redirect(redirect_url)
 
 
 ### CREATE, UPDATE, DELETE QUESTIONS ###
@@ -1214,8 +1234,8 @@ def add_question(quiz_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to add question.", "invalid action")
-        return redirect(url_for("login"))
+        flash("Login first to add question.", "invalid-action")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     # read quiz data from db with quiz_id
     quiz_data = mongo.db.quizzes.find_one(
@@ -1229,8 +1249,8 @@ def add_question(quiz_id):
         }
     )
     if not quiz_data:
-        flash("Quiz does not exist. First, create a new quiz.", "invalid action")
-        return redirect(url_for('create_quiz'))
+        flash("Quiz does not exist. First, create a new quiz.", "invalid-action")
+        return redirect(url_for('create_quiz', _external=True, _scheme='https'))
     
     # if quiz identified by new_quiz_id exists...
     quiz_title = quiz_data.get('title')
@@ -1272,7 +1292,9 @@ def add_question(quiz_id):
         return redirect(url_for(
             'add_question', 
             quiz_id=quiz_id,
-            create_quiz_process=create_quiz_process
+            create_quiz_process=create_quiz_process,
+            _external=True, 
+            _scheme='https'
         ))
 
     # GET #
@@ -1324,8 +1346,8 @@ def edit_question(quiz_id, edit_question_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to edit question", "invalid action")
-        return redirect(url_for("login"))
+        flash("Login first to edit question", "invalid-action")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     # read quiz data from db with quiz_id
     quiz_data = mongo.db.quizzes.find_one(
@@ -1348,7 +1370,7 @@ def edit_question(quiz_id, edit_question_id):
     if not quiz_data:
         flash("Quiz not found.", "error")
         # redirect to where quiz id is not required
-        return redirect(url_for('discover'))
+        return redirect(url_for('discover', _external=True, _scheme='https'))
 
     # confirm current user is quiz owner
     user_is_owner = (
@@ -1356,14 +1378,24 @@ def edit_question(quiz_id, edit_question_id):
             ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
     if not user_is_owner:
-        flash("Cannot edit: current user is not the quiz owner", "invalid action")
-        return redirect(url_for('view_quiz', view_quiz_id=quiz_id))
+        flash("Cannot edit: current user is not the quiz owner", "invalid-action")
+        return redirect(url_for(
+            'view_quiz', 
+            view_quiz_id=quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # if quiz exists and current user is owner...    
     edit_question_index = quiz_data.get('edit_question_num', -1)  
     if edit_question_index == -1:
         flash("Cannot edit question - question not in quiz", "error")
-        return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
+        return redirect(url_for(
+            'edit_quiz', 
+            edit_quiz_id=quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # POST #
     if request.method == "POST":
@@ -1388,7 +1420,12 @@ def edit_question(quiz_id, edit_question_id):
         else:    
             flash("Question could not be updated. Try again later.", "error")
 
-        return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
+        return redirect(url_for(
+            'edit_quiz', 
+            edit_quiz_id=quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # GET #
     # add 1 b/c $indexOfArray returns zero-based index
@@ -1437,8 +1474,8 @@ def delete_question(quiz_id, delete_question_id):
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to delete a quiz.", "invalid action")
-        return redirect(url_for("login"))
+        flash("Login first to delete a quiz.", "invalid-action")
+        return redirect(url_for("login", _external=True, _scheme='https'))
 
     # read document from quizzes collection by quiz_id
     quiz_data = mongo.db.quizzes.find_one(
@@ -1453,7 +1490,7 @@ def delete_question(quiz_id, delete_question_id):
     )
     if not quiz_data:
         flash("Quiz not found", "error")
-        return redirect(url_for('discover'))
+        return redirect(url_for('discover', _external=True, _scheme='https'))
         
     # confirm current user is quiz owner
     user_is_owner = (
@@ -1461,8 +1498,13 @@ def delete_question(quiz_id, delete_question_id):
             ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
     if not user_is_owner:
-        flash("Question not deleted - user is not the quiz owner.", "invalid action")
-        return redirect(url_for('view_quiz', view_quiz_id=quiz_id))
+        flash("Question not deleted - user is not the quiz owner.", "invalid-action")
+        return redirect(url_for(
+            'view_quiz', 
+            view_quiz_id=quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # try to remove delete_quiz_id from quiz_id questions array
     update_quiz_questions_result = mongo.db.quizzes.update_one(
@@ -1471,17 +1513,27 @@ def delete_question(quiz_id, delete_question_id):
     )
     if not update_quiz_questions_result:
         flash("Question could not be deleted from quiz - try again later.", "error")
-        return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
+        return redirect(url_for(
+            'edit_quiz', 
+            edit_quiz_id=quiz_id,
+            _external=True, 
+            _scheme='https'
+        ))
 
     # if quiz_id questions array is updated successfully, try to delete question
-    delete_question_result = mongo.db.questions.delete_one(
+    mongo.db.questions.delete_one(
         { 
             "_id": ObjectIdHelper.toObjectId(delete_question_id)
         }
     )
-    flash(f"Question was deleted from ${quiz_data.get('title')}", "success")
+    flash(f"Question was deleted from {quiz_data.get('title')}", "success")
     
-    return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
+    return redirect(url_for(
+        'edit_quiz', 
+        edit_quiz_id=quiz_id,
+        _external=True,
+        _scheme='https'
+    ))
 
 
 ### START APP ###

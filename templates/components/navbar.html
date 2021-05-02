@@ -30,7 +30,7 @@
                         <button class="btn btn-rounded cta btn-nav">Sign Up</button>
                     </a>
                     <a class="nav-link text-center" href="{{ url_for('login') }}">Login</a>
-                    <a class="nav-link text-center" href="{{ url_for('landing') }}">Welcome</a>
+                    <a class="nav-link text-center" href="{{ url_for('welcome') }}">Welcome</a>
                 {% elif loggedIn == True %}
                     <a class="nav-link" href="{{ url_for('create_quiz') }}">
                         <button class="btn btn-rounded cta btn-nav">Create</button>
@@ -38,7 +38,7 @@
                     <a class="nav-link" href="{{ url_for('discover') }}">
                         <button class="btn btn-rounded cta btn-nav">Discover</button>
                     </a>
-                    <a class="nav-link text-center" href="#">Logout</a>
+                    <a class="nav-link text-center" href="{{ url_for('logout') }}">Logout</a>
                 {% endif %}
             </div>
         </div>

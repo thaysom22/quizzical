@@ -31,13 +31,14 @@
     <main>
         <div class="main-inner-wrapper">
             <section>
-                <!-- flash messages -->
-                {% with messages = get_flashed_messages() %}
+                <!-- flashed messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
-                        {% for message in messages %}
-                            <div class="row g-0 flashed-messages
+                        {% for category, message in messages %}
+                            <div class="row g-0 flashed-message
                                 alert alert-warning alert-dismissible
-                                fade show d-flex align-items-center"
+                                fade show d-flex align-items-center
+                                {{category}}"
                                 role="alert"
                             >
                                 <h4 class="center-align text-center"><strong>{{ message }}</strong></h4>

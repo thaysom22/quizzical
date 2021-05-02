@@ -57,7 +57,19 @@ main {
     margin-top: 6.663rem;
     padding-bottom: 8rem;
 
-    .flashed-messages {
+    .flashed-message {
+        &.not-auth {
+            background-color: $not-auth; 
+        }
+        &.success {
+            background-color: $success;
+        }
+        &.invalid-action {
+            background-color: $invalid-action;
+        }
+        &.error {
+            background-color: $error;
+        }
         h4 {
             margin-bottom: 0;
         }

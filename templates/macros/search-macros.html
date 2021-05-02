@@ -3,9 +3,7 @@
 {% macro quiz_search_result(quiz_data) -%}
 
 <div class="quiz-search-result-wrapper my-2">
-    <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" 
-        class="card quiz-search-result grid-container"
-    >
+    <div class="card quiz-search-result grid-container">
         <div class="quiz-title">
             <h4 class="p-3">
                 {{ quiz_data.title }}
@@ -19,7 +17,7 @@
             />
         </div>
         <div class="view-quiz-button d-flex justify-content-center">
-            <a href="{{ url_for('view_quiz') }}" 
+            <a href="{{ url_for('view_quiz', view_quiz_id=quiz_data._id) }}" 
                 class="btn btn-rounded cta d-flex align-items-center" 
                 role="button"
             >
@@ -32,7 +30,7 @@
             <span>{{ quiz_data.quiz_category_data.category_name }}</span>
             <span>{{ quiz_data.quiz_age_range_data.age_range }}</span>
         </div>
-    </a>
+    </div>
 </div>
 
 {%- endmacro %}

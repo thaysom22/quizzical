@@ -20,7 +20,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# default route for app
+### DEFAULT ROUTE ###
+
 @app.route("/")
 @app.route("/index")  
 def default():
@@ -33,6 +34,8 @@ def default():
 
     return redirect(url_for("discover"))
 
+
+### LANDING PAGE ###
 
 @app.route("/landing")
 def landing():
@@ -50,6 +53,10 @@ def landing():
     )
 
 
+### LOGIN AND LOGOUT ###
+
+# LOGIN #
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
@@ -57,7 +64,7 @@ def login():
     """
     loggedIn = 'user' in session
     if loggedIn:
-        return redirect(url_for("profile"))
+        return redirect(url_for("discover"))
     
     if request.method == "GET":
         return render_template("pages/login.html", 
@@ -108,6 +115,26 @@ def login():
     return redirect(url_for("discover"))  # redirect to discover if login successful
 
 
+# LOGOUT #
+
+@app.route("/logout")
+def logout():
+    """
+    docstring here
+    """
+    loggedIn = 'user' in session
+    if loggedIn:
+        redirect(url_for("discover"))  
+
+    username = session.get("user").get("username")
+    session.pop("user")
+    flash(f"${username} has been logged out.")
+    
+    return redirect(url_for("login"))
+
+
+### REGISTER ###
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -116,7 +143,7 @@ def register():
     loggedIn = 'user' in session
     if loggedIn:
         flash("Logout first to register a new account")
-        redirect(url_for("profile"))  # if logged in redirect to profile page
+        redirect(url_for("discover"))  
 
     if request.method == "GET":
         # read from categories and age_ranges collections in db
@@ -205,6 +232,9 @@ def register():
     
     return redirect(url_for("discover"))
 
+
+
+### DISCOVER ###
 
 @app.route("/discover")
 def discover():
@@ -302,88 +332,88 @@ def discover():
     user_category_id = user.get("user_category_id")
     user_age_range_id = user.get("user_age_range_id")
     recc_quizzes_by_category = list(mongo.db.quizzes.aggregate([
-            { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user_category_id)} },
-            { "$sample": { "size": 3 } },
-            {   
-                "$lookup": {
-                    "from": "categories",
-                    "localField": "quiz_category_id",
-                    "foreignField": "_id",
-                    "as": "quiz_category_data"
-                }
-            },
-            {   
-                "$lookup": {
-                    "from": "age_ranges",
-                    "localField": "quiz_age_range_id",
-                    "foreignField": "_id",
-                    "as": "quiz_age_range_data"
-                }
-            },
-            { 
-                "$lookup": {  
-                    "from": "users",
-                    "localField": "quiz_owner_id",
-                    "foreignField": "_id",
-                    "as": "quiz_owner_data"
-                } 
-            },
-            { 
-                "$addFields": {
-                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
-                } 
-            },
-            { 
-                "$project": {
-                    "questions": False,
-                    "quiz_owner_data.password": False
-                } 
+        { "$match": {"quiz_category_id": ObjectIdHelper.toObjectId(user_category_id)} },
+        { "$sample": { "size": 3 } },
+        {   
+            "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
             }
-        ]))
+        },
+        {   
+            "$lookup": {
+                "from": "age_ranges",
+                "localField": "quiz_age_range_id",
+                "foreignField": "_id",
+                "as": "quiz_age_range_data"
+            }
+        },
+        { 
+            "$lookup": {  
+                "from": "users",
+                "localField": "quiz_owner_id",
+                "foreignField": "_id",
+                "as": "quiz_owner_data"
+            } 
+        },
+        { 
+            "$addFields": {
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            } 
+        },
+        { 
+            "$project": {
+                "questions": False,
+                "quiz_owner_data.password": False
+            } 
+        }
+    ]))
     
     recc_quizzes_by_age_range = list(mongo.db.quizzes.aggregate([
-            { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user_age_range_id)} },
-            { "$sample": { "size": 3 } },
-            {   
-                "$lookup": {
-                    "from": "categories",
-                    "localField": "quiz_category_id",
-                    "foreignField": "_id",
-                    "as": "quiz_category_data"
-                }
-            },
-            {   
-                "$lookup": {
-                    "from": "age_ranges",
-                    "localField": "quiz_age_range_id",
-                    "foreignField": "_id",
-                    "as": "quiz_age_range_data"
-                }
-            },
-            { 
-                "$lookup": {  
-                    "from": "users",
-                    "localField": "quiz_owner_id",
-                    "foreignField": "_id",
-                    "as": "quiz_owner_data"
-                } 
-            },
-            { 
-                "$addFields": {
-                    "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
-                    "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
-                    "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
-                } 
-            },
-            { 
-                "$project": {
-                    "questions": False,
-                    "quiz_owner_data.password": False
-                } 
+        { "$match": {"quiz_age_range_id": ObjectIdHelper.toObjectId(user_age_range_id)} },
+        { "$sample": { "size": 3 } },
+        {   
+            "$lookup": {
+                "from": "categories",
+                "localField": "quiz_category_id",
+                "foreignField": "_id",
+                "as": "quiz_category_data"
             }
-        ]))
+        },
+        {   
+            "$lookup": {
+                "from": "age_ranges",
+                "localField": "quiz_age_range_id",
+                "foreignField": "_id",
+                "as": "quiz_age_range_data"
+            }
+        },
+        { 
+            "$lookup": {  
+                "from": "users",
+                "localField": "quiz_owner_id",
+                "foreignField": "_id",
+                "as": "quiz_owner_data"
+            } 
+        },
+        { 
+            "$addFields": {
+                "quiz_category_data": { "$arrayElemAt": [ "$quiz_category_data", 0 ]},
+                "quiz_age_range_data": { "$arrayElemAt": [ "$quiz_age_range_data", 0 ]},
+                "quiz_owner_data": { "$arrayElemAt": [ "$quiz_owner_data", 0 ]}
+            } 
+        },
+        { 
+            "$project": {
+                "questions": False,
+                "quiz_owner_data.password": False
+            } 
+        }
+    ]))
 
     # create list of max 3 unique quizzes
     recc_quizzes = recc_quizzes_by_category + recc_quizzes_by_age_range
@@ -406,6 +436,8 @@ def discover():
         search_query=""
     )
         
+
+### SEARCH ###
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
@@ -1311,6 +1343,11 @@ def delete_question(quiz_id, delete_question_id):
         }
     )
 
+    if not delete_question_result:
+        flash("Warning: question removed from quiz but not deleted.")
+
+    flash(f"Success: question was deleted from ${quiz_data.get('title')}")
+    
     return redirect(REDIRECT_URL)
 
 

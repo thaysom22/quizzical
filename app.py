@@ -1250,41 +1250,72 @@ def edit_question(quiz_id, edit_question_id):
 
 # DELETE QUESTION #
 
-@app.route("/delete_question/<quiz_id>/<delete_question_id>")
+@app.route("/delete-question/<quiz_id>/<delete_question_id>")
 def delete_question(quiz_id, delete_question_id):
     """
-    docstring here
+    Delete identified documents from mongodb collections and return
+    flask.redirect object with location parameter
+
+    Arguments:
+    quiz_id -- id for quiz document that references question document
+    to be deleted
+    delete_question_id -- id for question document to be deleted
     """
     loggedIn = 'user' in session
     if not loggedIn:
-        flash("Login first to create quizzes")
+        flash("Disallowed action: login first to delete a quiz.")
         return redirect(url_for("login"))
 
-    
-    return redirect(url_for('edit_quiz', edit_quiz_id=quiz_id))
+    # define redirect URL for endpoint
+    REDIRECT_URL = url_for('edit_quiz', edit_quiz_id=quiz_id)
 
+    # read document from quizzes collection by quiz_id
+    quiz_data = mongo.db.quizzes.find_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(quiz_id)
+        },
+        {
+            "title": True,
+            "quiz_owner_id": True,
+            "questions": True
+        }
+    )
 
+    if not quiz_data:
+        flash("Error: quiz not deleted - quiz not found")
+        return redirect(REDIRECT_URL)
+        
+    # confirm current user is quiz owner
+    user_is_owner = (
+        quiz_data.get('quiz_owner_id') == ObjectIdHelper.toObjectId(session.get('user').get('_id'))
+    )
 
-@app.route("/profile")
-def profile():
-    """
-    docstring here
-    """
-    loggedIn = 'user' in session
-    if not loggedIn:
-        flash("Login first to view your profile")
-        return redirect(url_for("login"))
-    
-    username = session["user"]["username"]
+    if not user_is_owner:
+        flash("Disallowed action: question not deleted - user is not the quiz owner.")
+        return redirect(REDIRECT_URL)
 
-    return render_template(
-        "pages/profile.html",
-        active_page=f"Profile: {username}",
-        username=username,
-        loggedIn=loggedIn)
+    # try to remove delete_quiz_id from quiz_id questions array
+    update_quiz_questions_result = mongo.db.quizzes.update_one(
+        { "_id": ObjectIdHelper.toObjectId(quiz_id) },
+        { "$pull": { "questions": ObjectIdHelper.toObjectId(delete_question_id) } }
+    )
+
+    if not update_quiz_questions_result:
+        flash(f"Error: question could not be deleted from quiz - try again later.")
+        return redirect(REDIRECT_URL)
+
+    # if quiz_id questions array is updated successfully, try to delete question
+    delete_question_result = mongo.db.questions.delete_one(
+        { 
+            "_id": ObjectIdHelper.toObjectId(delete_question_id)
+        }
+    )
+
+    return redirect(REDIRECT_URL)
 
 
 ### START APP ###
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"),

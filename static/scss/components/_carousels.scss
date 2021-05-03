@@ -1,20 +1,30 @@
 /* ******* CAROUSELS ******* */
 
+/* welcome page carousel */
 .carousel {
     .carousel-caption {
         background-color: $dark-overlay;
-        border-radius: 2rem;
-        margin-bottom: 3rem;
+        border-radius: 1rem;
+        
         padding: 1.5rem;
     }
-    .carousel-indicators {
-        margin-bottom: 4rem;
+    .carousel-control-next-icon:after, 
+    .carousel-control-prev-icon:after{
+        font-size: calc(2.5rem + .75vw);
+    }
+    .carousel-item {
+        max-height: 60rem;
+    }
+    h5 {
+        color: $wheat;
+        margin-bottom: .5rem;
     }
     p {
-        font-size: calc(1rem + .4vw);
+        font-size: calc(1rem + .8vw);
     }
 }
 
+/* quiz carousel */
 .quiz-carousel {
     .carousel-item {
         .item-inner {

@@ -9,7 +9,8 @@
 .hero-image-wrapper {
     position: relative;
     .hero-image {
-        background-image: url("./../img/class-with-raised-hands-1.jpg"); 
+        /* CREDIT for image: https://unsplash.com/photos/4uAmz2HyPKc?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink */
+        background-image: url("./../img/boy-smiling-with-pencil.jpg"); 
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -63,11 +64,11 @@
             margin-bottom: 1rem;
         }
         i {
-            padding: 1rem;
+            padding: calc(1rem + .5vw);;
             color: $gray;
         }
         p {
-            padding: 0 1rem;
+            padding: calc(1rem + .5vw);
             text-align: center;
             font-size: calc(1.2rem + .8vw);
         }

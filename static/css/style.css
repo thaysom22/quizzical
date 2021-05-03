@@ -130,6 +130,13 @@ span {
   font-size: calc(1.25rem + .4vw);
 }
 
+hr.h-rule {
+  margin: 0 auto;
+  width: 80%;
+  color: #4F8BD9;
+  height: 0.3rem;
+}
+
 /* containers */
 main {
   min-height: 100vh;
@@ -373,19 +380,28 @@ footer a.wheat {
 }
 
 /* ******* CAROUSELS ******* */
+/* welcome page carousel */
 .carousel .carousel-caption {
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 2rem;
-  margin-bottom: 3rem;
+  border-radius: 1rem;
   padding: 1.5rem;
 }
-.carousel .carousel-indicators {
-  margin-bottom: 4rem;
+.carousel .carousel-control-next-icon:after,
+.carousel .carousel-control-prev-icon:after {
+  font-size: calc(2.5rem + .75vw);
+}
+.carousel .carousel-item {
+  max-height: 60rem;
+}
+.carousel h5 {
+  color: #FADCB2;
+  margin-bottom: 0.5rem;
 }
 .carousel p {
-  font-size: calc(1rem + .4vw);
+  font-size: calc(1rem + .8vw);
 }
 
+/* quiz carousel */
 .quiz-carousel {
   background-color: white;
 }
@@ -463,7 +479,8 @@ form .form-new-user span {
   position: relative;
 }
 .hero-image-wrapper .hero-image {
-  background-image: url("./../img/class-with-raised-hands-1.jpg");
+  /* CREDIT for image: https://unsplash.com/photos/4uAmz2HyPKc?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink */
+  background-image: url("./../img/boy-smiling-with-pencil.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -516,11 +533,11 @@ form .form-new-user span {
   margin-bottom: 1rem;
 }
 .get-started-wrapper .get-started-step i {
-  padding: 1rem;
+  padding: calc(1rem + .5vw);
   color: #E0E0E0;
 }
 .get-started-wrapper .get-started-step p {
-  padding: 0 1rem;
+  padding: calc(1rem + .5vw);
   text-align: center;
   font-size: calc(1.2rem + .8vw);
 }
@@ -612,10 +629,6 @@ form .form-new-user span {
     border-radius: 0.75rem;
   }
 
-  .get-started-wrapper .get-started-step p {
-    text-align: justify;
-  }
-
   .login-wrapper .card, .register-wrapper .card {
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -695,10 +708,6 @@ form .form-new-user span {
   }
   .benefits-wrapper .benefit {
     padding: 3rem;
-  }
-
-  .get-started-wrapper .get-started-step p {
-    text-align: center;
   }
 
   .quiz-cards-item {

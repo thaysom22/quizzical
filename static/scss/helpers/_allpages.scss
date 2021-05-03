@@ -57,6 +57,12 @@ span {
 .text-lg {
     font-size: calc(1.25rem + .4vw);
 }
+hr.h-rule{ 
+    margin: 0 auto;
+    width: 80%;
+    color: $steel-blue;
+    height: .3rem;
+}
 
 /* containers */
 

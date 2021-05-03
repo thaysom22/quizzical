@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- main heading -->
-<header class="p-0 my-5 container-sm">
+<header class="p-0 g-0 my-5 container-sm">
     <div class="row g-0 justify-content-center">
         <div class="text-center main-heading">
             <h2 class="mb-3">Let's get <span class="super">Quizzical</span></h2>
@@ -12,7 +12,7 @@
                 class="quizzical-icon-heading"
             >
             <h4 class="mb-4">Find, create and share engaging quizzes</h4>
-            <div class="d-flex flex-align-justify flex-column flex-lg-row mt-4">
+            <div class="d-flex flex-align-justify flex-column flex-sm-row mt-4">
                 <a href="{{ url_for('register') }}">
                     <button type="button" class="btn btn-lg cta m-3">
                         Sign Up
@@ -27,180 +27,195 @@
         </div>
     </div>   
 </header>
-
+<hr class="h-rule">
 <!-- Hero image -->
-<section class="container-lg g-0 my-5">
+<section class="container-lg g-0 p-3 p-lg-0 my-5">
     <div class="hero-image-wrapper">
         <div class="hero-image w-100"></div>
-        <div class="hero-caption">
+        <div class="hero-caption px-2">
             <h4>Quizzical boosts student engagement and learning</h4>
         </div>
     </div>
 </section>
-
+<hr class="h-rule">
 <!-- List of benefits -->
-<section class="container-lg my-5">
-    <div class="row"> 
-        <div class="benefits-wrapper wrapper-lg 
-            d-flex justify-content-between
-            align-items-center flex-column
-            flex-md-row"
-        >
-            <div class="benefit d-flex align-items-center">
-                <i class="fas fa-lightbulb benefits-icon icon-lg icon-fade"></i>
-                <span class="text-lg">Find great lesson content for your teaching</span>
-            </div>
-            <div class="benefit d-flex align-items-center">
-                <i class="fas fa-graduation-cap benefits-icon icon-lg icon-fade"></i>
-                <span class="text-lg">Learn as part of a curious community</span>
-            </div>
-            <div class="benefit d-flex align-items-center">
-                <i class="fas fa-chart-line benefits-icon icon-lg icon-fade"></i>
-                <span class="text-lg">Source quality questions for your next quiz</span>
-            </div>
+<section class="container-lg my-5"> 
+    <div class="benefits-wrapper wrapper-lg 
+        d-flex justify-content-between
+        align-items-center flex-column
+        flex-md-row"
+    >
+        <div class="benefit d-flex align-items-center">
+            <i class="fas fa-lightbulb benefits-icon icon-lg icon-fade"></i>
+            <span class="text-lg">Find great lesson content for your teaching</span>
+        </div>
+        <div class="benefit d-flex align-items-center">
+            <i class="fas fa-graduation-cap benefits-icon icon-lg icon-fade"></i>
+            <span class="text-lg">Learn as part of a curious community</span>
+        </div>
+        <div class="benefit d-flex align-items-center">
+            <i class="fas fa-chart-line benefits-icon icon-lg icon-fade"></i>
+            <span class="text-lg">Source quality questions for your next quiz</span>
         </div>
     </div>
 </section>
-
+<hr class="h-rule">
 <!-- carousel -->
-<section class="carousel-wrapper wrapper container-lg my-5 p-0">
-    <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
-    <div id="landing-page-carousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-        <div class="carousel-indicators">
+<section class="container-lg my-5 p-0">
+    <div class="carousel-wrapper p-3 p-lg-0">
+        <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
+        <div id="landing-page-carousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+            <div class="carousel-indicators">
+                <button
+                type="button"
+                data-mdb-target="#landing-page-carousel"
+                data-mdb-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+                ></button>
+                <button
+                type="button"
+                data-mdb-target="#landing-page-carousel"
+                data-mdb-slide-to="1"
+                aria-label="Slide 2"
+                ></button>
+                <button
+                type="button"
+                data-mdb-target="#landing-page-carousel"
+                data-mdb-slide-to="2"
+                aria-label="Slide 3"
+                ></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <!-- credit: Photo from https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText CDC on Unsplash -->
+                <img
+                    src="{{ url_for('static', filename='img/boy-working-in-class.jpg') }}"
+                    class="d-block w-100"
+                    alt="Boy working in classroom"
+                />
+                <div class="carousel-caption">
+                    <h5>Recommended content</h5>
+                    <p class="d-none d-sm-block">Quizzical helps teachers to find great questions for their students</p>
+                </div>
+                </div>
+                <div class="carousel-item">
+                <!-- credit: Photo by https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText Tim Mossholder on Unsplash -->
+                <img
+                    src="{{ url_for('static', filename='img/love-to-learn.jpg') }}"
+                    class="d-block w-100"
+                    alt="'Love to learn' sign"
+                />
+                <div class="carousel-caption">
+                    <h5>Create and collaborate</h5>
+                    <p class="d-none d-sm-block">Design and share questions for your students and other educators with Quizzical</p>
+                </div>
+                </div>
+                <div class="carousel-item">
+                <!-- credit: Photo by https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText ThisisEngineering RAEng on Unsplash -->
+                <img
+                    src="{{ url_for('static', filename='img/smiling-teacher.jpg') }}"
+                    class="d-block w-100"
+                    alt="Smiling teacher in front of whiteboard"
+                />
+                <div class="carousel-caption">
+                    <h5>Search by topic and age range</h5>
+                    <p class="d-none d-sm-block">Quizzical organizes quizzes so you can find the questions you need</p>
+                </div>
+                </div>
+            </div>
             <button
-            type="button"
-            data-mdb-target="#landing-page-carousel"
-            data-mdb-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-            ></button>
+                class="carousel-control-prev"
+                type="button"
+                data-mdb-target="#landing-page-carousel"
+                data-mdb-slide="prev"
+            >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
             <button
-            type="button"
-            data-mdb-target="#landing-page-carousel"
-            data-mdb-slide-to="1"
-            aria-label="Slide 2"
-            ></button>
-            <button
-            type="button"
-            data-mdb-target="#landing-page-carousel"
-            data-mdb-slide-to="2"
-            aria-label="Slide 3"
-            ></button>
+                class="carousel-control-next"
+                type="button"
+                data-mdb-target="#landing-page-carousel"
+                data-mdb-slide="next"
+            >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-            <!-- credit: Photo from https://unsplash.com/@cdc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText CDC on Unsplash -->
-            <img
-                src="{{ url_for('static', filename='img/boy-working-in-class.jpg') }}"
-                class="d-block w-100"
-                alt="Boy working in classroom"
-            />
-            <div class="carousel-caption">
-                <h3>Recommended content</h3>
-                <p>Quizzical helps teachers to find great questions for their students</p>
-            </div>
-            </div>
-            <div class="carousel-item">
-            <!-- credit: Photo by https://unsplash.com/@timmossholder?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText Tim Mossholder on Unsplash -->
-            <img
-                src="{{ url_for('static', filename='img/love-to-learn.jpg') }}"
-                class="d-block w-100"
-                alt="'Love to learn' sign"
-            />
-            <div class="carousel-caption">
-                <h3>Create and collaborate</h3>
-                <p>Design and share questions for your students and other educators with Quizzical</p>
-            </div>
-            </div>
-            <div class="carousel-item">
-            <!-- credit: Photo by https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText ThisisEngineering RAEng on Unsplash -->
-            <img
-                src="{{ url_for('static', filename='img/smiling-teacher.jpg') }}"
-                class="d-block w-100"
-                alt="Smiling teacher in front of whiteboard"
-            />
-            <div class="carousel-caption">
-                <h3>Search by topic and age range</h3>
-                <p>Quizzical organizes quizzes so you can find the questions you need</p>
-            </div>
-            </div>
-        </div>
-        <button
-            class="carousel-control-prev"
-            type="button"
-            data-mdb-target="#landing-page-carousel"
-            data-mdb-slide="prev"
-        >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-            class="carousel-control-next"
-            type="button"
-            data-mdb-target="#landing-page-carousel"
-            data-mdb-slide="next"
-        >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
 </section>
-
-<!-- lets get started section -->
-<section class="get-started-wrapper wrapper container-lg my-5 p-3">
-    <h2>Easy to get started...</h2>
+<hr class="h-rule">
+<!-- easy to get started section -->
+<section class="container-lg my-5">
     <div class="row g-0">
-        <div class="get-started-step col-12 col-lg-4">
-            <div class="justify-content-center row g-0">
-                <div class="number-icon col-12 order-md-1">
-                    <!-- credit: https://icons8.com/icon/116651/1st 1st icon by Icons8 -->
-                    <img src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png"/>
+        <div class="get-started-wrapper wrapper-lg py-4 px-2">
+            <h2>Easy to get started</h2>
+            <div class="get-started-steps d-flex flex-column flex-lg-row 
+                justify-content-center"
+            >
+                <div class="get-started-step d-flex flex-column 
+                    align-items-center justify-content-between
+                    col-lg-4"
+                >  
+                    <div class="number-icon">
+                        <!-- credit: https://icons8.com/icon/116651/1st 1st icon by Icons8 -->
+                        <img src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png"/>
+                    </div>
+                    <div class="description">
+                        <p>Create an account and personalize your recommendations to view quizzes</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-user-plus icon-lg"></i>
+                    </div>  
                 </div>
-                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
-                    <p>Create an account and personalize your recommendations to view quizzes</p>
+
+                <div class="get-started-step d-flex flex-column 
+                    align-items-center justify-content-between
+                    col-lg-4">  
+                    <div class="number-icon">
+                        <!-- credit: https://icons8.com/icon/116654/circled-2 Circled 2 icon by Icons8 -->
+                        <img src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"/>
+                    </div>
+                    <div class="description">
+                        <p>Browse 'Discover' page by category, view quizzes recommended for you, search for quizzes or create your own</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-search-plus icon-lg"></i>
+                    </div>  
                 </div>
-                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
-                    <i class="fas fa-user-plus icon-lg"></i>
+
+                <div class="get-started-step d-flex flex-column 
+                    align-items-center justify-content-between
+                    col-lg-4">  
+                    <div class="number-icon">
+                        <!-- credit: https://icons8.com/icon/116660/circled-3 Circled 3 icon by Icons8 -->
+                        <img src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"/>
+                    </div>
+                    <div class="description">
+                        <p>Click on a quiz to view questions and toggle answers!</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-eye icon-lg"></i>
+                    </div>  
                 </div>
             </div>
-        </div>
-        <div class="get-started-step col-12 col-lg-4">
-            <div class="justify-content-center row g-0">
-                <div class="number-icon col-12 order-md-1">
-                    <!-- credit: https://icons8.com/icon/116654/circled-2 Circled 2 icon by Icons8 -->
-                    <img src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"/>
-                </div>
-                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
-                    <p>Browse 'Discover' page by category, view quizzes recommended for you, search for quizzes or create your own</p>
-                </div>
-                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
-                    <i class="fas fa-search-plus icon-lg"></i>
-                </div>
-            </div>
-        </div>
-        <div class="get-started-step col-12 col-lg-4">
-            <div class="justify-content-center row g-0">
-                <div class="number-icon col-12 order-md-1">
-                    <!-- credit: https://icons8.com/icon/116660/circled-3 Circled 3 icon by Icons8 -->
-                    <img src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"/>
-                </div>
-                <div class="justify-self-center description col-12 col-md-6 order-md-3 col-lg-12 order-lg-2">
-                    <p>Click on a quiz to view questions and toggle answers!</p>
-                </div>
-                <div class="justify-self-center text-center icon col-12 col-md-1 order-md-2 col-lg-12 order-lg-3">
-                    <i class="fas fa-eye icon-lg"></i>
-                </div>
-            </div>
-        </div>
+        </div>  
     </div>
 </section>
-
+<hr class="h-rule">
 <!-- final call to action section -->
-<section class="final-cta-wrapper wrapper container-lg my-5">
-    <div class="d-flex flex-column flex-align-justify">
-        <h2>Ready to get Quizzical?</h2>
-        <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
+<section class="container-lg my-5">
+    <div class="final-cta-wrapper wrapper-lg">
+        <div class="d-flex flex-column flex-align-justify">
+            <h2 class="text-center">Ready to get <span class="super">Quizzical?</span></h2>
+            <a href="{{ url_for('register') }}">
+                <button type="button" class="btn btn-lg cta m-3">
+                    Sign Up
+                </button>
+            </a>
+        </div>
     </div>
 </section>
 

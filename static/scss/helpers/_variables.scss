@@ -5,17 +5,19 @@
 
 
 /* COLOR VARIABLES */
-$black: #000000;
-$black-fade: rgba(0,0,0,.7);
-$magenta: #C60F7B;
-$persian-blue: #0839D9;
-$middle-blue: #80CED7;
-$wheat: #FADCB2;
-$wheat-translucent: rgba(250, 220, 178, 0.7);
-$middle-blue-translucent: rgba(127, 206, 215, 0.7);
+$black-fade: rgba(0,0,0,.5);
+$dark-overlay: rgba(0,0,0,.5);
+$light-overlay: rgba(255, 255, 255, 0.5);
 $gray: #E0E0E0;
-$white: #FFFFFF;  
-$dark-overlay: rgba(0,0,0,.4);
+$midnight-blue: #1C0D5E;
+$middle-blue: #80CED7;
+$middle-blue-translucent: rgba(127, 206, 215, 0.7);
+$steel-blue: #4F8BD9;
+$wheat: #FADCB2;
+$mandarin: #FC814A;
+$wheat-translucent: rgba(250, 220, 178, 0.7);
+
+
 $bright-green: #66ff00;
 $incorrect-red: #ff0000;
 /* warning color palette used for flash message backgrounds

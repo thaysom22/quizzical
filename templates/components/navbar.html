@@ -27,16 +27,16 @@
             <div class="navbar-nav">
                 {% if loggedIn == False %}
                     <a class="nav-link" href="{{ url_for('register') }}">
-                        <button class="btn btn-rounded cta btn-nav">Sign Up</button>
+                        <button class="btn cta btn-lg">Sign Up</button>
                     </a>
                     <a class="nav-link text-center" href="{{ url_for('login') }}">Login</a>
                     <a class="nav-link text-center" href="{{ url_for('welcome') }}">Welcome</a>
                 {% elif loggedIn == True %}
                     <a class="nav-link" href="{{ url_for('create_quiz') }}">
-                        <button class="btn btn-rounded cta btn-nav">Create</button>
+                        <button class="btn cta">Create</button>
                     </a>
                     <a class="nav-link" href="{{ url_for('discover') }}">
-                        <button class="btn btn-rounded cta btn-nav">Discover</button>
+                        <button class="btn cta">Discover</button>
                     </a>
                     <a class="nav-link text-center" href="{{ url_for('logout') }}">Logout</a>
                 {% endif %}

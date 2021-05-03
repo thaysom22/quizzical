@@ -1,14 +1,10 @@
 /* ******* LOGIN PAGE ******* */
 
 .login-wrapper {
+    max-width: 80rem;
     .login-title {
         * {
             padding: 0 calc(1rem + .4vw);
-        }
-    }
-    .form-new-user {
-        * {
-            padding: 0 calc(.5rem + .2vw);
         }
     }
 }

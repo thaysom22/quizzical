@@ -1,10 +1,10 @@
 /*** MAIN HEADING ***/
 
 .main-heading {
-    background-color: $white;
-    margin-bottom: calc(2.5rem + .5vw);
+    background-color: white;
+    max-width: 80rem;
+    padding: calc(3rem + 1.5vw) 1.5rem;
     h1,h2 {  
-        color: $magenta;
         font-weight: 600;
     }
 }

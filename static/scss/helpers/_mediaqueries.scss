@@ -6,6 +6,9 @@
     .main-heading {
         @include container-box-shadow();
     }
+    .wrapper-sm {
+        border-radius: .75rem;
+    }
     .benefits-wrapper {
         .benefit {
             max-width: 60%;
@@ -14,6 +17,7 @@
             justify-content: center;
         }
     }
+
 }
 
 /* medium screen sizes and above */
@@ -22,6 +26,9 @@
         h1 {
             font-size: 5rem;
         }
+    }
+    .wrapper-md {
+        border-radius: .75rem;
     }
 
     .get-started-wrapper {
@@ -92,15 +99,7 @@
             }
         }
     }
-
-
-
-
-
 }
-
-
-
 
 /* large screen sizes and above */
 @media screen and (min-width: 992px) {
@@ -109,6 +108,9 @@
         .hero-image {
             border-radius: 2rem;
         }
+    }
+    .wrapper-lg {
+        border-radius: .75rem;
     }
     .carousel {
         .carousel-inner{

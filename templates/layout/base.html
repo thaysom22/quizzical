@@ -29,30 +29,32 @@
     <!-- navbar -->
     {% include "components/navbar.html" %}
     <main>
-        <div class="main-inner-wrapper">
-            <section>
+        <div class="overlay">
+            <div class="main-inner-wrapper">
                 <!-- flashed messages -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
+                <section class="flashed-messages">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
                             <div class="row g-0 flashed-message
                                 alert alert-warning alert-dismissible
                                 fade show d-flex align-items-center
                                 {{category}}"
                                 role="alert"
                             >
-                                <h4 class="center-align text-center"><strong>{{ message }}</strong></h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                {% for category, message in messages %}
+                                    <h4 class="center-align text-center"><strong>{{ message }}</strong></h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </section>
-          
-            <!-- child template content -->
-            {% block content %}
-            {% endblock %}
+                        {% endif %}
+                    {% endwith %}
+                </section>
             
+                <!-- child template content -->
+                {% block content %}
+                {% endblock %}
+                
+            </div>
         </div>
     </main>
     <!-- footer -->

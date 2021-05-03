@@ -3,40 +3,65 @@
 {% block content %}
 
 <!-- main heading -->
-<header>
-    <div class="p-5 text-center main-heading container">
-        <h1 class="mb-3">Let's get Quizzical</h1>
-        <h3 class="mb-4">Find, create and share engaging quizzes</h3>
-        <div class="d-flex flex-align-justify flex-column flex-lg-row mt-3">
-            <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
-            <a href="{{ url_for('login') }}" type="button" class="btn btn-link" data-mdb-ripple-color="dark">Log In</a>
+<header class="p-0 my-5 container-sm">
+    <div class="row g-0 justify-content-center">
+        <div class="text-center main-heading">
+            <h2 class="mb-3">Let's get <span class="super">Quizzical</span></h2>
+            <img src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
+                alt="Quizzical Owl icon"
+                class="quizzical-icon-heading"
+            >
+            <h4 class="mb-4">Find, create and share engaging quizzes</h4>
+            <div class="d-flex flex-align-justify flex-column flex-lg-row mt-4">
+                <a href="{{ url_for('register') }}">
+                    <button type="button" class="btn btn-lg cta m-3">
+                        Sign Up
+                    </button>
+                </a>
+                <a href="{{ url_for('login') }}">
+                    <button type="button" class="btn btn-secondary m-3">
+                        Login
+                    </button>
+                </a>
+            </div>
         </div>
-    </div>
+    </div>   
 </header>
+
 <!-- Hero image -->
-<section class="hero-image-wrapper wrapper container-lg my-5 g-0">
-    <div class="hero-image w-100"></div>
-    <div class="hero-caption">
-        <h2>Boost student engagement and learning</h2>
+<section class="container-lg g-0 my-5">
+    <div class="hero-image-wrapper">
+        <div class="hero-image w-100"></div>
+        <div class="hero-caption">
+            <h4>Quizzical boosts student engagement and learning</h4>
+        </div>
     </div>
 </section>
+
 <!-- List of benefits -->
-<section class="benefits-wrapper wrapper container-lg my-5 p-3 px-lg-0">
-    <div class="row py-4 px-2 justify-content-lg-between"> 
-        <div class="benefit d-flex align-items-center col-12 col-lg-3">
-            <i class="fas fa-lightbulb benefits-icon icon-lg"></i>
-            <span>Find great lesson content for your teaching</span>
-        </div>
-        <div class="benefit d-flex align-items-center col-12 col-lg-3">
-            <i class="fas fa-graduation-cap benefits-icon icon-lg"></i>
-            <span>Learn as part of a curious community</span>
-        </div>
-        <div class="benefit d-flex align-items-center col-12 col-lg-3">
-            <i class="fas fa-chart-line benefits-icon icon-lg"></i>
-            <span>Source quality questions for your next quiz</span>
+<section class="container-lg my-5">
+    <div class="row"> 
+        <div class="benefits-wrapper wrapper-lg 
+            d-flex justify-content-between
+            align-items-center flex-column
+            flex-md-row"
+        >
+            <div class="benefit d-flex align-items-center">
+                <i class="fas fa-lightbulb benefits-icon icon-lg icon-fade"></i>
+                <span class="text-lg">Find great lesson content for your teaching</span>
+            </div>
+            <div class="benefit d-flex align-items-center">
+                <i class="fas fa-graduation-cap benefits-icon icon-lg icon-fade"></i>
+                <span class="text-lg">Learn as part of a curious community</span>
+            </div>
+            <div class="benefit d-flex align-items-center">
+                <i class="fas fa-chart-line benefits-icon icon-lg icon-fade"></i>
+                <span class="text-lg">Source quality questions for your next quiz</span>
+            </div>
         </div>
     </div>
 </section>
+
 <!-- carousel -->
 <section class="carousel-wrapper wrapper container-lg my-5 p-0">
     <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
@@ -121,6 +146,7 @@
         </button>
     </div>
 </section>
+
 <!-- lets get started section -->
 <section class="get-started-wrapper wrapper container-lg my-5 p-3">
     <h2>Easy to get started...</h2>
@@ -169,6 +195,7 @@
         </div>
     </div>
 </section>
+
 <!-- final call to action section -->
 <section class="final-cta-wrapper wrapper container-lg my-5">
     <div class="d-flex flex-column flex-align-justify">
@@ -176,4 +203,5 @@
         <a href="{{ url_for('register') }}" class="btn btn-rounded btn-lg cta" role="button">Sign up</a>
     </div>
 </section>
+
 {% endblock %}

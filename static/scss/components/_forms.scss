@@ -2,62 +2,40 @@
 
 form {
     padding: calc(1rem + 1vw);
-    // select,.form-outline {
-    //     max-width: 60rem;
-    // }
-    // span{
-    //     white-space: nowrap;
-    //     font-size: calc(0.8rem + .2vw);
-    // }
-    // label {
-    //     font-size: calc(1.1rem + .2vw);
-    //     font-family: inherit;
-    //     line-height: 3rem;
-    // }
-    // .form-control,
-    // .form-select {
-    //     padding: .33em .75em;  
-    //     height: 4rem;
-    // }
-    // .form-outline {
-    //     padding-left: .75rem;
-    //     &.searchbar-outline{
-    //         width: 75%;
-    //     }
-    //     .form-control {
-    //         ~.form-label {
-    //             padding-top: .5rem;
-    //         }
-    //     }     
-    //     .form-control:focus,
-    //     .form-control.active{
-    //         ~.form-label {
-    //             padding-top: .2rem;
-    //             left: 1.5rem;
-    //         }
-    //     }
-    // }
+    .form-new-user {
+        margin-top: calc(2rem + .5vw);
+        span {
+            white-space: nowrap;
+            margin-bottom: 1rem;
+        }
+    }
 }
     
+    .form-control {
+        padding-left: 0 !important;
+    }
 
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+        margin-bottom: 1.5rem !important;
+        /* overwrite error in mdb.min.css file where commented out code applied */
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23f93154'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23f93154' stroke='none'/%3E%3C/svg%3E") !important;
+    }
 
-// .form-control.is-invalid,
-// .was-validated .form-control:invalid {
-//     margin-bottom: 1.5rem;
-// }
+    .form-control.is-valid,
+    .was-validated .form-control:valid {
+        margin-bottom: 0 !important;
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%2300b74a' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E") !important;
+    }
 
-// .form-control.is-valid,
-// .was-validated .form-control:valid {
-//     margin-bottom: 0;
-// }
+    .invalid-feedback {
+        top: 3rem;
+    }
 
-// .invalid-feedback {
-//     top: 4rem;
-// }
+    .form-select.is-invalid, 
+    .was-validated .form-select:invalid,
+    .form-select.is-valid, 
+    .was-validated .form-select:valid {
+        background-position: right .75rem center,center right 3rem;
+    }
 
-// .form-select.is-invalid, 
-// .was-validated .form-select:invalid,
-// .form-select.is-valid, 
-// .was-validated .form-select:valid {
-//     background-position: right .75rem center,center right 3rem;
-// }

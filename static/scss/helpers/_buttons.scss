@@ -1,30 +1,33 @@
 /* ******* BUTTONS ******* */
 
 .btn {
-    padding: .5rem 1rem;
-    font-size: calc(1rem + .4vw);
+    padding: .75rem 1.25rem;
+    border-radius: .5rem;
+    font-size: calc(1.1rem + .6vw);
+    margin: .25rem;
     font-family: $tertiary;
     line-height: initial; 
     white-space: nowrap;  
-    &.btn-link {
-        font-size: calc(0.8rem + .2vw);
-    } 
-    &.btn-search {
-        padding: 0.6rem 1rem 0.6rem 1rem;
-    }
+    text-transform: uppercase;
+    
+    // &.btn-search {
+    //     padding: 0.6rem 1rem 0.6rem 1rem;
+    // }
     &.cta {
-        text-transform: uppercase; 
-        background-color: $magenta;   
-        color: $white;
-        &.btn-lg {
-            font-size: calc(1.2rem + .5vw);
-            padding: .75rem 1.5rem;
-            margin: .5rem;
-        }
-        &.btn-nav {
-            font-size: calc(1rem + .4vw);
-            padding: .75rem 1.5rem;
-            margin: .25rem;
-        }
+        background-color: $mandarin;  
+        color: $midnight-blue; 
+    }
+    &.btn-lg {
+        font-size: calc(1.2rem + .8vw);
+    }
+   
+    &.btn-secondary{
+        background-color: white;
+        color: $steel-blue;
+    }
+    .icon-sm,
+    .icon-md{
+        font-size: inherit;
     }
 }
+

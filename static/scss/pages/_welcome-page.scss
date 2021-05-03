@@ -1,4 +1,9 @@
-/* ******* LANDING PAGE ******* */
+/* ******* WELCOME PAGE ******* */
+
+.quizzical-icon-heading {
+    margin: calc(1rem + 1vw);
+}
+
 
 /* hero image section */
 .hero-image-wrapper {
@@ -8,44 +13,39 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        min-height: 60vh;
+        min-height: 45rem;
+        max-height: 60rem;
     }
     .hero-caption {
         display: flex;
         justify-content: center;
         position: absolute;
-        bottom: 15%;
+        bottom: 5%;
         width: 100%;
-        h2 {
+        h4 {
             padding: 3rem 6rem;
             background-color: $dark-overlay;
             border-radius: 1rem;
-            color: $white;
             text-align: center;
+            color: white;
         }
     } 
 }
 
 /* benefits section */
 .benefits-wrapper {
-    background-color: $white;
-    border-radius: 2rem;
     .benefit{
         padding: 2rem;
         margin: 1.5rem 0;
         text-align: center;
-    }
-    .benefits-icon {
-        padding: .5rem;
-    }
-    span {
-        padding: 1rem;
+        span {
+            padding: 1rem;
+        }
     }
 }
 
 /* get started section */
 .get-started-wrapper{
-    background-color: $white;
     border-radius: 2rem;
     h2 {
         text-align: center;
@@ -76,7 +76,6 @@
 
 /* final cta section */
 .final-cta-wrapper{
-    background-color: $white;
     border-radius: 2rem;
     padding: 3rem;
     h2 {

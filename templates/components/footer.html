@@ -1,66 +1,65 @@
 <!-- Footer -->
 <!-- CREDIT footer: "https://mdbootstrap.com/docs/standard/navigation/footer/" -->
-<footer class="text-center">
-  <div class="container px-4 py-5">
-    <div class="row">
-      <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-4">
-        <div class="d-flex align-items-center justify-content-center mb-1">
-            <h5 class="mb-0 me-1">About Quizzical</h5>
-            <img 
-                id="footer-logo" 
-                src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
-                alt="Quizzical Icon" 
-                loading="lazy"
-            />
+<footer class="text-center container-fluid px-3 py-5">
+    <div class="row footer-inner-wrapper">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-4">
+            <div class="d-flex align-items-center justify-content-center mb-1">
+                <h5 class="mb-0 me-1">About Quizzical</h5>
+                <img 
+                    id="footer-logo" 
+                    src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
+                    alt="Quizzical Icon" 
+                    loading="lazy"
+                />
+            </div>
+            <p>
+            Quizzical is an online platform to find and share quiz questions organized into a range of topics. 
+            It is used by educators in the classroom to boost student learning and engagement and by enthusiasts or quiz event organizers. 
+            </p>
         </div>
-        <p>
-          Quizzical is an online platform to find and share quiz questions organized into a range of topics. 
-          It is used by educators in the classroom to boost student learning and engagement and by enthusiasts or quiz event organizers. 
-        </p>
-      </div>
-      <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-4">
-        <div class="d-flex align-items-center justify-content-center mb-1">
-            <h5 class="mb-0 me-1">Created by</h5>
-            <img 
-                id="footer-thdev-icon" 
-                src="{{ url_for('static', filename='img/th_dev_logo.png') }}" 
-                alt="Photo of developer" 
-                loading="lazy"
-            />
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0 px-4">
+            <div class="d-flex align-items-center justify-content-center mb-1">
+                <h5 class="mb-0 me-1">Created by</h5>
+                <img 
+                    id="footer-thdev-icon" 
+                    src="{{ url_for('static', filename='img/th_dev_logo.png') }}" 
+                    alt="Photo of developer" 
+                    loading="lazy"
+                />
+            </div>
+            <p>
+                Tom Haysom is a full stack developer coding with HTML5, CSS3/SASS/Bootstrap, Javascript, Python/Flask and SQL/NoSQL databases.
+            </p>
+            <div class="portfolio mt-2">
+                <a href="https://thaysom22.github.io/portfolio_project/" target="_blank">
+                    Link to porfolio
+                </a>
+            </div>
         </div>
-        <p>
-          Tom Haysom is a full stack developer coding with HTML5, CSS3/SASS/Bootstrap, Javascript, Python/Flask and SQL/NoSQL databases.
-          <br><a href="https://thaysom22.github.io/portfolio_project/" target="_blank" class="wheat">Link to porfolio</a>
-        </p>
-      </div>
-      <!-- Section: Social media -->
-      <section class="col-12 my-4">
-        <!-- Linkedin -->
-        <a
-            class="btn btn-primary btn-floating m-1"
-            style="background-color: #0082ca;"
-            href="https://linkedin.com/in/thomas-haysom"
-            target="_blank"
-            role="button"
-        >
-            <i class="fab fa-linkedin-in icon-sm"></i>
-        </a>
-        <!-- Github -->
-        <a
-            class="btn btn-primary btn-floating m-1"
-            style="background-color: #333333;"
-            href="https://github.com/thaysom22"
-            target="_blank"
-            role="button"
-        >
-            <i class="fab fa-github icon-sm"></i>
-        </a>
-    </section>
+        <!-- Section: Social media -->
+        <section class="col-12 my-4">
+            <!-- Linkedin -->
+            <a
+                href="https://linkedin.com/in/thomas-haysom"
+                target="_blank"
+            >   
+                <button class="btn footer-link linkedin m-1">
+                    <i class="fab fa-linkedin-in"></i>
+                </button>    
+            </a>
+            <!-- Github -->
+            <a
+                href="https://github.com/thaysom22"
+                target="_blank"
+            >   
+                <button class="btn footer-link github m-1">
+                    <i class="fab fa-github"></i>
+                </button>    
+            </a>
+        </section>
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            <p>© 2021 Copyright: Tom Haysom</p>
+        </div>
     </div>
-  </div>
-  <!-- Copyright -->
-  <div class="text-center p-3">
-    © 2021 Copyright:
-    <a href="https://github.com/thaysom22/quizzical" target="_blank" class="wheat">Tom Haysom</a>
-  </div>
 </footer>

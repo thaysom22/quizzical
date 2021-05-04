@@ -35,17 +35,17 @@
                 <section class="flashed-messages">
                     {% with messages = get_flashed_messages(with_categories=true) %}
                         {% if messages %}
-                            <div class="row g-0 flashed-message
-                                alert alert-warning alert-dismissible
-                                fade show d-flex align-items-center
-                                {{category}}"
-                                role="alert"
-                            >
-                                {% for category, message in messages %}
+                            {% for category, message in messages %}
+                                <div class="row g-0 flashed-message
+                                    alert alert-warning alert-dismissible
+                                    fade show d-flex align-items-center
+                                    {{ category }}"
+                                    role="alert"
+                                >
                                     <h4 class="center-align text-center"><strong>{{ message }}</strong></h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                {% endfor %}
-                            </div>
+                                </div>
+                            {% endfor %}
                         {% endif %}
                     {% endwith %}
                 </section>

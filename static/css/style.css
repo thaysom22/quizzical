@@ -18,6 +18,13 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   white-space: nowrap;
   text-transform: uppercase;
 }
+.btn.btn-search {
+  padding: 0.25rem;
+}
+.btn.footer-link {
+  color: white;
+  padding: 0.2rem 0.8rem 0.4rem 0.8rem;
+}
 .btn.cta {
   background-color: #FC814A;
   color: #1C0D5E;
@@ -168,6 +175,7 @@ main .overlay {
   height: 100%;
   min-height: 100vh;
   z-index: 1;
+  padding-bottom: 3rem;
 }
 
 .main-inner-wrapper {
@@ -224,23 +232,34 @@ main .overlay {
 
 /* ******* FOOTER ******* */
 footer {
-  font-family: "Open Sans", sans-serif;
   background-color: #1C0D5E;
 }
 footer .footer-inner-wrapper {
-  position: relative;
-  top: 6rem;
+  color: white;
+  font-family: "Open Sans", sans-serif;
 }
-footer #footer-thdev-icon,
-footer #footer-logo {
+footer .footer-inner-wrapper h5 {
+  color: white;
+}
+footer .footer-inner-wrapper #footer-thdev-icon,
+footer .footer-inner-wrapper #footer-logo {
   width: 2.5rem;
   height: 2.5rem;
   margin: 0.5rem;
 }
-footer #footer-thdev-icon {
+footer .footer-inner-wrapper #footer-thdev-icon {
   border-radius: 0.5rem;
 }
-footer a.wheat {
+footer .footer-inner-wrapper p {
+  font-size: calc(1rem + .2vw);
+}
+footer .footer-inner-wrapper .linkedin {
+  background-color: #0082ca;
+}
+footer .footer-inner-wrapper .github {
+  background-color: #333333;
+}
+footer .footer-inner-wrapper .portfolio a {
   color: #FADCB2;
 }
 
@@ -440,10 +459,6 @@ form .form-new-user span {
   margin-bottom: 1rem;
 }
 
-.form-control {
-  padding-left: 0 !important;
-}
-
 .form-control.is-invalid,
 .was-validated .form-control:invalid {
   margin-bottom: 1.5rem !important;
@@ -572,6 +587,12 @@ form .form-new-user span {
 .num-results span {
   color: rgba(0, 0, 0, 0.5);
   font-size: calc(1.1rem + .4vw);
+}
+
+.searchbar-outline {
+  min-width: 25rem;
+  width: 60%;
+  max-width: 40rem;
 }
 
 /* ******* VIEW QUIZ PAGE ******* */

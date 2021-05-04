@@ -10,14 +10,14 @@
             {% if search_query %}
                 <input type="text" name="search_query"
                     id="search_query"
-                    class="form-control active"
+                    class="form-control form-control-lg active"
                     required
                     value="{{ search_query }}"
                 >
             {% else %}
                 <input type="text" name="search_query"
                     id="search_query"
-                    class="form-control"
+                    class="form-control form-control-lg"
                     required
                 >
             <label for="search_query" class="form-label">Find a quiz...</label>
@@ -25,7 +25,7 @@
             <div class="invalid-feedback">Your search is empty!</div>
         </div>
         
-        <button type="submit" class="btn btn-search">
+        <button type="submit" class="btn btn-search cta">
             <i class="fas fa-search icon-sm"></i>
         </button>
     </form>

@@ -9,10 +9,13 @@
     line-height: initial; 
     white-space: nowrap;  
     text-transform: uppercase;
-    
-    // &.btn-search {
-    //     padding: 0.6rem 1rem 0.6rem 1rem;
-    // }
+    &.btn-search {
+        padding: 0.25rem;
+    }
+    &.footer-link{
+        color: white;
+        padding: 0.2rem 0.8rem 0.4rem 0.8rem
+    }
     &.cta {
         background-color: $mandarin;  
         color: $midnight-blue; 

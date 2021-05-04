@@ -1,23 +1,35 @@
 /* ******* FOOTER ******* */
 
 footer {
-    font-family: $main;
     background-color: $midnight-blue;
     .footer-inner-wrapper{
-    position: relative;
-    top: 6rem;
-    }
-    #footer-thdev-icon,
-    #footer-logo {
-        width: 2.5rem;
-        height: 2.5rem;
-        margin: .5rem;
-    }
-    #footer-thdev-icon {
-        border-radius: .5rem;
-    }
-    a.wheat {
-        color: $wheat;
+        color: white;
+        font-family: $main;
+        h5 {
+            color: white;
+        }
+        #footer-thdev-icon,
+        #footer-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: .5rem;
+        }
+        #footer-thdev-icon {
+            border-radius: .5rem;
+        }
+        p{
+            font-size: calc(1rem + .2vw);
+        }
+        .linkedin{
+            background-color: #0082ca;
+        }
+        .github {
+            background-color: #333333;
+        }
+        .portfolio a{
+            color: $wheat;
+        }
+
     }
 }
 

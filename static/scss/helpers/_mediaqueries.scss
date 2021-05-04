@@ -18,6 +18,13 @@
         }
     }
 
+    /* search result cards */
+    .quiz-search-result {
+        &.grid-container {
+            height: 20rem;
+        }
+    }
+
 }
 
 /* medium screen sizes and above */
@@ -45,6 +52,7 @@
     /* search result cards */
     .quiz-search-result {
         &.grid-container {
+            height: 25rem;
             grid-template: 50% 50% / 40% 30% 30%;
             .quiz-title {
                 grid-area: 1 / 1 / span 1 / span 1;
@@ -65,11 +73,6 @@
             }
             .quiz-info {
                 grid-area: 2 / 1 / span 1 / span 1;
-                span {
-                    font-size: calc(1.5rem + .2vw);
-                    color: $black-fade;
-                    padding: 0 .75rem calc(.5rem + .2vw) .75rem;
-                }
             }
         }
     }
@@ -126,17 +129,20 @@
             border-radius: 2rem;
         }
     }
-
     .benefits-wrapper {
         border-radius: 2rem;
         .benefit {
             padding: 3rem;
         }
     }
-
-
     .quiz-cards-item {
         height: 50rem;
+    }
+    /* search result cards */
+    .quiz-search-result {
+        &.grid-container {
+            height: 25rem;
+        }
     }
 }
 

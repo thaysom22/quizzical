@@ -2,93 +2,101 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
-<!-- main heading -->
-<header>
-    <div class="p-5 text-center main-heading container">
-        <div class="d-flex justify-content-center col-12">
-            <h2 class="text-center p-2">Create Quiz</h2> 
-            <i class="fas fa-plus-circle icon-lg px-3"></i>
-        </div>
-    </div>
-</header>
 
-<!-- create-quiz form section -->
-<section class="create-quiz-wrapper wrapper
-    container-lg my-5 p-0"
->
-    <form  
-        id="create-quiz-form"
-        method="POST"
-        action="{{ url_for('create_quiz') }}"
-        novalidate
-    >
-
-        <div class="create-quiz-inputs-wrapper d-flex flex-column flex-lg-row">
-            <!-- create-quiz title text input -->
-            <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
-                <i class="fas fa-tag icon-sm col-2 col-md-1 col-lg-2 text-center"></i>
-                <div class="d-flex col-8 col-md-5 col-lg-9">
-                    <div class="form-outline w-100">
-                        <input id="create-quiz-title" name="create_quiz_title" type="text" 
-                            min-length="3" maxlength="30" 
-                            class="form-control form-control-lg" required
-                        />
-                        <label for="create-quiz-title" class="form-label">Title</label>
-                        <div class="invalid-feedback">
-                            Choose a 3-30 character title
+<section class="container-md my-5">
+    <div class="row justify-content-center">
+        <div class="create-quiz-wrapper wrapper-md create-quiz-wrapper">
+            <!-- create quiz title -->
+            <div class="text-center d-flex flex-align-justify mb-5">
+                <i class="fas fa-plus-circle icon-lg icon-fade me-2"></i>
+                <h2 class="text-center p-2">Create Quiz</h2> 
+            </div>
+            <hr class="h-rule">
+            <!-- create quiz form -->
+            <form  
+                id="create-quiz-form"
+                method="POST"
+                action="{{ url_for('create_quiz') }}"
+                class="mt-4"
+                novalidate
+            >
+                <div class="create-quiz-inputs-wrapper d-flex flex-column flex-lg-row">
+                    <!-- create-quiz title text input -->
+                    <div class="d-flex align-items-center col-12 col-lg-4 mb-4">
+                        <i class="fas fa-tag icon-sm col-2 text-center icon-fade"></i>
+                        <div class="d-flex col-8">
+                            <div class="form-outline w-100">
+                                <input id="create-quiz-title" name="create_quiz_title" type="text" 
+                                    maxlength="30" 
+                                    class="form-control form-control-lg" required
+                                />
+                                <label for="create-quiz-title" class="form-label">Title</label>
+                                <div class="invalid-feedback">
+                                    Enter a title
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- create-quiz category select input -->
+                    <div class="d-flex align-items-center col-12 col-lg-4 mb-4">
+                        <i class="fas fa-folder-open icon-sm col-2 text-center icon-fade"></i>
+                        <div class="d-flex col-8">
+                            <select id="create-quiz-category" 
+                                name="create_quiz_category"
+                                class="form-select" required
+                            >
+                                <option value="" disabled selected>Choose category</option>
+                                {% for category in all_categories %}
+                                    <option value="{{ category._id }}">
+                                        {{ category.category_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <!-- create-quiz age-range select input -->
+                    <div class="d-flex align-items-center col-12 col-lg-4 mb-4">
+                        <i class="fas fa-users icon-sm col-2 icon-fade text-center"></i>
+                        <div class="d-flex col-8">
+                            <select id="create-quiz-age-range" 
+                                name="create_quiz_age_range"
+                                class="form-select" required
+                            >
+                                <option value="" disabled selected>Choose age range</option>
+                                {% for age_range in all_age_ranges %}
+                                    <option value="{{ age_range._id }}">
+                                        {{ age_range.age_range }}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- create-quiz category select input -->
-            <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
-                <i class="fas fa-folder-open icon-sm col-2 col-md-1 col-lg-2 text-center"></i>
-                <div class="d-flex col-8 col-md-5 col-lg-9">
-                    <select id="create-quiz-category" 
-                        name="create_quiz_category"
-                        class="form-select" required
-                    >
-                        <option value="" disabled selected>Choose category</option>
-                        {% for category in all_categories %}
-                            <option value="{{ category._id }}">
-                                {{ category.category_name }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                <!-- submit -->
+                <div class="col-12">
+                    <div class="row mt-5 d-flex justify-content-center align-items-center">
+                        <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
+                            <button type="submit" class="btn btn-lg cta m-2 d-flex align-items-center">
+                                Create
+                                <i class="fas fa-plus-circle icon-sm p-0 pt-1 ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- create-quiz age-range select input -->
-            <div class="d-flex align-items-center col-12 col-lg-4 mb-3">
-                <i class="fas fa-users icon-sm col-2 col-md-1 col-lg-2 text-center"></i>
-                <div class="d-flex col-8 col-md-5 col-lg-9">
-                    <select id="create-quiz-age-range" 
-                        name="create_quiz_age_range"
-                        class="form-select" required
-                    >
-                        <option value="" disabled selected>Choose age range</option>
-                        {% for age_range in all_age_ranges %}
-                            <option value="{{ age_range._id }}">
-                                {{ age_range.age_range }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                <div class="col-12 d-flex 
+                    justify-content-center align-items-center
+                    flex-column mt-4"
+                >
+                    <a href="{{ url_for('discover') }}">
+                        <button type="button" class="btn btn-secondary">
+                            <i class="fas fa-arrow-circle-left icon-sm me-2"></i>
+                            Discover
+                        </button> 
+                    </a>
                 </div>
-            </div>
+            </form>
         </div>
-        
-        <!-- submit -->
-        <div class="col-12">
-            <div class="row mt-5 d-flex justify-content-center align-items-center">
-                <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
-                    <button type="submit" class="btn btn-rounded cta m-2 d-flex align-items-center">
-                        <i class="fas fa-plus-circle icon-med"></i>
-                        Create
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </form>
+    </div>
 </section>
 
 

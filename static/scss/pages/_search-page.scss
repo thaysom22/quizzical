@@ -1,5 +1,9 @@
 /* ******* SEARCH PAGE ******* */
 
+.search-results-wrapper{
+    background-color: white;
+}
+
 .num-results {
     span {
         color: $black-fade;
@@ -8,7 +12,7 @@
 }
 
 .searchbar-outline {
-    min-width: 25rem;
+    min-width: 15rem;
     width: 60%;
     max-width: 40rem;
 }

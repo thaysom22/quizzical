@@ -18,6 +18,9 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   white-space: nowrap;
   text-transform: uppercase;
 }
+.btn .icon-sm {
+  padding: 0.25rem 0 0 0;
+}
 .btn.btn-search {
   padding: 0.25rem;
 }
@@ -185,6 +188,7 @@ main .flashed-messages .flashed-message.error {
 }
 main .flashed-messages .flashed-message h4 {
   margin-bottom: 0;
+  word-break: break-all;
 }
 main .overlay {
   background-color: rgba(255, 255, 255, 0.5);
@@ -342,7 +346,7 @@ a.card .quiz-img img {
 /* search result cards */
 .quiz-search-result.grid-container {
   display: grid;
-  min-height: 20rem;
+  height: 15rem;
   grid-template: 40% 40% 20%/60% 40%;
 }
 .quiz-search-result.grid-container .quiz-title {
@@ -621,13 +625,17 @@ form .form-new-user span {
 }
 
 /* ******* SEARCH PAGE ******* */
+.search-results-wrapper {
+  background-color: white;
+}
+
 .num-results span {
   color: rgba(0, 0, 0, 0.5);
   font-size: calc(1.1rem + .4vw);
 }
 
 .searchbar-outline {
-  min-width: 25rem;
+  min-width: 15rem;
   width: 60%;
   max-width: 40rem;
 }
@@ -676,6 +684,11 @@ form .form-new-user span {
     margin-right: auto;
     justify-content: center;
   }
+
+  /* search result cards */
+  .quiz-search-result.grid-container {
+    height: 20rem;
+  }
 }
 /* medium screen sizes and above */
 @media screen and (min-width: 768px) {
@@ -699,6 +712,7 @@ form .form-new-user span {
 
   /* search result cards */
   .quiz-search-result.grid-container {
+    height: 25rem;
     grid-template: 50% 50%/40% 30% 30%;
   }
   .quiz-search-result.grid-container .quiz-title {
@@ -720,11 +734,6 @@ form .form-new-user span {
   }
   .quiz-search-result.grid-container .quiz-info {
     grid-area: 2/1/span 1/span 1;
-  }
-  .quiz-search-result.grid-container .quiz-info span {
-    font-size: calc(1.5rem + .2vw);
-    color: rgba(0, 0, 0, 0.5);
-    padding: 0 0.75rem calc(.5rem + .2vw) 0.75rem;
   }
 
   /* view quiz card */
@@ -788,5 +797,10 @@ form .form-new-user span {
 
   .quiz-cards-item {
     height: 50rem;
+  }
+
+  /* search result cards */
+  .quiz-search-result.grid-container {
+    height: 25rem;
   }
 }/*# sourceMappingURL=style.css.map */

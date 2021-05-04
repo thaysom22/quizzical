@@ -2,184 +2,139 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
-<!-- main heading -->
-<header>
-    <div class="p-5 text-center main-heading container">
-        <div class="d-flex justify-content-center col-12">
-            <h2 class="text-center p-2">Add Question</h2> 
-            <i class="fas fa-plus icon-lg px-3"></i>
+<section class="container-lg my-5">
+    <div class="row justify-content-center">
+        <div class="wrapper-lg add-question-wrapper">
+            <!-- add question title -->
+            <div class="d-flex justify-content-center col-12 mb-4">
+                <i class="fas fa-plus icon-lg px-3 icon-fade"></i>
+                <h2 class="text-center p-2">Add Question</h2> 
+            </div>
+            <hr class="h-rule">
+            <!-- add question form section -->
+            <form  
+                id="add-question-form"
+                method="POST"
+                action="{{ url_for(
+                    'add_question',
+                    quiz_id=quiz_id,
+                    create_quiz_process=create_quiz_process
+                    ) }}"
+                class="my-4"
+                novalidate
+            >
+                <!-- question textarea input -->
+                <div class="d-flex row my-5 justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <div class="form-outline">
+                            <textarea name="new_question_text" id="new_question_text" rows="4" cols="50" class="form-control form-control-lg" maxlength="200" required></textarea>
+                            <label for="new_question_text" class="form-label">
+                                Question text
+                            </label>
+                            <div class="invalid-feedback">
+                                Enter a question
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="align-self-start p-4">Answer choices (check correct answer):</span>
+                <!-- add answers wrapper -->
+                <div class="d-flex row justify-content-center align-items-center my-4">
+                    {% for i in range(4) %}
+                    <!-- answer text input -->
+                        <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
+                            <div class="form-outline w-100">
+                                <input name="answer_{{ i }}" id="answer_{{ i }}" type="text" 
+                                    maxlength="30" class="form-control form-control-lg" 
+                                    required
+                                />
+                                <label for="answer_{{ i }}" class="form-label">Answer option {{ i+1 }}</label>
+                                <div class="invalid-feedback">
+                                    Enter an answer
+                                </div>
+                            </div>
+                            <!-- answer radio button -->
+                            <div class="d-flex align-items-center m-3 form-check">
+                                <input type="radio" id="correct_answer_{{ i }}" 
+                                name="correct_answer_index" value="{{ i }}" 
+                                required class="form-check-input"
+                                >
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- add question num section -->
+                <div>
+                    {% if num_questions == 0 %}
+                        <h6 class="m-3 p-3 text-center">You are adding the first question to {{ quiz_title }}</h6>
+                    {% else %}    
+                        <h6 class="m-3 p-3 text-center">You are adding question {{ num_questions + 1 }} to {{ quiz_title }}</h6>
+                    {% endif %}
+                </div>
+
+                <!-- submit button -->
+                <div class="row mt-3">
+                    <div class="col-12 d-flex justify-content-center align-items-center mb-2">
+                        <button 
+                            type="submit" 
+                            class="btn cta
+                                d-flex align-items-center"
+                        >
+                            <i class="fas fa-save icon-sm me-2"></i>
+                            Save Question
+                        </button>
+                    </div>
+                </div>
+                {% if create_quiz_process|default(None) == "true" %}
+                <!-- from create quiz links -->
+                <div class="row mt-3 d-flex justify-content-center align-items-center">
+                    {% if num_questions != 0 %}
+                    <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
+                        <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
+                            <button class="btn btn-rounded cta m-2 d-flex align-items-center"
+                                type="button"
+                            >
+                                <i class="fas fa-check icon-med"></i>
+                                Done
+                            </button>
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
+                        <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id, create_quiz_process='true') }}" 
+                            type="button" c
+                        >
+                            <button type="button" class="btn btn-secondary d-flex align-items-center" >
+                                <i class="fas fa-trash icon-sm me-2"></i>
+                                Discard Quiz
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <!-- from edit quiz links -->
+                <div class="row mt-3">
+                    <div class="col-12 d-flex justify-content-center align-items-center mb-1">
+                        <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}">
+                            <button class="btn btn-rounded 
+                                m-2 d-flex align-items-center"
+                                type="button"
+                            >
+                                <i class="fas fa-arrow-alt-circle-left icon-med"></i>
+                                Back
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
         </div>
     </div>
-</header>
-
-<!-- add question form section -->
-<section class="add-question-wrapper wrapper
-    container-lg my-5 p-0"
->
-    <form  
-        id="add-question-form"
-        method="POST"
-        action="{{ url_for(
-            'add_question',
-            quiz_id=quiz_id,
-            create_quiz_process=create_quiz_process
-            ) }}"
-        novalidate
-    >
-        <!-- question textarea input -->
-        <div class="d-flex row mb-3 justify-content-center">
-            <div class="col-12 col-md-8">
-                <div class="form-outline">
-                    <textarea name="new_question_text" id="new_question_text" rows="4" cols="50" class="form-control form-control-lg" required></textarea>
-                    <label for="new_question_text" class="form-label">
-                        Question text
-                    </label>
-                    <div class="invalid-feedback">
-                        Enter a question less than 200 characters
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <span class="align-self-start p-3">Answer choices (check correct answer):</span>
-        <!-- add answers wrapper -->
-        <div class="d-flex row justify-content-center align-items-center">
-            <!-- answer 0 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_0" id="answer_0" type="text" 
-                         maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_0" class="form-label">Answer option 1</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 0 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_0" name="correct_answer_index" value="0" required>
-                </div>
-            </div>
-        
-            <!-- answer 1 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_1" id="answer_1" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_1" class="form-label">Answer option 2</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 1 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_1" name="correct_answer_index" value="1" required>
-                </div>
-            </div>
-            <!-- answer 2 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_2" id="answer_2" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_2" class="form-label">Answer option 3</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 2 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_2" name="correct_answer_index" value="2" required>
-                </div>
-            </div>
-            <!-- answer 3 text input -->
-            <div class="d-flex col-8 col-lg-6 align-items-center mb-3">
-                <div class="form-outline w-100">
-                    <input name="answer_3" id="answer_3" type="text" 
-                        maxlength="30" pattern="^[a-zA-Z0-9]{5,20}$" 
-                        class="form-control form-control-lg" required
-                    />
-                    <label for="answer_3" class="form-label">Answer option 4</label>
-                    <div class="invalid-feedback">
-                        Answer must be less than 30 characters
-                    </div>
-                </div>
-                <!-- answer 3 radio button -->
-                <div class="d-flex align-items-center p-3">
-                    <input type="radio" id="correct_answer_3" name="correct_answer_index" value="3" required>
-                </div>
-            </div>
-        </div>
-
-        <!-- add question num section -->
-        <section>
-            {% if num_questions == 0 %}
-                <h6 class="m-3 p-3 text-center">You are adding the first question to {{ quiz_title }}</h6>
-            {% else %}    
-                <h6 class="m-3 p-3 text-center">You are adding question {{ num_questions + 1 }} to {{ quiz_title }}</h6>
-            {% endif %}
-        </section>
-
-        <!-- submit button -->
-        <div class="row mt-3">
-            <div class="col-12 d-flex justify-content-center align-items-center mb-2">
-                <button 
-                    type="submit" 
-                    class="btn btn-rounded cta
-                        d-flex align-items-center"
-                >
-                    <i class="fas fa-save icon-sm"></i>
-                    Save Question
-                </button>
-            </div>
-        </div>
-        <hr>
-        {% if create_quiz_process|default(None) == "true" %}
-        <!-- from create quiz links -->
-        <div class="row mt-3 d-flex justify-content-center align-items-center">
-            {% if num_questions != 0 %}
-            <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
-                <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
-                    <button class="btn btn-rounded cta m-2 d-flex align-items-center"
-                        type="button"
-                    >
-                        <i class="fas fa-check icon-med"></i>
-                        Done
-                    </button>
-                </a>
-            </div>
-            {% endif %}
-            <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
-                <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id, create_quiz_process='true') }}" 
-                    type="button" class="btn btn-link d-flex align-items-center"
-                    data-mdb-ripple-color="dark"
-                >
-                    <i class="fas fa-trash icon-sm"></i>
-                    Discard Quiz
-                </a>
-            </div>
-        </div>
-        {% else %}
-        <!-- from edit quiz links -->
-        <div class="row mt-3">
-            <div class="col-12 d-flex justify-content-center align-items-center mb-1">
-                <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}">
-                    <button class="btn btn-rounded 
-                        m-2 d-flex align-items-center"
-                        type="button"
-                    >
-                        <i class="fas fa-arrow-alt-circle-left icon-med"></i>
-                        Back
-                    </button>
-                </a>
-            </div>
-        </div>
-        {% endif %}
-    </form>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
 {% endblock %}

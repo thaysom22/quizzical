@@ -90,24 +90,22 @@
                 <!-- from create quiz links -->
                 <div class="row mt-3 d-flex justify-content-center align-items-center">
                     {% if num_questions != 0 %}
-                    <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
                         <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}">
-                            <button class="btn btn-rounded cta m-2 d-flex align-items-center"
-                                type="button"
-                            >
-                                <i class="fas fa-check icon-med"></i>
+                            <button class="btn cta d-flex align-items-center" type="button">
+                                <i class="fas fa-check icon-sm me-2"></i>
                                 Done
                             </button>
                         </a>
                     </div>
                     {% endif %}
-                    <div class="col-12 col-md-2 mb-1 d-flex justify-content-center align-items-center">
+                    <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
                         <a href="{{ url_for('delete_quiz', delete_quiz_id=quiz_id, create_quiz_process='true') }}" 
                             type="button" c
                         >
                             <button type="button" class="btn btn-secondary d-flex align-items-center" >
                                 <i class="fas fa-trash icon-sm me-2"></i>
-                                Discard Quiz
+                                Quiz
                             </button>
                         </a>
                     </div>

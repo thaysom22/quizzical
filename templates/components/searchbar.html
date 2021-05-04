@@ -7,28 +7,40 @@
         novalidate
     >
         <div class="form-outline searchbar-outline mx-3">
-            {% if search_query %}
-                <input type="text" name="search_query"
-                    id="search_query"
-                    class="form-control form-control-lg active"
-                    required
-                    value="{{ search_query }}"
-                >
-            {% else %}
-                <input type="text" name="search_query"
-                    id="search_query"
-                    class="form-control form-control-lg"
-                    required
-                >
+            <input type="text" name="search_query"
+                id="search_query"
+                class="form-control form-control-lg"
+                maxlength="30"
+                required
+            >
             <label for="search_query" class="form-label">Find a quiz...</label>
-            {% endif %}
-            <div class="invalid-feedback">Your search is empty!</div>
+            <div class="invalid-feedback">Invalid Search</div>
         </div>
-        
         <button type="submit" class="btn btn-search cta">
             <i class="fas fa-search icon-sm"></i>
         </button>
     </form>
 </div>
+{% if search_query %}
+    <!-- search term info -->
+    <div class="col-12 d-flex-justify-content-center mb-2">
+        <span>Showing results for: <strong class="text-lg">{{ search_query }}</strong></span>
+    </div>
+{% endif %}
+<!-- number of results caption -->
+<div class="col-12 d-flex-justify-content-center num-results text-center">
+    <span>
+        {% if search_results %}
+            {% if search_results|length == 1 %}
+                1 quiz found
+            {% else %}
+                {{ search_results|length }} quizzes found
+            {% endif %}
+        {% endif %}
+    </span>
+</div>
+
+
+
 
 

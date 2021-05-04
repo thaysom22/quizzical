@@ -15,7 +15,7 @@
         </div>
     </div>
 </header>
-
+<hr class="h-rule">
 <!-- recommended quizzes section -->
 <section class="d-md-none">
     {{ quiz_carousel("Recommended",
@@ -41,7 +41,7 @@
         recc=True) 
     }}
 </section>
-
+<hr class="h-rule">
 <!-- categories quiz carousels section -->
 <section class="d-md-none">
     {% for category in all_categories %}
@@ -67,7 +67,7 @@
         }}
     {% endfor %}
 </section>
-
+<hr class="h-rule">
 <!-- age range quiz carousels section -->
 <section class="d-md-none">
     {% for age_range in all_age_ranges %}
@@ -99,11 +99,9 @@
         }}
     {% endfor %}
 </section>
-
+<hr class="h-rule">
 <!-- final create quiz cta section -->
-<section class="final-create-cta">
-    {% include "components/create-quiz-cta.html" %}
-</section>
+{% include "components/create-quiz-cta.html" %}
 
 {% endblock %}
 

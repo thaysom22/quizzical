@@ -9,9 +9,9 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
 /* ******* MIXINS ******* */
 /* ******* BUTTONS ******* */
 .btn {
-  padding: 0.75rem 1.25rem;
+  padding: 0.6rem 1.1rem;
   border-radius: 0.5rem;
-  font-size: calc(1.1rem + .6vw);
+  font-size: calc(1.1rem + .3vw);
   margin: 0.25rem;
   font-family: "Oswald", sans-serif;
   line-height: initial;
@@ -30,7 +30,7 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   color: #1C0D5E;
 }
 .btn.btn-lg {
-  font-size: calc(1.2rem + .8vw);
+  font-size: calc(1.2rem + .5vw);
 }
 .btn.btn-secondary {
   background-color: white;
@@ -74,6 +74,23 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   display: none;
 }
 
+/* KEYFRAMES */
+@-webkit-keyframes card-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+@keyframes card-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
 /* ******* ALLPAGES ******* */
 /* global resets */
 html {
@@ -280,12 +297,25 @@ footer .footer-inner-wrapper .portfolio a {
   padding: calc(1.5rem + 2vw) calc(3rem + 2vw);
 }
 
+/* card link */
+a.card {
+  border-radius: 0.2rem;
+  /* box shadow style. CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+a.card .quiz-img {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+a.card .quiz-img img {
+  height: 100%;
+  width: 100%;
+}
+
 /* quiz cards */
 .quiz-cards-wrapper {
   background-color: white;
-}
-.quiz-cards-wrapper .quiz-cards-heading-wrapper a {
-  color: black;
 }
 
 .quiz-cards-item .item-inner {
@@ -293,11 +323,11 @@ footer .footer-inner-wrapper .portfolio a {
   max-height: 50vh;
   max-width: 25rem;
 }
-.quiz-cards-item .item-inner img {
-  height: 65%;
+.quiz-cards-item .item-inner .quiz-img {
+  height: 60%;
 }
 .quiz-cards-item .item-inner .quiz-cards-text {
-  height: 35%;
+  height: 40%;
 }
 .quiz-cards-item .item-inner .quiz-cards-text h4 {
   padding: calc(1rem + .2vw) 0.5rem 0 0.5rem;
@@ -428,7 +458,8 @@ footer .footer-inner-wrapper .portfolio a {
   margin: 0 auto;
 }
 .quiz-carousel .carousel-heading-wrapper a {
-  color: black;
+  padding: 0.5rem 0.5rem 0 0;
+  margin-right: 0.5rem;
 }
 .quiz-carousel .carousel-control-next,
 .quiz-carousel .carousel-control-prev {
@@ -450,6 +481,12 @@ footer .footer-inner-wrapper .portfolio a {
 /* ******* FORMS ******* */
 form {
   padding: calc(1rem + 1vw);
+}
+form .form-outline {
+  padding: 0 0.75rem;
+}
+form .form-outline .form-control {
+  padding-left: 0.3rem !important;
 }
 form .form-new-user {
   margin-top: calc(2rem + .5vw);
@@ -705,6 +742,24 @@ form .form-new-user span {
   }
   .quiz-view.grid-container .quiz-owner {
     grid-area: 1/2/span 2/span 1;
+  }
+
+  /* card link effects */
+  a.card {
+    border-radius: 0.2rem;
+    /* box shadow style. CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
+    box-shadow: 3px 3px 5px 6px #ccc;
+  }
+  a.card:hover {
+    cursor: pointer;
+  }
+  a.card:hover img {
+    -webkit-animation-name: card-zoom;
+            animation-name: card-zoom;
+    -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
   }
 }
 /* large screen sizes and above */

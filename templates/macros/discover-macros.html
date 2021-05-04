@@ -9,39 +9,38 @@
         justify-content-between
         justify-content-md-start 
         align-items-center
-        py-3">
-        <h3 class="p-3 m-0">{{ title }}</h3>
+        p-4">
+        <h3 class="m-0">{{ title }}</h3>
         {% if quizzes %}
             {% if recc %}
                 <a href="{{ url_for('search',
-                    category=category,
-                    age_range=age_range,
-                    recc='true') }}" class="me-5"
+                 category=category,
+                 age_range=age_range,
+                 recc='true') }}" class="d-flex flex-column text-center"
                 >
-                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                    <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                    <span>More</span>
                 </a>
             {% elif category %}
-                <a href="{{ url_for('search',
-                    category=category) }}" class="me-5"
+                <a href="{{ url_for('search', category=category) }}" 
+                    class="d-flex flex-column text-center"
                 >
-                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                    <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                    <span>More</span>
                 </a>
             {% elif age_range %}
-                <a href="{{ url_for('search',
-                    age_range=age_range) }}" class="me-5"
+                <a href="{{ url_for('search', age_range=age_range) }}" 
+                    class="d-flex flex-column text-center"
                 >
-                    <i class="fas fa-arrow-circle-right icon-med"></i>
+                    <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                    <span>More</span>
                 </a>
             {% endif %}
         {% endif %}
     </div>
-
     {% if not quizzes %}
-
         <h6 class="text-center p-3">No quizzes found</h6>
-
     {% else %}
-
     <!-- credit: carousel markup from: https://mdbootstrap.com/docs/standard/components/carousel/ -->
         {% if category %}
             <div id="{{ title|lower|replace(' ', '-') }}-quiz-carousel" 
@@ -54,7 +53,6 @@
                 data-mdb-ride="carousel"
             >
         {% endif %}
-
         <div class="carousel-inner py-5">
             {% for quiz in quizzes  %}
                 {% if loop.index == 1 %}
@@ -63,11 +61,13 @@
                     <div class="carousel-item quiz-cards-item">
                 {% endif %}
                         <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
-                            <img
-                                src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
-                                class="d-block w-100"
-                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                            />
+                            <div class="quiz-img">
+                                <img
+                                    src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
+                                    class="d-block w-100"
+                                    alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                                />
+                            </div>
                             <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
                                 <h4>{{ quiz.title }}</h4>
                                 <div class="carousel-info quiz-cards-info d-flex justify-content-between">
@@ -136,33 +136,33 @@
 {% macro quiz_cards(title, quizzes, category=None, age_range=None, recc=False) -%}
 
 <div class="quiz-cards-wrapper container-lg py-5 my-5">
-
     <!-- quiz cards heading section -->
     <div class="quiz-cards-heading-wrapper
         d-flex
         justify-content-between
         justify-content-md-start 
         align-items-center
-        my-3">
+        mt-3">
         <h3 class="p-3 m-0">{{ title }}</h3>
         {% if recc %}
             <i class="fas fa-star icon-med"></i>
         {% endif %}
     </div>
-
     {% if not quizzes %}
         <h6 class="text-center p-3">No quizzes found</h6>
     {% else %}
         <div id="{{ title|lower|replace(' ', '-') }}-quiz-cards" >
-            <div class="quiz-cards-inner d-flex justify-content-evenly py-3">
+            <div class="quiz-cards-inner d-flex justify-content-evenly py-3 py-lg-0">
             {% for quiz in quizzes  %}
                 <div class="quiz-cards-item d-flex justify-content-center align-items-center">
                     <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
-                        <img
-                            src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
-                            class="d-block w-100"
-                            alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
-                        />
+                        <div class="quiz-img">
+                            <img
+                                src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
+                                class="d-block w-100"
+                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                            />
+                        </div>     
                         <div class="quiz-cards-text d-flex flex-column justify-content-between">
                             <h4>{{ quiz.title }}</h4>
 
@@ -187,24 +187,24 @@
                             recc='true') }}" 
                             class="d-flex flex-column text-center"
                         >
-                            <i class="fas fa-arrow-circle-right icon-med"></i>
-                            <span>View more</span>
+                            <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                            <span>More</span>
                         </a>
                     {% elif category %}
                         <a href="{{ url_for('search',
                             category=category) }}" 
                             class="d-flex flex-column text-center"
                         >
-                            <i class="fas fa-arrow-circle-right icon-med"></i>
-                            <span>View more</span>
+                            <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                            <span>More</span>
                         </a>
                     {% elif age_range %}
                         <a href="{{ url_for('search',
                             age_range=age_range) }}" 
                             class="d-flex flex-column text-center"
                         >
-                            <i class="fas fa-arrow-circle-right icon-med"></i>
-                            <span>View more</span>
+                            <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
+                            <span>More</span>
                         </a>
                     {% endif %}
                 </div>

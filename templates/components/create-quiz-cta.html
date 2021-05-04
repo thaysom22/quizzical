@@ -1,21 +1,23 @@
-<div class="p-5 container-lg text-center card">
-    <h2 class="mb-3">Can't find what you're looking for?</h2>
-    <h4 class="mb-4">Find, create and share engaging quizzes</h4>
-    <div class="d-flex flex-align-justify flex-column mt-3">
-        <a href="{{ url_for('create_quiz') }}" 
-            class="btn btn-rounded btn-lg cta d-flex align-items-center"
-            role="button"
-        >
-            Create Quiz
-            <i class="fas fa-hammer icon-sm"></i>
-        </a>
-        {% if all_quizzes != "true" %}
-        <a href="{{ url_for('search', all_quizzes='true') }}" 
-            type="button" class="btn btn-link" 
-            data-mdb-ripple-color="dark"
-        >
-            View All Quizzes
-        </a>
-        {% endif %}
+<section class="my-5 container-sm">
+    <div class="row justify-content-center">
+        <div class="final-create-cta wrapper-sm text-center">
+            <h2 class="mb-4">Can't find what you're looking for?</h2>
+            <h4 class="mb-5">Find, create and share engaging quizzes</h4>
+            <div class="d-flex flex-align-justify flex-column">
+                <a href="{{ url_for('create_quiz') }}" class="mb-3">
+                    <button class="btn cta btn-lg" role="button">
+                        Create Quiz
+                        <i class="fas fa-hammer icon-sm"></i>
+                    </button>
+                </a>
+                {% if all_quizzes|default(None) != "true" %}
+                <a href="{{ url_for('search', all_quizzes='true') }}" >
+                    <button class="btn btn-secondary" role="button">
+                        All Quizzes
+                    </button>
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</div>
+</section>

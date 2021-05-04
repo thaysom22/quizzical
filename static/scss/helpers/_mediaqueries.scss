@@ -92,6 +92,22 @@
             }
         }
     }
+
+    /* card link effects */
+    a.card {
+        border-radius: .2rem;
+        /* box shadow style. CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
+        box-shadow: 3px 3px 5px 6px #ccc;
+        &:hover {
+            cursor: pointer;
+            img {
+                animation-name: card-zoom;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+
 }
 
 /* large screen sizes and above */

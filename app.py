@@ -497,9 +497,9 @@ def search():
     # use request.args to parse optional url parameters...
     # CREDIT: https://stackoverflow.com/questions/24892035/how-can-i-get-the-named-parameters-from-a-url-using-flask 
     request_args = request.args
+    all_quizzes = request_args.get('all_quizzes')
     # GET #
     if request.method == "GET":
-        all_quizzes = request_args.get('all_quizzes')
         recc = request_args.get('recc')
         category = request_args.get('category')
         age_range = request_args.get('age_range')

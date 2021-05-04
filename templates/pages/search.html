@@ -19,12 +19,6 @@
 {% if search_results %}
     <!-- search results section -->
     <section class="search-results-wrapper container-lg my-5 px-4">
-        <!-- number of results caption -->
-        <div class="num-results my-2 text-center">
-            <span>
-                {{ search_results|length }} quizzes found
-            </span>
-        </div>
         <!-- quiz_search_result macros -->
         {% for quiz in search_results %}
             {{ quiz_search_result(quiz) }}

@@ -2,6 +2,14 @@
 
 form {
     padding: calc(1rem + 1vw);
+    .form-outline{
+        padding: 0 0.75rem;
+        .form-control{
+            padding-left: .3rem !important;
+        }
+    }
+
+
     .form-new-user {
         margin-top: calc(2rem + .5vw);
         span {

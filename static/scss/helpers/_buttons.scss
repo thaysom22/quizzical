@@ -1,9 +1,9 @@
 /* ******* BUTTONS ******* */
 
 .btn {
-    padding: .75rem 1.25rem;
+    padding: .6rem 1.1rem;
     border-radius: .5rem;
-    font-size: calc(1.1rem + .6vw);
+    font-size: calc(1.1rem + .3vw);
     margin: .25rem;
     font-family: $tertiary;
     line-height: initial; 
@@ -21,7 +21,7 @@
         color: $midnight-blue; 
     }
     &.btn-lg {
-        font-size: calc(1.2rem + .8vw);
+        font-size: calc(1.2rem + .5vw);
     }
    
     &.btn-secondary{

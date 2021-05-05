@@ -22,7 +22,7 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   padding: 0.25rem 0 0 0;
 }
 .btn.btn-search {
-  padding: 0.25rem;
+  padding: 0.7rem 1.1rem;
 }
 .btn.footer-link {
   color: white;
@@ -494,6 +494,22 @@ form .form-outline {
 form .form-outline .form-control {
   padding-left: 0.3rem !important;
 }
+form .form-control,
+form .form-select,
+form textarea {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+form .form-control,
+form .form-select,
+form label,
+form textarea {
+  font-size: calc(1.2rem + .1vw) !important;
+}
+form .form-control:not(textarea),
+form .form-select {
+  height: 3.5rem;
+}
 form .form-new-user {
   margin-top: calc(2rem + .5vw);
 }
@@ -516,7 +532,7 @@ form .form-new-user span {
 }
 
 .invalid-feedback {
-  top: 3rem;
+  top: 3.7rem;
 }
 
 .form-select.is-invalid,

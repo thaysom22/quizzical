@@ -8,7 +8,22 @@ form {
             padding-left: .3rem !important;
         }
     }
-
+    .form-control,
+    .form-select,
+    textarea {
+        padding-top: .5rem !important;
+        padding-bottom: .5rem !important;
+    }
+    .form-control,
+    .form-select,
+    label,
+    textarea {
+            font-size: calc(1.2rem + .1vw) !important;
+    }
+    .form-control:not(textarea),
+    .form-select {
+        height: 3.5rem;
+    }
 
     .form-new-user {
         margin-top: calc(2rem + .5vw);
@@ -32,7 +47,7 @@ form {
     }
 
     .invalid-feedback {
-        top: 3rem;
+        top: 3.7rem;
     }
 
     .form-select.is-invalid, 

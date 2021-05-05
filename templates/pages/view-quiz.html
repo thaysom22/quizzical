@@ -1,11 +1,11 @@
 <!-- VIEW QUIZ PAGE -->
 {% extends "layout/base.html" %}
-{% from 'macros/view-edit-macros.html' import view_edit_question %}
+{% from 'macros/view-edit-question-macros.html' import view_edit_question %}
 {% block content %}
 
 <section class="quiz-view-wrapper container-lg my-2">
     <div class="card quiz-view grid-container">
-        <div class="quiz-title d-flex justify-content-center">
+        <div class="quiz-title">
             <h4 class="p-4">
                 {{ view_quiz_data.title }}
             </h4>
@@ -27,6 +27,7 @@
         >
             <span>{{ view_quiz_data.quiz_category_data.category_name }}</span>
             <span>{{ view_quiz_data.quiz_age_range_data.age_range }}</span>
+            <span>{{ view_quiz_data.quiz_owner_data.username }}</span>
             <span>
             {% if num_questions == 1 %}
                 1 question
@@ -46,10 +47,6 @@
                 <a href="{{ url_for('edit_quiz', edit_quiz_id=view_quiz_id) }}">
                     <i class="fas fa-edit icon-med"></i>
                 </a>
-            </div>
-        {% else %}
-            <div class="quiz-owner d-flex justify-content-center align-items-end p-2">
-                <span>{{ view_quiz_data.quiz_owner_data.username }}</span>
             </div>
         {% endif %}
     </div>

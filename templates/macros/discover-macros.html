@@ -167,12 +167,8 @@
                             <h4>{{ quiz.title }}</h4>
 
                             <div class="quiz-cards-info d-flex justify-content-between">
-                                {% if category %}
-                                    <span>{{ quiz.quiz_age_range_data.age_range }}</span>
-                                {% endif %}
-                                {% if age_range %}
-                                    <span>{{ quiz.quiz_category_data.category_name }}</span>
-                                {% endif %}
+                                <span>{{ quiz.quiz_age_range_data.age_range }}</span>
+                                <span>{{ quiz.quiz_category_data.category_name }}</span>
                                 <span>{{ quiz.quiz_owner_data.username }}</span>
                             </div>  
                         </div>

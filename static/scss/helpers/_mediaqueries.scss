@@ -80,7 +80,7 @@
     /* view quiz card */
     .quiz-view {
         &.grid-container {
-            grid-template: 60% 40% / 35% 35% 30%;
+            grid-template: 60% 40% / 55% 15% 30%;
             .quiz-title {
                 grid-area: 1 / 1 / span 1 / span 1;
             }

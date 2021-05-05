@@ -29,6 +29,7 @@
                         quiz_id=quiz_id, 
                         delete_question_id=question_data._id)}}"
                         class="delete"
+                        onclick="return confirm('Are you sure you want to delete this question?');"
                     >
                         <i class="fas fa-trash icon-sm p-3"></i>
                     </a>

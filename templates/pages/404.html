@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome css cdn -->
+    <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
+        crossorigin="anonymous"
+    />
+    <!-- mdbootsrap css cdn -->
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.4.0/mdb.min.css" 
+        integrity="sha512-HpwtJdZJE6hhDbz0Hf4vKLGuaQFRS09b7YKAofRKx1+UZV7Y1ORUPs2Ud+N8g92P9p+OOXioISI32OUXb56Qag==" 
+        crossorigin="anonymous"
+    />
+    <!-- custom css for all templates-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    <!-- favicon credit: https://favicon.io/favicon-converter/ for optimization and https://www.freelogodesign.org/ for icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='img/favicons/site.webmanifest') }}">
+    <title>{{ active_page }} | Quizzical - create, share and play</title>
+</head>
+
+<body>
+    <div class="p-0 g-0 my-5 container-sm">
+        <div class="row g-0 justify-content-center">
+            <div class="text-center main-heading p-5">
+                <h2 class="mb-3">Ooops ... can't find that page!</h2>
+                <img src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
+                    alt="Quizzical Owl icon"
+                    class="quizzical-icon-heading"
+                >
+                <h4 class="mb-4">Go back to safety</h4>
+                <div class="d-flex flex-align-justify flex-column flex-sm-row mt-4">
+                    <a href="{{ url_for('default') }}">
+                        <button type="button" class="btn btn-lg cta m-3">
+                            Home
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>   
+    </div>
+</body>
+
+</html>

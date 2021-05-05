@@ -400,10 +400,10 @@ a.card .quiz-img img {
   height: 100%;
 }
 .quiz-view.grid-container .quiz-info {
-  grid-area: 3/2/span 1/span 1;
+  grid-area: 2/1/span 2/span 1;
 }
 .quiz-view.grid-container .quiz-owner {
-  grid-area: 2/1/span 2/span 1;
+  grid-area: 3/2/span 1/span 1;
 }
 
 /* edit quiz card */
@@ -740,7 +740,7 @@ form .form-new-user span {
 
   /* view quiz card */
   .quiz-view.grid-container {
-    grid-template: 60% 40%/35% 35% 30%;
+    grid-template: 60% 40%/55% 15% 30%;
   }
   .quiz-view.grid-container .quiz-title {
     grid-area: 1/1/span 1/span 1;

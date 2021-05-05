@@ -19,6 +19,16 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
+### 404 - page not found error ###
+@app.errorhandler(404)
+def page_not_found(e):
+    print(e)
+
+    return render_template(
+        'pages/404.html',
+        active_page="404 - page not found"
+        ), 404
+
 
 ### DEFAULT ROUTE ###
 

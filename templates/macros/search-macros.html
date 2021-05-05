@@ -18,8 +18,9 @@
                 alt="Image for {{ quiz_data.quiz_category_data.category_name }} quiz"     
             />
         </div>
-        <div class="quiz-info d-flex justify-content-between align-items-end">
+        <div class="quiz-info d-flex justify-content-between ps-2 align-items-end">
             <span>{{ quiz_data.num_questions }} questions</span>
+            <span>{{ quiz_data.quiz_owner_data.username }}</span>
             <span>{{ quiz_data.quiz_category_data.category_name }}</span>
             <span>{{ quiz_data.quiz_age_range_data.age_range }}</span>
         </div>

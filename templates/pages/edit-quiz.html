@@ -4,94 +4,94 @@
 {% block content %}
 
 <!-- edit quiz main heading -->
-<header>
-    <div class="p-5 text-center main-heading container">
-        <div class="d-flex justify-content-center align-items-center col-12">
-            <i class="fas fa-edit icon-med px-3"></i>
+
+<header class="p-0 g-0 my-5 container-sm">
+    <div class="row g-0 justify-content-center">
+        <div class="text-center main-heading d-flex flex-align-justify">
+            <i class="fas fa-edit icon-lg me-3 icon-fade"></i>
             <h4 class="text-center px-2">{{ edit_quiz_data.title }}</h4> 
         </div>
     </div>
 </header>
-
+            
 <!-- edit quiz form -->
 <section class="quiz-edit-wrapper container-lg my-2">
     <div class="card quiz-edit grid-container">
         <form method="POST" 
             action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
-            class="quiz-edit-data d-flex flex-column justify-content-around pe-3"
+            class="p-2"
+            novalidate
         >
-            <div class="edit-quiz-title my-2">
-                <label for="edit-title" class="py-2">Title:</label>
-                <div class="form-outline">
-                    <input type="text" id="edit-title" 
-                        name="edit-title" class="form-control form-control-lg"
-                        value="{{ edit_quiz_data.title }}" required
-                    />
-                </div>  
+            <div class="quiz-edit-data d-flex flex-column justify-content-around">
+                <div class="edit-quiz-title my-1">
+                    <label for="edit-title" class="py-2">Title:</label>
+                    <div class="form-outline">
+                        <input type="text" id="edit-title" 
+                            name="edit-title" class="form-control form-control-lg"
+                            value="{{ edit_quiz_data.title }}" required
+                        />
+                        <div class="invalid-feedback mt-1">
+                            Enter a title
+                        </div>
+                    </div>  
+                </div>
+                <div class="edit-quiz-category my-1">
+                    <label for="edit-category" class="py-2">Category:</label>
+                    <select id="edit-category" 
+                        name="edit-category"
+                        class="form-select" required
+                    >
+                        {% for category in all_categories %}
+                            {% if category._id == edit_quiz_data.quiz_category_id %}
+                                <option 
+                                    value="{{ edit_quiz_data.quiz_category_id }}"
+                                    selected
+                                >
+                                    {{ edit_quiz_data.quiz_category_data.category_name }}
+                                </option>
+                            {% else %}
+                                <option value="{{ category._id }}">
+                                    {{ category.category_name }}
+                                </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="edit-quiz-age-range my-1">
+                    <label for="edit-age-range" class="py-2">Age range:</label>
+                    <select id="edit-age-range" 
+                        name="edit-age-range"
+                        class="form-select" required
+                    >
+                        {% for age_range in all_age_ranges %}
+                            {% if age_range._id == edit_quiz_data.quiz_age_range_id %}
+                                <option 
+                                    value="{{ edit_quiz_data.quiz_age_range_id }}"
+                                    selected
+                                >
+                                    {{ edit_quiz_data.quiz_age_range_data.age_range }}
+                                </option>
+                            {% else %}
+                                <option value="{{ age_range._id }}">
+                                    {{ age_range.age_range }}
+                                </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
-            <div class="edit-quiz-category my-2">
-                <label for="edit-category" class="py-2">Category:</label>
-                <select id="edit-category" 
-                    name="edit-category"
-                    class="form-select" required
-                >
-                    {% for category in all_categories %}
-                        {% if category._id == edit_quiz_data.quiz_category_id %}
-                            <option 
-                                value="{{ edit_quiz_data.quiz_category_id }}"
-                                selected
-                            >
-                                {{ edit_quiz_data.quiz_category_data.category_name }}
-                            </option>
-                        {% else %}
-                            <option value="{{ category._id }}">
-                                {{ category.category_name }}
-                            </option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="edit-quiz-age-range my-2">
-                <label for="edit-age-range" class="py-2">Age range:</label>
-                <select id="edit-age-range" 
-                    name="edit-age-range"
-                    class="form-select" required
-                >
-                    {% for age_range in all_age_ranges %}
-                        {% if age_range._id == edit_quiz_data.quiz_age_range_id %}
-                            <option 
-                                value="{{ edit_quiz_data.quiz_age_range_id }}"
-                                selected
-                            >
-                                {{ edit_quiz_data.quiz_age_range_data.age_range }}
-                            </option>
-                        {% else %}
-                            <option value="{{ age_range._id }}">
-                                {{ age_range.age_range }}
-                            </option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="edit-quiz-submit d-flex 
-                p-2 justify-content-center
-                align-items-center mt-3"
-            >
-                <button type="submit" class="btn btn-rounded cta">
-                    <i class="fas fa-save icon-sm"></i>
+            <div class="quiz-edit-submit d-flex flex-column flex-align-justify mt-5">
+                <button type="submit" class="btn cta mb-4">
+                    <i class="fas fa-save icon-sm me-2"></i>
                     Save changes
                 </button>
-            </div>
-            <div class="edit-quiz-back d-flex 
-                p-2 justify-content-center
-                align-items-center mt-3"
-            >
+
                 <a href="{{ url_for('view_quiz', view_quiz_id=edit_quiz_id) }}"
                     class="d-flex align-items-center justify-content-center"
                 >
-                    <button type="button" class="btn btn-rounded">
-                        <i class="fas fa-arrow-alt-circle-left"></i>
-                         Back
+                    <button type="button" class="btn btn-secondary" role="button">
+                        <i class="fas fa-arrow-alt-circle-left icon-sm me-2"></i>
+                        Back
                     </button>
                 </a>
             </div>
@@ -109,15 +109,15 @@
             quiz-edit-delete"
         >   
             <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
-                <button class="btn btn-rounded cta">
-                    <i class="fas fa-plus-circle icon-sm"></i>
+                <button class="btn cta">
+                    <i class="fas fa-plus-circle icon-sm me-2"></i>
                     Add Question
                 </button>
             </a> 
             <a href="{{ url_for('delete_quiz', delete_quiz_id=edit_quiz_id) }}">
-                <button type="submit" class="btn btn-rounded">
+                <button type="submit" class="btn btn-secondary delete">
                     <i class="fas fa-trash icon-sm"></i>
-                    Delete Quiz
+                    Quiz
                 </button>
             </a>
         </div>
@@ -133,22 +133,16 @@
 </section>
 
 <!-- final add question button -->
-<section class="container-sm my-3">
-    <div class="d-flex justify-content-center align-items-center p-5">
+<section class="container-sm my-4">
+    <div class="wrapper-sm p-5 d-flex flex-align-justify">
         <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
-            <button class="btn btn-rounded cta">
-                <i class="fas fa-plus-circle icon-sm"></i>
+            <button class="btn cta">
+                <i class="fas fa-plus-circle icon-sm me-2"></i>
                 Add Question
             </button>
         </a>
     </div>
 </section>
-
-
-<hr>
-<strong>edit_quiz_data</strong>
-{{ edit_quiz_data }}
-
 
 {% endblock %}
 

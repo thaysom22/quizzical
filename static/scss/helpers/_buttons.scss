@@ -31,6 +31,9 @@
         background-color: white;
         color: $steel-blue;
     }
+    &.delete {
+        color: $error;
+    }
     .icon-sm,
     .icon-md{
         font-size: inherit;

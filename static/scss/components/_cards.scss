@@ -113,29 +113,23 @@ a.card {
     }
 }
 
-/* view question card */
-
-.question-wrapper {
-    hr {
-        width: 90%;
-        color: $black-fade;
-        margin: 2rem;
-    }
-}
 
 /* edit quiz card */
 .quiz-edit {
     &.grid-container {
         display: grid;
         max-height: 50rem;
-        grid-template: 60% 40% / 60% 40%;
+        grid-template: 65% 35% / 60% 40%;
         span {
             color: $black-fade;
             padding: 0 .75rem calc(.5rem + .2vw) .75rem;
             overflow-wrap: break-word;
         }
         .quiz-edit-data {
-            grid-area: 1 / 1 / span 2 / span 1;
+            grid-area: 1 / 1 / span 1 / span 1;
+        }
+        .quiz-edit-submit {
+            grid-area: 2 / 1 / span 1 / span 1;
         }
         .quiz-img {
             grid-area: 1 / 2 / span 1 / span 1;

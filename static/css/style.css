@@ -39,6 +39,9 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   background-color: white;
   color: #4F8BD9;
 }
+.btn.delete {
+  color: #cc3300;
+}
 .btn .icon-sm,
 .btn .icon-md {
   font-size: inherit;
@@ -147,6 +150,9 @@ a {
 a.nav-link {
   padding: 0.75rem 1.5rem;
   margin: 0.25rem;
+}
+a.delete {
+  color: #cc3300;
 }
 
 span {
@@ -400,18 +406,11 @@ a.card .quiz-img img {
   grid-area: 2/1/span 2/span 1;
 }
 
-/* view question card */
-.question-wrapper hr {
-  width: 90%;
-  color: rgba(0, 0, 0, 0.5);
-  margin: 2rem;
-}
-
 /* edit quiz card */
 .quiz-edit.grid-container {
   display: grid;
   max-height: 50rem;
-  grid-template: 60% 40%/60% 40%;
+  grid-template: 65% 35%/60% 40%;
 }
 .quiz-edit.grid-container span {
   color: rgba(0, 0, 0, 0.5);
@@ -419,7 +418,10 @@ a.card .quiz-img img {
   overflow-wrap: break-word;
 }
 .quiz-edit.grid-container .quiz-edit-data {
-  grid-area: 1/1/span 2/span 1;
+  grid-area: 1/1/span 1/span 1;
+}
+.quiz-edit.grid-container .quiz-edit-submit {
+  grid-area: 2/1/span 1/span 1;
 }
 .quiz-edit.grid-container .quiz-img {
   grid-area: 1/2/span 1/span 1;
@@ -765,8 +767,8 @@ form .form-new-user span {
   a.card:hover img {
     -webkit-animation-name: card-zoom;
             animation-name: card-zoom;
-    -webkit-animation-duration: 1s;
-            animation-duration: 1s;
+    -webkit-animation-duration: 0.75s;
+            animation-duration: 0.75s;
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;
   }

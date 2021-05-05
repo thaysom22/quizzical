@@ -3,10 +3,10 @@
 {% block content %}
 
 <!-- edit question main heading -->
-<header>
-    <div class="p-5 text-center main-heading container">
-        <div class="d-flex justify-content-center align-items-center col-12">
-            <i class="fas fa-edit icon-med px-3"></i>
+<header class="p-0 g-0 my-5 container-sm">
+    <div class="row g-0 justify-content-center">
+        <div class="text-center main-heading d-flex flex-align-justify">
+            <i class="fas fa-edit icon-lg me-3 icon-fade"></i>
             <h4 class="text-center px-2">Question {{ edit_question_num }} of {{ quiz_title }}</h4> 
         </div>
     </div>
@@ -17,24 +17,25 @@
     <form 
         class="question-inner d-flex 
         flex-column align-items-center 
-        py-3 px-1 card"
+        py-5 px-3 card"
         method="POST"
         action="{{ url_for(
         'edit_question', 
         quiz_id=quiz_id, 
         edit_question_id=edit_question_id) }}"
+        novalidate
     >   
         <!-- edit question text -->
         <div class="edit-question-text my-2">
             <label for="edit-question-text" class="py-2">Question text:</label>
             <div class="form-outline">
-                <textarea name="edit_question_text" id="edit-question-text" required rows="4" cols="50" class="form-control form-control-lg">{{ edit_question_data.question_text }}</textarea>
+                <textarea name="edit_question_text" id="edit-question-text" required rows="4" cols="50" maxlength="200" class="form-control form-control-lg">{{ edit_question_data.question_text }}</textarea>
                 <div class="invalid-feedback">
-                    Question must be less than 200 characters
+                    Enter a question
                 </div>
             </div>  
         </div>
-        <hr>
+        <hr class="h-rule my-4">
         <span class="align-self-start p-3">Answer choices (check correct answer):</span>
         <!-- edit answers wrapper -->
         <div class="d-flex row justify-content-center 
@@ -53,24 +54,30 @@
                             class="form-control form-control-lg" required
                         />
                         <div class="invalid-feedback">
-                            Max 30 characters
+                           Enter an answer
                         </div>
                     </div>
                     <!-- edit answer radio button -->
                     <div class="d-flex align-items-center p-3">
                         {% if loop.index0 == edit_question_data.correct_answer_index|int %}
-                        <input type="radio" 
-                            id="correct_answer_{{ loop.index0 }}" 
-                            name="correct_answer_index" 
-                            value="{{ loop.index0 }}" required
-                            checked
-                        >
+                        <div class="d-flex align-items-center m-3 form-check">
+                            <input type="radio" 
+                                id="correct_answer_{{ loop.index0 }}" 
+                                name="correct_answer_index" 
+                                class="form-check-input"
+                                value="{{ loop.index0 }}" required
+                                checked
+                            >
+                        </div>
                         {% else %}
-                        <input type="radio" 
-                            id="correct_answer_{{ loop.index0 }}" 
-                            name="correct_answer_index" 
-                            value="{{ loop.index0 }}" required
-                        >
+                        <div class="d-flex align-items-center m-3 form-check">
+                            <input type="radio" 
+                                id="correct_answer_{{ loop.index0 }}" 
+                                name="correct_answer_index" 
+                                class="form-check-input"
+                                value="{{ loop.index0 }}" required
+                            >
+                        </div>
                         {% endif %}
                     </div>
                 </div>
@@ -81,19 +88,19 @@
             p-2 justify-content-center
             align-items-center my-3"
         >
-            <button type="submit" class="btn btn-rounded cta">
-                <i class="fas fa-save icon-sm"></i>
+            <button type="submit" class="btn cta">
+                <i class="fas fa-save icon-sm me-2"></i>
                 Save changes
             </button>
         </div> 
         <!-- go back link -->
         <div class="edit-question-back d-flex justify-content-center align-items-center">
             <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}">
-                <button class="btn btn-rounded 
-                    m-2 d-flex align-items-center"
+                <button class="btn btn-secondary 
+                    d-flex align-items-center"
                     type="button"
                 >
-                    <i class="fas fa-arrow-alt-circle-left icon-sm"></i>
+                    <i class="fas fa-arrow-alt-circle-left icon-sm me-2"></i>
                     Back
                 </button>
             </a>
@@ -103,4 +110,6 @@
 
 {% endblock %}
 
-
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/forms.js')}}"></script>
+{% endblock %}

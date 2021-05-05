@@ -22,14 +22,15 @@
                         quiz_id=quiz_id, 
                         edit_question_id=question_data._id)}}"
                     >
-                        <i class="fas fa-edit icon-med p-3"></i>
+                        <i class="fas fa-edit icon-sm p-3"></i>
                     </a>
                     <a href="{{ url_for(
                         'delete_question', 
                         quiz_id=quiz_id, 
                         delete_question_id=question_data._id)}}"
+                        class="delete"
                     >
-                        <i class="fas fa-trash icon-med p-3"></i>
+                        <i class="fas fa-trash icon-sm p-3"></i>
                     </a>
                 </div>
             </div>
@@ -59,7 +60,7 @@
         </div>
         <!-- show/hide answer button -->
         <div class="d-flex justify-content-center align-items-center p-3 mt-3">
-            <button class="toggle-answer-button btn btn-rounded">Show answer</button>
+            <button class="toggle-answer-button btn btn-secondary" role="button">Show answer</button>
         </div>
     </div>
 

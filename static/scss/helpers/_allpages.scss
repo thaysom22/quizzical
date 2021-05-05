@@ -50,6 +50,9 @@ a {
         padding: .75rem 1.5rem;
         margin: .25rem;
     }
+    &.delete {
+        color: $error;
+    }
 }
 span {
     font-size: calc(1rem + .2vw);

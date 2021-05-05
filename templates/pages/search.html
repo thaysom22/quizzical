@@ -26,7 +26,7 @@
     </section>
 {% else %}
     <!-- no quizzes found section -->
-    <section class="container-lg my-5">
+    <div class="container-lg my-5">
         <div class="row justify-content-center">
             <div class="wrapper-lg no-quizzes-found d-flex flex-column flex-align-justify">
                 <h6 class="p-2">No quizzes found...</h6>
@@ -39,13 +39,13 @@
                 </a>
             </div>
         </div>
-    </section>
+    </div>
 {% endif %}
 <hr class="h-rule">
 <!-- final create quiz cta section -->
-<section class="final-create-cta">
+<div class="final-create-cta">
     {% include "components/create-quiz-cta.html" %}
-</section>
+</div>
 
 {% endblock %}
 

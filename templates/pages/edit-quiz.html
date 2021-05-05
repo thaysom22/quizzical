@@ -15,7 +15,7 @@
 </header>
             
 <!-- edit quiz form -->
-<section class="quiz-edit-wrapper container-lg my-2">
+<div class="quiz-edit-wrapper container-lg my-2">
     <div class="card quiz-edit grid-container">
         <form method="POST" 
             action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
@@ -128,7 +128,7 @@
             </a>
         </div>
     </div>
-</section>
+</div>
 
 <!-- edit questions section -->
 <section class="container-lg my-5 px-2 view-questions-wrapper">
@@ -139,7 +139,7 @@
 </section>
 
 <!-- final add question button -->
-<section class="container-sm my-4">
+<div class="container-sm my-4">
     <div class="wrapper-sm p-5 d-flex flex-align-justify">
         <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}" title="Add Question">
             <span class="btn cta" role="button">
@@ -148,7 +148,7 @@
             </span>
         </a>
     </div>
-</section>
+</div>
 
 {% endblock %}
 

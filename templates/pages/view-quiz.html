@@ -54,12 +54,12 @@
 </section>
 
 <!-- view questions section -->
-<section class="container-lg my-5 px-2 view-questions-wrapper">
+<div class="container-lg my-5 px-2 view-questions-wrapper">
     <!-- view question macros -->
     {% for question_data in view_quiz_data.questions_data %}
         {{ view_edit_question(question_data, loop.index, view_quiz_id, False) }}
     {% endfor %}
-</section>
+</div>
 
 {% endblock %}
 

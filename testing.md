@@ -39,7 +39,8 @@
 
 ### Fixed
 
-* Error: HTML validator showing error: "button element must not appear as descendant of a element. Fix: changed `<button>` elements which are child of `<a>` elements into `<span>` elements.
+* HTML validator showing error: "button element must not appear as descendant of a element". Fix: changed `<button>` elements which are child of `<a>` elements into `<span>` elements.
+
 
 ### Not fixed
 

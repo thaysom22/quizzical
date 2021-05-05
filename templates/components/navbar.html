@@ -3,7 +3,7 @@
 <!-- CREDIT navbar: "https://mdbootstrap.com/docs/standard/navigation/navbar/" -->
 <nav class="navbar fixed-top navbar-expand-md">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('default') }}">
+        <a class="navbar-brand" href="{{ url_for('default') }}" title="Quizzical | Home">
             <img 
                 id="nav-logo" 
                 src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
@@ -26,17 +26,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav">
                 {% if loggedIn == False %}
-                    <a class="nav-link" href="{{ url_for('register') }}">
+                    <a class="nav-link" href="{{ url_for('register') }}" title="Register">
                         <button class="btn cta btn-lg">Sign Up</button>
                     </a>
-                    <a class="nav-link text-center" href="{{ url_for('login') }}">Login</a>
-                    <a class="nav-link text-center" href="{{ url_for('welcome') }}">Welcome</a>
+                    <a class="nav-link text-center" href="{{ url_for('login') }}" title="Login">Login</a>
+                    <a class="nav-link text-center" href="{{ url_for('welcome') }}" title="Welcome">Welcome</a>
                 {% elif loggedIn == True %}
-                    <a class="nav-link" href="{{ url_for('create_quiz') }}">
+                    <a class="nav-link" href="{{ url_for('create_quiz') }}" title="Create">
                         <button class="btn cta">Create</button>
                     </a>
-                    <a class="nav-link text-center" href="{{ url_for('discover') }}">Discover</a>
-                    <a class="nav-link text-center" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-link text-center" href="{{ url_for('discover') }}" title="Discover">Discover</a>
+                    <a class="nav-link text-center" href="{{ url_for('logout') }}" title="Logout">Logout</a>
                 {% endif %}
             </div>
         </div>

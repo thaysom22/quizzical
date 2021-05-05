@@ -9,16 +9,17 @@
             <h2 class="mb-3">Let's get <span class="super">Quizzical</span></h2>
             <img src="{{ url_for('static', filename='img/quizzical-icon.png') }}" 
                 alt="Quizzical Owl icon"
+                title="Quizzical Owl icon"
                 class="quizzical-icon-heading"
             >
             <h4 class="mb-4">Find, create and share engaging quizzes</h4>
             <div class="d-flex flex-align-justify flex-column flex-sm-row mt-4">
-                <a href="{{ url_for('register') }}">
+                <a href="{{ url_for('register') }}" title="Sign Up">
                     <button type="button" class="btn btn-lg cta m-3">
                         Sign Up
                     </button>
                 </a>
-                <a href="{{ url_for('login') }}">
+                <a href="{{ url_for('login') }}" title="Login">
                     <button type="button" class="btn btn-secondary m-3">
                         Login
                     </button>
@@ -94,6 +95,7 @@
                     src="{{ url_for('static', filename='img/boy-working-in-class.jpg') }}"
                     class="d-block w-100"
                     alt="Boy working in classroom"
+                    title="Boy working in classroom"
                 />
                 <div class="carousel-caption">
                     <h5>Recommended content</h5>
@@ -106,6 +108,7 @@
                     src="{{ url_for('static', filename='img/love-to-learn.jpg') }}"
                     class="d-block w-100"
                     alt="'Love to learn' sign"
+                    title="'Love to learn' sign"
                 />
                 <div class="carousel-caption">
                     <h5>Create and collaborate</h5>
@@ -118,6 +121,7 @@
                     src="{{ url_for('static', filename='img/smiling-teacher.jpg') }}"
                     class="d-block w-100"
                     alt="Smiling teacher in front of whiteboard"
+                    title="Smiling teacher in front of whiteboard"
                 />
                 <div class="carousel-caption">
                     <h5>Search by topic and age range</h5>
@@ -130,6 +134,7 @@
                 type="button"
                 data-mdb-target="#landing-page-carousel"
                 data-mdb-slide="prev"
+                title="Previous"
             >
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -139,6 +144,7 @@
                 type="button"
                 data-mdb-target="#landing-page-carousel"
                 data-mdb-slide="next"
+                title="Next"
             >
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -161,7 +167,11 @@
                 >  
                     <div class="number-icon">
                         <!-- credit: https://icons8.com/icon/116651/1st 1st icon by Icons8 -->
-                        <img src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png"/>
+                        <img 
+                            src="https://img.icons8.com/carbon-copy/100/000000/1-circle.png" 
+                            title="Step 1 icon"
+                            alt="Step 1 icon"
+                        />
                     </div>
                     <div class="description">
                         <p>Create an account and personalize your recommendations to view quizzes</p>
@@ -176,7 +186,11 @@
                     col-lg-4">  
                     <div class="number-icon">
                         <!-- credit: https://icons8.com/icon/116654/circled-2 Circled 2 icon by Icons8 -->
-                        <img src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"/>
+                        <img 
+                            src="https://img.icons8.com/carbon-copy/100/000000/2-circle.png"
+                            title="Step 2 icon"
+                            alt="Step 2 icon"
+                        />
                     </div>
                     <div class="description">
                         <p>Browse 'Discover' page by category, view quizzes recommended for you, search for quizzes or create your own</p>
@@ -191,7 +205,11 @@
                     col-lg-4">  
                     <div class="number-icon">
                         <!-- credit: https://icons8.com/icon/116660/circled-3 Circled 3 icon by Icons8 -->
-                        <img src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"/>
+                        <img 
+                            src="https://img.icons8.com/carbon-copy/100/000000/3-circle.png"
+                            title="Step 3 icon"
+                            alt="Step 3 icon"
+                        />
                     </div>
                     <div class="description">
                         <p>Click on a quiz to view questions and toggle answers!</p>
@@ -210,7 +228,7 @@
     <div class="final-cta-wrapper wrapper-lg">
         <div class="d-flex flex-column flex-align-justify">
             <h2 class="text-center">Ready to get <span class="super">Quizzical?</span></h2>
-            <a href="{{ url_for('register') }}">
+            <a href="{{ url_for('register') }}" title="Sign Up">
                 <button type="button" class="btn btn-lg cta m-3">
                     Sign Up
                 </button>

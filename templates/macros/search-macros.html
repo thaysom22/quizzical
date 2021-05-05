@@ -5,6 +5,7 @@
 <div class="quiz-search-result-wrapper my-5">
     <a class="card quiz-search-result grid-container"
         href="{{ url_for('view_quiz', view_quiz_id=quiz_data._id) }}" 
+        title="{{ quiz_data.title }}"
     >
         <div class="quiz-title">
             <h4 class="p-3">
@@ -15,7 +16,8 @@
             <img
                 src="{{ url_for('static', filename=quiz_data.quiz_category_data.img_url) }}"
                 class="d-block"
-                alt="Image for {{ quiz_data.quiz_category_data.category_name }} quiz"     
+                alt="Image for {{ quiz_data.quiz_category_data.category_name }} quiz" 
+                title="Image for {{ quiz_data.quiz_category_data.category_name }} quiz"    
             />
         </div>
         <div class="quiz-info d-flex justify-content-between ps-2 align-items-end">

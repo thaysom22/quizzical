@@ -14,7 +14,8 @@
             <img
                 src="{{ url_for('static', filename=view_quiz_data.quiz_category_data.img_url) }}"
                 class="d-block"
-                alt="Image for {{ view_quiz_data.quiz_category_data.category_name }} quiz"     
+                alt="Image for {{ view_quiz_data.quiz_category_data.category_name }} quiz"  
+                title="Image for {{ view_quiz_data.quiz_category_data.category_name }} quiz"   
             />
         </div>
         <div class="quiz-info
@@ -44,7 +45,7 @@
                 align-items-center
                 align-items-md-end"
             >
-                <a href="{{ url_for('edit_quiz', edit_quiz_id=view_quiz_id) }}">
+                <a href="{{ url_for('edit_quiz', edit_quiz_id=view_quiz_id) }}" title="Edit {{ view_quiz_data.title }}">
                     <i class="fas fa-edit icon-med"></i>
                 </a>
             </div>

@@ -516,8 +516,8 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 ## 8. Evaluation
 <hr>
 
-* [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided decision to use null values for empty fields in mongodb rather than leaving fields out
-*
+* [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided my decision to use null values for empty fields in mongodb rather than leaving fields out
+* For interface/presentational choices: code and test elements that will be reused multiple times in site early and then create reusable and customizable styles and classes to make future implementation faster and more consistent.
 
 
 

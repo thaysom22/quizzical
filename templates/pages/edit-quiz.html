@@ -81,13 +81,14 @@
                 </div>
             </div>
             <div class="quiz-edit-submit d-flex flex-column flex-align-justify mt-5">
-                <button type="submit" class="btn cta mb-4">
+                <button type="submit" class="btn cta mb-4" title="Save Changes">
                     <i class="fas fa-save icon-sm me-1"></i>
-                    Save changes
+                    Save Changes
                 </button>
 
                 <a href="{{ url_for('view_quiz', view_quiz_id=edit_quiz_id) }}"
                     class="d-flex align-items-center justify-content-center"
+                    title="Back"
                 >
                     <button type="button" class="btn btn-secondary" role="button">
                         <i class="fas fa-arrow-alt-circle-left icon-sm me-1"></i>
@@ -100,7 +101,8 @@
             <img
                 src="{{ url_for('static', filename=edit_quiz_data.quiz_category_data.img_url) }}"
                 class="d-block"
-                alt="Image for {{ edit_quiz_data.quiz_category_data.category_name }} quiz"     
+                alt="Image for {{ edit_quiz_data.quiz_category_data.category_name }} quiz"    
+                title="Image for {{ edit_quiz_data.quiz_category_data.category_name }} quiz" 
             />
         </div>
         <div class="quiz-edit-add-question d-flex 
@@ -108,7 +110,7 @@
             align-items-center flex-column
             quiz-edit-delete"
         >   
-            <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
+            <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}" title="Add Question">
                 <button class="btn cta">
                     <i class="fas fa-plus-circle icon-sm me-1"></i>
                     Add Question
@@ -117,6 +119,7 @@
             <a 
                 href="{{ url_for('delete_quiz', delete_quiz_id=edit_quiz_id) }}"
                 onclick="return confirm('Are you sure you want to delete this quiz?');"
+                title="Delete QUiz"
             >
                 <button type="submit" class="btn btn-secondary delete">
                     <i class="fas fa-trash icon-sm me-1"></i>
@@ -138,7 +141,7 @@
 <!-- final add question button -->
 <section class="container-sm my-4">
     <div class="wrapper-sm p-5 d-flex flex-align-justify">
-        <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}">
+        <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}" title="Add Question">
             <button class="btn cta">
                 <i class="fas fa-plus-circle icon-sm me-2"></i>
                 Add Question

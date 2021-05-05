@@ -6,7 +6,7 @@
             <!-- login title -->
             <div class="login-title d-flex justify-content-center align-items-center mb-3">
                 <i class="fas fa-sign-in-alt icon-lg icon-fade"></i>
-                <h2>Log In</h2>
+                <h2>Login</h2>
             </div>
             <hr class="h-rule">
             <!-- login form -->
@@ -41,8 +41,8 @@
                 <!-- submit -->
                 <div class="row mt-5 d-flex justify-content-center align-items-center">
                     <div class="col-12 col-lg-3 d-flex justify-content-center align-items-center mb-2 mb-lg-0">
-                        <button type="submit" class="btn btn-lg cta m-2">
-                            Log In 
+                        <button type="submit" class="btn btn-lg cta m-2" title="Login">
+                            Login 
                             <i class="fas fa-sign-in-alt icon-sm"></i>
                         </button>
                     </div>
@@ -50,7 +50,7 @@
                         justify-content-center align-items-center
                         flex-column">
                         <span>New here?</span>
-                        <a href="{{ url_for('register') }}">
+                        <a href="{{ url_for('register') }}" title="Sign Up">
                             <button type="button" class="btn btn-secondary">
                                 Sign Up
                             </button> 

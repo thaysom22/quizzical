@@ -13,10 +13,9 @@
         <h3 class="m-0">{{ title }}</h3>
         {% if quizzes %}
             {% if recc %}
-                <a href="{{ url_for('search',
-                 category=category,
-                 age_range=age_range,
-                 recc='true') }}" class="d-flex flex-column text-center"
+                <a href="{{ url_for('search', category=category, age_range=age_range, recc='true') }}" 
+                    class="d-flex flex-column text-center"
+                    title="View recommended quizzes"
                 >
                     <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                     <span>More</span>
@@ -24,6 +23,7 @@
             {% elif category %}
                 <a href="{{ url_for('search', category=category) }}" 
                     class="d-flex flex-column text-center"
+                    title="View quizzes in category"
                 >
                     <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                     <span>More</span>
@@ -31,6 +31,7 @@
             {% elif age_range %}
                 <a href="{{ url_for('search', age_range=age_range) }}" 
                     class="d-flex flex-column text-center"
+                    title="View quizzes in age range"
                 >
                     <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                     <span>More</span>
@@ -60,12 +61,16 @@
                 {% else %}
                     <div class="carousel-item quiz-cards-item">
                 {% endif %}
-                        <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
+                        <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" 
+                            class="card item-inner"
+                            title="{{ quiz.title }}"
+                        >
                             <div class="quiz-img">
                                 <img
                                     src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
                                     class="d-block w-100"
-                                    alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                                    alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"
+                                    title="Image for {{ quiz.quiz_category_data.category_name }} quiz"
                                 />
                             </div>
                             <div class="carousel-text quiz-cards-text d-flex flex-column justify-content-between">
@@ -90,6 +95,7 @@
                 type="button"
                 data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
                 data-mdb-slide="prev"
+                title="Previous"
             >
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -99,6 +105,7 @@
                 type="button"
                 data-mdb-target="#{{ title|lower|replace(' ', '-') }}-quiz-carousel"
                 data-mdb-slide="next"
+                title="Next"
             >
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -109,6 +116,7 @@
                 type="button"
                 data-mdb-target="#age-{{ title|lower|replace(' ', '-') }}-quiz-carousel"
                 data-mdb-slide="prev"
+                title="Previous"
             >
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -118,13 +126,13 @@
                 type="button"
                 data-mdb-target="#age-{{ title|lower|replace(' ', '-') }}-quiz-carousel"
                 data-mdb-slide="next"
+                title="Next"
             >
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         {% endif %}
     </div>
-
     {% endif %}
 </div>        
 
@@ -155,12 +163,16 @@
             <div class="quiz-cards-inner d-flex justify-content-evenly py-3 py-lg-0">
             {% for quiz in quizzes  %}
                 <div class="quiz-cards-item d-flex justify-content-center align-items-center">
-                    <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" class="card item-inner">
+                    <a href="{{ url_for('view_quiz', view_quiz_id=quiz._id) }}" 
+                        class="card item-inner"
+                        title="{{ quiz.title }}"
+                    >
                         <div class="quiz-img">
                             <img
                                 src="{{ url_for('static', filename=quiz.quiz_category_data.img_url) }}"
                                 class="d-block w-100"
-                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
+                                alt="Image for {{ quiz.quiz_category_data.category_name }} quiz"
+                                title="Image for {{ quiz.quiz_category_data.category_name }} quiz"     
                             />
                         </div>     
                         <div class="quiz-cards-text d-flex flex-column justify-content-between">
@@ -177,27 +189,27 @@
             {% endfor %}
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     {% if recc %}
-                        <a href="{{ url_for('search',
-                            category=category,
-                            age_range=age_range,
-                            recc='true') }}" 
+                        <a 
+                            href="{{ url_for('search',category=category, age_range=age_range, recc='true') }}" 
                             class="d-flex flex-column text-center"
+                            title="View recommended quizzes"
                         >
                             <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                             <span>More</span>
                         </a>
                     {% elif category %}
-                        <a href="{{ url_for('search',
-                            category=category) }}" 
+                        <a 
+                            href="{{ url_for('search', category=category) }}" 
                             class="d-flex flex-column text-center"
+                            title="View quizzes in category"
                         >
                             <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                             <span>More</span>
                         </a>
                     {% elif age_range %}
-                        <a href="{{ url_for('search',
-                            age_range=age_range) }}" 
+                        <a href="{{ url_for('search', age_range=age_range) }}" 
                             class="d-flex flex-column text-center"
+                            title="View quizzes in age range"
                         >
                             <i class="fas fa-arrow-circle-right icon-med pb-1"></i>
                             <span>More</span>

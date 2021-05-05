@@ -43,7 +43,13 @@
                                     role="alert"
                                 >
                                     <h4 class="center-align text-center"><strong>{{ message }}</strong></h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button 
+                                        type="button" 
+                                        class="btn-close" 
+                                        data-bs-dismiss="alert" 
+                                        aria-label="Close" 
+                                        title="Dismiss message">
+                                    </button>
                                 </div>
                             {% endfor %}
                         {% endif %}

@@ -88,14 +88,14 @@
             p-2 justify-content-center
             align-items-center my-3"
         >
-            <button type="submit" class="btn cta">
+            <button type="submit" class="btn cta" title="Save Changes">
                 <i class="fas fa-save icon-sm me-2"></i>
                 Save changes
             </button>
         </div> 
         <!-- go back link -->
         <div class="edit-question-back d-flex justify-content-center align-items-center">
-            <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}">
+            <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}" title="Back">
                 <button class="btn btn-secondary 
                     d-flex align-items-center"
                     type="button"

@@ -92,10 +92,10 @@
                     {% if num_questions != 0 %}
                     <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
                         <a href="{{ url_for('view_quiz', view_quiz_id=quiz_id) }}" title="Done">
-                            <button class="btn cta d-flex align-items-center" type="button">
+                            <span class="btn cta d-flex align-items-center" role="button">
                                 <i class="fas fa-check icon-sm me-1"></i>
                                 Done
-                            </button>
+                            </span>
                         </a>
                     </div>
                     {% endif %}
@@ -105,13 +105,13 @@
                             onclick="return confirm('Are you sure you want to delete this quiz?');"
                             title="Delete Quiz"
                         >
-                            <button 
-                                type="button" 
+                            <span 
+                                role="button" 
                                 class="btn btn-secondary d-flex align-items-center" 
                             >
                                 <i class="fas fa-trash icon-sm me-1"></i>
                                 Quiz
-                            </button>
+                    </span>
                         </a>
                     </div>
                 </div>
@@ -120,13 +120,13 @@
                 <div class="row mt-3">
                     <div class="col-12 d-flex justify-content-center align-items-center mb-1">
                         <a href="{{ url_for('edit_quiz', edit_quiz_id=quiz_id) }}" title="Back">
-                            <button class="btn btn-secondary
+                            <span class="btn btn-secondary
                                 d-flex align-items-center"
-                                type="button"
+                                role="button"
                             >
                                 <i class="fas fa-arrow-alt-circle-left icon-sm me-1"></i>
                                 Back
-                            </button>
+                            </span>
                         </a>
                     </div>
                 </div>

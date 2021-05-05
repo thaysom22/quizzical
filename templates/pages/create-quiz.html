@@ -2,7 +2,6 @@
 {% extends "layout/base.html" %}
 {% block content %}
 
-
 <section class="container-md my-5">
     <div class="row justify-content-center">
         <div class="create-quiz-wrapper wrapper-md create-quiz-wrapper">
@@ -92,10 +91,10 @@
                     flex-column mt-4"
                 >
                     <a href="{{ url_for('discover') }}" title="Discover">
-                        <button type="button" class="btn btn-secondary">
+                        <span type="button" class="btn btn-secondary" role="button">
                             <i class="fas fa-arrow-circle-left icon-sm me-2"></i>
                             Discover
-                        </button> 
+                        </span> 
                     </a>
                 </div>
             </form>

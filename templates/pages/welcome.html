@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- main heading -->
-<header class="p-0 g-0 my-5 container-sm">
+<header class="p-0 g-0 mb-5 mt-3 container-sm">
     <div class="row g-0 justify-content-center">
         <div class="text-center main-heading">
             <h2 class="mb-3">Let's get <span class="super">Quizzical</span></h2>
@@ -15,14 +15,14 @@
             <h4 class="mb-4">Find, create and share engaging quizzes</h4>
             <div class="d-flex flex-align-justify flex-column flex-sm-row mt-4">
                 <a href="{{ url_for('register') }}" title="Sign Up">
-                    <button type="button" class="btn btn-lg cta m-3">
+                    <span type="button" class="btn btn-lg cta m-3">
                         Sign Up
-                    </button>
+                    </span>
                 </a>
                 <a href="{{ url_for('login') }}" title="Login">
-                    <button type="button" class="btn btn-secondary m-3">
+                    <span type="button" class="btn btn-secondary m-3">
                         Login
-                    </button>
+                    </span>
                 </a>
             </div>
         </div>
@@ -229,9 +229,9 @@
         <div class="d-flex flex-column flex-align-justify">
             <h2 class="text-center">Ready to get <span class="super">Quizzical?</span></h2>
             <a href="{{ url_for('register') }}" title="Sign Up">
-                <button type="button" class="btn btn-lg cta m-3">
+                <span type="button" class="btn btn-lg cta m-3">
                     Sign Up
-                </button>
+                </span>
             </a>
         </div>
     </div>

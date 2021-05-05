@@ -5,16 +5,16 @@
             <h4 class="mb-5">Find, create and share engaging quizzes</h4>
             <div class="d-flex flex-align-justify flex-column">
                 <a href="{{ url_for('create_quiz') }}" class="mb-3" title="Create Quiz">
-                    <button class="btn cta btn-lg" role="button">
+                    <span class="btn cta btn-lg" role="button">
                         Create Quiz
                         <i class="fas fa-plus-circle icon-sm"></i>
-                    </button>
+                    </span>
                 </a>
                 {% if all_quizzes|default(None) != "true" %}
                 <a href="{{ url_for('search', all_quizzes='true') }}" title="All Quizzes">
-                    <button class="btn btn-secondary" role="button">
+                    <span class="btn btn-secondary" role="button">
                         All Quizzes
-                    </button>
+                    </span>
                 </a>
                 {% endif %}
             </div>

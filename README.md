@@ -1,9 +1,10 @@
 # Quizzical
-<hr>
+----------
 
-[Quizzical]() was created for educators, learners and quiz enthusiasts to find and share topical mini-quizzes. 
+
+[Quizzical](https://quizzical-quiz-app.herokuapp.com/) was created for educators, learners and quiz enthusiasts to find and share topical mini-quizzes. 
 The main goal of the site is to support and enhance the work of teachers and the learning of students whilst facilitating fun and friendly competition.
-Quizzical was developed by Tom Haysom [thaysom22]() for data-centric project of the [Code Institute Full Stack Diploma]().
+Quizzical was developed by Tom Haysom [thaysom22](https://thaysom22.github.io/portfolio_project/) for data-centric project of the Code Institute Full Stack Diploma program.
 
 ## Table of Contents
 1. [UX](#ux)
@@ -34,7 +35,7 @@ Quizzical was developed by Tom Haysom [thaysom22]() for data-centric project of 
     * 8.3 What I would do differently
 
 ## 1. UX
-<hr>
+----------
 
 ### Goals
 Target audiences and possible user goals:
@@ -390,7 +391,9 @@ Collection name: age_ranges
 * ObjectIds for documents in `users` collection are stored as field values in `quizzes` collection - serves to define a relationship between documents in these different collections.
 
 ## 4. Testing
-<hr>
+----------
+
+[testing.md file](./testing.md)
 
 ## 5. Technologies Used
 <hr>

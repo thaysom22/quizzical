@@ -90,7 +90,7 @@
                     class="d-flex align-items-center justify-content-center"
                     title="Back"
                 >
-                    <span role="button" class="btn btn-secondary" role="button">
+                    <span class="btn btn-secondary">
                         <i class="fas fa-arrow-alt-circle-left icon-sm me-1"></i>
                         Back
                     </span>
@@ -111,7 +111,7 @@
             quiz-edit-delete"
         >   
             <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}" title="Add Question">
-                <span class="btn cta" role="button">
+                <span class="btn cta">
                     <i class="fas fa-plus-circle icon-sm me-1"></i>
                     Add Question
                 </span>
@@ -121,7 +121,7 @@
                 onclick="return confirm('Are you sure you want to delete this quiz?');"
                 title="Delete QUiz"
             >
-                <span role="button" class="btn btn-secondary delete">
+                <span class="btn btn-secondary delete">
                     <i class="fas fa-trash icon-sm me-1"></i>
                     Quiz
                 </span>
@@ -142,7 +142,7 @@
 <div class="container-sm my-4">
     <div class="wrapper-sm p-5 d-flex flex-align-justify">
         <a href="{{ url_for('add_question', quiz_id=edit_quiz_id) }}" title="Add Question">
-            <span class="btn cta" role="button">
+            <span class="btn cta">
                 <i class="fas fa-plus-circle icon-sm me-2"></i>
                 Add Question
             </span>

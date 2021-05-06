@@ -33,7 +33,8 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
   color: #1C0D5E;
 }
 .btn.btn-lg {
-  font-size: calc(1.2rem + .5vw);
+  font-size: calc(1.25rem + .5vw);
+  padding: 0.8rem 1.3rem;
 }
 .btn.btn-secondary {
   background-color: white;
@@ -382,7 +383,8 @@ a.card .quiz-img img {
 .quiz-view.grid-container {
   display: grid;
   min-height: 20rem;
-  grid-template: 35% 35% 30%/50% 50%;
+  max-height: 30rem;
+  grid-template: 35% 35% 30%/60% 40%;
 }
 .quiz-view.grid-container span {
   color: rgba(0, 0, 0, 0.5);

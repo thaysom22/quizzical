@@ -88,7 +88,8 @@ a.card {
     &.grid-container {
         display: grid;
         min-height: 20rem;
-        grid-template: 35% 35% 30% / 50% 50%;
+        max-height: 30rem;
+        grid-template: 35% 35% 30% / 60% 40%;
         span {
             color: $black-fade;
             padding: 0 .75rem calc(.5rem + .2vw) .75rem;

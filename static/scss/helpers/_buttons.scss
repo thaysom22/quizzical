@@ -24,7 +24,8 @@
         color: $midnight-blue; 
     }
     &.btn-lg {
-        font-size: calc(1.2rem + .5vw);
+        font-size: calc(1.25rem + .5vw);
+        padding: .8rem 1.3rem;
     }
    
     &.btn-secondary{

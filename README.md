@@ -83,7 +83,7 @@ As a user of the site:
 2. I want to quickly find where to search for content, so that I can find the specific content I need
 3. I want search results to be presented to me clearly and succinctly, so that I have a useful overview of the content available
 4. I want to be able to click on a search result to view the content in more detail, so that I can decide to use it more not
-5. I want to be able to view a varied selection of content in a single clear view, so that I can get an idea of the content the site offers and what might be relevant for me
+5. I want to be able to view a varied selection of content in a single clear view, so that I can get an idea of the content the site offers and what might be relevant for me.
 6. I want quiz content to be categorized by subject/topic, so that I can find content that I need by navigating the site
 7. I want the navigation buttons and links to be intuitively located and designed, so that I can traverse the site easily and efficiently
 8. I want to easily find where I can create by own quiz content and for the inputs to be intuitive and appropriate, so that I can share my own content effectively on the site
@@ -396,7 +396,7 @@ Collection name: age_ranges
 [testing.md file](./testing.md)
 
 ## 5. Technologies Used
-<hr>
+----------
 
 * [Python3]() language and standard libraries
 * [Flask]() web application framework used to simplify building appeal
@@ -418,9 +418,14 @@ Collection name: age_ranges
 * [Favicon.io](https://favicon.io/) used to convert png icon into favicon files and for html to optimize browser display
 * [FreeLogoDesign](https://www.freelogodesign.org/) to generate and edit logo and favicon png file
 * [Vector Stock](https://www.vectorstock.com/) for image content
+* [W3C Markup Validation Service](https://validator.w3.org/) used to validate HTML by passing each url of deployed app. 
+* [W3C Jigsaw CSS Validation Service](https://jigsaw.w3.org/css-validator/) used to validate CSS. 
+* [JSHint](https://jshint.com/) was used to validate Javascript files. 
+* [VSCode Python extension tool](https://marketplace.visualstudio.com/items?itemName=ms-python.python) used to validate Python code.
+* [autopep8](https://pypi.org/project/autopep8/) automatic Python formatter was used to format Python code to meet PEP8 guidelines.
 
 ## 6. Deployment
-<hr>
+----------
 
 ### Deployment to Heroku
 

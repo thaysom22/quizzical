@@ -10,7 +10,7 @@
 <div class="question-wrapper my-4">
     <div class="question-inner d-flex 
         flex-column align-items-center 
-        py-3 px-1 card"
+        py-3 card"
     >   
         <!-- question number and edit/delete buttons -->
         {% if edit %}
@@ -24,7 +24,7 @@
                         )}}"
                         title="Edit question {{ question_num }}"
                     >
-                        <i class="fas fa-edit icon-sm p-3"></i>
+                        <i class="fas fa-edit icon-med p-3"></i>
                     </a>
                     <a href="{{ url_for(
                         'delete_question', 
@@ -34,7 +34,7 @@
                         onclick="return confirm('Are you sure you want to delete this question?');"
                         title="Delete question {{ question_num }}"
                     >
-                        <i class="fas fa-trash icon-sm p-3"></i>
+                        <i class="fas fa-trash icon-med p-3"></i>
                     </a>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         {% endif %}
         
         <!-- question text -->
-        <h6 class="p-3">{{ question_data.question_text }}</h6>
+        <h6>{{ question_data.question_text }}</h6>
         <hr>
         <span class="align-self-start p-3">Answer choices:</span>
         <!-- view answers -->
@@ -63,8 +63,8 @@
         {% endfor %}
         </div>
         <!-- show/hide answer button -->
-        <div class="d-flex justify-content-center align-items-center p-3 mt-3">
-            <button class="toggle-answer-button btn btn-secondary" 
+        <div class="d-flex justify-content-center align-items-center p-3 mt-lg-2">
+            <button class="toggle-answer-button btn btn-secondary show" 
                 role="button" 
                 title="Show/hide answer"
             >

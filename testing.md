@@ -296,16 +296,192 @@ The following was confirmed for each page/component/functionality:
 
 1. searchbar
 
-
-
+    * As above for searchbar on Discover page
+    * Displays a "showing results for: <search_query>" message below input box with previously entered search query text
+    * If quiz results are displayed below the searchbar element contains a "<num_of_quizzes> quizzes found" message
 
 2. quiz results section
 
+    * If no quiz results are found: displays no quizzes found section with "Discover" button (exhibits hover feedback effect and if clicked redirects to Discover page)
+    * If quiz results are found (via search query entered or via clicking view more link on Discover page) 
+    * Each search result displays as a card with quiz title, image (dependent on category) and quiz owner username, quiz category and quiz age range information. On tablet and desktop sizes the number of questions in the quiz is also displayed.
+    * Image in search result card is full height on desktop. 
+
+3. Create Quiz call to action section
+
+    * As above on Discover page
+
+### Create Quiz page 
+
+1. Form layout
+
+    * Input outlines are arranged vertically on mobile and tablet views and horizontally on desktop view. 
+    * All input boxes remain sufficiently wide with ample padding on all screen sizes.
+
+2. Quiz title input
+
+    * Validation feedback as described for login/sign up forms.  
+    * Invalid feedback shown if form is submitted when empty
+
+3. Choose category/ choose age range select elements
+
+    * As described above for sign up page
+
+4. Form submit button
+
+    * Will not submit request all form inputs are not validated
+    * Displays hover interaction feedback
+    * If form validated: redirects to add question page and dismissable banner message "<quiz_title> has been created" is displayed
+    * Adds new quiz document to quizzes collection in db
+
+5. Discover button
+
+    * Displays hover interaction feedback
+    * Redirects to Discover page when clicked
+
+### Add Question (requested whilst creating a quiz) page
+
+1. Form layout
+
+    * Answer input boxes arranged vertically on mobile and tablet views and two by two on desktop view.
+    * Correct answer radio buttons are adjacent to respective answer text input
+    * Done and delete quiz buttons are arranged vertically on mobile and horizontally on tablet and desktop
+
+2. Question text textarea
+
+    * Box contains label "Question text" when page is loaded which moves to top of form outline when in focus. 
+    * Error validation as described for text inpputs in previous sections except outline does not extend downward.
+    * Provides invalid feedback and form will not submit if left empty
+
+3. Answer option inputs
+
+    * Validation feedback as described previously
+    * All four answers must  be not empty for form to submit
+
+4. Correct answer radio input 
+
+    * Form will not submit unless at least one is selected
+    * If none selected all four turn red to give invalid feedback
+    * Once one is selected all four turn green and a green ring appears around selected button
+
+5. Adding question info message
+
+    * Reads "you are adding the first question to <quiz_title> when viewing add question page immediately after create qui page. 
+    * Reads "you are adding  question number <question_num> to <quiz_title> when  adding subsequent questions
+
+6. Save Question button (form submit)
+
+    * Form will not submit unless all inputs are validated
+    * If form submits, user is redirected to same page (add question) with empty input fields and adding question info message updated
+    * Adds new question document to questions collection in db and updates quiz document with ObjectID of new question
+
+7. Done button
+
+    * Displayed only after at least one question is already added
+    * Redirects to view quiz page for newly created quiz
+
+8. Delete Quiz button
+
+    * Clicking triggers browser confirmation pop up ("Are you sure you want to delete Quiz?") if cancelled nothing else occurs
+    * If confirmed, removes newly created quiz and questions from quizzes and questions collections in db and redirects to create quiz page.
+
+### View Quiz page
+
+1. Quiz summary card
+
+    * Displays quiz title, image, category, age range, username of owner and number of questions information.
+    * If current user is the owner of thsi quiz a link to edit the quiz is displayed in the card. If not, no edit link is displayed. 
+    * On mobile and tablet quiz information is arranged vertically and  on desktop it is arranged horizontally along bottom of card. 
+    * IF shown, edit link is displayed under image on mobile and desktop and along bottom adjacent to quiz information on desktop. Image is full height of card on desktop.
+    * IF shown, edit link redirects to edit quiz page for current quiz (passes ObjectID of current quiz to url). Edit quiz page displays same data as previous view quiz page as values of input elements on page loading.
+
+2. View questions section
+
+    * Each question displayed in separate card
+    * For each question card: Question number displayed in top left. Question text displayed at center top of card. Answer choices arranged vertically down left hand side of card on mobile and tablet and 2 by 2 across card on desktop. Each answer option displays a ? icon when page loaded.
+    * Show/hide answer button has text "show answer" on page load and when clicked, text changes to "hide answer" and causes all ? icons next to answer options to hide and be replaced by a green tick icon for correct answer and a red cross for an incorrect answer (tested with some really easy questions where I couldnt forget the correct answer I chose!). When clicked again original state of button and icon is reverted to.
+
+3. Back button
+
+    * If view quiz page was accessed by clicking a quiz card link on Discover page, back button redirects  to discover page
+    * If view quiz page was accessed by clicking a search result card link on search page, back button redirects to search page with same results as were previously displayed.
+    
+### Edit Quiz page
+
+1. Edit quiz form layout
+
+    * Contains inut elements, buttons and image with padding and space around on all device sizes
+
+2. Edit Quiz title input
+
+    * When page loads contains text of quiz title of quiz from previous page
+    * Invalid feedback if value deleted and form submitted (described previously) - see details in bugs not fixed section.
+
+3. Edit Quiz category/age range select elements
+
+    * When page loads value of these fields for quiz on previous page is selected
+
+4. Submit edit quiz form (save changes) button
+
+    * Will not submit  if title input is empty
+    * If form inputs all valid form submits and user redirected to same page (edit quiz) with input populated by new quiz title and new category and age range values
+    * Quiz document fields updated in db quizzes collection
+
+5. Back button
+
+    * Redirects to view quiz page for same quiz
+
+6. Add question buttons
+
+    * One inside top card below quiz image.
+    * One at bottom of page beneath all question cards
+    * Redirect user to add question page (tests described above) - add question page displays 'save question' button (same as described above) and a 'back' button which redirects back to previous edit quiz page.
+
+7. Delete Quiz button
+
+    * Clicking triggers browser confirmation pop up ("Are you sure you want to delete Quiz?") if cancelled nothing else occurs
+    * If confirmed, removes newly created quiz and questions from quizzes and questions collections in db and redirects to Discover page with "Quiz and all questions" dismissible banner message displayed
+
+8. View questions (with edit and delete links)
+
+    * As described above for view quiz page
+    * Link to edit question - redirects to edit question page for selected question populated with current question data
+    * Link to delete question -  triggers browser confirmation as described above. If confirmed, removes question from questions field array of quiz in quizzes coleection and removes question from questions collection.
 
 
-3. No quizzes found section
+### Edit Question page
 
-4. Create Quiz call to action section
+1. Form layout
+
+    * Tested as described for create question page
+
+2. Question text textarea element
+
+    * When page loads contains question text of question from previous page.
+    * Validation as described for create question textarea element
+
+3. Answer choices inputs
+
+    * When page loads these are populated with answer options from previous question
+    * Validation as described ofr create question answer text inputs
+
+4. Correct answer radio button inputs
+
+    * Radio button corresponding to correct answer for question on previous page is selected when page loads. 
+
+5. Save changes (form submit) button
+
+    * Form does not submit if not all inputs are validated and validation feedback is shown as described above.
+    * If form submits question document in db questions collection is updated with values of inputs and user is redirected  to edit quiz page for quiz question belongs to.
+
+6. Back button
+
+    * Redirects user is redirected to edit quiz page for quiz question belongs to without question document being updated.
+
+### 404 url not found page
+
+    * When an invalid url is entered 404 page is displayed.
+    * Clicking on Home button  redirects user to Discover page (if logged in) and to Welcome page (if logged out)
 
 # Bugs Discovered
 
@@ -319,10 +495,15 @@ The following was confirmed for each page/component/functionality:
     * Fix: Edit images in carousel so they all have equal proportions and carousel item container remains same height for each image.
 * Username and password inputs showing validation feedback as on sign up page. This makes it easier to brute force authentication on login page and leads to ambiguous interactiions.
     * Fix: `minlength`, `maxlength` and `pattern` attributes removed from username and password inputs on login page.
+* Images not loading on quiz search result cards on search page after 'view more' link is clicked from a category section on discover page (working for other sections - age range and recommended)
+    * Fix: added lookup stage from categories colection to mongodb pipeline when request to search endpoint is made with category url parameter passed, category_img_url can now be accessed in quiz_data document returned from db
+* On view/edit quiz page the show/hide answer button is not changing text content on first click and thereafter is out of sync with the icons displayed
+    * Fix: added "show" class to HTML of button element when first loaded and check for then toggled this class in click event listener instead of checking current text content.
 
 ### Not fixed
 
 * On pages with form text inputs if form is submitted and a new request is loaded then user presses broswer 'back' button then value entered is displayed on top of the form label and neither can be read clearly.
+* When the initial value in the title input is deleted on edit quiz page ans the form submit button is pressed, form does not submit but input outline does not extend as expected to around invalid error message so error message appears outside of box
 
 # Further Testing
 

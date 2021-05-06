@@ -11,11 +11,12 @@
         // add event listener to toggleButton with contextual access to incorrectIcons and correctIcon
         toggleButton.addEventListener('click', function(e) {
             e.preventDefault();
-            if (this.textContent === "Show answer") {
+            if (this.classList.contains("show")) {
                 this.textContent = "Hide answer";
             } else {
                 this.textContent = "Show answer";
             }
+            this.classList.toggle("show")
             correctIcon.classList.toggle('fa-question-circle');
             correctIcon.classList.toggle('fa-check-circle');
             incorrectIcons.forEach(incorrectIcon => {

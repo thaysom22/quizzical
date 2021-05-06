@@ -8,7 +8,7 @@
 <header class="p-0 g-0 my-5 container-sm">
     <div class="row g-0 justify-content-center">
         <div class="text-center main-heading d-flex flex-align-justify">
-            <i class="fas fa-edit icon-lg me-3 icon-fade"></i>
+            <i class="fas fa-edit icon-lg me-2 icon-fade"></i>
             <h4 class="text-center px-2">{{ edit_quiz_data.title }}</h4> 
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="card quiz-edit grid-container">
         <form method="POST" 
             action="{{ url_for('edit_quiz', edit_quiz_id=edit_quiz_id) }}"
-            class="p-2"
+            class="p-4"
             novalidate
         >
             <div class="quiz-edit-data d-flex flex-column justify-content-around">
@@ -87,10 +87,9 @@
                 </button>
 
                 <a href="{{ url_for('view_quiz', view_quiz_id=edit_quiz_id) }}"
-                    class="d-flex align-items-center justify-content-center"
                     title="Back"
                 >
-                    <span class="btn btn-secondary">
+                    <span class="btn btn-secondary d-flex flex-align-justify">
                         <i class="fas fa-arrow-alt-circle-left icon-sm me-1"></i>
                         Back
                     </span>

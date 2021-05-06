@@ -61,6 +61,20 @@
     {% endfor %}
 </div>
 
+<!-- back button -->
+{% if prev_url|default(None) %}
+    <div class="container-sm my-4">
+        <div class="wrapper-sm p-5 d-flex flex-align-justify">
+            <a href="{{ prev_url }}" title="Back">
+                <span class="btn btn-secondary">
+                    <i class="fas fa-arrow-alt-circle-left icon-sm me-2"></i>
+                    Back     
+                </span>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
 {% endblock %}
 
 {% block scripts %}

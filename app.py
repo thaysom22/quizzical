@@ -718,10 +718,18 @@ def search():
                     }
                 },
                 {
+                    "$lookup": {
+                        "from": "categories",
+                        "localField": "quiz_category_id",
+                        "foreignField": "_id",
+                        "as": "quiz_category_data"
+                    }
+                },
+                {
                     "$addFields": {
-                        "quiz_category_data": category,
                         # specifying an existing field name in an...
                         # $addFields operation causes the original field to be replaced
+                        "quiz_category_data": {"$arrayElemAt": ["$quiz_category_data", 0]},
                         "quiz_age_range_data": {"$arrayElemAt": ["$quiz_age_range_data", 0]},
                         "quiz_owner_data": {"$arrayElemAt": ["$quiz_owner_data", 0]},
                         "num_questions": {"$size": "$questions"}
@@ -759,8 +767,16 @@ def search():
                     }
                 },
                 {
+                    "$lookup": {
+                        "from": "age_ranges",
+                        "localField": "quiz_age_range_id",
+                        "foreignField": "_id",
+                        "as": "quiz_age_range_data"
+                    }
+                },
+                {
                     "$addFields": {
-                        "quiz_age_range_data": age_range,
+                        "quiz_age_range_data": {"$arrayElemAt": ["$quiz_age_range_data", 0]},
                         "quiz_category_data": {"$arrayElemAt": ["$quiz_category_data", 0]},
                         "quiz_owner_data": {"$arrayElemAt": ["$quiz_owner_data", 0]},
                         "num_questions": {"$size": "$questions"}
@@ -1005,13 +1021,17 @@ def view_quiz(view_quiz_id):
         ObjectIdHelper.toObjectId(session.get('user').get('_id'))
     )
 
+    # template requires url of previous page for back button
+    prev_url = request.referrer
+
     return render_template("pages/view-quiz.html",
                            active_page="View Quiz",
                            view_quiz_id=view_quiz_id,
                            user_is_owner=user_is_owner,
                            view_quiz_data=view_quiz_data,
                            num_questions=num_questions,
-                           loggedIn=loggedIn)
+                           loggedIn=loggedIn,
+                           prev_url=prev_url)
 
 
 # UPDATE QUIZ #

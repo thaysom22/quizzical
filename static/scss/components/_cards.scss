@@ -121,11 +121,6 @@ a.card {
         display: grid;
         max-height: 50rem;
         grid-template: 65% 35% / 60% 40%;
-        span {
-            color: $black-fade;
-            padding: 0 .75rem calc(.5rem + .2vw) .75rem;
-            overflow-wrap: break-word;
-        }
         .quiz-edit-data {
             grid-area: 1 / 1 / span 1 / span 1;
         }

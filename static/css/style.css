@@ -414,11 +414,6 @@ a.card .quiz-img img {
   max-height: 50rem;
   grid-template: 65% 35%/60% 40%;
 }
-.quiz-edit.grid-container span {
-  color: rgba(0, 0, 0, 0.5);
-  padding: 0 0.75rem calc(.5rem + .2vw) 0.75rem;
-  overflow-wrap: break-word;
-}
 .quiz-edit.grid-container .quiz-edit-data {
   grid-area: 1/1/span 1/span 1;
 }

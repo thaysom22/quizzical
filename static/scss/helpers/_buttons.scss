@@ -25,7 +25,7 @@
     }
     &.btn-lg {
         font-size: calc(1.25rem + .5vw);
-        padding: .8rem 1.3rem;
+        padding: calc(.8rem + .3vw) calc(1.3rem + .3vw);
     }
    
     &.btn-secondary{

@@ -1,23 +1,21 @@
 # Quizzical - Testing
-----------
 
-[README.md file](./README.md)
-[Quizzical deployed on Heroku](https://quizzical-quiz-app.herokuapp.com/)
+* [README.md file](./README.md)
+* [Quizzical](https://quizzical-quiz-app.herokuapp.com/) deployed on Heroku
 
 ## Contents
 ----------
 1. [Automated Testing](#automated-testing)
-    * HTML, CSS and JS validation
-    * Note on Unit Testing
+* HTML, CSS and JS validation
+* Note on Unit Testing
 2. [User Stories Testing](#user-stories-testing)
 3. [Manual Testing](#manual-testing)
 4. [Bugs Discovered](#bugs-discovered)
-    * Fixed
-    * Not fixed
+* Fixed
+* Not fixed
 5. [Further Testing](#further-testing)
 
-# 1. Automated Testing
-----------
+# Automated Testing
 
 ### Validation Services
 
@@ -34,8 +32,7 @@
 * The amount and complexity of Javascript used in this project was not sufficient to warrant implementing unit tests with Jasmine - manual testing done on Javascript functionality. 
 * I would liked to have implemented unit testing for the Python functions in the codebase, however given the deadline of the project and my limited time available I decided this was not a priority for this project. I aim to familiarize and improve my skills with unit testing in Python in a future project.
 
-# 2. User Stories Testing
-----------
+# User Stories Testing
 
 This section goes through and confirms each user story in the [README](./README.md).
 
@@ -140,25 +137,194 @@ This section goes through and confirms each user story in the [README](./README.
 
     * Link to login is displayed in navbar and immediately in main heading section on landing page.
 
-# 3. Manual Testing
-----------
+# Manual Testing
 
-Testing was done in a google chrome browser 
+Testing of all pages and functionality was performed in a Google Chrome web browser using the dev tools device toolbar to emulate mobile and tablet screen sizes (iPhone 6/7/8 and iPad).
 
-# 4. Bugs Discovered
-----------
+The following was confirmed for each page/component/functionality:
+
+### Components on all pages
+
+1. Navbar
+
+    * Quizzical Owl icon and heading are visible on left of navbar and padded from edge of display on all device sizes.
+    * Clicking on icon or heading redirects user to welcome page (if logged out) and to discover page (if logged in)
+    * Sign Up, Login and Welcome links are displayed on right of navbar when user is logged out and Create, Discover and Logout are displayed when user is logged in.
+    * Links collapse on mobile display and a hamburger icon is displayed. Clicking on hamburger icon toggles a dropdown nav menu where links are displayed.
+    * Sign up, Login and Welcome links redirect to correct pages when logged out.
+    * Create, Discover and Logout links redirect to correct pages when logged in.
+    * Hover effect on buttons is displayed.
+
+2. Footer
+
+    * Layout of sections is vertical and uncramped on mobile display. Text is readable.
+    * Layout of sections is horizontal on tablet and desktop displays. 
+    * Link to portfolio opens my developer portfolio website in a separate tab.
+    * LinkedIn and Github links open my profiles on respective sites in a separate tab.
+
+### Welcome page
+
+1. Main header with sign up and login call to action
+
+    * Sign up and login buttons are arranged horizontally on tablet and desktop displays and vertically on mobile displays
+    * Sign up and login links redirect correctly to appropriate pages. Hover effect on buttons is displayed.
+    * Text and icon is readable, uncramped and sized proportionally on each device size
+
+2. Hero image
+
+    * Image content scales and is visible on all device sizes
+    * Caption is readable on all device sizes and whitespace breaks when text does not fit on a single line
+
+3. List of benefits section
+
+    * Three individual benefit elements are arranged horizontally on tablet and desktop sizes and vertically on phone.
+    * Icons and text are aligned on all device sizes.
+
+4. Main features carousel section
+
+    * 3 images and captions display clearly on all device sizes
+    * The text underneath caption heading is hidden on mobile devices so image not obscured
+    * The carousel scrolls through images and captions automatically with a constant time interval
+    * The next and previous buttons trigger the next or previous image and caption respectively to display
+    * The carousel progress indicators update when image changes
+
+5. Easy to get started section
+
+    * Steps are arranged vertically on mobile and tablet device sizes and horizontally on desktop. 
+    * Icons have sufficient padding and text is center aligned on all device sizes
+
+6. Final sign up call to action section
+
+    * Link to sign up redirects to correct page. Hover effect on button is displayed.
+
+### Login page
+
+1. Form layout
+
+    * Scales with viewport width and remains at fixed max width of desktop display
+    * Input outline widths remain fixed % of container
+
+
+2. Username input
+
+    * Label username is displayed inside of form outline when not in focus
+    * When clicked or tapped cursor appears and label move to top edge of outline box
+    * If an no username is submitted outline turns red and extends down vertically, an error message is displayed below input text and a warning icon slides into view at right of outline box.
+    * If username is entered, the outline shrinks back to original size and becomes green , error message hides and warning icon is replaced by a tick and remains this way when no longer in focus.
+    * If input deleted again then styling reverts to red, with error message and warning icon and remains this way when no longer in focus.
+    * If input entered originally and sumbitted outline turns green and tick icon slides across to right of outline box.
+
+3. Password input
+
+    * As above for username input
+
+4. Form submission
+
+    * Submit button does not redirect to a new page when form not validated
+    * Provides hover user feedback effect
+    * If an unrecognized username (not in db) is entered, form validates and login page refreshed with a dismissable banner (incorrect username / password)
+    * If a recognized username is entered without the correct password pairing (not empty), form validates and login page refreshed with a dismissable banner (incorrect username / password)
+    * If all form inputs are valid, username is found and correct matching password is entered submit button redirects to Discover page with dismissable banner message ("welcome back, <username>")
+
+5. Sign up button
+
+    * Redirects to sign up (register page)
+    * Provides hover user feedback effect
+
+### Sign Up (Register) page
+
+1. Form layout
+
+    * Inputs are arranged vertically on mobile display and 2 columns of 2 on tablet and desktop.
+    * Width of input outline boxes remains not too long/small
+
+2. Username and password inputs
+
+    * As above for username input on Login page. 
+    * Invalid feedback as above if a left blank, or value less than 5 or greater than 20 (30 for password) or does not satify regex pattern is submitted
+
+3. Main category / main age range select elements
+
+    * Display red outline and warning icon if not selected when form submitted.
+    * Green outline and tick icon when selected
+    * Displys label inside form outline box prior to selection.
+
+4. Form submission
+
+    * Submit button does not redirect to a new page when form not validated
+    * Provides hover user feedback effect
+    * If a pre-existing username is entered in username input and all fields are valid form submits and redirects to same page with a dismissable banner ("The username <username> already exists")
+    * If all form inputs are valid and username not already in db submit redirects to Discover page with dismissable banner message ("welcome to Quizzical, <username>")
+
+5. Login button
+
+    * Redirects to login page
+    * Provides hover user feedback effect
+
+### Discover page
+
+1. searchbar
+
+    * Displays as full width element on mobile size and as a centered container with rounded border on tablet and desktop
+    * Orange search button (form submit) displays to right of searchbar input outline and exhibits hover feedback effect
+    * Searchbar input displays "Find a quiz by title" label when page is loaded which move to top of input outline box when in focus and cursor appears.
+    * If search is submitted with empty search query invalid feedback (as described above) is displayed with message: "Invalid Search"
+    * If any value is entered into searchbar input valid feedback is displayed (as above) when form submits and user is redirected to search page where searchbar element displays text: "showing results for: <search_query>" and the number of results if any quizzes found by search. 
+    * Input does not allow a search query to be entered of more than 30 characters.
+
+2. Recommended section
+
+    * Each quiz is displayed in a card element with an image (dependent on category of quiz), title and age range, category and quiz owner username information.
+    * Quiz card images exhibit a hover zoom feedback effect. Hovering anywhere on the quiz card caused a pointer cursor to be displayed and if clicked user is directed to view quiz page for selected quiz.
+    * Quizzes all in category matching user main category or user main age range selected at sign up. 
+    * A more link is displayed at top right of section on mobile and middle right on tablet and desktop. Clicking redirects to search page and displays as search result cards all quizzes in db that are matching the current user's category or age range preference
+    * Displays a carousel of 3 quizzes on mobile view. Cycles through quizzes in a constant time interval and next and previous buttons can be used to view next/previous quiz manually.
+    * Displays 2 quiz cards arranged horizontally (not carousel) on tablet view
+    * Displays 3 quiz cards arranged horizontally (not carousel) on desktop view
+
+3. Categories and age range sections
+
+    * Display as above (recommended section) for each category in db categories collection and each age range in age_ranges collection
+    * Clicking view more link redirects to search page and displays as search result cards all quizzes in db that are matching the category or age range of the section of the view more link that was clicked
+
+4. Create Quiz call to action section
+
+    * Create quiz button displays hover feedback effect and when clicked redirects to create quiz page.
+    * All Quizzes button displays hover feedback effect and when clicked redirects to search page displaying all quizzes in db quizzzes collection as search results
+
+### Search page
+
+1. searchbar
+
+
+
+
+2. quiz results section
+
+
+
+3. No quizzes found section
+
+4. Create Quiz call to action section
+
+# Bugs Discovered
 
 ### Fixed
 
-* HTML validator showing error: "button element must not appear as descendant of a element". Fix: changed `<button>` elements which are child of `<a>` elements into `<span>` elements.
-* Quiz image on view quiz page is blurred on tablet sizes. Fix: reduced width of column containing image in grid container so image remains closer to natural dimensions.
+* HTML validator showing error: "button element must not appear as descendant of a element". 
+    * Fix: changed `<button>` elements which are child of `<a>` elements into `<span>` elements.
+* Quiz image on view quiz page is blurred on tablet sizes. 
+    * Fix: reduced width of column containing image in grid container so image remains closer to natural dimensions.
+* When 'Love to learn' image on carousel displays on welcome page the caption jumps up slighly
+    * Fix: Edit images in carousel so they all have equal proportions and carousel item container remains same height for each image.
+* Username and password inputs showing validation feedback as on sign up page. This makes it easier to brute force authentication on login page and leads to ambiguous interactiions.
+    * Fix: `minlength`, `maxlength` and `pattern` attributes removed from username and password inputs on login page.
 
 ### Not fixed
 
-* 
+* On pages with form text inputs if form is submitted and a new request is loaded then user presses broswer 'back' button then value entered is displayed on top of the form label and neither can be read clearly.
 
-# 5. Further Testing
-----------
+# Further Testing
 
 1. Posted link to deployed site and link to Github repo for project on 'peer review' section of Code Institute Slack channel to obtain helpful comments, suggestions and feedback from peers on the course.
 2. Asked around 40 students aged 12-14 in my classes (I work as a Maths teacher) to sign up, view some quizzes and create and edit a quiz with questions whilst testing the functionality and interactions with the interface. These young people are very comfortable and familiar with interaction with software and web applications and provided some useful comments and feedback on layout, sizing, access to navigation links and interaction feedback as well as plenty of quiz content!

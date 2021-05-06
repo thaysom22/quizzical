@@ -18,11 +18,13 @@
 
 {% if search_results %}
     <!-- search results section -->
-    <section class="search-results-wrapper container-lg my-5 px-4">
-        <!-- quiz_search_result macros -->
-        {% for quiz in search_results %}
-            {{ quiz_search_result(quiz) }}
-        {% endfor %}
+    <section class="search-results-wrapper container-lg my-5 g-0">
+        <div class="wrapper-lg">
+            <!-- quiz_search_result macros -->
+            {% for quiz in search_results %}
+                {{ quiz_search_result(quiz) }}
+            {% endfor %}
+        </div>
     </section>
 {% else %}
     <!-- no quizzes found section -->

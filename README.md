@@ -526,6 +526,6 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 
 * [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided my decision to use null values for empty fields in mongodb rather than leaving fields out
 * For interface/presentational choices: code and test elements that will be reused multiple times in site early and then create reusable and customizable styles and classes to make future implementation faster and more consistent.
-
-
+* Easier not to change root font size to 62.5% when working with a framework like Bootstrap as many elements have specific styles that use 1rem and become too small, requiring !important to overwrite.
+* Front end design and presentation/colors is not my strong area! Consider advice of my mentor and look for free lisence Bootstrap templates for elements I plan to include. 
 

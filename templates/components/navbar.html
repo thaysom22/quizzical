@@ -33,7 +33,7 @@
                     <a class="nav-link text-center" href="{{ url_for('welcome') }}" title="Welcome">Welcome</a>
                 {% elif loggedIn == True %}
                     <a class="nav-link" href="{{ url_for('create_quiz') }}" title="Create">
-                        <span class="btn cta btn-lg">Create</span>
+                        <span class="btn cta">Create</span>
                     </a>
                     <a class="nav-link text-center" href="{{ url_for('discover') }}" title="Discover">Discover</a>
                     <a class="nav-link text-center" href="{{ url_for('logout') }}" title="Logout">Logout</a>

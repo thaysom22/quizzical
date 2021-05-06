@@ -34,7 +34,7 @@ CREDIT: https://www.color-hex.com/color-palette/23357 */
 }
 .btn.btn-lg {
   font-size: calc(1.25rem + .5vw);
-  padding: 0.8rem 1.3rem;
+  padding: calc(.8rem + .3vw) calc(1.3rem + .3vw);
 }
 .btn.btn-secondary {
   background-color: white;
@@ -146,7 +146,7 @@ body {
 
 a {
   font-family: "Oswald", sans-serif;
-  font-size: calc(1.4rem + .5vw);
+  font-size: calc(1.25rem + .2vw);
 }
 a.nav-link {
   padding: 0.75rem 1.5rem;
@@ -174,7 +174,7 @@ hr.h-rule {
 /* containers */
 main {
   min-height: 100vh;
-  background-image: url("./../img/question-mark-background-colored.png");
+  background-image: url("./../img/question-mark-background.png");
   margin-top: 6.663rem;
   z-index: 0;
 }
@@ -198,7 +198,7 @@ main .flashed-messages .flashed-message h4 {
   word-break: break-all;
 }
 main .overlay {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -439,7 +439,7 @@ a.card .quiz-img img {
 /* ******* CAROUSELS ******* */
 /* welcome page carousel */
 .carousel .carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 1rem;
   padding: 1.5rem;
 }
@@ -572,7 +572,7 @@ form .form-new-user span {
 }
 .hero-image-wrapper .hero-caption h4 {
   padding: 3rem 6rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 1rem;
   text-align: center;
   color: white;
@@ -589,9 +589,6 @@ form .form-new-user span {
 }
 
 /* get started section */
-.get-started-wrapper {
-  border-radius: 2rem;
-}
 .get-started-wrapper h2 {
   text-align: center;
   margin: 3rem 0 3rem 0;
@@ -620,7 +617,6 @@ form .form-new-user span {
 
 /* final cta section */
 .final-cta-wrapper {
-  border-radius: 2rem;
   padding: 3rem;
 }
 .final-cta-wrapper h2 {
@@ -645,10 +641,6 @@ form .form-new-user span {
 }
 
 /* ******* SEARCH PAGE ******* */
-.search-results-wrapper {
-  background-color: white;
-}
-
 .num-results span {
   color: rgba(0, 0, 0, 0.5);
   font-size: calc(1.1rem + .4vw);

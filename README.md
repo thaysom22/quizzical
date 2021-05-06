@@ -30,12 +30,8 @@ Quizzical was developed by Tom Haysom [thaysom22](https://thaysom22.github.io/po
     * 7.2 Code
     * 7.3 Acknowledgements
 8. [Evaluation](#evaluation) 
-    * 8.1 What I have learned
-    * 8.2 Questions I have
-    * 8.3 What I would do differently
 
-## 1. UX
-----------
+# UX
 
 ### Goals
 Target audiences and possible user goals:
@@ -65,7 +61,6 @@ Quizzical is a great way to meet these user needs because:
 * The site provides a community where expertise, knowledge and experience can be shared via high quality quiz content
 
 Site owner's goals:
-
 
 * Provide an easy to use, useful site that helps educators teach better and students enjoy learning and progress
 * To practice building a full stack application using front end languages plus Python, Flask and MongoDB
@@ -110,8 +105,9 @@ A consistent overall layout and feel across the site was a priority when designi
 A mobile first design approach was used to optimize the user experience for small devices first before adjusting layout and size of elements for larger screen sizes.
 
 Inspiration for design and layout was taken from some existing (much more sophisticated) online quiz sites:
-* [Quizziz]()
-* [Kahoot]()
+* [Quizziz](https://quizizz.com/)
+* [Kahoot](https://kahoot.com/)
+* [Quizlet](https://quizlet.com/en-gb)
 
 This project aims to create a basic implementation of quiz sharing functionality which is scalable into an application with it's own unique features and content in future versions.
 Quizziz and Kahoot both include functionality for users to login and play head to head on a quiz interactively in real time: this functionality is beyond the scope of this project and the developer's current skill level and time available therefore the scope is limited to sharing static quiz content. 
@@ -125,16 +121,14 @@ Quizziz and Kahoot both include functionality for users to login and play head t
 
 #### Colors
 
-[Link to color palette](https://coolors.co/000000-c60f7b-0839d9-80ced7-fadcb2-e0e0e0-ffffff)
+[Link to color palette](./docs/quizzical-color-palette.pdf)
 
 The color palette was chosen using the [Coolors](https://coolors.co/) color picker.
 
-* The overall theme of the pallete is a mixture of vibrant contrast and tactile office stationary colors.
+* The overall theme of the pallete is a contrast of darker colors with white for container backgrounds and bright accents for calls to action. 
 * There are a mixture of lighter and darker tones with more vibrant and garish colors used on the site to help bring contrast to certain elements - in particular, calls to action.
-* There are not too many constrasting colors in the pallete overall to overwhelm the user and each group of three lighter and darker colors blend well together respectively
+* There are not too many constrasting colors in the pallete overall to overwhelm the user - lighter and darker colors blend well together respectively
 * White is used as a primary font color on darker blue or green background to provide maximum contrast and also as a background color paired with black or 'persian blue' text for a clean, high contrast effect when there is alot of content or smaller text.
-* Main solid backgrounds for elements use the vibrant 'persian blue' and 'wheat' colors to visually separate elements and convey structure to help user easily navigate the page.
-* 'Middle blue' and 'gainsboro gray' are used as secondary accent and styling colors for elements (horizontal rule elements, borders, minor text, secondary icons and buttons). These help add depth to the page but are not essential to the site experience so that users who need very high contast can still use the page effectively.
 * Research into the designs of other similar applications showed that many use a shade of purple paired with white font as primary colors so I decided not to use this color to make this app distinctive from the competition in this way.
 
 #### Icons
@@ -151,13 +145,12 @@ The color palette was chosen using the [Coolors](https://coolors.co/) color pick
 #### Components, styling and effects 
 
 * [Material Design for Bootstrap](https://mdbootstrap.com/) was used for layout and components for this project as it provided an easy to use framework for building a responsive site quickly and effectively via Bootstrap's grid system. The prebuilt components offer a user experience appropriate for this app so these are used where possible to provide structure, styling and feedback for components on this site. Many have been edited with custom css to meet the specific design requirements for this site:
-
-- [Buttons](https://mdbootstrap.com/docs/standard/components/buttons/) and links of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
-- [Progression indicators (spinners)](https://mdbootstrap.com/docs/standard/components/spinners/) are used as visual indicators to user when app is loading or waiting for a response
-- [Collapsible navbar](https://mdbootstrap.com/docs/standard/navigation/navbar/) used to make navbar reponsive and to create smooth user experience when using collapsible menu with burger icon
-- [Footer](https://mdbootstrap.com/docs/standard/navigation/footer/) for responsive layout with Bootstrap Grid system
-- [Carousel](https://mdbootstrap.com/docs/standard/components/carousel/) used to display selection of images on landing page and quiz content from db on other pages
-- [Cards](https://mdbootstrap.com/docs/standard/components/cards/) to display discrete piece of data: either fixed content or a quiz/question loaded from db
+    - [Buttons](https://mdbootstrap.com/docs/standard/components/buttons/) and links of various sizes and styles are used to distinguish priority calls to action from secondary interactions. Create and Login buttons are largest and most prominent as goal of site (which also benefits users) is to increase the number of quizzes in database and increase number of site users. 
+    - [Progression indicators (spinners)](https://mdbootstrap.com/docs/standard/components/spinners/) are used as visual indicators to user when app is loading or waiting for a response
+    - [Collapsible navbar](https://mdbootstrap.com/docs/standard/navigation/navbar/) used to make navbar reponsive and to create smooth user experience when using collapsible menu with burger icon
+    - [Footer](https://mdbootstrap.com/docs/standard/navigation/footer/) for responsive layout with Bootstrap Grid system
+    - [Carousel](https://mdbootstrap.com/docs/standard/components/carousel/) used to display selection of images on landing page and quiz content from db on other pages
+    - [Cards](https://mdbootstrap.com/docs/standard/components/cards/) to display discrete piece of data: either fixed content or a quiz/question loaded from db
 
 Other components and styling used:
 
@@ -174,18 +167,17 @@ Other components and styling used:
 
 #### Wireframes
 
-- [View all wireframes]()
+- [View all wireframes](./docs/quizzical_wireframes.pdf)
 
 Wireframes for this project were created using [Balsamiq](https://balsamiq.com/):
 
 #### Flowchart
 
-[Flowchart](https://drive.google.com/file/d/15qV6-4HKJ9E3Yz0v8qGknZRC-tVGFY5b/view?usp=sharing) to show user interaction pathways for login and register functionality of application
+[Flowchart](./docs/user-interaction-flowchart.png) to show user interaction pathways for login and register functionality of application
 
 This flowchart was created using [draw.io](https://www.draw.io/)
 
-## 2. Features
-<hr>
+# Features
 
 - Note that the features included in this project for submission to Code Institute represent a 'Minimum Viable Project' (MVP) version. It was important not to allow the scope to become too large given the time constraints and the requirements and criteria of the course assessment. There are a large umber of features - big and small - that were left out in the scope phase of the project but which may well be added at a later date.
 
@@ -206,7 +198,7 @@ This flowchart was created using [draw.io](https://www.draw.io/)
     - About section (visible by default on landing page hidden by default on all other pages). Includes brief info about the project and the site owner/developer. Includes links to developer portfolio, LinkedIn and GitHub.
     - Inverse color contrast with background of elements above.
 
-- Landing page
+- Landing page (renamed to Welcome page)
     - Visible to all users
     - Main title, tagline and Sign Up/ Log In links. Sign Up button is call to action for new users and is larger and more prominent.
     - Photo of engaged learners
@@ -256,7 +248,7 @@ This flowchart was created using [draw.io](https://www.draw.io/)
     - Same large 'add question' call to action button appears directly below main quiz information form on page load. This button has same function to add a new empty card component for a question to the display. The 'add question' button always displays below the last question in the list.
     - Duplicate of 'publish' and 'discard' links displayed at bottom of main page content. 
 
-- Profile page
+- Profile page ** (NOT IMPLEMENTED) **
     - Visible to logged in users only
     - Username of logged in user displayed next to user icon
     - 'Create' button displayed which links to create quiz page
@@ -282,8 +274,7 @@ This flowchart was created using [draw.io](https://www.draw.io/)
 
 ### Changes made to wireframes and designs during implementation
 
-
-
+Numerous changes to wireframe design and to app functionality was made during implementation and can be seen in the deployed version. I am relatively in experienced building web apps so it takes me an amount of trial and error during implementation to get the desired outcome. 
 
 ### Features left to implement
 
@@ -326,9 +317,16 @@ Not implemented due to a balanced consideration of time constraints, developer s
 - Login fields and button appears in navbar instead of separate page to limit navigation between separate pages on site.
 - A 'flag question' link displayed on every question catd. sends an email to quiz owner and to admin that a question needs correcting or updating. When clickeda new page is opened up to input details and send email.
 - An element on homepage (larger screens only) showing a map from google maps API of where users are located in the world - to encourage community growth.
+- Pagination of search results page
+- Incorporate asynchronous background calls to app endpoints using Javascript on the front end to improve user experience and reduce number of page reloads
+- Character counter on form input elements
+- Improve search flexibility to allow user to use checkboxes to search by username, category, age range or title
+- PROGRESS indicators - with some more time I would definitely like to include to give helpful feedback to user between requests.
+- Users can view, edit and delete their profile from a page which displays the quizzes they own
+- Add a 'like' button to each quiz card which sends a background asynchronous request to endpoint which updates db collection?
 
-## 3. Information Architecture
-<hr>
+# Information Architecture
+
 
 ### Database choice
 
@@ -360,9 +358,25 @@ Collection name: quizzes
 | Quiz Owner ID | quiz_owner_id | None | ObjectId | ref: > users._id  |
 | Quiz Category ID | quiz_category_id | None | ObjectId | ref: > categories._id |
 | Quiz Age Range ID | quiz_age_range_id | None | ObjectId | ref: > age_ranges._id |
+| Questions | questions | None | Array | Array of ObjectIds ref: > questions._id | 
+
+#### Questions collection
+
+Collection name: questions
+
+| Title | Key in DB | Form validation | Data Type | Details |
+| --- | --- | --- | --- | --- |
+| Question ID | _id | None | ObjectId | Primary Key |
+| Question Text | questions | text, `maxlength=200` | string | not null |
+| Correct Answer Index | correct_answer_index | `required` | integer | not null |
+| Answers | answers | None | Array | Array of `string` types |
+| **Answers** | **Array** |  
+| Answer Text | answer_text | text, `maxlength=30` | string | not null |
+
+
 |   |   |   |   |   |
 | **Questions** | questions |   | **object** |   |
-| Question Text | question_text | text, `maxlength=150` | string | not null |
+| Question Text | questions | text, `maxlength=150` | string | not null |
 | **Answers** | answers |   | **object** |  Embedded in questions object |
 | Answer Text | answer_text | text, `maxlength=100` | string | not null, unique |
 | Correct Boolean | correct_bool | radio | Boolean | not null |
@@ -390,13 +404,13 @@ Collection name: age_ranges
 * ObjectIds for documents in `categories` and `age_ranges` collections are stored as field values in both `users` and `quizzes` collections - serves to define a relationship between documents in these different collections.
 * ObjectIds for documents in `users` collection are stored as field values in `quizzes` collection - serves to define a relationship between documents in these different collections.
 
-## 4. Testing
-----------
+# Testing
+
 
 [testing.md file](./testing.md)
 
-## 5. Technologies Used
-----------
+# Technologies Used
+
 
 * [Python3]() language and standard libraries
 * [Flask]() web application framework used to simplify building appeal
@@ -424,8 +438,8 @@ Collection name: age_ranges
 * [VSCode Python extension tool](https://marketplace.visualstudio.com/items?itemName=ms-python.python) used to validate Python code.
 * [autopep8](https://pypi.org/project/autopep8/) automatic Python formatter was used to format Python code to meet PEP8 guidelines.
 
-## 6. Deployment
-----------
+# Deployment
+
 
 ### Deployment to Heroku
 
@@ -486,10 +500,7 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 8. Run `python3 app.py` command from the terminal to run the application
 9. The website can be viewed by clicking 'open browser' in IDE for the relevant port or entering the url: `http://<IP>:<PORT>/` 
 
-## 7. Credits
-<hr>
-
-
+# Credits
 
 ### Content
 
@@ -521,11 +532,11 @@ Note: the documentation on how to set up a MongoDB account and get `MONGO_URI` i
 * [jinja templating docs](https://jinja.palletsprojects.com/)
 
 
-## 8. Evaluation
-<hr>
+# Evaluation
 
 * [StackOverflow thread](https://stackoverflow.com/questions/12403240/storing-null-vs-not-storing-the-key-at-all-in-mongodb#:~:text=Query%20on%20key%3A%20null%20will,field%20key%20doesn't%20exist.&text=If%20you%20need%20to%20keep,field%20as%20null%20or%20empty.) guided my decision to use null values for empty fields in mongodb rather than leaving fields out
 * For interface/presentational choices: code and test elements that will be reused multiple times in site early and then create reusable and customizable styles and classes to make future implementation faster and more consistent.
 * Easier not to change root font size to 62.5% when working with a framework like Bootstrap as many elements have specific styles that use 1rem and become too small, requiring !important to overwrite.
-* Front end design and presentation/colors is not my strong area! Consider advice of my mentor and look for free lisence Bootstrap templates for elements I plan to include. 
-
+* Front end design and presentation/colors is not my strong area! Consider advice of my mentor and look for free lisence Bootstrap templates for elements to include. 
+* When building my next Flask application I will think morw about how Python functions can be designed to be reused and abstract these to separate modules to main app.py file to reduce code reuse and prevent a monolithic main application file! In particular, I would create functions to call to perform CRUD interactions with db within endpoint functions.
+* Sometimes I am pulling unneccesary data (document fields) in db read operations - with more time I would reduce this overhead.

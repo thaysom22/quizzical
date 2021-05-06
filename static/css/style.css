@@ -106,6 +106,7 @@ html {
 html body {
   color: #000000;
 }
+
 /* fonts */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
@@ -311,7 +312,8 @@ footer .footer-inner-wrapper .portfolio a {
 /* card link */
 a.card {
   border-radius: 0.2rem;
-  /* box shadow style. CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
+  /* box shadow style
+  CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
   box-shadow: 3px 3px 5px 6px #ccc;
 }
 a.card .quiz-img {

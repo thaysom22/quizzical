@@ -22,6 +22,7 @@
 * [W3C Markup Validation Service](https://validator.w3.org/) used to validate HTML by passing each url of deployed app. 
     * All urls pass HTML validator with no errors or warnings.
 * [W3C Jigsaw CSS Validation Service](https://jigsaw.w3.org/css-validator/) used to validate CSS. 
+    * Compiled `style.css` and `style.min.css` files pass validator with no errors.
 * [JSHint](https://jshint.com/) was used to validate Javascript files. 
     * All files pass after adding missing semicolons and changing a `return None` statement to `return;`
 * Gitpod/VSCode [Python extension tool](https://marketplace.visualstudio.com/items?itemName=ms-python.python) used to validate Python code.
@@ -405,7 +406,7 @@ The following was confirmed for each page/component/functionality:
 
     * If view quiz page was accessed by clicking a quiz card link on Discover page, back button redirects  to discover page
     * If view quiz page was accessed by clicking a search result card link on search page, back button redirects to search page with same results as were previously displayed.
-    
+
 ### Edit Quiz page
 
 1. Edit quiz form layout

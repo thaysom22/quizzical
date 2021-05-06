@@ -1,48 +1,51 @@
 /* ******* ALLPAGES ******* */
 
 /* global resets */
-
 html {
     font-size: 62.5%;
     body {
         color: #000000;
-        * {
-            // overflow-x: hidden;
-        }
     }
 }
 
 /* fonts */
-
 h1,h2,h3,h4,h5,h6 {
     font-family: $heading;
     margin: 0;  // remove default margin-bottom 
     color: $midnight-blue;
 }
-h1{
+
+h1 {
     font-size: calc(3.5rem + 1vw);
 }
+
 h2 {
     font-size: calc(3rem + .6vw);
     .super {
         font-size: calc(4rem + 1vw);
     }
 }
+
 h3 {
     font-size: calc(2.5rem + .4vw);
 }
+
 h4 {
     font-size: calc(2rem + .3vw);
 }
+
 h5 {
     font-size: calc(1.75rem + .3vw);
 }
+
 h6 {
     font-size: calc(1.5rem + .3vw);
 }
+
 body {
     font-family: $main;
 }
+
 a {
     font-family: $tertiary;
     font-size: calc(1.25rem + .2vw);
@@ -54,12 +57,15 @@ a {
         color: $error;
     }
 }
+
 span {
     font-size: calc(1rem + .2vw);
 }
+
 .text-lg {
     font-size: calc(1.25rem + .4vw);
 }
+
 hr.h-rule{ 
     margin: 0 auto;
     width: 80%;
@@ -68,14 +74,12 @@ hr.h-rule{
 }
 
 /* containers */
-
 main {
     min-height: 100vh;
     // background image from vectorstock: www.vectorstock.com/royalty-free-vector/black-seamless-background-with-question-marks-vector-30182680
     background-image: url("./../img/question-mark-background.png");
     margin-top: 6.663rem;
     z-index: 0;
-
     .flashed-messages {
         height: 5rem;
         .flashed-message {
@@ -98,7 +102,6 @@ main {
             }
         }
     }
-
     .overlay{
         background-color: rgba(0,0,0,.7);
         width: 100%;
@@ -121,10 +124,7 @@ main {
     }
 }
 
-
-
 /*** mixins as classes ***/
-
 .flex-align-justify {
-        @include flex-align-justify();
-    }
+    @include flex-align-justify();
+}

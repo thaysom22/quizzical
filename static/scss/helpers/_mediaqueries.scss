@@ -17,14 +17,12 @@
             justify-content: center;
         }
     }
-
     /* search result cards */
     .quiz-search-result {
         &.grid-container {
             height: 20rem;
         }
     }
-
 }
 
 /* medium screen sizes and above */
@@ -37,18 +35,14 @@
     .wrapper-md {
         border-radius: .75rem;
     }
-
-
     .login-wrapper,.register-wrapper {
         .card {
             width: fit-content;
         }
     }
-
     .quiz-cards-item {
         height: 40rem;
     }  
-
     /* search result cards */
     .quiz-search-result {
         &.grid-container {
@@ -76,7 +70,6 @@
             }
         }
     }
-
     /* view quiz card */
     .quiz-view {
         &.grid-container {
@@ -95,7 +88,6 @@
             }
         }
     }
-
     /* card link effects */
     a.card {
         border-radius: .2rem;
@@ -110,7 +102,6 @@
             }
         }
     }
-
 }
 
 /* large screen sizes and above */
@@ -145,4 +136,3 @@
         }
     }
 }
-

@@ -11,7 +11,8 @@
 /* card link */
 a.card {
     border-radius: .2rem;
-    /* box shadow style. CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
+    /* box shadow style
+    CREDIT: https://css-tricks.com/snippets/css/css-box-shadow/ */
     box-shadow: 3px 3px 5px 6px #ccc;
     .quiz-img {
         overflow: hidden;
@@ -113,7 +114,6 @@ a.card {
         }
     }
 }
-
 
 /* edit quiz card */
 .quiz-edit {
